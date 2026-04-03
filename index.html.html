@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shining Clarity Coaching — Aligned. Empowered. Unstoppable.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cosmos: #080416;
+    --deep: #150836;
+    --violet: #7c3aed;
+    --lilac: #a78bfa;
+    --soft: #c4b5fd;
+    --star: #e9d5ff;
+    --gold: #fde68a;
+    --rose: #f43f5e;
+    --amber: #f97316;
+    --yellow: #facc15;
+    --green: #4ade80;
+    --blue: #38bdf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cosmos);
+    color: var(--star);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(233,213,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 8%, rgba(253,230,138,0.5) 0%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 40% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 60% 5%, rgba(191,219,254,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 18%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.3px 1.3px at 88% 12%, rgba(253,230,138,0.6) 0%, transparent 100%),
+      radial-gradient(0.9px 0.9px at 15% 45%, rgba(233,213,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.1px 1.1px at 92% 40%, rgba(191,219,254,0.5) 0%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 5% 70%, rgba(253,230,138,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 60%, rgba(233,213,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 35% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(0.9px 0.9px at 80% 85%, rgba(253,230,138,0.5) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,4,22,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--star);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-logo span { color: var(--lilac); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--soft);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--violet);
+    color: var(--lilac);
+    padding: 0.5rem 1.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .nav-cta:hover {
+    background: var(--violet);
+    color: var(--star);
+  }
+
+  /* PAGES */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page.active { display: block; }
+
+  /* RAINBOW BAR */
+  .rainbow-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--amber), var(--yellow), var(--green), var(--blue), var(--lilac), var(--rose));
+    width: 100%;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 1rem;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-block;
+    background: var(--violet);
+    color: var(--star);
+    padding: 0.9rem 2.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: #6d28d9; }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--lilac);
+    padding: 0.9rem 2.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--violet);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    background: var(--violet);
+    color: var(--star);
+  }
+
+  /* PILL TAGS */
+  .pill {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* DIVIDER DOTS */
+  .dot-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .dot-divider span {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(8,4,22,0.95);
+    backdrop-filter: blur(8px);
+  }
+
+  .modal-content {
+    background: var(--deep);
+    margin: 10% auto;
+    padding: 2rem;
+    max-width: 600px;
+    border: 1px solid var(--violet);
+    border-radius: 8px;
+    position: relative;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .modal-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .modal-content p {
+    color: var(--soft);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--lilac);
+  }
+
+  .close-modal:hover { color: var(--gold); }
+
+  /* =================== HOME PAGE =================== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem 6rem;
+    position: relative;
+  }
+
+  .hero-planet {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 3rem;
+  }
+
+  .hero-planet svg { width: 100%; height: 100%; }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: var(--star);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 2rem;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-tagline-secondary {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--soft);
+    margin-bottom: 3rem;
+  }
+
+  .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* WHO WE HELP */
+  .who-section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .who-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 1.5rem;
+  }
+
+  .who-section p {
+    color: var(--soft);
+    line-height: 1.9;
+    font-size: 1rem;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* PILLARS */
+  .pillars-section {
+    padding: 5rem 2rem;
+    background: rgba(21,8,54,0.5);
+  }
+
+  .pillars-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 300;
+    text-align: center;
+    color: var(--star);
+    margin-bottom: 3rem;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .pillar-card {
+    background: rgba(8,4,22,0.6);
+    border: 1px solid rgba(124,58,237,0.2);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+
+  .pillar-card:hover { border-color: rgba(124,58,237,0.5); }
+
+  .pillar-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .pillar-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--star);
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-card p {
+    font-size: 0.8rem;
+    color: var(--lilac);
+    line-height: 1.6;
+  }
+
+  .pillar-accent {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    margin-top: 0.8rem;
+    display: block;
+  }
+
+  /* TESTIMONIALS placeholder */
+  .testimonials {
+    padding: 5rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .testimonials h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 2rem;
+  }
+
+  .testimonial-placeholder {
+    border: 1px dashed rgba(124,58,237,0.3);
+    padding: 3rem;
+    color: var(--lilac);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  /* HOME CTA BANNER */
+  .home-cta {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: rgba(21,8,54,0.6);
+  }
+
+  .home-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .home-cta p {
+    color: var(--soft);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  /* =================== ABOUT PAGE =================== */
+  .about-hero {
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .about-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 1rem;
+  }
+
+  .about-bio {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .about-avatars {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .avatar-card {
+    text-align: center;
+  }
+
+  .avatar-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border: 2px solid rgba(124,58,237,0.4);
+  }
+
+  .avatar-circle.cait { background: #1a0840; }
+  .avatar-circle.scott { background: #091428; }
+
+  .avatar-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--star);
+    margin-bottom: 0.3rem;
+  }
+
+  .avatar-card p {
+    font-size: 0.75rem;
+    color: var(--lilac);
+    letter-spacing: 0.1em;
+  }
+
+  .bio-text {
+    background: rgba(21,8,54,0.6);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-left: 3px solid var(--violet);
+    padding: 2.5rem;
+    line-height: 1.9;
+    color: var(--soft);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .bio-text em { color: var(--gold); font-style: normal; }
+
+  /* MISSION VISION */
+  .mission-vision {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 600px) { .mission-vision { grid-template-columns: 1fr; } }
+
+  .mv-card {
+    padding: 2.5rem;
+    border: 1px solid rgba(124,58,237,0.2);
+  }
+
+  .mv-card.mission { border-top: 3px solid var(--violet); }
+  .mv-card.vision { border-top: 3px solid var(--blue); }
+
+  .mv-card h3 {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .mv-card.mission h3 { color: var(--violet); }
+  .mv-card.vision h3 { color: var(--blue); }
+
+  .mv-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--soft);
+    line-height: 1.8;
+  }
+
+  /* =================== SERVICES PAGE =================== */
+  .services-hero {
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .services-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 1rem;
+  }
+
+  .services-hero p {
+    color: var(--lilac);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .services-list {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: rgba(21,8,54,0.7);
+    border: 1px solid rgba(124,58,237,0.2);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+    transition: border-color 0.3s;
+  }
+
+  .service-card:hover { border-color: rgba(124,58,237,0.5); }
+  .service-card.s1 { border-left: 4px solid var(--violet); }
+  .service-card.s2 { border-left: 4px solid var(--blue); }
+  .service-card.s3 { border-left: 4px solid var(--green); }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .s1 .service-icon { background: rgba(124,58,237,0.2); }
+  .s2 .service-icon { background: rgba(56,189,248,0.15); }
+  .s3 .service-icon { background: rgba(74,222,128,0.15); }
+
+  .service-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .s1 .service-label { color: var(--violet); }
+  .s2 .service-label { color: var(--blue); }
+  .s3 .service-label { color: var(--green); }
+
+  .service-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 1rem;
+  }
+
+  .service-card p {
+    color: var(--soft);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+  /* =================== APPLY PAGE =================== */
+  .apply-hero {
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .apply-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 1rem;
+  }
+
+  .apply-hero p {
+    color: var(--lilac);
+    max-width: 550px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+  }
+
+  .apply-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.8rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 0.6rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(21,8,54,0.7);
+    border: 1px solid rgba(124,58,237,0.3);
+    color: var(--star);
+    padding: 0.9rem 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--violet);
+  }
+
+  .form-group textarea { height: 120px; resize: vertical; }
+
+  .scale-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .scale-btn {
+    width: 40px; height: 40px;
+    background: rgba(21,8,54,0.7);
+    border: 1px solid rgba(124,58,237,0.3);
+    color: var(--lilac);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .scale-btn:hover, .scale-btn.active {
+    background: var(--violet);
+    color: var(--star);
+    border-color: var(--violet);
+  }
+
+  /* =================== CONTACT PAGE =================== */
+  .contact-hero {
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .contact-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 1rem;
+  }
+
+  .contact-hero p {
+    color: var(--lilac);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+  }
+
+  .contact-grid {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  @media (max-width: 650px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--star);
+    margin-bottom: 2rem;
+  }
+
+  .contact-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-item .ci-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-item p {
+    color: var(--soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-link {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(124,58,237,0.3);
+    color: var(--lilac);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
+  }
+
+  .social-link:hover {
+    border-color: var(--violet);
+    color: var(--star);
+  }
+
+  .hours-note {
+    background: rgba(21,8,54,0.6);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-left: 3px solid var(--green);
+    padding: 1.2rem 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    color: #86efac;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    background: rgba(8,4,22,0.95);
+    border-top: 1px solid rgba(124,58,237,0.15);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--star);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--violet);
+    margin-bottom: 1rem;
+  }
+
+  .footer-tag-secondary {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--lilac);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-disclaimer-link {
+    color: var(--violet);
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .footer-disclaimer-link:hover {
+    color: var(--gold);
+  }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: rgba(196,181,253,0.3);
+    margin-top: 1rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.8s ease forwards; }
+  .fade-up-2 { animation: fadeUp 0.8s ease 0.2s forwards; opacity: 0; }
+  .fade-up-3 { animation: fadeUp 0.8s ease 0.4s forwards; opacity: 0; }
+  .fade-up-4 { animation: fadeUp 0.8s ease 0.6s forwards; opacity: 0; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .service-card { grid-template-columns: 1fr; }
+    .mission-vision { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">SHINING <span>CLARITY</span></a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('services')">Services</a></li>
+    <li><a onclick="showPage('contact')">Contact</a></li>
+  </ul>
+  <a class="nav-cta" onclick="showPage('apply')">Apply Now</a>
+</nav>
+
+<!-- DISCLAIMER MODAL -->
+<div id="disclaimerModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h3>Disclaimer</h3>
+    <p>Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Cait & Scott are not licensed therapists, psychologists, or medical professionals. Coaching is not a substitute for professional mental health treatment.</p>
+    <p>We work with clients who are past the acute phase of crisis and ready to focus on clarity, direction, and rebuilding. If you are currently in active crisis or need mental health support, we will help connect you with appropriate resources.</p>
+    <p>If you are experiencing a mental health crisis, please seek support from a qualified professional immediately.</p>
+    <p>Individual results vary — every journey unfolds in its own time.</p>
+    <p style="margin-top: 1rem;">✨ Become the shooting star you were born to be.</p>
+  </div>
+</div>
+
+<!-- =================== HOME =================== -->
+<div id="page-home" class="page active">
+  <div class="rainbow-bar"></div>
+
+  <section class="hero">
+    <div class="hero-planet fade-up">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="pg" cx="42%" cy="38%" r="55%">
+            <stop offset="0%" stop-color="#c4b5fd"/>
+            <stop offset="45%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#2e1065"/>
+          </radialGradient>
+          <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.9"/>
+            <stop offset="25%" stop-color="#facc15" stop-opacity="0.9"/>
+            <stop offset="50%" stop-color="#4ade80" stop-opacity="0.9"/>
+            <stop offset="75%" stop-color="#38bdf8" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.9"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="65" fill="url(#pg)"/>
+        <ellipse cx="100" cy="108" rx="105" ry="26" fill="none" stroke="url(#rg)" stroke-width="7" opacity="0.9"/>
+        <ellipse cx="100" cy="108" rx="118" ry="30" fill="none" stroke="url(#rg)" stroke-width="4" opacity="0.4"/>
+        <polygon points="148,44 151,53 160,53 153,58 156,67 148,62 140,67 143,58 136,53 145,53" fill="#fde68a" opacity="0.9"/>
+        <circle cx="50" cy="72" r="3" fill="#fde68a" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <p class="hero-eyebrow fade-up-2">Welcome to</p>
+    <h1 class="hero-title fade-up-2">SHINING<br>CLARITY</h1>
+    <p class="hero-sub fade-up-3">Cait &amp; Scott</p>
+
+    <div class="dot-divider fade-up-3">
+      <span style="background:#f43f5e"></span>
+      <span style="background:#f97316"></span>
+      <span style="background:#facc15"></span>
+      <span style="background:#4ade80; width:7px; height:7px"></span>
+      <span style="background:#38bdf8"></span>
+      <span style="background:#a78bfa"></span>
+      <span style="background:#f43f5e"></span>
+    </div>
+
+    <p class="hero-tagline fade-up-3">Become the shooting star you were born to be</p>
+    <p class="hero-tagline-secondary fade-up-3">Aligned. Empowered. Unstoppable.</p>
+
+    <div class="hero-buttons fade-up-4">
+      <a class="
