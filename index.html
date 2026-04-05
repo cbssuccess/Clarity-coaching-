@@ -640,19 +640,49 @@
   </footer>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-function selectScale(btn, field) {
-  btn.closest('.scale-row').querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+<script type="text/javascript">
+window.showPage = function(id) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  var el = document.getElementById('page-' + id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+};
+
+window.selectScale = function(btn, field) {
+  var btns = btn.closest('.scale-row').querySelectorAll('.scale-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
   btn.classList.add('active');
-  document.getElementById(field + '-val').value = btn.textContent;
-}
-function handleSubmit(e) {
+  var inp = document.getElementById(field + '-val');
+  if (inp) inp.value = btn.textContent || btn.innerText;
+};
+
+window.handleSubmit = function(e) {
   e.preventDefault();
-  const form = e.target;
-  fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(new FormData(form)).toString() })
-    .then(() => { form.style.display='none'; document.getElementById('success
+  e.target.style.display = 'none';
+  var m = document.getElementById('success-msg');
+  if (m) m.style.display = 'block';
+};
+
+window.handleContactSubmit = function(e) {
+  e.preventDefault();
+  e.target.style.display = 'none';
+  var m = document.getElementById('contact-success-msg');
+  if (m) m.style.display = 'block';
+};
+
+window.addEventListener('DOMContentLoaded', function() {
+  var valid = ['home','about','services','faq','apply','contact','terms','privacy'];
+  var hash = window.location.hash.replace('#','');
+  var page = (valid.indexOf(hash) > -1) ? hash : 'home';
+  window.showPage(page);
+});
+
+window.addEventListener('hashchange', function() {
+  var valid = ['home','about','services','faq','apply','contact','terms','privacy'];
+  var hash = window.location.hash.replace('#','');
+  var page = (valid.indexOf(hash) > -1) ? hash : 'home';
+  window.showPage(page);
+});
+</script>
+</body>
+</html>
