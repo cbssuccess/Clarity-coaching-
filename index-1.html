@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Shining Clarity Coaching — You can change anything. Start with the pattern holding you back.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cosmos: #080416;
+    --deep: #150836;
+    --violet: #7c3aed;
+    --lilac: #a78bfa;
+    --soft: #c4b5fd;
+    --star: #e9d5ff;
+    --gold: #fde68a;
+    --rose: #f43f5e;
+    --amber: #f97316;
+    --yellow: #facc15;
+    --green: #4ade80;
+    --blue: #38bdf8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--cosmos); color:var(--star); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(233,213,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 8%, rgba(253,230,138,0.5) 0%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 40% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 60% 5%, rgba(191,219,254,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 18%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.3px 1.3px at 88% 12%, rgba(253,230,138,0.6) 0%, transparent 100%),
+      radial-gradient(0.9px 0.9px at 15% 45%, rgba(233,213,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.1px 1.1px at 92% 40%, rgba(191,219,254,0.5) 0%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 5% 70%, rgba(253,230,138,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 60%, rgba(233,213,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 35% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(0.9px 0.9px at 80% 85%, rgba(253,230,138,0.5) 0%, transparent 100%);
+  }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.2rem 3rem; display:flex; align-items:center; justify-content:space-between; background:rgba(8,4,22,0.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(124,58,237,0.15); }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; letter-spacing:0.12em; color:var(--star); text-decoration:none; cursor:pointer; display:flex; align-items:center; gap:0.6rem; }
+  .nav-logo span { color:var(--gold); }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--soft); text-decoration:none; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; transition:color 0.3s; cursor:pointer; }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-cta { background:transparent; border:1px solid var(--violet); color:var(--lilac); padding:0.5rem 1.4rem; font-family:'Jost',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; transition:all 0.3s; text-decoration:none; }
+  .nav-cta:hover { background:var(--violet); color:var(--star); }
+  .page { display:none; min-height:100vh; padding-top:5rem; position:relative; z-index:1; }
+  .page.active { display:block; }
+  .rainbow-bar { height:3px; background:linear-gradient(90deg,var(--rose),var(--amber),var(--yellow),var(--green),var(--blue),var(--lilac),var(--rose)); width:100%; }
+  .section-label { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:1rem; }
+  .btn-primary { display:inline-block; background:var(--violet); color:var(--star); padding:0.9rem 2.5rem; font-family:'Jost',sans-serif; font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; transition:all 0.3s; border:none; cursor:pointer; }
+  .btn-primary:hover { background:#6d28d9; }
+  .btn-outline { display:inline-block; background:transparent; color:var(--lilac); padding:0.9rem 2.5rem; font-family:'Jost',sans-serif; font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; border:1px solid var(--violet); transition:all 0.3s; cursor:pointer; }
+  .btn-outline:hover { background:var(--violet); color:var(--star); }
+  .dot-divider { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin:1.5rem 0; }
+  .dot-divider span { width:5px; height:5px; border-radius:50%; display:inline-block; }
+  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:4rem 2rem 6rem; }
+  .hero-eyebrow { font-size:0.7rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--violet); margin-bottom:1.5rem; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,7vw,5.5rem); font-weight:300; line-height:1.05; letter-spacing:0.08em; color:var(--star); margin-bottom:0.5rem; }
+  .hero-sub { font-size:0.75rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--lilac); margin-bottom:2rem; }
+  .hero-tagline { font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,2.5vw,1.5rem); font-style:italic; color:#c9a84c; margin-bottom:1rem; }
+  .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .section { padding:5rem 2rem; max-width:900px; margin:0 auto; }
+  .section-dark { background:rgba(21,8,54,0.5); padding:5rem 2rem; }
+  .section-dark .inner { max-width:900px; margin:0 auto; }
+  .section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:var(--star); margin-bottom:1.5rem; }
+  .section p { color:var(--soft); line-height:1.9; font-size:1rem; margin-bottom:1.2rem; }
+  .pillars-top { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:2rem; }
+  .pillars-bottom { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; max-width:66%; margin-left:auto; margin-right:auto; }
+  @media(max-width:680px) { .pillars-top { grid-template-columns:1fr; } .pillars-bottom { grid-template-columns:1fr; max-width:100%; } }
+  .pillar-card { background:rgba(8,4,22,0.6); border:1px solid rgba(124,58,237,0.2); padding:2rem 1.5rem; text-align:center; transition:border-color 0.3s; }
+  .pillar-card:hover { border-color:rgba(124,58,237,0.5); }
+  .pillar-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; color:var(--star); margin-bottom:0.5rem; margin-top:0.8rem; }
+  .pillar-card p { font-size:0.82rem; color:var(--lilac); line-height:1.6; }
+  .pillar-accent { font-size:0.65rem; letter-spacing:0.2em; margin-top:0.8rem; display:block; }
+  .service-card { background:rgba(21,8,54,0.7); border:1px solid rgba(124,58,237,0.2); padding:3rem; margin-bottom:2rem; transition:border-color 0.3s; }
+  .service-card:hover { border-color:rgba(124,58,237,0.4); }
+  .service-card.s1 { border-left:4px solid var(--gold); }
+  .service-card.s2 { border-left:4px solid var(--violet); }
+  .service-card.s3 { border-left:4px solid var(--blue); }
+  .service-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:0.5rem; }
+  .service-card h2 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--star); margin-bottom:0.5rem; }
+  .service-price { font-size:1.1rem; color:var(--gold); margin-bottom:1rem; font-family:'Cormorant Garamond',serif; font-style:italic; }
+  .service-card p { color:var(--soft); line-height:1.9; font-size:0.95rem; margin-bottom:1.5rem; }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0; }
+  @media(max-width:620px) { .about-grid { grid-template-columns:1fr; } }
+  .about-card { background:rgba(8,4,22,0.6); border:1px solid rgba(124,58,237,0.2); padding:2rem; }
+  .about-card.scott { border-top:3px solid var(--blue); }
+  .about-card.cait { border-top:3px solid var(--lilac); }
+  .about-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--star); margin-bottom:1rem; }
+  .about-card p { color:var(--soft); font-size:0.9rem; line-height:1.9; }
+  .bio-block { background:rgba(21,8,54,0.6); border:1px solid rgba(124,58,237,0.2); border-left:3px solid var(--violet); padding:2.5rem; line-height:1.9; color:var(--soft); font-size:1rem; margin-bottom:2rem; }
+  .bio-block em { color:var(--gold); font-style:normal; }
+  .mv-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0; }
+  @media(max-width:620px) { .mv-grid { grid-template-columns:1fr; } }
+  .mv-card { padding:2.5rem; border:1px solid rgba(124,58,237,0.2); }
+  .mv-card.mission { border-top:3px solid var(--violet); }
+  .mv-card.vision { border-top:3px solid var(--blue); }
+  .mv-card h3 { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; margin-bottom:1.2rem; }
+  .mv-card.mission h3 { color:var(--violet); }
+  .mv-card.vision h3 { color:var(--blue); }
+  .mv-card p { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:var(--soft); line-height:1.8; }
+  .faq-item { border-bottom:1px solid rgba(124,58,237,0.15); padding:1.5rem 0; }
+  .faq-q { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--star); margin-bottom:0.8rem; }
+  .faq-a { color:var(--soft); font-size:0.9rem; line-height:1.9; }
+  .form-group { margin-bottom:1.8rem; }
+  .form-group label { display:block; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--lilac); margin-bottom:0.6rem; }
+  .form-group input, .form-group textarea, .form-group select { width:100%; background:rgba(21,8,54,0.7); border:1px solid rgba(124,58,237,0.3); color:var(--star); padding:0.9rem 1.2rem; font-family:'Jost',sans-serif; font-size:0.9rem; font-weight:300; outline:none; transition:border-color 0.3s; appearance:none; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--violet); }
+  .form-group textarea { height:120px; resize:vertical; }
+  .scale-row { display:flex; gap:0.5rem; flex-wrap:wrap; }
+  .scale-btn { width:40px; height:40px; background:rgba(21,8,54,0.7); border:1px solid rgba(124,58,237,0.3); color:var(--lilac); font-family:'Jost',sans-serif; font-size:0.85rem; cursor:pointer; transition:all 0.2s; }
+  .scale-btn:hover, .scale-btn.active { background:var(--violet); color:var(--star); border-color:var(--violet); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; max-width:900px; margin:2rem auto; padding:0 2rem 4rem; }
+  @media(max-width:650px) { .contact-grid { grid-template-columns:1fr; } }
+  .contact-item { margin-bottom:1.5rem; }
+  .ci-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--violet); margin-bottom:0.3rem; }
+  .social-links { display:flex; gap:1rem; margin-top:0.5rem; }
+  .social-link { padding:0.5rem 1.2rem; border:1px solid rgba(124,58,237,0.3); color:var(--lilac); text-decoration:none; font-size:0.75rem; letter-spacing:0.1em; transition:all 0.3s; }
+  .social-link:hover { border-color:var(--violet); color:var(--star); }
+  .hours-note { background:rgba(21,8,54,0.6); border:1px solid rgba(74,222,128,0.2); border-left:3px solid var(--green); padding:1.2rem 1.5rem; margin-top:1.5rem; font-size:0.82rem; color:#86efac; line-height:1.7; }
+  .legal-page { max-width:800px; margin:0 auto; padding:3rem 2rem 5rem; }
+  .legal-page h2 { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; color:var(--star); margin-bottom:0.5rem; }
+  .legal-page .last-updated { font-size:0.72rem; color:var(--violet); letter-spacing:0.15em; margin-bottom:2.5rem; }
+  .legal-section { margin-bottom:2.5rem; }
+  .legal-section h3 { font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--lilac); margin-bottom:0.8rem; }
+  .legal-section p { color:var(--soft); font-size:0.9rem; line-height:1.9; }
+  footer { background:rgba(8,4,22,0.95); border-top:1px solid rgba(124,58,237,0.15); padding:3rem 2rem; text-align:center; }
+  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; letter-spacing:0.15em; color:var(--star); margin-bottom:0.5rem; display:flex; align-items:center; justify-content:center; gap:0.8rem; }
+  .footer-quote { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--gold); max-width:600px; margin:1rem auto; line-height:1.7; }
+  .footer-cta { margin:1.5rem 0; }
+  .footer-tag { font-size:0.7rem; letter-spacing:0.3em; color:var(--violet); margin-bottom:1rem; }
+  .footer-legal-links { display:flex; justify-content:center; gap:2rem; margin-top:1rem; }
+  .footer-legal-links a { font-size:0.68rem; color:rgba(196,181,253,0.4); text-decoration:none; letter-spacing:0.1em; transition:color 0.3s; cursor:pointer; }
+  .footer-legal-links a:hover { color:var(--lilac); }
+  .footer-copy { font-size:0.72rem; color:rgba(196,181,253,0.4); margin-top:1rem; }
+  .footer-disclaimer { font-size:0.68rem; color:rgba(196,181,253,0.35); max-width:700px; margin:1.2rem auto 0; line-height:1.7; font-style:italic; border-top:1px solid rgba(124,58,237,0.1); padding-top:1.2rem; }
+  .waitlist-banner { background:rgba(74,222,128,0.08); border:1px solid rgba(74,222,128,0.2); padding:2rem; text-align:center; margin-top:2rem; }
+  .waitlist-banner h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--green); margin-bottom:0.5rem; }
+  .waitlist-banner p { color:#86efac; font-size:0.9rem; margin-bottom:1.2rem; }
+  .success-msg { display:none; background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3); border-left:3px solid var(--green); padding:2rem; text-align:center; margin-top:1rem; }
+  .success-msg h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--green); margin-bottom:0.5rem; }
+  .success-msg p { color:#86efac; font-size:0.9rem; }
+  @media(max-width:768px) { nav { padding:1rem 1.5rem; } .nav-links { display:none; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .fade-up { animation:fadeUp 0.8s ease forwards; }
+  .fade-up-2 { animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
+  .fade-up-3 { animation:fadeUp 0.8s ease 0.4s forwards; opacity:0; }
+  .fade-up-4 { animation:fadeUp 0.8s ease 0.6s forwards; opacity:0; }
+</style>
+</head>
+<body>
+<nav>
+<a class="nav-logo" onclick="showPage('home')"><span>✦</span> Shining Clarity Coaching</a>
+<ul class="nav-links">
+<li><a onclick="showPage('home')">Home</a></li>
+<li><a onclick="showPage('about')">About</a></li>
+<li><a onclick="showPage('services')">Services</a></li>
+<li><a onclick="showPage('faq')">FAQ</a></li>
+<li><a onclick="showPage('contact')">Contact</a></li>
+</ul>
+<a class="nav-cta" onclick="showPage('apply')" style="cursor:pointer;">Book Discovery Call</a>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+<div class="rainbow-bar"></div>
+<section class="hero">
+<p class="hero-eyebrow fade-up-2">Shining Clarity Coaching</p>
+<h1 class="hero-title fade-up-2">Tired of feeling stuck?</h1>
+<p class="hero-sub fade-up-3">Scott &amp; Cait</p>
+<div class="dot-divider fade-up-3">
+<span style="background:#f43f5e"></span><span style="background:#f97316"></span><span style="background:#facc15"></span><span style="background:#4ade80;width:7px;height:7px"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span><span style="background:#f43f5e"></span>
+</div>
+<p class="hero-tagline fade-up-3">You can change anything. Start with the pattern holding you back.</p>
+<div class="hero-buttons fade-up-4">
+<a class="btn-primary" onclick="showPage('apply')" style="cursor:pointer;">Book Your Free Call</a>
+<a class="btn-outline" onclick="showPage('about')">Meet Scott &amp; Cait</a>
+</div>
+</section>
+
+<section class="section" style="text-align:center">
+<p class="section-label">Who We Help</p>
+<h2>For the person who's tried everything and still ends up in the same loop</h2>
+<p>You've read the books, listened to the podcasts, talked it through, pushed harder, promised yourself this time would be different — and somehow you're still back in the same place.</p>
+<p style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic">If you're done with surface-level fixes and ready to finally understand the loop, you're exactly who we help.</p>
+<div style="margin-top:2rem"><a class="btn-outline" onclick="showPage('services')">Explore Our Services</a></div>
+</section>
+
+<section class="section-dark">
+<div class="inner">
+<p class="section-label" style="text-align:center">Our Brand Pillars</p>
+<h2 style="text-align:center">What we stand for</h2>
+<div class="pillars-top">
+<div class="pillar-card"><span style="color:var(--lilac);font-size:1.3rem">✦</span><h3>Seen + Heard</h3><p>Every client feels deeply understood.</p></div>
+<div class="pillar-card"><span style="color:var(--blue);font-size:1.3rem">✦</span><h3>Clarity</h3><p>From fog to forward — finding what comes next.</p></div>
+<div class="pillar-card"><span style="color:var(--green);font-size:1.3rem">✦</span><h3>Grounded</h3><p>Cosmic vision with both feet on the earth.</p></div>
+</div>
+<div class="pillars-bottom">
+<div class="pillar-card"><span style="color:var(--rose);font-size:1.3rem">✦</span><h3>Rainbow Spirit</h3><p>There is power in you the storm can't touch.</p></div>
+<div class="pillar-card"><span style="color:var(--gold);font-size:1.3rem">✦</span><h3>Intuitive</h3><p>Trusting what the soul already knows.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section-dark" style="margin-top:0">
+<div class="inner" style="text-align:center">
+<p class="section-label">Ready?</p>
+<h2 style="color:var(--gold);">You don't have to have it figured out to get started.</h2>
+<p style="color:var(--soft);margin-bottom:2rem">You just have to be ready to look. Book a free discovery call and let's figure out the rest together.</p>
+<a class="btn-primary" onclick="showPage('apply')" style="cursor:pointer;">Book Your Free Discovery Call</a>
+</div>
+</section>
+
+<footer>
+<div class="rainbow-bar" style="margin-bottom:2rem"></div>
+<div class="footer-logo"><span>✦</span> Shining Clarity Coaching</div>
+<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
+<div class="footer-cta"><a class="btn-primary" onclick="showPage('apply')" style="cursor:pointer;">Book Your Free Discovery Call</a></div>
+<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
+<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
+<div class="footer-copy">© 2024 Shining Clarity Coaching — Scott &amp; Cait</div>
+<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Coaching is not a substitute for professional mental health treatment. Individual results may vary.</div>
+</footer>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+<div class="rainbow-bar"></div>
+<div class="section" style="text-align:center;padding-bottom:2rem">
+<p class="section-label">Our Story</p>
+<h2>Two coaches. One experience built to help you see the pattern and shift it.</h2>
+</div>
+<div class="section" style="padding-top:0">
+<div class="bio-block">Most people don't need more advice. They need help seeing the loop they're in while also feeling supported enough to change it. That's why Scott and Cait work side by side — one tracking the pattern, one tracking the person, both helping you move forward.</div>
+<div class="about-grid">
+<div class="about-card scott"><h3>Scott</h3><p>Scott has spent 18 years helping people identify the TFBB link — the connection between thoughts, feelings, beliefs, and behaviors that keeps life repeating itself. He sees the pattern under the pattern.</p></div>
+<div class="about-card cait"><h3>Cait</h3><p>Cait's coaching comes from living the hard thing. She knows what it is to build worthiness while you're still in the middle of the mess. She helps clients stay with themselves long enough to hear what's true.</p></div>
+</div>
+<div class="bio-block" style="margin-top:2rem;border-left-color:var(--gold)"><strong style="color:var(--gold);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase">Together</strong><br/><br/>Every client gets both of us, at the same time. Scott tracks the pattern. Cait tracks the emotional truth. You don't have to choose between insight and support — you get both.</div>
+<div class="mv-grid">
+<div class="mv-card mission"><h3>Our Mission</h3><p>To create a space where people feel truly seen, heard, and understood — and walk away with the clarity, courage, and direction to take their next step forward.</p></div>
+<div class="mv-card vision"><h3>Our Vision</h3><p>A world where no one stays stuck at the crossroads alone. Where every person knows they have the power within them to align with who they are.</p></div>
+</div>
+<div style="text-align:center;margin-top:3rem"><a class="btn-primary" onclick="showPage('apply')" style="cursor:pointer;">Book Your Free Discovery Call</a></div>
+</div>
+<footer>
+<div class="rainbow-bar" style="margin-bottom:2rem"></div>
+<div class="footer-logo"><span>✦</span> Shining Clarity Coaching</div>
+<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
+<div class="footer-cta"><a class="btn-primary" onclick="showPage('apply')" style="cursor:pointer;">Book Your Free Discovery Call</a></div>
+<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
+<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
+<div class="footer-copy">© 2024 Shining Clarity Coaching — Scott &amp; Cait</div>
+<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Coaching is not a substitute for professional mental health treatment. Individual results may vary.</div>
+</footer>
+</div>
+
+<!-- SERVICES PAGE -->
+<div class="page" id="page-services"><div class="rainbow-bar"></div><div class="section"><p class="section-label">What We Offer</p><h2>Our Services</h2><div class="service-card s1"><p class="service-label" style="color:var(--gold)">Free — No commitment</p><h2>Discovery Call</h2><div class="service-price">Free</div><p>If you're stuck and can't tell whether you need one session or deeper support, start here.</p><a class="btn-primary" onclick="showPage('apply')" style="font-size:0.72rem;padding:0.7rem 1.8rem">Book Your Free Call</a></div><div class="service-card s2"><p class="service-label" style="color:var(--lilac)">1:1 Session</p><h2>Single Session</h2><div class="service-price">$125 per session</div><p>Perfect if something feels tangled right now and you need help seeing it clearly.</p><a class="btn-outline" href="#" style="font-size:0.72rem;padding:0.7rem 1.8rem">Book Your Session</a></div><div class="service-card s3"><p class="service-label" style="color:var(--blue)">Our Core Offering</p><h2>Custom Coaching Package</h2><div class="service-price">Pricing based on your custom program</div><p>For the person who's tired of recurring cycles and ready for real change.</p><a class="btn-outline" onclick="showPage('apply')" style="font-size:0.72rem;padding:0.7rem 1.8rem;border-color:var(--blue);color:var(--blue)">Apply for a Package</a></div></div></div>
+
+<!-- FAQ PAGE -->
+<div class="page" id="page-faq"><div class="rainbow-bar"></div><div class="section"><p class="section-label">Questions</p><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-q">What is coaching and how is it different from therapy?</div><div class="faq-a">Coaching is forward focused. Therapy is healing. Coaching is momentum.</div></div><div class="faq-item"><div class="faq-q">How do I know which service is right for me?</div><div class="faq-a">Start with a free discovery call — that's exactly what it's for.</div></div><div class="faq-item"><div class="faq-q">What is your refund policy?</div><div class="faq-a">We offer a full refund if you cancel before your first session.</div></div><div style="text-align:center;margin-top:3rem"><a class="btn-primary" onclick="showPage('contact')">Get in Touch</a></div></div></div>
+
+<!-- APPLY PAGE -->
+<div class="page" id="page-apply"><div class="rainbow-bar"></div><div class="section" style="text-align:center"><p class="section-label">Begin Your Journey</p><h2>Book Your Free Discovery Call</h2></div><div style="max-width:700px;margin:0 auto;padding:0 2rem 4rem"><form method="POST" name="discovery-call" onsubmit="handleSubmit(event)"><div class="form-group"><label>Your name</label><input name="name" placeholder="Your full name" required type="text"></div><div class="form-group"><label>Email address</label><input name="email" placeholder="your@email.com" required type="email"></div><div class="form-group"><label>What brought you to Shining Clarity Coaching today?</label><textarea name="what-brought-you" placeholder="What's going on in your world right now..."></textarea></div><div class="form-group"><label>On a scale of 1–10, how ready are you to do the work and make changes?</label><div class="scale-row"><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">1</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">2</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">3</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">4</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">5</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">6</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">7</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">8</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">9</button><button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">10</button></div><input id="readiness-val" name="readiness" type="hidden"></div><div class="form-group"><label>Type your full name to sign (acknowledging coaching disclaimer)</label><input type="text" id="disclaimer-sig" name="signature" placeholder="Your full name"></div><button class="btn-primary" style="width:100%" type="submit">Send My Application ✦</button></form><div class="success-msg" id="success-msg"><h3>✦ You're on your way.</h3><p>Your application has been received. We'll be in touch to schedule your discovery call.</p></div></div></div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact"><div class="rainbow-bar"></div><div class="section" style="text-align:center"><p class="section-label">Reach Out</p><h2>Let's Connect</h2></div><div class="contact-grid"><div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:2rem">Find us here</h3><div class="contact-item"><div class="ci-label">Email</div><p style="color:var(--soft);font-size:0.9rem">hello@shiningclarity.com</p></div><div class="contact-item"><div class="ci-label">Ready to apply?</div><a class="btn-outline" onclick="showPage('apply')" style="font-size:0.72rem;padding:0.6rem 1.5rem">Apply Now</a></div></div><div><form method="POST" name="contact" onsubmit="handleContactSubmit(event)"><div class="form-group"><label>Your name</label><input name="name" placeholder="Your name" required type="text"></div><div class="form-group"><label>Email address</label><input name="email" placeholder="your@email.com" required type="email"></div><div class="form-group"><label>Your message</label><textarea name="message" placeholder="What's on your mind?" style="height:150px"></textarea></div><button class="btn-primary" style="width:100%" type="submit">Send Message ✦</button></form><div class="success-msg" id="contact-success-msg" style="margin-top:1rem"><h3>✦ Message received</h3><p>Thank you for reaching out. We'll be in touch.</p></div></div></div></div>
+
+<!-- TERMS PAGE -->
+<div class="page" id="page-terms"><div class="rainbow-bar"></div><div class="legal-page"><p class="section-label">Legal</p><h2>Terms &amp; Conditions</h2><div class="legal-section"><h3>1. About Shining Clarity Coaching</h3><p>Shining Clarity Coaching is a life coaching practice operated by Scott &amp; Cait.</p></div><div class="legal-section"><h3>2. Coaching vs. Therapy</h3><p>Shining Clarity Coaching is not a licensed therapy or mental health service. Coaching is not a substitute for professional mental health treatment.</p></div><div class="legal-section"><h3>3. Payments &amp; Refunds</h3><p>We offer a full refund if you cancel before your first session.</p></div></div></div>
+
+<!-- PRIVACY PAGE -->
+<div class="page" id="page-privacy"><div class="rainbow-bar"></div><div class="legal-page"><p class="section-label">Legal</p><h2>Privacy Policy</h2><div class="legal-section"><h3>1. Who We Are</h3><p>Shining Clarity Coaching is operated by Scott &amp; Cait.</p></div><div class="legal-section"><h3>2. What Information We Collect</h3><p>We collect your name, email address, and any information you voluntarily share.</p></div><div class="legal-section"><h3>3. We Do Not Sell Your Data</h3><p>We will never sell, rent, or share your personal information with third parties.</p></div></div></div>
+
+<script>
+window.showPage = function(id) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  var el = document.getElementById('page-' + id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+};
+window.selectScale = function(btn, field) {
+  var btns = btn.closest('.scale-row').querySelectorAll('.scale-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  var inp = document.getElementById(field + '-val');
+  if (inp) inp.value = btn.textContent || btn.innerText;
+};
+window.handleSubmit = function(e) {
+  e.preventDefault();
+  var sig = document.getElementById('disclaimer-sig');
+  if (!sig || !sig.value.trim()) {
+    alert('Please type your full name to sign the coaching disclaimer.');
+    if (sig) sig.focus();
+    return;
+  }
+  e.target.style.display = 'none';
+  var m = document.getElementById('success-msg');
+  if (m) m.style.display = 'block';
+};
+window.handleContactSubmit = function(e) {
+  e.preventDefault();
+  e.target.style.display = 'none';
+  var m = document.getElementById('contact-success-msg');
+  if (m) m.style.display = 'block';
+};
+window.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  var page = (['home','about','services','faq','apply','contact','terms','privacy'].indexOf(hash) > -1) ? hash : 'home';
+  window.showPage(page);
+});
+window.addEventListener('hashchange', function() {
+  var hash = window.location.hash.replace('#', '');
+  var page = (['home','about','services','faq','apply','contact','terms','privacy'].indexOf(hash) > -1) ? hash : 'home';
+  window.showPage(page);
+});
+</script>
+</body>
+</html>
