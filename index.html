@@ -513,8 +513,9 @@
       <p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--violet)">We'll be in touch within 48 hours. We can't wait to meet you.</p>
     </form>
     <div class="success-msg" id="success-msg">
-      <h3>✦ You're on your way</h3>
-      <p>We received your application and will be in touch within 48 hours. We can't wait to meet you.</p>
+      <h3>✦ Application received</h3>
+      <p>Thank you! Now let's get your discovery call on the calendar. Click below or the calendar will open automatically.</p>
+      <a class="btn-primary" href="https://calendly.com/talkintothemoon2" target="_blank" rel="noopener" style="display:inline-block;margin-top:1.2rem;text-decoration:none">Book Your Discovery Call ✦</a>
     </div>
   </div>
   <footer>
@@ -659,6 +660,9 @@ window.handleSubmit = function(e) {
   e.target.style.display = 'none';
   var m = document.getElementById('success-msg');
   if (m) m.style.display = 'block';
+  setTimeout(function() {
+    window.open('https://calendly.com/talkintothemoon2', '_blank');
+  }, 1500);
 };
 
 window.handleContactSubmit = function(e) {
