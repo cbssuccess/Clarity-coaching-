@@ -657,12 +657,20 @@ window.selectScale = function(btn, field) {
 
 window.handleSubmit = function(e) {
   e.preventDefault();
-  e.target.style.display = 'none';
-  var m = document.getElementById('success-msg');
-  if (m) m.style.display = 'block';
-  setTimeout(function() {
-    window.open('https://calendly.com/talkintothemoon2', '_blank');
-  }, 1500);
+  var form = e.target;
+  var data = new FormData(form);
+  fetch('https://formspree.io/f/mdapbnlo', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).finally(function() {
+    form.style.display = 'none';
+    var m = document.getElementById('success-msg');
+    if (m) m.style.display = 'block';
+    setTimeout(function() {
+      window.open('https://calendly.com/talkintothemoon2', '_blank');
+    }, 1500);
+  });
 };
 
 window.handleContactSubmit = function(e) {
