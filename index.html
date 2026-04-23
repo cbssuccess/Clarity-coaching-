@@ -39,11 +39,11 @@
       radial-gradient(1.2px 1.2px at 35% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
       radial-gradient(0.9px 0.9px at 80% 85%, rgba(253,230,138,0.5) 0%, transparent 100%);
   }
-  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0rem 0rem; display:flex; align-items:center; justify-content:space-between; background:rgba(8,4,22,0.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(124,58,237,0.15); }
-  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:2.0rem; font-weight:300; letter-spacing:0.12em; color:var(--star); text-decoration:none; cursor:pointer; }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.2rem 3rem; display:flex; align-items:center; justify-content:space-between; background:rgba(8,4,22,0.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(124,58,237,0.15); }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; letter-spacing:0.12em; color:var(--star); text-decoration:none; cursor:pointer; }
   .nav-logo span { color:var(--gold); }
-  .nav-links { display:flex; gap:1rem; list-style:none; }
-  .nav-links a { color:var(--soft); text-decoration:none; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; transition:color 0.3s; cursor:pointer; }
+  .nav-links { display:flex; flex:1; justify-content:space-evenly; list-style:none; margin:0 2rem; }
+  .nav-links a { color:var(--soft); text-decoration:none; font-size:0.95rem; letter-spacing:0.15em; text-transform:uppercase; transition:color 0.3s; cursor:pointer; }
   .nav-links a:hover { color:var(--gold); }
   .nav-cta { background:transparent; border:1px solid var(--violet); color:var(--lilac); padding:0.3rem 0.8rem; font-family:'Jost',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; transition:all 0.3s; text-decoration:none; }
   .nav-cta:hover { background:var(--violet); color:var(--star); }
@@ -513,8 +513,9 @@
       <p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--violet)">We'll be in touch within 48 hours. We can't wait to meet you.</p>
     </form>
     <div class="success-msg" id="success-msg">
-      <h3>✦ You're on your way</h3>
-      <p>We received your application and will be in touch within 48 hours. We can't wait to meet you.</p>
+      <h3>✦ Application received</h3>
+      <p>Thank you! Now let's get your discovery call on the calendar. Click below or the calendar will open automatically.</p>
+      <a class="btn-primary" href="https://calendly.com/talkintothemoon2" target="_blank" rel="noopener" style="display:inline-block;margin-top:1.2rem;text-decoration:none">Book Your Discovery Call ✦</a>
     </div>
   </div>
   <footer>
@@ -656,9 +657,20 @@ window.selectScale = function(btn, field) {
 
 window.handleSubmit = function(e) {
   e.preventDefault();
-  e.target.style.display = 'none';
-  var m = document.getElementById('success-msg');
-  if (m) m.style.display = 'block';
+  var form = e.target;
+  var data = new FormData(form);
+  fetch('https://formspree.io/f/mdapbnlo', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).finally(function() {
+    form.style.display = 'none';
+    var m = document.getElementById('success-msg');
+    if (m) m.style.display = 'block';
+    setTimeout(function() {
+      window.open('https://calendly.com/talkintothemoon2', '_blank');
+    }, 1500);
+  });
 };
 
 window.handleContactSubmit = function(e) {
