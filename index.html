@@ -445,9 +445,7 @@
     </div>
   </div>
   <div style="max-width:700px;margin:0 auto;padding:0 2rem 4rem">
-    <form name="discovery-call" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
-      <input type="hidden" name="form-name" value="discovery-call">
-      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <form name="discovery-call" method="POST" onsubmit="handleSubmit(event)">
 
       <div class="form-group">
         <label>Your name</label>
@@ -676,11 +674,11 @@ window.handleSubmit = function(e) {
   }
   if (sigMsg) sigMsg.style.display = 'none';
   var form = e.target;
-  fetch('/', {
+  fetch('https://formspree.io/f/YOUR_FORM_ID', {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(new FormData(form)).toString()
-  }).then(function() {
+    headers: {'Accept': 'application/json'},
+    body: new FormData(form)
+  }).then(function(res) {
     form.style.display = 'none';
     var m = document.getElementById('success-msg');
     if (m) { m.style.display = 'block'; window.scrollTo(0, 0); }
