@@ -446,8 +446,7 @@
   </div>
   <div style="max-width:700px;margin:0 auto;padding:0 2rem 4rem">
     <form name="discovery-call" method="POST" onsubmit="handleSubmit(event)">
-      
-      
+
       <div class="form-group">
         <label>Your name</label>
         <input type="text" name="name" placeholder="Your full name" required/>
@@ -507,12 +506,24 @@
           <option>Not sure yet — help me decide</option>
         </select>
       </div>
-      <div class="form-group">
-       
+      <div style="background:rgba(21,8,54,0.9);border:1px solid rgba(253,230,138,0.3);border-radius:8px;padding:1.8rem;margin:2rem 0;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);margin-bottom:1rem;">✦ Please Read &amp; Sign Before Continuing</p>
+        <p style="font-size:0.88rem;color:var(--soft);line-height:1.85;margin-bottom:0.9rem;"><strong style="color:var(--star)">Shining Clarity Coaching is a life coaching practice &mdash; not a therapy or mental health service.</strong> Cait and Scott are not licensed therapists, psychologists, psychiatrists, or medical professionals.</p>
+        <p style="font-size:0.88rem;color:var(--soft);line-height:1.85;margin-bottom:0.9rem;">Coaching is a forward-focused partnership designed to support clarity, direction, and personal growth. It is <em>not</em> a substitute for professional mental health treatment, medical advice, or crisis support. If you are currently experiencing a mental health crisis, please contact a qualified professional or emergency services immediately.</p>
+        <p style="font-size:0.88rem;color:var(--soft);line-height:1.85;">By signing below, you confirm that you have read and understood this disclaimer, and that you are entering into this coaching relationship with that understanding.</p>
+        <div style="margin-top:1.5rem;">
+          <label style="display:block;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Type your full name to sign *</label>
+          <input type="text" id="disclaimer-sig" name="signature" placeholder="Your full name" autocomplete="off" style="width:100%;background:rgba(8,4,22,0.9);border:1px solid rgba(253,230,138,0.3);border-bottom:2px solid var(--gold);color:var(--star);padding:0.75rem 0.9rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;outline:none;border-radius:4px 4px 0 0;">
+          <p id="sig-required-msg" style="display:none;color:#f87171;font-size:0.8rem;margin-top:0.5rem;">Please type your full name to sign the disclaimer before submitting.</p>
+        </div>
+      </div>
       <button type="submit" class="btn-primary" style="width:100%;font-size:0.85rem;padding:1.1rem">Send My Application ✦</button>
       <p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--violet)">We'll be in touch within 48 hours. We can't wait to meet you.</p>
     </form>
     <div class="success-msg" id="success-msg">
+      <h3>✦ You're on your way</h3>
+      <p>We received your application and will be in touch within 48 hours. We can't wait to meet you.</p>
+      <p style="margin-top:1rem;font-size:0.85rem;">Ready to book your discovery call now? <a href="https://calendly.com/talkintothemoon2" target="_blank" rel="noopener" style="color:var(--green);font-weight:500;">Click here to schedule on Calendly →</a></p>
       <h3>✦ Application received</h3>
       <p>Thank you! Now let's get your discovery call on the calendar. Click below or the calendar will open automatically.</p>
       <a class="btn-primary" href="https://calendly.com/talkintothemoon2" target="_blank" rel="noopener" style="display:inline-block;margin-top:1.2rem;text-decoration:none">Book Your Discovery Call ✦</a>
@@ -657,6 +668,33 @@ window.selectScale = function(btn, field) {
 
 window.handleSubmit = function(e) {
   e.preventDefault();
+  var sig = document.getElementById('disclaimer-sig');
+  var sigMsg = document.getElementById('sig-required-msg');
+  if (!sig || !sig.value.trim()) {
+    if (sigMsg) sigMsg.style.display = 'block';
+    if (sig) { sig.scrollIntoView({behavior:'smooth', block:'center'}); sig.focus(); }
+    return;
+  }
+  if (sigMsg) sigMsg.style.display = 'none';
+  var form = e.target;
+  fetch('https://formspree.io/f/mdapbnlo', {
+    method: 'POST',
+    headers: {'Accept': 'application/json'},
+    body: new FormData(form)
+  }).then(function(res) {
+    form.style.display = 'none';
+    var m = document.getElementById('success-msg');
+    if (m) { m.style.display = 'block'; window.scrollTo(0, 0); }
+    setTimeout(function() {
+      window.open('https://calendly.com/talkintothemoon2', '_blank');
+    }, 2000);
+  }).catch(function() {
+    form.style.display = 'none';
+    var m = document.getElementById('success-msg');
+    if (m) { m.style.display = 'block'; window.scrollTo(0, 0); }
+    setTimeout(function() {
+      window.open('https://calendly.com/talkintothemoon2', '_blank');
+    }, 2000);
   var form = e.target;
   var data = new FormData(form);
   fetch('https://formspree.io/f/mdapbnlo', {
