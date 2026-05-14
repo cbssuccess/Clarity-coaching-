@@ -23,7 +23,7 @@
     --blue: #38bdf8;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { font-size:18px; }
+  @media(min-width:768px) { html { font-size:18px; } }
   body { background:var(--cosmos); color:var(--star); font-family:'Lora',serif; font-weight:300; overflow-x:hidden; }
   body::before {
     content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
