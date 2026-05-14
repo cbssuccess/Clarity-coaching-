@@ -165,6 +165,12 @@
   .fade-up-2 { animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
   .fade-up-3 { animation:fadeUp 0.8s ease 0.4s forwards; opacity:0; }
   .fade-up-4 { animation:fadeUp 0.8s ease 0.6s forwards; opacity:0; }
+  /* QUIZ */
+  .quiz-section { background:#0a0520; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(124,58,237,0.15); border-bottom:1px solid rgba(124,58,237,0.15); }
+  .quiz-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:var(--star); margin-bottom:0.8rem; }
+  .quiz-section p { color:var(--soft); font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
+  .quiz-wrapper { max-width:860px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
+  .quiz-wrapper iframe { display:block; width:100%; height:700px; border:none; }
   /* VIDEO */
   .video-section { background:#1c0d45; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(124,58,237,0.15); border-bottom:1px solid rgba(124,58,237,0.15); }
   .video-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:var(--star); margin-bottom:0.8rem; }
@@ -232,6 +238,15 @@
 <p>That kind of stuck usually isn't a motivation problem. It's a loop problem — a belief, a body response, an old story, or a pattern that keeps quietly running the show. We help you get underneath it and actually shift it at the root.</p>
 <p style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic">If you're done with surface-level fixes and ready to finally understand the loop, you're exactly who we work with.</p>
 <div style="margin-top:2rem"><a class="btn-outline" onclick="showPage('services')">Explore Our Services</a></div>
+</section>
+<!-- QUIZ -->
+<section class="quiz-section">
+<p class="section-label">Free Quiz</p>
+<h2>Find out what's keeping you stuck</h2>
+<p>Take our free quiz to identify the pattern underneath your loop — and get clarity on your next step.</p>
+<div class="quiz-wrapper">
+  <iframe src="https://clarity-client-flow--cbscodingsucces.replit.app/" title="Clarity Coaching Quiz" loading="lazy" allowfullscreen></iframe>
+</div>
 </section>
 <!-- PILLARS -->
 <section class="section-dark">
