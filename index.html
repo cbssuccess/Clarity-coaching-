@@ -160,7 +160,17 @@
   .success-msg { display:none; background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3); border-left:3px solid var(--green); padding:2rem; text-align:center; margin-top:1rem; }
   .success-msg h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--green); margin-bottom:0.5rem; }
   .success-msg p { color:#86efac; font-size:0.9rem; }
-  @media(max-width:768px) { nav { padding:1rem 1.5rem; } .nav-links { display:none; } }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:0.4rem; z-index:200; }
+  .hamburger span { display:block; width:24px; height:2px; background:var(--star); border-radius:2px; transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(8,4,22,0.97); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { color:var(--star); text-decoration:none; font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; letter-spacing:0.15em; transition:color 0.3s; }
+  .mobile-menu a:hover { color:var(--gold); }
+  .mobile-menu .mobile-cta { margin-top:1rem; background:var(--violet); color:var(--star); padding:0.9rem 2.5rem; font-family:'Lora',serif; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; border:none; cursor:pointer; }
+  @media(max-width:768px) { nav { padding:1rem 1.5rem; } .nav-links { display:none; } .hamburger { display:flex; } }
   @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
   .fade-up { animation:fadeUp 0.8s ease forwards; }
   .fade-up-2 { animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
@@ -191,7 +201,18 @@
 <li><a onclick="showPage('contact')">Contact</a></li>
 </ul>
 <a class="nav-cta" onclick="showPage('apply')">Book Discovery Call</a>
+<button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+  <span></span><span></span><span></span>
+</button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="toggleMenu();showPage('home')">Home</a>
+  <a onclick="toggleMenu();showPage('about')">About</a>
+  <a onclick="toggleMenu();showPage('services')">Services</a>
+  <a onclick="toggleMenu();showPage('faq')">FAQ</a>
+  <a onclick="toggleMenu();showPage('contact')">Contact</a>
+  <button class="mobile-cta" onclick="toggleMenu();showPage('apply')">Book Discovery Call</button>
+</div>
 <!-- ===== HOME ===== -->
 <div class="page active" id="page-home">
 <div class="rainbow-bar"></div>
@@ -669,6 +690,13 @@
 </footer>
 </div>
 <script type="text/javascript">
+window.toggleMenu = function() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobileMenu');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+};
 window.showPage = function(id) {
   var pages = document.querySelectorAll('.page');
   for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
