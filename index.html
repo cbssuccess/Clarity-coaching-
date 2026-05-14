@@ -165,6 +165,12 @@
   .fade-up-2 { animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
   .fade-up-3 { animation:fadeUp 0.8s ease 0.4s forwards; opacity:0; }
   .fade-up-4 { animation:fadeUp 0.8s ease 0.6s forwards; opacity:0; }
+  /* VIDEO */
+  .video-section { background:#1c0d45; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(124,58,237,0.15); border-bottom:1px solid rgba(124,58,237,0.15); }
+  .video-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:var(--star); margin-bottom:0.8rem; }
+  .video-section p { color:var(--soft); font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
+  .video-wrapper { max-width:800px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
+  .video-wrapper video { display:block; width:100%; height:auto; background:#000; }
 </style>
 </head>
 <body>
@@ -204,6 +210,18 @@
 <div class="hero-buttons fade-up-4">
 <a class="btn-primary" onclick="showPage('apply')">Book Your Free Call</a>
 <a class="btn-outline" onclick="showPage('about')">Meet Scott &amp; Cait</a>
+</div>
+</section>
+<!-- VIDEO -->
+<section class="video-section">
+<p class="section-label">The Science Behind It</p>
+<h2>Your brain can change. Here's how.</h2>
+<p>Neuroplasticity means the patterns holding you back aren't permanent — they can be rewired. This is the foundation of everything we do.</p>
+<div class="video-wrapper">
+  <video controls preload="metadata">
+    <source src="neuroplacisity.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </div>
 </section>
 <!-- WHO WE HELP -->
