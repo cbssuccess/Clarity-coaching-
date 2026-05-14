@@ -165,6 +165,12 @@
   .fade-up-2 { animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
   .fade-up-3 { animation:fadeUp 0.8s ease 0.4s forwards; opacity:0; }
   .fade-up-4 { animation:fadeUp 0.8s ease 0.6s forwards; opacity:0; }
+  /* VIDEO */
+  .video-section { background:#0a0520; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(124,58,237,0.15); border-bottom:1px solid rgba(124,58,237,0.15); }
+  .video-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:var(--star); margin-bottom:0.8rem; }
+  .video-section p { color:var(--soft); font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
+  .video-wrapper { max-width:800px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
+  .video-wrapper video { display:block; width:100%; height:auto; background:#000; }
 </style>
 </head>
 <body>
@@ -214,6 +220,18 @@
 <p>That kind of stuck usually isn't a motivation problem. It's a loop problem — a belief, a body response, an old story, or a pattern that keeps quietly running the show. We help you get underneath it and actually shift it at the root.</p>
 <p style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic">If you're done with surface-level fixes and ready to finally understand the loop, you're exactly who we work with.</p>
 <div style="margin-top:2rem"><a class="btn-outline" onclick="showPage('services')">Explore Our Services</a></div>
+</section>
+<!-- VIDEO -->
+<section class="video-section">
+<p class="section-label">Meet Us</p>
+<h2>See how we work</h2>
+<p>Get a feel for who we are and what a session with us actually looks like.</p>
+<div class="video-wrapper">
+  <video controls preload="metadata">
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 </section>
 <!-- PILLARS -->
 <section class="section-dark">
