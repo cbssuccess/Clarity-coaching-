@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #13131f;
+    color: #e8e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1c1c2e;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3a3a55;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5a5a78;
+  }
+}
+
+@layer components {
+  .pastel-border-rose {
+    border-left: 3px solid #f4b8c1;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 12px rgba(244, 184, 193, 0.08);
+  }
+  .pastel-border-lavender {
+    border-left: 3px solid #c4b5fd;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 12px rgba(196, 181, 253, 0.08);
+  }
+  .pastel-border-mint {
+    border-left: 3px solid #a7f3d0;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 12px rgba(167, 243, 208, 0.08);
+  }
+  .pastel-border-peach {
+    border-left: 3px solid #fcd5b5;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 12px rgba(252, 213, 181, 0.08);
+  }
+  .pastel-border-sky {
+    border-left: 3px solid #bae6fd;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 12px rgba(186, 230, 253, 0.08);
+  }
+  .pastel-border-yellow {
+    border-left: 3px solid #fef08a;
+    box-shadow: inset 0 0 0 0 transparent, 0 0 12px rgba(254, 240, 138, 0.08);
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-200
+           bg-surface-2 hover:bg-border text-text-primary border border-border
+           hover:border-pastel-lavender/50 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
+           text-text-secondary hover:text-text-primary hover:bg-surface active:scale-95;
+  }
+
+  .input-base {
+    @apply w-full bg-surface border border-border rounded-xl px-4 py-3
+           text-text-primary placeholder-text-muted outline-none
+           focus:border-pastel-lavender/60 focus:ring-2 focus:ring-pastel-lavender/10
+           transition-all duration-200;
+  }
+
+  .card-base {
+    @apply bg-card-bg rounded-2xl border border-border/50 transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .text-glow-rose {
+    text-shadow: 0 0 20px rgba(244, 184, 193, 0.4);
+  }
+  .text-glow-lavender {
+    text-shadow: 0 0 20px rgba(196, 181, 253, 0.4);
+  }
+  .bg-gradient-app {
+    background: linear-gradient(135deg, #13131f 0%, #1a1a2e 50%, #16162a 100%);
+  }
+}
+
+/* Focus mode transition */
+.focus-overlay {
+  backdrop-filter: blur(4px);
+}
+
+/* Chat panel overlay */
+.chat-overlay {
+  background: rgba(19, 19, 31, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+/* Smooth checkbox */
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* Prose in AI responses */
+.ai-message p {
+  margin-bottom: 0.5em;
+}
+.ai-message p:last-child {
+  margin-bottom: 0;
+}
+
+/* Steps list */
+.steps-list li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.steps-list li::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.6;
+}

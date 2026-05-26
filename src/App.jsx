@@ -1,0 +1,410 @@
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import Header from './components/Header.jsx'
+import TaskCard from './components/TaskCard.jsx'
+import TaskForm from './components/TaskForm.jsx'
+import FocusMode from './components/FocusMode.jsx'
+import ChatPanel from './components/ChatPanel.jsx'
+import FidgetCanvas from './components/FidgetCanvas.jsx'
+
+const STORAGE_KEY = 'clarity-tasks-v1'
+const SYNC_ID_KEY = 'clarity-sync-id'
+const PASTEL_COLORS = ['rose', 'lavender', 'mint', 'peach', 'sky', 'yellow']
+
+function generateSyncId() {
+  return crypto.randomUUID()
+}
+
+function nextColor(tasks) {
+  return PASTEL_COLORS[tasks.length % PASTEL_COLORS.length]
+}
+
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch { return [] }
+}
+
+function saveLocal(tasks) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)) } catch {}
+}
+
+function loadSyncId() {
+  return localStorage.getItem(SYNC_ID_KEY) || null
+}
+
+function saveSyncId(id) {
+  localStorage.setItem(SYNC_ID_KEY, id)
+}
+
+function priorityOrder(p) {
+  return p === 'must' ? 0 : p === 'should' ? 1 : 2
+}
+
+function selectFocusTasks(tasks, count) {
+  const pending = tasks.filter(t => !t.done)
+  const pinned = pending.filter(t => t.pinned)
+  if (pinned.length > 0) {
+    return pinned.slice().sort((a, b) => {
+      const pd = priorityOrder(a.priority) - priorityOrder(b.priority)
+      return pd !== 0 ? pd : a.anxiety - b.anxiety
+    }).slice(0, count)
+  }
+  return pending.slice().sort((a, b) => {
+    const pd = priorityOrder(a.priority) - priorityOrder(b.priority)
+    return pd !== 0 ? pd : a.anxiety - b.anxiety
+  }).slice(0, count)
+}
+
+const API_KEY = import.meta.env.VITE_CLAUDE_API_KEY
+const CLAUDE_MODEL = 'claude-haiku-4-5-20251001'
+
+// ── sync helpers ────────────────────────────────────────────────────────────
+
+async function fetchTasksFromCloud(syncId) {
+  const r = await fetch(`/api/tasks?syncId=${encodeURIComponent(syncId)}`)
+  if (!r.ok) throw new Error('Failed to load tasks')
+  const data = await r.json()
+  return data.tasks || []
+}
+
+async function saveTasksToCloud(syncId, tasks) {
+  const r = await fetch('/api/tasks', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ syncId, tasks }),
+  })
+  if (!r.ok) throw new Error('Failed to save tasks')
+}
+
+// ── main component ──────────────────────────────────────────────────────────
+
+export default function App() {
+  const [tasks, setTasks] = useState(() => loadLocal())
+  const [syncId, setSyncId] = useState(() => {
+    const existing = loadSyncId()
+    if (existing) return existing
+    const newId = generateSyncId()
+    saveSyncId(newId)
+    return newId
+  })
+  const [syncStatus, setSyncStatus] = useState('idle')
+  const [showForm, setShowForm] = useState(false)
+  const [focusMode, setFocusMode] = useState(false)
+  const [focusCount, setFocusCount] = useState(2)
+  const [chatOpen, setChatOpen] = useState(false)
+  const [fidgetOpen, setFidgetOpen] = useState(false)
+  const [breakingDownId, setBreakingDownId] = useState(null)
+  const saveTimer = useRef(null)
+  const isFirstLoad = useRef(true)
+
+  // ── load from cloud on mount / sync id change ───────────────────────────
+
+  useEffect(() => {
+    setSyncStatus('syncing')
+    fetchTasksFromCloud(syncId)
+      .then(cloudTasks => {
+        if (cloudTasks.length > 0) {
+          setTasks(cloudTasks)
+          saveLocal(cloudTasks)
+        }
+        setSyncStatus('synced')
+      })
+      .catch(() => {
+        setSyncStatus('error')
+      })
+      .finally(() => {
+        isFirstLoad.current = false
+      })
+  }, [syncId])
+
+  // ── save to cloud (debounced) on task change ────────────────────────────
+
+  useEffect(() => {
+    if (isFirstLoad.current) return
+    saveLocal(tasks)
+    clearTimeout(saveTimer.current)
+    setSyncStatus('syncing')
+    saveTimer.current = setTimeout(() => {
+      saveTasksToCloud(syncId, tasks)
+        .then(() => setSyncStatus('synced'))
+        .catch(() => setSyncStatus('error'))
+    }, 1200)
+  }, [tasks, syncId])
+
+  // ── change sync id (entering another device's code) ─────────────────────
+
+  const handleChangeSyncId = useCallback((newId) => {
+    saveSyncId(newId)
+    setSyncId(newId)
+    isFirstLoad.current = true
+  }, [])
+
+  // ── task actions ─────────────────────────────────────────────────────────
+
+  const addTask = useCallback((fields) => {
+    const newTask = {
+      id: crypto.randomUUID(),
+      name: fields.name,
+      notes: fields.notes || '',
+      anxiety: fields.anxiety,
+      priority: fields.priority,
+      pinned: false,
+      done: false,
+      steps: [],
+      color: nextColor(tasks),
+      createdAt: Date.now(),
+    }
+    setTasks(prev => [newTask, ...prev])
+  }, [tasks])
+
+  const toggleDone = useCallback((id) => {
+    setTasks(prev => prev.map(t => t.id === id ? { ...t, done: !t.done } : t))
+  }, [])
+
+  const togglePin = useCallback((id) => {
+    setTasks(prev => prev.map(t => t.id === id ? { ...t, pinned: !t.pinned } : t))
+  }, [])
+
+  const deleteTask = useCallback((id) => {
+    setTasks(prev => prev.filter(t => t.id !== id))
+  }, [])
+
+  // ── break it down ─────────────────────────────────────────────────────────
+
+  const breakItDown = useCallback(async (id) => {
+    if (!API_KEY) {
+      const task = tasks.find(t => t.id === id)
+      if (!task) return
+      const fallbackSteps = [
+        `Write down exactly what "${task.name}" means to you`,
+        'Identify the single next physical action',
+        'Do just that one action for 5 minutes',
+        'Decide what the next step is after that',
+      ]
+      setTasks(prev => prev.map(t => t.id === id ? { ...t, steps: fallbackSteps } : t))
+      return
+    }
+
+    setBreakingDownId(id)
+    const task = tasks.find(t => t.id === id)
+    if (!task) { setBreakingDownId(null); return }
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: CLAUDE_MODEL,
+          max_tokens: 400,
+          system: `You are a helpful assistant for someone with GAD and ADHD. Break tasks into tiny, non-overwhelming steps.
+Rules:
+- Return ONLY a JSON array of strings (step descriptions)
+- 3 to 6 steps maximum
+- Each step should be very small and concrete — something completable in under 10 minutes
+- Use plain language, no jargon
+- No numbering in the step text itself
+- Don't include anything other than the JSON array
+Example output: ["Open your email app", "Search for the email from Jane", "Read it once without replying", "Write one sentence draft reply"]`,
+          messages: [{ role: 'user', content: `Break this task into small steps: "${task.name}"${task.notes ? `\nContext: ${task.notes}` : ''}` }],
+        }),
+      })
+
+      if (!response.ok) throw new Error('API error')
+      const data = await response.json()
+      const text = data.content?.[0]?.text || '[]'
+      const match = text.match(/\[[\s\S]*\]/)
+      const steps = match ? JSON.parse(match[0]) : []
+      if (Array.isArray(steps) && steps.length > 0) {
+        setTasks(prev => prev.map(t => t.id === id ? { ...t, steps } : t))
+      }
+    } catch {
+      const fallback = [
+        `Figure out exactly what "${task.name}" requires`,
+        'Identify the first tiny action',
+        'Set a 10-minute timer and start',
+        'Check in with yourself after',
+      ]
+      setTasks(prev => prev.map(t => t.id === id ? { ...t, steps: fallback } : t))
+    } finally {
+      setBreakingDownId(null)
+    }
+  }, [tasks])
+
+  // ── derived state ──────────────────────────────────────────────────────────
+
+  const pendingTasks = tasks.filter(t => !t.done)
+  const doneTasks = tasks.filter(t => t.done)
+  const focusTasks = selectFocusTasks(tasks, focusCount)
+
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (a.done !== b.done) return a.done ? 1 : -1
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1
+    return priorityOrder(a.priority) - priorityOrder(b.priority)
+  })
+
+  // ── render ──────────────────────────────────────────────────────────────────
+
+  return (
+    <div className="min-h-screen bg-gradient-app">
+      <Header
+        focusMode={focusMode}
+        onToggleFocus={() => setFocusMode(v => !v)}
+        focusCount={focusCount}
+        onSetFocusCount={setFocusCount}
+        taskCount={tasks.length}
+        syncId={syncId}
+        syncStatus={syncStatus}
+        onChangeSyncId={handleChangeSyncId}
+      />
+
+      <main className="max-w-3xl mx-auto px-4 py-8">
+        <div className="mb-8">
+          <button
+            onClick={() => setShowForm(true)}
+            className="w-full group flex items-center gap-3 p-4 rounded-2xl
+                       border border-dashed border-border/50 hover:border-pastel-lavender/40
+                       bg-card-bg/50 hover:bg-card-bg
+                       text-text-muted hover:text-pastel-lavender
+                       transition-all duration-200 active:scale-[0.99]"
+          >
+            <div className="w-8 h-8 rounded-xl bg-surface group-hover:bg-pastel-lavender/10 border border-border/50 group-hover:border-pastel-lavender/30
+                            flex items-center justify-center transition-all duration-200">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium">Add a new task</span>
+          </button>
+        </div>
+
+        {tasks.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-in">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pastel-lavender/15 to-pastel-rose/10 border border-pastel-lavender/20 flex items-center justify-center mb-4 animate-float">
+              <span className="text-2xl">✨</span>
+            </div>
+            <h2 className="text-base font-semibold text-text-primary mb-2">Nothing here yet</h2>
+            <p className="text-sm text-text-muted max-w-xs leading-relaxed">
+              Add your first task above. You don't have to tackle everything — just what feels right for today.
+            </p>
+          </div>
+        )}
+
+        {tasks.length > 0 && (
+          <div className="space-y-3">
+            {pendingTasks.length > 0 && (
+              <section>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-medium text-text-muted uppercase tracking-wide">To do</span>
+                  <span className="px-1.5 py-0.5 rounded-full bg-surface text-text-muted text-[10px] border border-border/40">
+                    {pendingTasks.length}
+                  </span>
+                </div>
+                <div className="space-y-3">
+                  {sortedTasks.filter(t => !t.done).map(task => (
+                    <TaskCard
+                      key={task.id}
+                      task={task}
+                      onToggleDone={toggleDone}
+                      onTogglePin={togglePin}
+                      onDelete={deleteTask}
+                      onBreakDown={breakItDown}
+                      isBreakingDown={breakingDownId === task.id}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {doneTasks.length > 0 && (
+              <section className="mt-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-medium text-text-muted uppercase tracking-wide">Completed</span>
+                  <span className="px-1.5 py-0.5 rounded-full bg-pastel-mint/10 text-pastel-mint text-[10px] border border-pastel-mint/20">
+                    {doneTasks.length}
+                  </span>
+                </div>
+                <div className="space-y-3">
+                  {sortedTasks.filter(t => t.done).map(task => (
+                    <TaskCard
+                      key={task.id}
+                      task={task}
+                      onToggleDone={toggleDone}
+                      onTogglePin={togglePin}
+                      onDelete={deleteTask}
+                      onBreakDown={breakItDown}
+                      isBreakingDown={breakingDownId === task.id}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
+
+        <div className="h-24" />
+      </main>
+
+      {focusMode && (
+        <FocusMode tasks={focusTasks} onToggleDone={toggleDone} onExit={() => setFocusMode(false)} />
+      )}
+
+      {showForm && (
+        <TaskForm onAdd={addTask} onClose={() => setShowForm(false)} />
+      )}
+
+      {/* Floating fidget button — bottom left */}
+      <button
+        onClick={() => setFidgetOpen(v => !v)}
+        className={`fixed bottom-6 left-6 z-40 w-14 h-14 rounded-2xl
+                   border flex items-center justify-center
+                   transition-all duration-200 active:scale-90
+                   ${fidgetOpen
+                     ? 'bg-pastel-mint/25 border-pastel-mint/60 text-pastel-mint shadow-glow-mint'
+                     : 'bg-gradient-to-br from-pastel-mint/20 to-pastel-sky/15 border-pastel-mint/30 text-pastel-mint animate-pulse-soft hover:from-pastel-mint/30 hover:to-pastel-sky/25 hover:border-pastel-mint/50'
+                   }`}
+        title="Fidget / doodle canvas"
+      >
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round"
+            d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+        </svg>
+      </button>
+
+      {/* Floating chat button — bottom right */}
+      {!chatOpen && (
+        <button
+          onClick={() => setChatOpen(true)}
+          className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl
+                     bg-gradient-to-br from-pastel-lavender/25 to-pastel-rose/20
+                     border border-pastel-lavender/40 text-pastel-lavender shadow-glow-lavender
+                     hover:from-pastel-lavender/35 hover:to-pastel-rose/30
+                     hover:border-pastel-lavender/60 hover:shadow-lg
+                     flex items-center justify-center
+                     transition-all duration-200 active:scale-90 animate-pulse-soft"
+          title="Chat with your AI coach"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+          </svg>
+        </button>
+      )}
+
+      {chatOpen && (
+        <ChatPanel tasks={tasks} onClose={() => setChatOpen(false)} />
+      )}
+
+      {fidgetOpen && (
+        <FidgetCanvas onClose={() => setFidgetOpen(false)} />
+      )}
+    </div>
+  )
+}
