@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Header from './components/Header.jsx'
 import TaskCard from './components/TaskCard.jsx'
 import TaskForm from './components/TaskForm.jsx'
@@ -7,30 +7,34 @@ import ChatPanel from './components/ChatPanel.jsx'
 import FidgetCanvas from './components/FidgetCanvas.jsx'
 
 const STORAGE_KEY = 'clarity-tasks-v1'
+const SYNC_ID_KEY = 'clarity-sync-id'
 const PASTEL_COLORS = ['rose', 'lavender', 'mint', 'peach', 'sky', 'yellow']
 
-// ─── helpers ─────────────────────────────────────────────────────────────────
+function generateSyncId() {
+  return crypto.randomUUID()
+}
 
 function nextColor(tasks) {
-  // cycle through pastel colors based on existing task count
   return PASTEL_COLORS[tasks.length % PASTEL_COLORS.length]
 }
 
-function loadTasks() {
+function loadLocal() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     return raw ? JSON.parse(raw) : []
-  } catch {
-    return []
-  }
+  } catch { return [] }
 }
 
-function saveTasks(tasks) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
-  } catch {
-    // ignore storage errors
-  }
+function saveLocal(tasks) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)) } catch {}
+}
+
+function loadSyncId() {
+  return localStorage.getItem(SYNC_ID_KEY) || null
+}
+
+function saveSyncId(id) {
+  localStorage.setItem(SYNC_ID_KEY, id)
 }
 
 function priorityOrder(p) {
@@ -39,46 +43,102 @@ function priorityOrder(p) {
 
 function selectFocusTasks(tasks, count) {
   const pending = tasks.filter(t => !t.done)
-
-  // Pinned first
   const pinned = pending.filter(t => t.pinned)
   if (pinned.length > 0) {
-    // Sort pinned by priority then by anxiety ascending (lower anxiety = easier win)
-    const sorted = pinned.slice().sort((a, b) => {
+    return pinned.slice().sort((a, b) => {
       const pd = priorityOrder(a.priority) - priorityOrder(b.priority)
-      if (pd !== 0) return pd
-      return a.anxiety - b.anxiety
-    })
-    return sorted.slice(0, count)
+      return pd !== 0 ? pd : a.anxiety - b.anxiety
+    }).slice(0, count)
   }
-
-  // No pins — sort by priority then by anxiety ascending
-  const sorted = pending.slice().sort((a, b) => {
+  return pending.slice().sort((a, b) => {
     const pd = priorityOrder(a.priority) - priorityOrder(b.priority)
-    if (pd !== 0) return pd
-    return a.anxiety - b.anxiety
-  })
-  return sorted.slice(0, count)
+    return pd !== 0 ? pd : a.anxiety - b.anxiety
+  }).slice(0, count)
 }
 
 const API_KEY = import.meta.env.VITE_CLAUDE_API_KEY
 const CLAUDE_MODEL = 'claude-haiku-4-5-20251001'
 
-// ─── main component ──────────────────────────────────────────────────────────
+// ── sync helpers ────────────────────────────────────────────────────────────
+
+async function fetchTasksFromCloud(syncId) {
+  const r = await fetch(`/api/tasks?syncId=${encodeURIComponent(syncId)}`)
+  if (!r.ok) throw new Error('Failed to load tasks')
+  const data = await r.json()
+  return data.tasks || []
+}
+
+async function saveTasksToCloud(syncId, tasks) {
+  const r = await fetch('/api/tasks', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ syncId, tasks }),
+  })
+  if (!r.ok) throw new Error('Failed to save tasks')
+}
+
+// ── main component ──────────────────────────────────────────────────────────
 
 export default function App() {
-  const [tasks, setTasks] = useState(() => loadTasks())
+  const [tasks, setTasks] = useState(() => loadLocal())
+  const [syncId, setSyncId] = useState(() => {
+    const existing = loadSyncId()
+    if (existing) return existing
+    const newId = generateSyncId()
+    saveSyncId(newId)
+    return newId
+  })
+  const [syncStatus, setSyncStatus] = useState('idle')
   const [showForm, setShowForm] = useState(false)
   const [focusMode, setFocusMode] = useState(false)
   const [focusCount, setFocusCount] = useState(2)
   const [chatOpen, setChatOpen] = useState(false)
   const [fidgetOpen, setFidgetOpen] = useState(false)
   const [breakingDownId, setBreakingDownId] = useState(null)
+  const saveTimer = useRef(null)
+  const isFirstLoad = useRef(true)
 
-  // Persist on change
+  // ── load from cloud on mount / sync id change ───────────────────────────
+
   useEffect(() => {
-    saveTasks(tasks)
-  }, [tasks])
+    setSyncStatus('syncing')
+    fetchTasksFromCloud(syncId)
+      .then(cloudTasks => {
+        if (cloudTasks.length > 0) {
+          setTasks(cloudTasks)
+          saveLocal(cloudTasks)
+        }
+        setSyncStatus('synced')
+      })
+      .catch(() => {
+        setSyncStatus('error')
+      })
+      .finally(() => {
+        isFirstLoad.current = false
+      })
+  }, [syncId])
+
+  // ── save to cloud (debounced) on task change ────────────────────────────
+
+  useEffect(() => {
+    if (isFirstLoad.current) return
+    saveLocal(tasks)
+    clearTimeout(saveTimer.current)
+    setSyncStatus('syncing')
+    saveTimer.current = setTimeout(() => {
+      saveTasksToCloud(syncId, tasks)
+        .then(() => setSyncStatus('synced'))
+        .catch(() => setSyncStatus('error'))
+    }, 1200)
+  }, [tasks, syncId])
+
+  // ── change sync id (entering another device's code) ─────────────────────
+
+  const handleChangeSyncId = useCallback((newId) => {
+    saveSyncId(newId)
+    setSyncId(newId)
+    isFirstLoad.current = true
+  }, [])
 
   // ── task actions ─────────────────────────────────────────────────────────
 
@@ -114,7 +174,6 @@ export default function App() {
 
   const breakItDown = useCallback(async (id) => {
     if (!API_KEY) {
-      // Without API key, use a helpful fallback
       const task = tasks.find(t => t.id === id)
       if (!task) return
       const fallbackSteps = [
@@ -152,29 +211,19 @@ Rules:
 - No numbering in the step text itself
 - Don't include anything other than the JSON array
 Example output: ["Open your email app", "Search for the email from Jane", "Read it once without replying", "Write one sentence draft reply"]`,
-          messages: [
-            {
-              role: 'user',
-              content: `Break this task into small steps: "${task.name}"${task.notes ? `\nContext: ${task.notes}` : ''}`,
-            },
-          ],
+          messages: [{ role: 'user', content: `Break this task into small steps: "${task.name}"${task.notes ? `\nContext: ${task.notes}` : ''}` }],
         }),
       })
 
       if (!response.ok) throw new Error('API error')
-
       const data = await response.json()
       const text = data.content?.[0]?.text || '[]'
-
-      // Extract JSON array from response (handle any surrounding text)
       const match = text.match(/\[[\s\S]*\]/)
       const steps = match ? JSON.parse(match[0]) : []
-
       if (Array.isArray(steps) && steps.length > 0) {
         setTasks(prev => prev.map(t => t.id === id ? { ...t, steps } : t))
       }
-    } catch (err) {
-      // Fallback gracefully
+    } catch {
       const fallback = [
         `Figure out exactly what "${task.name}" requires`,
         'Identify the first tiny action',
@@ -193,7 +242,6 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
   const doneTasks = tasks.filter(t => t.done)
   const focusTasks = selectFocusTasks(tasks, focusCount)
 
-  // Sort display: pinned first, then by priority, then undone before done
   const sortedTasks = [...tasks].sort((a, b) => {
     if (a.done !== b.done) return a.done ? 1 : -1
     if (a.pinned !== b.pinned) return a.pinned ? -1 : 1
@@ -210,12 +258,12 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
         focusCount={focusCount}
         onSetFocusCount={setFocusCount}
         taskCount={tasks.length}
+        syncId={syncId}
+        syncStatus={syncStatus}
+        onChangeSyncId={handleChangeSyncId}
       />
 
-      {/* Main content */}
       <main className="max-w-3xl mx-auto px-4 py-8">
-
-        {/* Add task button / hero area */}
         <div className="mb-8">
           <button
             onClick={() => setShowForm(true)}
@@ -235,7 +283,6 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
           </button>
         </div>
 
-        {/* Empty state */}
         {tasks.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-in">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pastel-lavender/15 to-pastel-rose/10 border border-pastel-lavender/20 flex items-center justify-center mb-4 animate-float">
@@ -248,16 +295,12 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
           </div>
         )}
 
-        {/* Task list */}
         {tasks.length > 0 && (
           <div className="space-y-3">
-            {/* Pending tasks */}
             {pendingTasks.length > 0 && (
               <section>
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs font-medium text-text-muted uppercase tracking-wide">
-                    To do
-                  </span>
+                  <span className="text-xs font-medium text-text-muted uppercase tracking-wide">To do</span>
                   <span className="px-1.5 py-0.5 rounded-full bg-surface text-text-muted text-[10px] border border-border/40">
                     {pendingTasks.length}
                   </span>
@@ -278,13 +321,10 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
               </section>
             )}
 
-            {/* Done tasks */}
             {doneTasks.length > 0 && (
               <section className="mt-8">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs font-medium text-text-muted uppercase tracking-wide">
-                    Completed
-                  </span>
+                  <span className="text-xs font-medium text-text-muted uppercase tracking-wide">Completed</span>
                   <span className="px-1.5 py-0.5 rounded-full bg-pastel-mint/10 text-pastel-mint text-[10px] border border-pastel-mint/20">
                     {doneTasks.length}
                   </span>
@@ -307,28 +347,18 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
           </div>
         )}
 
-        {/* Bottom padding so FAB doesn't overlap last task */}
         <div className="h-24" />
       </main>
 
-      {/* Focus Mode overlay */}
       {focusMode && (
-        <FocusMode
-          tasks={focusTasks}
-          onToggleDone={toggleDone}
-          onExit={() => setFocusMode(false)}
-        />
+        <FocusMode tasks={focusTasks} onToggleDone={toggleDone} onExit={() => setFocusMode(false)} />
       )}
 
-      {/* Add task modal */}
       {showForm && (
-        <TaskForm
-          onAdd={addTask}
-          onClose={() => setShowForm(false)}
-        />
+        <TaskForm onAdd={addTask} onClose={() => setShowForm(false)} />
       )}
 
-      {/* Floating fidget/doodle button — bottom left */}
+      {/* Floating fidget button — bottom left */}
       <button
         onClick={() => setFidgetOpen(v => !v)}
         className={`fixed bottom-6 left-6 z-40 w-14 h-14 rounded-2xl
@@ -346,14 +376,13 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
         </svg>
       </button>
 
-      {/* Floating AI chat button */}
+      {/* Floating chat button — bottom right */}
       {!chatOpen && (
         <button
           onClick={() => setChatOpen(true)}
           className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl
                      bg-gradient-to-br from-pastel-lavender/25 to-pastel-rose/20
-                     border border-pastel-lavender/40
-                     text-pastel-lavender shadow-glow-lavender
+                     border border-pastel-lavender/40 text-pastel-lavender shadow-glow-lavender
                      hover:from-pastel-lavender/35 hover:to-pastel-rose/30
                      hover:border-pastel-lavender/60 hover:shadow-lg
                      flex items-center justify-center
@@ -369,15 +398,10 @@ Example output: ["Open your email app", "Search for the email from Jane", "Read 
         </button>
       )}
 
-      {/* Chat panel */}
       {chatOpen && (
-        <ChatPanel
-          tasks={tasks}
-          onClose={() => setChatOpen(false)}
-        />
+        <ChatPanel tasks={tasks} onClose={() => setChatOpen(false)} />
       )}
 
-      {/* Fidget canvas overlay */}
       {fidgetOpen && (
         <FidgetCanvas onClose={() => setFidgetOpen(false)} />
       )}
