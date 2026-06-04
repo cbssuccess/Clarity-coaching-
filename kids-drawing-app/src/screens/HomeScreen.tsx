@@ -172,7 +172,7 @@ export default function HomeScreen({ onNavigate }: Props) {
           {/* Title */}
           <View style={styles.titleRow}>
             <Text style={styles.titleEmoji}>🎨</Text>
-            <Text style={styles.title}>Doodle Kids</Text>
+            <Text style={styles.title}>Anges World</Text>
           </View>
           <Text style={styles.subtitle}>What do you want to make today?</Text>
 

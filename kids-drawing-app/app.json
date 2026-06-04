@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Doodle Kids",
-    "slug": "doodle-kids",
+    "name": "Anges World",
+    "slug": "anges-world",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,15 +10,15 @@
       "backgroundColor": "#FFF9E6"
     },
     "ios": {
-      "bundleIdentifier": "com.doodlekids.app",
+      "bundleIdentifier": "com.angesworld.app",
       "supportsTablet": true,
       "infoPlist": {
-        "NSPhotoLibraryAddUsageDescription": "Doodle Kids saves your drawings to your photo library.",
-        "NSPhotoLibraryUsageDescription": "Doodle Kids needs access to save your drawings."
+        "NSPhotoLibraryAddUsageDescription": "Anges World saves your drawings to your photo library.",
+        "NSPhotoLibraryUsageDescription": "Anges World needs access to save your drawings."
       }
     },
     "android": {
-      "package": "com.doodlekids.app",
+      "package": "com.angesworld.app",
       "permissions": ["WRITE_EXTERNAL_STORAGE", "READ_EXTERNAL_STORAGE"],
       "adaptiveIcon": {
         "backgroundColor": "#FFF9E6",
@@ -29,8 +29,8 @@
       [
         "expo-media-library",
         {
-          "photosPermission": "Doodle Kids saves your drawings to your photo library.",
-          "savePhotosPermission": "Allow Doodle Kids to save drawings.",
+          "photosPermission": "Anges World saves your drawings to your photo library.",
+          "savePhotosPermission": "Allow Anges World to save drawings.",
           "isAccessMediaLocationEnabled": false
         }
       ]

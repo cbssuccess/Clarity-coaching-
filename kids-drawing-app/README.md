@@ -1,4 +1,4 @@
-# Doodle Kids 🎨
+# Anges World 🎨
 
 A self-contained drawing & coloring app for kids, built with Expo (React Native).
 Runs on **Android** and **iPhone**. No internet required after install. No ads. No accounts.
@@ -44,7 +44,7 @@ Screen Time-restricted phones.
 4. Build for iOS: `eas build --platform ios`
 5. Submit to TestFlight: `eas submit --platform ios`
 6. In App Store Connect, add the child's Apple ID as a TestFlight tester
-7. The child opens the **TestFlight** app on her iPhone and installs "Doodle Kids"
+7. The child opens the **TestFlight** app on her iPhone and installs "Anges World"
 
 > **Screen Time note:** You may need to add TestFlight to the list of allowed apps
 > in Screen Time → Content & Privacy → Allowed Apps.
