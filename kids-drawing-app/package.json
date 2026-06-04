@@ -6,6 +6,7 @@
     "@react-native-community/slider": "^5.2.0",
     "expo": "~56.0.8",
     "expo-file-system": "^56.0.7",
+    "expo-linear-gradient": "^56.0.4",
     "expo-media-library": "^56.0.6",
     "expo-status-bar": "~56.0.4",
     "react": "19.2.3",

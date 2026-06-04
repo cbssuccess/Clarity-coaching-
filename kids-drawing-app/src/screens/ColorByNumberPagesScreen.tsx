@@ -9,33 +9,35 @@ import {
   Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ColoringPage } from '../../App';
-import { COLORING_PAGES } from '../data/coloringPages';
+import { CBNPage } from '../../App';
+import { CBN_PAGES } from '../data/colorByNumberPages';
 
 const { width } = Dimensions.get('window');
-const CARD_SIZE = (width - 48) / 2;
+const CARD = (width - 48) / 2;
 
 type Props = {
   onBack: () => void;
-  onSelect: (page: ColoringPage) => void;
+  onSelect: (page: CBNPage) => void;
 };
 
-export default function ColoringPagesScreen({ onBack, onSelect }: Props) {
+export default function ColorByNumberPagesScreen({ onBack, onSelect }: Props) {
   return (
-    <LinearGradient colors={['#D6EEFF', '#FFD6EC', '#EDD5FF']} style={{ flex: 1 }}>
+    <LinearGradient colors={['#EDD5FF', '#FFD6EC', '#D6EEFF']} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.header}>
           <TouchableOpacity onPress={onBack} style={styles.back}>
             <Text style={styles.backText}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>🖍️ Coloring Pages</Text>
+          <Text style={styles.title}>🔢 Color by Number</Text>
           <View style={{ width: 72 }} />
         </View>
 
-        <Text style={styles.hint}>Pick a picture and color it your way!</Text>
+        <Text style={styles.hint}>
+          Pick a picture, then follow the number key!
+        </Text>
 
         <FlatList
-          data={COLORING_PAGES}
+          data={CBN_PAGES}
           numColumns={2}
           contentContainerStyle={styles.grid}
           columnWrapperStyle={styles.row}
@@ -43,13 +45,21 @@ export default function ColoringPagesScreen({ onBack, onSelect }: Props) {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.card}
-              onPress={() =>
-                onSelect({ id: item.id, name: item.name, svgData: item.svgData })
-              }
+              onPress={() => onSelect(item)}
               activeOpacity={0.8}
             >
               <Text style={styles.cardEmoji}>{item.emoji}</Text>
               <Text style={styles.cardName}>{item.name}</Text>
+              <View style={styles.numbersRow}>
+                {Object.entries(item.colorMap)
+                  .slice(0, 6)
+                  .map(([num, color]) => (
+                    <View
+                      key={num}
+                      style={[styles.dot, { backgroundColor: color, borderColor: '#aaa' }]}
+                    />
+                  ))}
+              </View>
             </TouchableOpacity>
           )}
         />
@@ -67,15 +77,15 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: 'rgba(255,255,255,0.4)',
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(163,200,230,0.4)',
+    borderBottomColor: 'rgba(200,160,230,0.3)',
   },
   back: { width: 72 },
-  backText: { fontSize: 16, color: '#3FA9D0', fontWeight: '700' },
-  title: { fontSize: 20, fontWeight: '800', color: '#3FA9D0' },
+  backText: { fontSize: 16, color: '#7B3FA0', fontWeight: '700' },
+  title: { fontSize: 20, fontWeight: '800', color: '#7B3FA0' },
   hint: {
     textAlign: 'center',
     fontSize: 13,
-    color: '#3FA9D0',
+    color: '#9B59B6',
     fontWeight: '600',
     marginTop: 10,
     marginBottom: 4,
@@ -84,26 +94,38 @@ const styles = StyleSheet.create({
   grid: { padding: 16 },
   row: { justifyContent: 'space-between', marginBottom: 16 },
   card: {
-    width: CARD_SIZE,
-    height: CARD_SIZE,
+    width: CARD,
+    height: CARD + 20,
     backgroundColor: 'rgba(255,255,255,0.85)',
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#3FA9D0',
+    shadowColor: '#9B59B6',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
     elevation: 4,
     borderWidth: 2,
-    borderColor: 'rgba(163,200,230,0.5)',
+    borderColor: 'rgba(200,160,230,0.5)',
+    paddingVertical: 12,
   },
-  cardEmoji: { fontSize: 64, marginBottom: 8 },
+  cardEmoji: { fontSize: 60, marginBottom: 8 },
   cardName: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#2A7090',
+    color: '#5A3070',
     textAlign: 'center',
-    paddingHorizontal: 8,
+    marginBottom: 10,
+    paddingHorizontal: 6,
+  },
+  numbersRow: {
+    flexDirection: 'row',
+    gap: 4,
+  },
+  dot: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    borderWidth: 1,
   },
 });
