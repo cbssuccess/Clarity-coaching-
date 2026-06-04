@@ -23,47 +23,47 @@
 
     /* ══════════════════════════ HOME SCREEN ══════════════════════════ */
     #screen-home{
-      background:linear-gradient(160deg,#EDD5FF 0%,#FFD6EC 38%,#D6EEFF 68%,#E0FFD6 100%);
+      background:linear-gradient(180deg,#C9A3FF 0%,#FFB5D8 30%,#87CEEB 65%,#A8ECD8 100%);
       overflow-y:auto;position:relative;
     }
-    .home-title{text-align:center;padding:18px 16px 6px;position:relative;z-index:2;}
-    .home-title .emoji{font-size:52px;display:block;margin-bottom:4px;}
-    .home-title h1{font-size:36px;font-weight:900;color:#7B3FA0;letter-spacing:-1px;}
-    .home-title p{font-size:14px;color:#B06FC4;font-weight:600;margin-top:4px;}
+    .home-title{text-align:center;padding:22px 16px 8px;position:relative;z-index:2;}
+    .home-title .emoji{font-size:58px;display:block;margin-bottom:4px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));}
+    .home-title h1{font-size:38px;font-weight:900;color:#fff;letter-spacing:-1px;text-shadow:0 2px 8px rgba(120,50,180,.4);}
+    .home-title p{font-size:14px;color:rgba(255,255,255,.92);font-weight:600;margin-top:4px;}
 
     /* floating decorations */
     .floaties{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
     .floaty{position:absolute;font-size:22px;animation:float 3s ease-in-out infinite;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(5deg)}}
 
-    /* game board spots */
-    .board-svg{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:0;}
+    /* candy land gameboard SVG */
+    #board-svg-container{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
 
     /* jump game */
-    .game-box{margin:10px 16px 4px;border-radius:18px;overflow:hidden;
-      background:rgba(255,255,255,0.45);border:2px solid rgba(255,255,255,0.7);
-      flex-shrink:0;position:relative;z-index:2;}
-    .game-label{font-size:11px;font-weight:800;color:#9B59B6;text-transform:uppercase;
-      letter-spacing:.5px;padding:6px 12px 2px;}
-    #game-canvas{display:block;cursor:pointer;touch-action:none;}
+    .game-box{margin:8px 16px 6px;border-radius:20px;overflow:hidden;
+      background:rgba(255,255,255,0.32);border:2.5px solid rgba(255,255,255,0.65);
+      flex-shrink:0;position:relative;z-index:2;box-shadow:0 4px 16px rgba(100,50,180,.15);cursor:pointer;}
+    .game-label{font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.2);
+      text-transform:uppercase;letter-spacing:.8px;padding:7px 12px 2px;}
+    #game-canvas{display:block;touch-action:none;}
 
     /* mode buttons */
-    .mode-buttons{padding:12px 16px 24px;display:flex;flex-direction:column;gap:12px;
+    .mode-buttons{padding:10px 16px 28px;display:flex;flex-direction:column;gap:12px;
       position:relative;z-index:2;}
-    .mode-btn{border:none;border-radius:22px;padding:14px 18px;cursor:pointer;
+    .mode-btn{border:2px solid rgba(255,255,255,.35);border-radius:24px;padding:14px 18px;cursor:pointer;
       display:flex;align-items:center;gap:14px;
-      box-shadow:0 5px 14px rgba(123,63,160,0.22);text-align:left;transition:transform .1s;}
-    .mode-btn:active{transform:scale(.97);}
-    .mode-btn .btn-circle{width:52px;height:52px;border-radius:26px;
-      background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.5);
-      display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+      box-shadow:0 6px 18px rgba(100,50,180,.25);text-align:left;transition:transform .12s,box-shadow .12s;}
+    .mode-btn:active{transform:scale(.97);box-shadow:0 2px 8px rgba(100,50,180,.2);}
+    .mode-btn .btn-circle{width:54px;height:54px;border-radius:27px;
+      background:rgba(255,255,255,0.28);border:2px solid rgba(255,255,255,0.5);
+      display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
     .mode-btn .btn-text{flex:1;}
-    .mode-btn .btn-label{font-size:19px;font-weight:800;color:#fff;display:block;margin-bottom:2px;}
-    .mode-btn .btn-sub{font-size:12px;color:rgba(255,255,255,.88);font-weight:500;}
-    .mode-btn .btn-arrow{font-size:24px;color:rgba(255,255,255,.6);}
-    #btn-draw{background:linear-gradient(135deg,#FF8DC7,#FF5BA3);}
-    #btn-color{background:linear-gradient(135deg,#7EC8E3,#3FA9D0);}
-    #btn-cbn{background:linear-gradient(135deg,#C39BD3,#9B59B6);}
+    .mode-btn .btn-label{font-size:20px;font-weight:900;color:#fff;display:block;margin-bottom:2px;text-shadow:0 1px 3px rgba(0,0,0,.15);}
+    .mode-btn .btn-sub{font-size:12px;color:rgba(255,255,255,.88);font-weight:600;}
+    .mode-btn .btn-arrow{font-size:26px;color:rgba(255,255,255,.7);}
+    #btn-draw{background:linear-gradient(135deg,#FF6EB4,#E0176E);}
+    #btn-color{background:linear-gradient(135deg,#5BC8F5,#0E86B0);}
+    #btn-cbn{background:linear-gradient(135deg,#C39BD3,#7D3DAF);}
 
     /* ══════════════════════════ DRAWING SCREEN ══════════════════════════ */
     #screen-draw{background:#E8E8E8;}
@@ -138,15 +138,18 @@
 
 <!-- ══ HOME SCREEN ══ -->
 <div id="screen-home" class="screen active">
-  <!-- Decorations -->
+  <!-- Candy Land gameboard SVG (built by JS) -->
+  <div id="board-svg-container"></div>
+
+  <!-- Floating decorations -->
   <div class="floaties">
-    <span class="floaty" style="left:7%;top:12%;animation-delay:0s">⭐</span>
-    <span class="floaty" style="left:84%;top:14%;animation-delay:.3s">💜</span>
-    <span class="floaty" style="left:14%;top:38%;animation-delay:.5s;font-size:16px">✨</span>
-    <span class="floaty" style="left:77%;top:36%;animation-delay:.2s">🌸</span>
-    <span class="floaty" style="left:4%;top:68%;animation-delay:.7s;font-size:16px">💙</span>
-    <span class="floaty" style="left:87%;top:70%;animation-delay:.1s">🌟</span>
-    <span class="floaty" style="left:50%;top:44%;animation-delay:.4s;font-size:14px">🩷</span>
+    <span class="floaty" style="left:7%;top:11%;animation-delay:0s">⭐</span>
+    <span class="floaty" style="left:83%;top:14%;animation-delay:.4s">💜</span>
+    <span class="floaty" style="left:14%;top:36%;animation-delay:.7s;font-size:16px">✨</span>
+    <span class="floaty" style="left:76%;top:34%;animation-delay:.2s">🌸</span>
+    <span class="floaty" style="left:4%;top:66%;animation-delay:.9s;font-size:16px">💙</span>
+    <span class="floaty" style="left:86%;top:68%;animation-delay:.1s">🌟</span>
+    <span class="floaty" style="left:49%;top:45%;animation-delay:.5s;font-size:15px">🩷</span>
   </div>
 
   <div class="home-title">
@@ -155,9 +158,9 @@
     <p>What do you want to make today?</p>
   </div>
 
-  <!-- Jump game -->
-  <div class="game-box">
-    <div class="game-label">⭐ Jump Game</div>
+  <!-- Jump game — tap anywhere in the box to play -->
+  <div class="game-box" id="game-box">
+    <div class="game-label">⭐ Jump Game — tap to play!</div>
     <canvas id="game-canvas" height="100"></canvas>
   </div>
 
@@ -295,8 +298,10 @@ function showScreen(id) {
     if (charY === 0) velY = JUMP_VEL;
   }
 
-  gc.addEventListener('click', jump);
-  gc.addEventListener('touchstart', e => { e.preventDefault(); jump(); }, { passive: false });
+  // Tap anywhere in the game box to jump
+  const gameBox = document.getElementById('game-box');
+  gameBox.addEventListener('click', jump);
+  gameBox.addEventListener('touchstart', e => { e.preventDefault(); jump(); }, { passive: false });
 
   function loop() {
     requestAnimationFrame(loop);
@@ -363,6 +368,78 @@ function showScreen(id) {
     ctx.textAlign = 'left';
   }
   loop();
+})();
+
+// ═══════════════════════════════════════════════════════
+//  CANDY LAND GAMEBOARD
+// ═══════════════════════════════════════════════════════
+(function buildGameboard() {
+  const container = document.getElementById('board-svg-container');
+  const W = window.innerWidth, H = window.innerHeight;
+  const sx = W / 375; // scale X for any screen width
+
+  // 17 spaces along an S-curve, designed for 375px wide reference
+  // Winds: bottom row L→R, right bend, mid row R→L, left bend, top row L→R
+  const ref = [
+    [52,490],[108,478],[168,472],[228,475],[288,484], // row 1 (bottom)
+    [326,445],                                         // right bend
+    [308,404],[248,392],[186,386],[124,390],[62,402],  // row 2 (middle)
+    [36,366],                                          // left bend
+    [58,310],[120,297],[182,292],[244,296],[306,308],  // row 3 (top)
+  ];
+  const PASTEL = ['#FFB3C6','#FFD0A0','#FFF0A0','#C8F0C8','#A0D8FF','#D0B0FF'];
+  const pts = ref.map(([rx,ry]) => [Math.round(rx * sx), ry]);
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('width', String(W));
+  svg.setAttribute('height', String(H));
+  svg.style.cssText = 'position:absolute;top:0;left:0;';
+
+  // Smooth quadratic bezier path through all 17 points
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [px,py] = pts[i-1], [cx,cy] = pts[i];
+    d += ` Q${px},${py} ${(px+cx)/2},${(py+cy)/2}`;
+  }
+  d += ` L${pts[pts.length-1][0]},${pts[pts.length-1][1]}`;
+
+  const mkPath = (sw, col) => {
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d); p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', col); p.setAttribute('stroke-width', String(sw));
+    p.setAttribute('stroke-linecap', 'round');
+    return p;
+  };
+  svg.appendChild(mkPath(30, 'rgba(150,90,255,0.18)')); // soft purple shadow
+  svg.appendChild(mkPath(18, 'rgba(255,255,255,0.42)')); // white track
+
+  pts.forEach(([cx,cy], i) => {
+    const col = PASTEL[i % PASTEL.length];
+    // Glow ring
+    const g = document.createElementNS(NS, 'circle');
+    g.setAttribute('cx', String(cx)); g.setAttribute('cy', String(cy)); g.setAttribute('r', '19');
+    g.setAttribute('fill', 'rgba(255,255,255,0.22)');
+    svg.appendChild(g);
+    // Filled space circle
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', String(cx)); c.setAttribute('cy', String(cy)); c.setAttribute('r', '13');
+    c.setAttribute('fill', col);
+    c.setAttribute('stroke', 'rgba(255,255,255,0.78)'); c.setAttribute('stroke-width', '2.5');
+    c.setAttribute('opacity', '0.90');
+    svg.appendChild(c);
+    // Space number
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', String(cx)); t.setAttribute('y', String(cy + 4));
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('font-size', '10'); t.setAttribute('font-weight', '800');
+    t.setAttribute('font-family', 'sans-serif');
+    t.setAttribute('fill', 'rgba(80,30,110,0.85)');
+    t.textContent = String(i + 1);
+    svg.appendChild(t);
+  });
+
+  container.appendChild(svg);
 })();
 
 // ═══════════════════════════════════════════════════════
