@@ -8,6 +8,7 @@ import {
   Dimensions,
   ScrollView,
   Alert,
+  Platform,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Circle, Rect, Path, Polygon, Ellipse, Text as SvgText } from 'react-native-svg';
@@ -146,6 +147,23 @@ export default function ColorByNumberScreen({ onBack, page }: Props) {
   );
 
   const save = async () => {
+    if (Platform.OS === 'web') {
+      const svgs = document.querySelectorAll('svg');
+      const svgEl = svgs[svgs.length - 1] as SVGSVGElement | null;
+      if (svgEl) {
+        const data = new XMLSerializer().serializeToString(svgEl);
+        const blob = new Blob([data], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'anges-world-coloring.svg';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+      return;
+    }
     if (!permissionResponse?.granted) {
       const { granted } = await requestPermission();
       if (!granted) return;

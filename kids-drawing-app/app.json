@@ -25,6 +25,16 @@
         "foregroundImage": "./assets/adaptive-icon.png"
       }
     },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png",
+      "name": "Anges World",
+      "shortName": "Anges World",
+      "lang": "en",
+      "backgroundColor": "#EDD5FF",
+      "themeColor": "#9B59B6"
+    },
     "plugins": [
       [
         "expo-media-library",
