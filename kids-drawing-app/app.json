@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Anges World",
+    "slug": "anges-world",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#FFF9E6"
+    },
+    "ios": {
+      "bundleIdentifier": "com.angesworld.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryAddUsageDescription": "Anges World saves your drawings to your photo library.",
+        "NSPhotoLibraryUsageDescription": "Anges World needs access to save your drawings."
+      }
+    },
+    "android": {
+      "package": "com.angesworld.app",
+      "permissions": ["WRITE_EXTERNAL_STORAGE", "READ_EXTERNAL_STORAGE"],
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF9E6",
+        "foregroundImage": "./assets/adaptive-icon.png"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png",
+      "name": "Anges World",
+      "shortName": "Anges World",
+      "lang": "en",
+      "backgroundColor": "#EDD5FF",
+      "themeColor": "#9B59B6"
+    },
+    "plugins": [
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Anges World saves your drawings to your photo library.",
+          "savePhotosPermission": "Allow Anges World to save drawings.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ]
+    ]
+  }
+}
