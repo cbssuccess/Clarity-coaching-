@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -24,30 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: kids-drawing-app/package-lock.json
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: kids-drawing-app
-
-      - name: Build web app
-        run: npx expo export --platform web
-        working-directory: kids-drawing-app
-
-      - name: Fix asset paths for GitHub Pages subdirectory
-        run: |
-          sed -i 's|src="/_expo/|src="_expo/|g' kids-drawing-app/dist/index.html
-          sed -i 's|href="/favicon.ico"|href="favicon.ico"|g' kids-drawing-app/dist/index.html
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: kids-drawing-app/dist
+          path: kids-drawing-app/web-build
 
       - name: Deploy to GitHub Pages
         id: deploy
