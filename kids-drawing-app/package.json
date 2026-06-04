@@ -10,9 +10,11 @@
     "expo-media-library": "^56.0.6",
     "expo-status-bar": "~56.0.4",
     "react": "19.2.3",
+    "react-dom": "^19.2.3",
     "react-native": "0.85.3",
     "react-native-svg": "^15.15.5",
-    "react-native-view-shot": "^5.1.0"
+    "react-native-view-shot": "^5.1.0",
+    "react-native-web": "^0.21.0"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
