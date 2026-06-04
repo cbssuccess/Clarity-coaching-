@@ -378,7 +378,6 @@ const COLORS = [
 let drawCtx, strokes = [], currentStroke = null;
 let drawColor = '#FF0000', brushSize = 4, isEraser = false;
 let coloringPageSvg = null;
-let coloringImageLoaded = false;
 
 function buildPalette() {
   const p = document.getElementById('draw-palette');
@@ -413,45 +412,43 @@ function toggleEraser() {
 function undoStroke() {
   if (strokes.length === 0) return;
   strokes.pop();
-  redrawCanvas();
+  redrawAll();
 }
 
 function clearCanvas() {
   if (!confirm('Clear the drawing?')) return;
   strokes = [];
-  redrawCanvas();
+  redrawAll();
 }
 
 function saveDrawing() {
+  const canvas = document.getElementById('draw-canvas');
   const link = document.createElement('a');
   link.download = 'anges-world-drawing.png';
-  link.href = document.getElementById('draw-canvas').toDataURL();
+  link.href = canvas.toDataURL();
   link.click();
 }
 
-function redrawCanvas() {
+function redrawAll() {
   const canvas = document.getElementById('draw-canvas');
+  if (!drawCtx) return;
   drawCtx.clearRect(0, 0, canvas.width, canvas.height);
   drawCtx.fillStyle = '#fff';
   drawCtx.fillRect(0, 0, canvas.width, canvas.height);
-
   if (coloringPageSvg) {
-    const img = new Image();
     const svgBlob = new Blob([`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="${canvas.width}" height="${canvas.height}">${coloringPageSvg}</svg>`], {type:'image/svg+xml'});
-    img.src = URL.createObjectURL(svgBlob);
-    img.onload = () => {
-      drawCtx.drawImage(img, 0, 0);
-      URL.revokeObjectURL(img.src);
-      drawStrokes();
-    };
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = () => { drawCtx.drawImage(img, 0, 0); URL.revokeObjectURL(url); paintStrokes(); };
+    img.src = url;
   } else {
-    drawStrokes();
+    paintStrokes();
   }
 }
 
-function drawStrokes() {
+function paintStrokes() {
   strokes.forEach(stroke => {
-    if (stroke.points.length === 0) return;
+    if (!stroke.points.length) return;
     drawCtx.beginPath();
     drawCtx.strokeStyle = stroke.color;
     drawCtx.lineWidth = stroke.size;
@@ -468,20 +465,11 @@ function drawStrokes() {
         const my = (stroke.points[i].y + stroke.points[i+1].y) / 2;
         drawCtx.quadraticCurveTo(stroke.points[i].x, stroke.points[i].y, mx, my);
       }
-      const last = stroke.points[stroke.points.length - 1];
-      drawCtx.lineTo(last.x, last.y);
+      drawCtx.lineTo(stroke.points[stroke.points.length-1].x, stroke.points[stroke.points.length-1].y);
       drawCtx.stroke();
     }
   });
   document.getElementById('undo-btn').disabled = strokes.length === 0;
-}
-
-function getPos(e, canvas) {
-  const r = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / r.width;
-  const scaleY = canvas.height / r.height;
-  const src = e.touches ? e.touches[0] : e;
-  return { x: (src.clientX - r.left) * scaleX, y: (src.clientY - r.top) * scaleY };
 }
 
 function initDrawCanvas() {
@@ -490,54 +478,66 @@ function initDrawCanvas() {
   const size = Math.min(wrap.clientWidth - 16, wrap.clientHeight - 16);
   canvas.width = size;
   canvas.height = size;
+  canvas.style.touchAction = 'none';
   drawCtx = canvas.getContext('2d');
   strokes = [];
+  currentStroke = null;
   buildPalette();
-  redrawCanvas();
+  redrawAll();
 
-  function onStart(e) {
-    e.preventDefault();
-    const p = getPos(e, canvas);
-    currentStroke = { points: [p], color: isEraser ? '#FFFFFF' : drawColor, size: brushSize };
+  function localPos(e) {
+    // Always read fresh bounding rect so position is accurate
+    const r = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return {
+      x: (src.clientX - r.left) * (canvas.width / r.width),
+      y: (src.clientY - r.top)  * (canvas.height / r.height)
+    };
   }
-  function onMove(e) {
-    e.preventDefault();
+
+  // Use direct property assignment — replaces any prior handler automatically
+  canvas.onmousedown = e => {
+    currentStroke = { points: [localPos(e)], color: isEraser ? '#fff' : drawColor, size: brushSize };
+  };
+  canvas.onmousemove = e => {
     if (!currentStroke) return;
-    const p = getPos(e, canvas);
+    const p = localPos(e);
+    const prev = currentStroke.points[currentStroke.points.length - 1];
     currentStroke.points.push(p);
-    // live draw
-    const pts = currentStroke.points;
     drawCtx.beginPath();
     drawCtx.strokeStyle = currentStroke.color;
     drawCtx.lineWidth = currentStroke.size;
-    drawCtx.lineCap = 'round';
-    drawCtx.lineJoin = 'round';
-    if (pts.length >= 2) {
-      const prev = pts[pts.length - 2];
-      const curr = pts[pts.length - 1];
-      drawCtx.moveTo(prev.x, prev.y);
-      drawCtx.lineTo(curr.x, curr.y);
-      drawCtx.stroke();
-    }
-  }
-  function onEnd(e) {
+    drawCtx.lineCap = 'round'; drawCtx.lineJoin = 'round';
+    drawCtx.moveTo(prev.x, prev.y); drawCtx.lineTo(p.x, p.y);
+    drawCtx.stroke();
+  };
+  canvas.onmouseup = canvas.onmouseleave = () => {
     if (!currentStroke) return;
-    strokes.push(currentStroke);
-    currentStroke = null;
+    strokes.push(currentStroke); currentStroke = null;
     document.getElementById('undo-btn').disabled = false;
-  }
-
-  // Remove old listeners by cloning
-  const nc = canvas.cloneNode(true);
-  canvas.parentNode.replaceChild(nc, canvas);
-  nc.addEventListener('mousedown', onStart);
-  nc.addEventListener('mousemove', onMove);
-  nc.addEventListener('mouseup', onEnd);
-  nc.addEventListener('touchstart', onStart, { passive: false });
-  nc.addEventListener('touchmove', onMove, { passive: false });
-  nc.addEventListener('touchend', onEnd);
-  drawCtx = nc.getContext('2d');
-  redrawCanvas();
+  };
+  canvas.ontouchstart = e => {
+    e.preventDefault();
+    currentStroke = { points: [localPos(e)], color: isEraser ? '#fff' : drawColor, size: brushSize };
+  };
+  canvas.ontouchmove = e => {
+    e.preventDefault();
+    if (!currentStroke) return;
+    const p = localPos(e);
+    const prev = currentStroke.points[currentStroke.points.length - 1];
+    currentStroke.points.push(p);
+    drawCtx.beginPath();
+    drawCtx.strokeStyle = currentStroke.color;
+    drawCtx.lineWidth = currentStroke.size;
+    drawCtx.lineCap = 'round'; drawCtx.lineJoin = 'round';
+    drawCtx.moveTo(prev.x, prev.y); drawCtx.lineTo(p.x, p.y);
+    drawCtx.stroke();
+  };
+  canvas.ontouchend = () => {
+    if (!currentStroke) return;
+    strokes.push(currentStroke); currentStroke = null;
+    document.getElementById('undo-btn').disabled = false;
+  };
 }
 
 function showDraw(pageData) {
@@ -764,14 +764,16 @@ function openCBN(page) {
   const svg = container.querySelector('svg');
   svg.querySelectorAll('[data-region]').forEach(el => {
     el.style.cursor = 'pointer';
-    el.addEventListener('click', () => {
+    const fillRegion = () => {
       const rid = el.getAttribute('data-region');
       if (!cbnSelected) { showCBNHint(); return; }
       const color = page.colorMap[cbnSelected];
       el.setAttribute('fill', color);
       cbnFilled[rid] = color;
       checkCBNComplete(svg);
-    });
+    };
+    el.addEventListener('click', fillRegion);
+    el.addEventListener('touchend', e => { e.preventDefault(); fillRegion(); });
   });
 
   // Build key
@@ -783,6 +785,7 @@ function openCBN(page) {
     item.id = 'cbn-key-' + num;
     item.innerHTML = `<div class="cbn-key-swatch" style="background:${color};border-color:${color==='#FFFFFF'?'#999':color}"></div><div class="cbn-key-num">${num}</div>`;
     item.onclick = () => selectCBNColor(Number(num));
+    item.addEventListener('touchend', e => { e.preventDefault(); selectCBNColor(Number(num)); });
     keyGrid.appendChild(item);
   });
 
