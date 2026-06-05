@@ -1,4 +1,4 @@
-name: Deploy Anges World to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: kids-drawing-app/web-build
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deploy

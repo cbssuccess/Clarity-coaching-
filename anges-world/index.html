@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#9B59B6">
+  <title>Anges World 🎨</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+    body{background:#EDD5FF;}
+
+    /* ── Screens ── */
+    .screen{display:none;width:100%;height:100vh;flex-direction:column;}
+    .screen.active{display:flex;}
+
+    /* ── Header bar ── */
+    .header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;
+      background:rgba(255,255,255,0.4);border-bottom:1px solid rgba(200,160,230,0.3);flex-shrink:0;}
+    .header h2{font-size:17px;font-weight:800;color:#5A3070;}
+    .back-btn{font-size:15px;font-weight:700;color:#7B3FA0;background:none;border:none;cursor:pointer;padding:4px 8px;}
+    .save-btn{font-size:14px;font-weight:700;color:#9B59B6;background:none;border:none;cursor:pointer;padding:4px 8px;}
+
+    /* ══════════════════════════ HOME SCREEN ══════════════════════════ */
+    #screen-home{
+      background:linear-gradient(180deg,#C9A3FF 0%,#FFB5D8 30%,#87CEEB 65%,#A8ECD8 100%);
+      overflow-y:auto;position:relative;
+    }
+    .home-title{text-align:center;padding:22px 16px 8px;position:relative;z-index:2;}
+    .home-title .emoji{font-size:58px;display:block;margin-bottom:4px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));}
+    .home-title h1{font-size:38px;font-weight:900;color:#fff;letter-spacing:-1px;text-shadow:0 2px 8px rgba(120,50,180,.4);}
+    .home-title p{font-size:14px;color:rgba(255,255,255,.92);font-weight:600;margin-top:4px;}
+
+    /* floating decorations */
+    .floaties{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+    .floaty{position:absolute;font-size:22px;animation:float 3s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(5deg)}}
+
+    /* candy land gameboard SVG */
+    #board-svg-container{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+
+    /* jump game */
+    .game-box{margin:8px 16px 6px;border-radius:20px;overflow:hidden;
+      background:rgba(255,255,255,0.32);border:2.5px solid rgba(255,255,255,0.65);
+      flex-shrink:0;position:relative;z-index:2;box-shadow:0 4px 16px rgba(100,50,180,.15);cursor:pointer;}
+    .game-label{font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.2);
+      text-transform:uppercase;letter-spacing:.8px;padding:7px 12px 2px;}
+    #game-canvas{display:block;touch-action:none;}
+
+    /* mode buttons */
+    .mode-buttons{padding:10px 16px 28px;display:flex;flex-direction:column;gap:12px;
+      position:relative;z-index:2;}
+    .mode-btn{border:2px solid rgba(255,255,255,.35);border-radius:24px;padding:14px 18px;cursor:pointer;
+      display:flex;align-items:center;gap:14px;
+      box-shadow:0 6px 18px rgba(100,50,180,.25);text-align:left;transition:transform .12s,box-shadow .12s;}
+    .mode-btn:active{transform:scale(.97);box-shadow:0 2px 8px rgba(100,50,180,.2);}
+    .mode-btn .btn-circle{width:54px;height:54px;border-radius:27px;
+      background:rgba(255,255,255,0.28);border:2px solid rgba(255,255,255,0.5);
+      display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+    .mode-btn .btn-text{flex:1;}
+    .mode-btn .btn-label{font-size:20px;font-weight:900;color:#fff;display:block;margin-bottom:2px;text-shadow:0 1px 3px rgba(0,0,0,.15);}
+    .mode-btn .btn-sub{font-size:12px;color:rgba(255,255,255,.88);font-weight:600;}
+    .mode-btn .btn-arrow{font-size:26px;color:rgba(255,255,255,.7);}
+    #btn-draw{background:linear-gradient(135deg,#FF6EB4,#E0176E);}
+    #btn-color{background:linear-gradient(135deg,#5BC8F5,#0E86B0);}
+    #btn-cbn{background:linear-gradient(135deg,#C39BD3,#7D3DAF);}
+
+    /* ══════════════════════════ DRAWING SCREEN ══════════════════════════ */
+    #screen-draw{background:#E8E8E8;}
+    .canvas-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px;position:relative;}
+    .canvas-wrap canvas{border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.12);touch-action:none;display:block;}
+
+    /* palette */
+    .palette-row{background:#FFF9F0;border-top:1px solid #FFE0A0;padding:6px 0;overflow-x:auto;
+      display:flex;align-items:center;flex-shrink:0;white-space:nowrap;}
+    .swatch{width:34px;height:34px;border-radius:17px;border:2px solid transparent;
+      margin:0 4px;cursor:pointer;flex-shrink:0;transition:transform .1s;}
+    .swatch.active{border-color:#333;transform:scale(1.22);}
+    .swatch-white{border-color:#ddd!important;}
+
+    /* toolbar */
+    .draw-toolbar{background:#fff;border-top:2px solid #EEE;display:flex;
+      align-items:center;padding:4px 10px;gap:4px;flex-shrink:0;}
+    .tool-btn{width:42px;height:42px;border-radius:21px;border:none;background:none;
+      font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .tool-btn.active{background:#FFE0A0;}
+    .tool-btn:disabled{opacity:.3;}
+    .brush-btns{display:flex;gap:2px;align-items:center;margin-right:4px;}
+    .brush-btn{width:38px;height:38px;border-radius:19px;border:none;background:none;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900;color:#333;}
+    .brush-btn.active{background:#FFE0A0;}
+    .divider{width:1px;height:28px;background:#EEE;margin:0 6px;}
+
+    /* ══════════════════════════ GALLERY SCREEN ══════════════════════════ */
+    .gallery-screen{background:linear-gradient(160deg,#D6EEFF,#FFD6EC,#EDD5FF);}
+    .gallery-hint{text-align:center;font-size:13px;font-weight:600;color:#9B59B6;
+      padding:8px 24px;flex-shrink:0;}
+    .gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:12px 16px 24px;
+      overflow-y:auto;}
+    .gallery-card{background:rgba(255,255,255,.85);border-radius:20px;padding:16px 12px;
+      display:flex;flex-direction:column;align-items:center;cursor:pointer;border:2px solid rgba(200,160,230,.4);
+      box-shadow:0 3px 10px rgba(155,89,182,.15);transition:transform .1s;}
+    .gallery-card:active{transform:scale(.96);}
+    .gallery-card .card-emoji{font-size:56px;margin-bottom:8px;}
+    .gallery-card .card-name{font-size:13px;font-weight:700;color:#5A3070;text-align:center;}
+    .cbn-dots{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;justify-content:center;}
+    .cbn-dot{width:13px;height:13px;border-radius:50%;border:1px solid #bbb;}
+
+    /* ══════════════════════════ CBN SCREEN ══════════════════════════ */
+    #screen-cbn{background:linear-gradient(160deg,#EDD5FF,#FFD6EC,#D6EEFF);}
+    .cbn-canvas-wrap{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:10px;}
+    .cbn-svg-wrap{background:#fff;border-radius:14px;overflow:hidden;
+      box-shadow:0 2px 12px rgba(155,89,182,.18);width:100%;max-width:360px;}
+    .cbn-svg-wrap svg{display:block;width:100%;height:auto;}
+    .cbn-selected-row{display:flex;align-items:center;gap:10px;padding:8px 16px;font-size:13px;
+      font-weight:600;color:#7B3FA0;flex-shrink:0;}
+    .cbn-selected-swatch{width:28px;height:28px;border-radius:14px;border:2px solid #7B3FA0;flex-shrink:0;}
+    .cbn-palette-wrap{background:rgba(255,255,255,.7);border-radius:16px;padding:12px;
+      margin:8px 16px;width:calc(100% - 32px);max-width:360px;}
+    .cbn-palette-title{font-size:11px;font-weight:800;color:#9B59B6;text-transform:uppercase;
+      letter-spacing:.5px;margin-bottom:8px;}
+    .cbn-key-grid{display:flex;flex-wrap:wrap;gap:8px;}
+    .cbn-key-item{display:flex;flex-direction:column;align-items:center;width:46px;
+      padding:6px;border-radius:12px;border:2px solid transparent;cursor:pointer;}
+    .cbn-key-item.active{border-color:#9B59B6;background:rgba(155,89,182,.1);}
+    .cbn-key-swatch{width:32px;height:32px;border-radius:16px;border:1.5px solid #ddd;margin-bottom:4px;}
+    .cbn-key-num{font-size:12px;font-weight:800;color:#555;}
+    .cbn-key-item.active .cbn-key-num{color:#7B3FA0;}
+    .cbn-reset-btn{margin:4px auto 16px;padding:9px 22px;border-radius:20px;border:1.5px solid rgba(155,89,182,.3);
+      background:rgba(255,255,255,.7);color:#9B59B6;font-size:14px;font-weight:700;cursor:pointer;display:block;}
+    .celebrate{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,240,255,.85);
+      display:none;align-items:center;justify-content:center;border-radius:14px;z-index:10;}
+    .celebrate.show{display:flex;}
+    .celebrate-text{font-size:22px;font-weight:900;color:#7B3FA0;text-align:center;padding:16px;}
+  </style>
+</head>
+<body>
+
+<!-- ══ HOME SCREEN ══ -->
+<div id="screen-home" class="screen active">
+  <!-- Candy Land gameboard SVG (built by JS) -->
+  <div id="board-svg-container"></div>
+
+  <!-- Floating decorations -->
+  <div class="floaties">
+    <span class="floaty" style="left:7%;top:11%;animation-delay:0s">⭐</span>
+    <span class="floaty" style="left:83%;top:14%;animation-delay:.4s">💜</span>
+    <span class="floaty" style="left:14%;top:36%;animation-delay:.7s;font-size:16px">✨</span>
+    <span class="floaty" style="left:76%;top:34%;animation-delay:.2s">🌸</span>
+    <span class="floaty" style="left:4%;top:66%;animation-delay:.9s;font-size:16px">💙</span>
+    <span class="floaty" style="left:86%;top:68%;animation-delay:.1s">🌟</span>
+    <span class="floaty" style="left:49%;top:45%;animation-delay:.5s;font-size:15px">🩷</span>
+  </div>
+
+  <div class="home-title">
+    <span class="emoji">🎨</span>
+    <h1>Anges World</h1>
+    <p>What do you want to make today?</p>
+  </div>
+
+  <!-- Jump game — tap anywhere in the box to play -->
+  <div class="game-box" id="game-box">
+    <div class="game-label">⭐ Jump Game — tap to play!</div>
+    <canvas id="game-canvas" height="100"></canvas>
+  </div>
+
+  <!-- Mode buttons -->
+  <div class="mode-buttons">
+    <button class="mode-btn" id="btn-draw" onclick="showDraw(null)">
+      <div class="btn-circle">✏️</div>
+      <div class="btn-text">
+        <span class="btn-label">Free Draw</span>
+        <span class="btn-sub">Draw anything you want!</span>
+      </div>
+      <span class="btn-arrow">›</span>
+    </button>
+    <button class="mode-btn" id="btn-color" onclick="showScreen('screen-coloring-gallery')">
+      <div class="btn-circle">🖍️</div>
+      <div class="btn-text">
+        <span class="btn-label">Coloring Pages</span>
+        <span class="btn-sub">Color a fun picture!</span>
+      </div>
+      <span class="btn-arrow">›</span>
+    </button>
+    <button class="mode-btn" id="btn-cbn" onclick="showScreen('screen-cbn-gallery')">
+      <div class="btn-circle">🔢</div>
+      <div class="btn-text">
+        <span class="btn-label">Color by Number</span>
+        <span class="btn-sub">Follow the numbers!</span>
+      </div>
+      <span class="btn-arrow">›</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══ FREE DRAW SCREEN ══ -->
+<div id="screen-draw" class="screen" style="background:#E8E8E8;">
+  <div class="header" style="background:#FFF9E6;border-color:#FFE0A0;">
+    <button class="back-btn" onclick="showScreen('screen-home')">← Back</button>
+    <h2 id="draw-title">Free Draw</h2>
+    <button class="save-btn" onclick="saveDrawing()">💾 Save</button>
+  </div>
+  <div class="canvas-wrap" id="draw-canvas-wrap">
+    <canvas id="draw-canvas"></canvas>
+  </div>
+  <div class="palette-row" id="draw-palette"></div>
+  <div class="draw-toolbar">
+    <div class="brush-btns">
+      <button class="brush-btn active" id="brush-s" onclick="setBrush(4,this)" title="Small">·</button>
+      <button class="brush-btn" id="brush-m" onclick="setBrush(10,this)" title="Medium">—</button>
+      <button class="brush-btn" id="brush-l" onclick="setBrush(22,this)" title="Large" style="font-size:24px">▬</button>
+    </div>
+    <div class="divider"></div>
+    <button class="tool-btn" id="eraser-btn" onclick="toggleEraser()" title="Eraser">🧽</button>
+    <button class="tool-btn" id="undo-btn" onclick="undoStroke()" title="Undo" disabled>↩️</button>
+    <button class="tool-btn" onclick="clearCanvas()" title="Clear">🗑️</button>
+  </div>
+</div>
+
+<!-- ══ COLORING PAGES GALLERY ══ -->
+<div id="screen-coloring-gallery" class="screen gallery-screen">
+  <div class="header" style="background:rgba(255,255,255,.4);border-color:rgba(163,200,230,.4);">
+    <button class="back-btn" style="color:#3FA9D0" onclick="showScreen('screen-home')">← Back</button>
+    <h2 style="color:#3FA9D0">🖍️ Coloring Pages</h2>
+    <div style="width:64px"></div>
+  </div>
+  <p class="gallery-hint">Pick a picture and color it your way!</p>
+  <div class="gallery-grid" id="coloring-gallery-grid"></div>
+</div>
+
+<!-- ══ COLOR BY NUMBER GALLERY ══ -->
+<div id="screen-cbn-gallery" class="screen gallery-screen">
+  <div class="header" style="background:rgba(255,255,255,.4);border-color:rgba(200,160,230,.3);">
+    <button class="back-btn" onclick="showScreen('screen-home')">← Back</button>
+    <h2>🔢 Color by Number</h2>
+    <div style="width:64px"></div>
+  </div>
+  <p class="gallery-hint">Pick a picture, then follow the number key!</p>
+  <div class="gallery-grid" id="cbn-gallery-grid"></div>
+</div>
+
+<!-- ══ COLOR BY NUMBER CANVAS ══ -->
+<div id="screen-cbn" class="screen">
+  <div class="header">
+    <button class="back-btn" onclick="showScreen('screen-cbn-gallery')">← Back</button>
+    <h2 id="cbn-title">Color by Number</h2>
+    <button class="save-btn" onclick="saveCBN()">💾 Save</button>
+  </div>
+  <div class="cbn-canvas-wrap" id="cbn-canvas-wrap">
+    <div class="cbn-svg-wrap" style="position:relative;">
+      <div id="cbn-svg-container"></div>
+      <div class="celebrate" id="cbn-celebrate">
+        <div class="celebrate-text">🎉 Amazing!<br>You did it! 🎉</div>
+      </div>
+    </div>
+    <div class="cbn-selected-row" id="cbn-selected-row">
+      <span>👇 Tap a number below to pick a color</span>
+    </div>
+    <div class="cbn-palette-wrap">
+      <div class="cbn-palette-title">Color Key</div>
+      <div class="cbn-key-grid" id="cbn-key-grid"></div>
+    </div>
+    <button class="cbn-reset-btn" onclick="resetCBN()">🗑️ Start Over</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  SCREEN MANAGEMENT
+// ═══════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'screen-draw') initDrawCanvas();
+}
+
+// ═══════════════════════════════════════════════════════
+//  JUMP GAME
+// ═══════════════════════════════════════════════════════
+(function() {
+  const gc = document.getElementById('game-canvas');
+  gc.width = window.innerWidth - 32;
+  const W = gc.width, H = 100;
+  const ctx = gc.getContext('2d');
+  const GROUND = 14, CHAR_X = 52, CHAR_SIZE = 28, OBS_SIZE = 26;
+  const GRAVITY = 2.6, JUMP_VEL = -19, OBS_SPEED = 4.5;
+  let charY = 0, velY = 0, alive = true, started = false;
+  let obstacles = [], score = 0, frame = 0, nextSpawn = 80;
+
+  function reset() {
+    charY = 0; velY = 0; alive = true; started = false;
+    obstacles = []; score = 0; frame = 0; nextSpawn = 80;
+  }
+
+  function jump() {
+    if (!alive) { reset(); return; }
+    if (!started) { started = true; return; }
+    if (charY === 0) velY = JUMP_VEL;
+  }
+
+  // Tap anywhere in the game box to jump
+  const gameBox = document.getElementById('game-box');
+  gameBox.addEventListener('click', jump);
+  gameBox.addEventListener('touchstart', e => { e.preventDefault(); jump(); }, { passive: false });
+
+  function loop() {
+    requestAnimationFrame(loop);
+    ctx.clearRect(0, 0, W, H);
+
+    // sky gradient
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, 'rgba(237,213,255,0.5)');
+    g.addColorStop(1, 'rgba(214,238,255,0.5)');
+    ctx.fillStyle = g;
+    ctx.roundRect(0, 0, W, H, 14);
+    ctx.fill();
+
+    // ground
+    ctx.fillStyle = '#C8A8E9';
+    ctx.fillRect(0, H - GROUND, W, 3);
+
+    // clouds
+    ctx.font = '20px serif'; ctx.globalAlpha = 0.5;
+    ctx.fillText('☁️', W * 0.2, 24);
+    ctx.fillText('☁️', W * 0.65, 18);
+    ctx.globalAlpha = 1;
+
+    if (started && alive) {
+      velY += GRAVITY;
+      charY = Math.max(0, charY - velY);
+      obstacles = obstacles.map(o => ({...o, x: o.x - OBS_SPEED})).filter(o => o.x > -OBS_SIZE - 10);
+      nextSpawn--;
+      if (nextSpawn <= 0) {
+        obstacles.push({ x: W + 10 });
+        nextSpawn = 80 + Math.floor(Math.random() * 60);
+        score++;
+      }
+      frame++;
+      // collision
+      for (const o of obstacles) {
+        if (o.x < CHAR_X + CHAR_SIZE - 8 && o.x + OBS_SIZE > CHAR_X + 8 && charY < OBS_SIZE - 6) {
+          alive = false;
+        }
+      }
+    }
+
+    // draw char
+    ctx.font = CHAR_SIZE + 'px serif';
+    ctx.fillText('⭐', CHAR_X, H - GROUND - charY - 2);
+
+    // draw obstacles
+    ctx.font = OBS_SIZE + 'px serif';
+    for (const o of obstacles) ctx.fillText('🍄', o.x, H - GROUND - 2);
+
+    // score
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillStyle = '#9B59B6';
+    ctx.textAlign = 'right';
+    ctx.fillText('⭐ ' + score, W - 10, 18);
+    ctx.textAlign = 'left';
+
+    // prompt
+    ctx.font = '13px sans-serif';
+    ctx.fillStyle = '#7B3FA0';
+    ctx.textAlign = 'center';
+    if (!started && alive) ctx.fillText('Tap to play! 🎮', W / 2, H / 2 + 5);
+    if (!alive) ctx.fillText('Game over! Score: ' + score + ' · Tap to restart 🔄', W / 2, H / 2 + 5);
+    ctx.textAlign = 'left';
+  }
+  loop();
+})();
+
+// ═══════════════════════════════════════════════════════
+//  CANDY LAND GAMEBOARD
+// ═══════════════════════════════════════════════════════
+(function buildGameboard() {
+  const container = document.getElementById('board-svg-container');
+  const W = window.innerWidth, H = window.innerHeight;
+  const sx = W / 375; // scale X for any screen width
+
+  // 17 spaces along an S-curve, designed for 375px wide reference
+  // Winds: bottom row L→R, right bend, mid row R→L, left bend, top row L→R
+  const ref = [
+    [52,490],[108,478],[168,472],[228,475],[288,484], // row 1 (bottom)
+    [326,445],                                         // right bend
+    [308,404],[248,392],[186,386],[124,390],[62,402],  // row 2 (middle)
+    [36,366],                                          // left bend
+    [58,310],[120,297],[182,292],[244,296],[306,308],  // row 3 (top)
+  ];
+  const PASTEL = ['#FFB3C6','#FFD0A0','#FFF0A0','#C8F0C8','#A0D8FF','#D0B0FF'];
+  const pts = ref.map(([rx,ry]) => [Math.round(rx * sx), ry]);
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('width', String(W));
+  svg.setAttribute('height', String(H));
+  svg.style.cssText = 'position:absolute;top:0;left:0;';
+
+  // Smooth quadratic bezier path through all 17 points
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [px,py] = pts[i-1], [cx,cy] = pts[i];
+    d += ` Q${px},${py} ${(px+cx)/2},${(py+cy)/2}`;
+  }
+  d += ` L${pts[pts.length-1][0]},${pts[pts.length-1][1]}`;
+
+  const mkPath = (sw, col) => {
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d); p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', col); p.setAttribute('stroke-width', String(sw));
+    p.setAttribute('stroke-linecap', 'round');
+    return p;
+  };
+  svg.appendChild(mkPath(30, 'rgba(150,90,255,0.18)')); // soft purple shadow
+  svg.appendChild(mkPath(18, 'rgba(255,255,255,0.42)')); // white track
+
+  pts.forEach(([cx,cy], i) => {
+    const col = PASTEL[i % PASTEL.length];
+    // Glow ring
+    const g = document.createElementNS(NS, 'circle');
+    g.setAttribute('cx', String(cx)); g.setAttribute('cy', String(cy)); g.setAttribute('r', '19');
+    g.setAttribute('fill', 'rgba(255,255,255,0.22)');
+    svg.appendChild(g);
+    // Filled space circle
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', String(cx)); c.setAttribute('cy', String(cy)); c.setAttribute('r', '13');
+    c.setAttribute('fill', col);
+    c.setAttribute('stroke', 'rgba(255,255,255,0.78)'); c.setAttribute('stroke-width', '2.5');
+    c.setAttribute('opacity', '0.90');
+    svg.appendChild(c);
+    // Space number
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', String(cx)); t.setAttribute('y', String(cy + 4));
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('font-size', '10'); t.setAttribute('font-weight', '800');
+    t.setAttribute('font-family', 'sans-serif');
+    t.setAttribute('fill', 'rgba(80,30,110,0.85)');
+    t.textContent = String(i + 1);
+    svg.appendChild(t);
+  });
+
+  container.appendChild(svg);
+})();
+
+// ═══════════════════════════════════════════════════════
+//  FREE DRAW
+// ═══════════════════════════════════════════════════════
+const COLORS = [
+  '#FF0000','#FF4500','#FF6B35','#FF9500','#FFD700','#90EE90',
+  '#00C853','#00BCD4','#2196F3','#3F51B5','#9C27B0','#E91E63',
+  '#FF69B4','#A0522D','#808080','#000000','#FFFFFF','#FFB6C1',
+  '#87CEEB','#98FB98'
+];
+
+let drawCtx, strokes = [], currentStroke = null;
+let drawColor = '#FF0000', brushSize = 4, isEraser = false;
+let coloringPageSvg = null;
+
+function buildPalette() {
+  const p = document.getElementById('draw-palette');
+  p.innerHTML = '';
+  COLORS.forEach(c => {
+    const s = document.createElement('div');
+    s.className = 'swatch' + (c === '#FFFFFF' ? ' swatch-white' : '') + (c === drawColor && !isEraser ? ' active' : '');
+    s.style.background = c;
+    s.onclick = () => { drawColor = c; isEraser = false; document.getElementById('eraser-btn').classList.remove('active'); refreshPalette(); };
+    p.appendChild(s);
+  });
+}
+
+function refreshPalette() {
+  document.querySelectorAll('#draw-palette .swatch').forEach((s, i) => {
+    s.classList.toggle('active', COLORS[i] === drawColor && !isEraser);
+  });
+}
+
+function setBrush(size, el) {
+  brushSize = size;
+  document.querySelectorAll('.brush-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleEraser() {
+  isEraser = !isEraser;
+  document.getElementById('eraser-btn').classList.toggle('active', isEraser);
+  refreshPalette();
+}
+
+function undoStroke() {
+  if (strokes.length === 0) return;
+  strokes.pop();
+  redrawAll();
+}
+
+function clearCanvas() {
+  if (!confirm('Clear the drawing?')) return;
+  strokes = [];
+  redrawAll();
+}
+
+function saveDrawing() {
+  const canvas = document.getElementById('draw-canvas');
+  const link = document.createElement('a');
+  link.download = 'anges-world-drawing.png';
+  link.href = canvas.toDataURL();
+  link.click();
+}
+
+function redrawAll() {
+  const canvas = document.getElementById('draw-canvas');
+  if (!drawCtx) return;
+  drawCtx.clearRect(0, 0, canvas.width, canvas.height);
+  drawCtx.fillStyle = '#fff';
+  drawCtx.fillRect(0, 0, canvas.width, canvas.height);
+  if (coloringPageSvg) {
+    const svgBlob = new Blob([`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="${canvas.width}" height="${canvas.height}">${coloringPageSvg}</svg>`], {type:'image/svg+xml'});
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = () => { drawCtx.drawImage(img, 0, 0); URL.revokeObjectURL(url); paintStrokes(); };
+    img.src = url;
+  } else {
+    paintStrokes();
+  }
+}
+
+function paintStrokes() {
+  strokes.forEach(stroke => {
+    if (!stroke.points.length) return;
+    drawCtx.beginPath();
+    drawCtx.strokeStyle = stroke.color;
+    drawCtx.lineWidth = stroke.size;
+    drawCtx.lineCap = 'round';
+    drawCtx.lineJoin = 'round';
+    if (stroke.points.length === 1) {
+      drawCtx.arc(stroke.points[0].x, stroke.points[0].y, stroke.size / 2, 0, Math.PI * 2);
+      drawCtx.fillStyle = stroke.color;
+      drawCtx.fill();
+    } else {
+      drawCtx.moveTo(stroke.points[0].x, stroke.points[0].y);
+      for (let i = 1; i < stroke.points.length - 1; i++) {
+        const mx = (stroke.points[i].x + stroke.points[i+1].x) / 2;
+        const my = (stroke.points[i].y + stroke.points[i+1].y) / 2;
+        drawCtx.quadraticCurveTo(stroke.points[i].x, stroke.points[i].y, mx, my);
+      }
+      drawCtx.lineTo(stroke.points[stroke.points.length-1].x, stroke.points[stroke.points.length-1].y);
+      drawCtx.stroke();
+    }
+  });
+  document.getElementById('undo-btn').disabled = strokes.length === 0;
+}
+
+function initDrawCanvas() {
+  const wrap = document.getElementById('draw-canvas-wrap');
+  const canvas = document.getElementById('draw-canvas');
+  const size = Math.min(wrap.clientWidth - 16, wrap.clientHeight - 16);
+  canvas.width = size;
+  canvas.height = size;
+  canvas.style.touchAction = 'none';
+  drawCtx = canvas.getContext('2d');
+  strokes = [];
+  currentStroke = null;
+  buildPalette();
+  redrawAll();
+
+  function localPos(e) {
+    // Always read fresh bounding rect so position is accurate
+    const r = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return {
+      x: (src.clientX - r.left) * (canvas.width / r.width),
+      y: (src.clientY - r.top)  * (canvas.height / r.height)
+    };
+  }
+
+  // Use direct property assignment — replaces any prior handler automatically
+  canvas.onmousedown = e => {
+    currentStroke = { points: [localPos(e)], color: isEraser ? '#fff' : drawColor, size: brushSize };
+  };
+  canvas.onmousemove = e => {
+    if (!currentStroke) return;
+    const p = localPos(e);
+    const prev = currentStroke.points[currentStroke.points.length - 1];
+    currentStroke.points.push(p);
+    drawCtx.beginPath();
+    drawCtx.strokeStyle = currentStroke.color;
+    drawCtx.lineWidth = currentStroke.size;
+    drawCtx.lineCap = 'round'; drawCtx.lineJoin = 'round';
+    drawCtx.moveTo(prev.x, prev.y); drawCtx.lineTo(p.x, p.y);
+    drawCtx.stroke();
+  };
+  canvas.onmouseup = canvas.onmouseleave = () => {
+    if (!currentStroke) return;
+    strokes.push(currentStroke); currentStroke = null;
+    document.getElementById('undo-btn').disabled = false;
+  };
+  canvas.ontouchstart = e => {
+    e.preventDefault();
+    currentStroke = { points: [localPos(e)], color: isEraser ? '#fff' : drawColor, size: brushSize };
+  };
+  canvas.ontouchmove = e => {
+    e.preventDefault();
+    if (!currentStroke) return;
+    const p = localPos(e);
+    const prev = currentStroke.points[currentStroke.points.length - 1];
+    currentStroke.points.push(p);
+    drawCtx.beginPath();
+    drawCtx.strokeStyle = currentStroke.color;
+    drawCtx.lineWidth = currentStroke.size;
+    drawCtx.lineCap = 'round'; drawCtx.lineJoin = 'round';
+    drawCtx.moveTo(prev.x, prev.y); drawCtx.lineTo(p.x, p.y);
+    drawCtx.stroke();
+  };
+  canvas.ontouchend = () => {
+    if (!currentStroke) return;
+    strokes.push(currentStroke); currentStroke = null;
+    document.getElementById('undo-btn').disabled = false;
+  };
+}
+
+function showDraw(pageData) {
+  coloringPageSvg = pageData ? pageData.svgData : null;
+  document.getElementById('draw-title').textContent = pageData ? pageData.name : 'Free Draw';
+  showScreen('screen-draw');
+}
+
+// ═══════════════════════════════════════════════════════
+//  COLORING PAGES DATA
+// ═══════════════════════════════════════════════════════
+const COLORING_PAGES = [
+  { id:'sun', name:'Happy Sun', emoji:'☀️', svgData:`
+    <rect width="300" height="300" fill="white"/>
+    <circle cx="150" cy="150" r="55" fill="none" stroke="black" stroke-width="6"/>
+    <line x1="150" y1="78" x2="150" y2="62" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="150" y1="222" x2="150" y2="238" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="78" y1="150" x2="62" y2="150" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="222" y1="150" x2="238" y2="150" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="109" y1="109" x2="98" y2="98" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="191" y1="109" x2="202" y2="98" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="109" y1="191" x2="98" y2="202" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="191" y1="191" x2="202" y2="202" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="132" cy="140" r="9" fill="black"/>
+    <circle cx="168" cy="140" r="9" fill="black"/>
+    <path d="M 128 165 Q 150 182 172 165" fill="none" stroke="black" stroke-width="5" stroke-linecap="round"/>
+  `},
+  { id:'star', name:'Big Star', emoji:'⭐', svgData:`
+    <rect width="300" height="300" fill="white"/>
+    <polygon points="150,38 179,122 268,122 198,172 224,256 150,206 76,256 102,172 32,122 121,122"
+      fill="none" stroke="black" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="136" cy="145" r="8" fill="black"/>
+    <circle cx="164" cy="145" r="8" fill="black"/>
+    <path d="M 134 162 Q 150 174 166 162" fill="none" stroke="black" stroke-width="5" stroke-linecap="round"/>
+  `},
+  { id:'flower', name:'Pretty Flower', emoji:'🌸', svgData:`
+    <rect width="300" height="300" fill="white"/>
+    <ellipse cx="150" cy="78" rx="28" ry="44" fill="none" stroke="black" stroke-width="5"/>
+    <ellipse cx="222" cy="114" rx="28" ry="44" fill="none" stroke="black" stroke-width="5" transform="rotate(60,222,114)"/>
+    <ellipse cx="222" cy="186" rx="28" ry="44" fill="none" stroke="black" stroke-width="5" transform="rotate(120,222,186)"/>
+    <ellipse cx="150" cy="222" rx="28" ry="44" fill="none" stroke="black" stroke-width="5"/>
+    <ellipse cx="78" cy="186" rx="28" ry="44" fill="none" stroke="black" stroke-width="5" transform="rotate(60,78,186)"/>
+    <ellipse cx="78" cy="114" rx="28" ry="44" fill="none" stroke="black" stroke-width="5" transform="rotate(120,78,114)"/>
+    <circle cx="150" cy="150" r="38" fill="none" stroke="black" stroke-width="6"/>
+    <circle cx="138" cy="143" r="7" fill="black"/>
+    <circle cx="162" cy="143" r="7" fill="black"/>
+    <path d="M 136 162 Q 150 174 164 162" fill="none" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <line x1="150" y1="262" x2="150" y2="295" stroke="black" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 150 285 Q 174 268 192 278" fill="none" stroke="black" stroke-width="5" stroke-linecap="round"/>
+  `},
+  { id:'butterfly', name:'Butterfly', emoji:'🦋', svgData:`
+    <rect width="300" height="300" fill="white"/>
+    <path d="M150 150 Q88 78 48 98 Q18 118 48 170 Q78 212 140 180 Z" fill="none" stroke="black" stroke-width="5"/>
+    <path d="M150 150 Q212 78 252 98 Q282 118 252 170 Q222 212 160 180 Z" fill="none" stroke="black" stroke-width="5"/>
+    <path d="M150 150 Q98 162 78 212 Q68 242 108 242 Q140 232 150 196 Z" fill="none" stroke="black" stroke-width="5"/>
+    <path d="M150 150 Q202 162 222 212 Q232 242 192 242 Q160 232 150 196 Z" fill="none" stroke="black" stroke-width="5"/>
+    <ellipse cx="150" cy="148" rx="9" ry="44" fill="none" stroke="black" stroke-width="5"/>
+    <circle cx="150" cy="105" r="9" fill="none" stroke="black" stroke-width="4"/>
+    <line x1="145" y1="97" x2="136" y2="82" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <line x1="155" y1="97" x2="164" y2="82" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="134" cy="79" r="4" fill="black"/>
+    <circle cx="166" cy="79" r="4" fill="black"/>
+  `},
+  { id:'house', name:'My House', emoji:'🏠', svgData:`
+    <rect width="300" height="300" fill="white"/>
+    <polygon points="150,38 262,130 38,130" fill="none" stroke="black" stroke-width="6" stroke-linejoin="round"/>
+    <rect x="58" y="130" width="184" height="138" fill="none" stroke="black" stroke-width="6" rx="3"/>
+    <rect x="113" y="193" width="74" height="75" fill="none" stroke="black" stroke-width="5" rx="4"/>
+    <rect x="72" y="154" width="52" height="46" fill="none" stroke="black" stroke-width="5" rx="4"/>
+    <rect x="176" y="154" width="52" height="46" fill="none" stroke="black" stroke-width="5" rx="4"/>
+    <line x1="98" y1="154" x2="98" y2="200" stroke="black" stroke-width="3"/>
+    <line x1="72" y1="177" x2="124" y2="177" stroke="black" stroke-width="3"/>
+    <line x1="202" y1="154" x2="202" y2="200" stroke="black" stroke-width="3"/>
+    <line x1="176" y1="177" x2="228" y2="177" stroke="black" stroke-width="3"/>
+    <circle cx="182" cy="234" r="5" fill="black"/>
+  `},
+  { id:'cat', name:'Cute Cat', emoji:'🐱', svgData:`
+    <rect width="300" height="300" fill="white"/>
+    <circle cx="150" cy="168" r="80" fill="none" stroke="black" stroke-width="6"/>
+    <polygon points="94,104 79,56 120,90" fill="none" stroke="black" stroke-width="5" stroke-linejoin="round"/>
+    <polygon points="206,104 221,56 180,90" fill="none" stroke="black" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="122" cy="158" r="13" fill="none" stroke="black" stroke-width="4"/>
+    <circle cx="178" cy="158" r="13" fill="none" stroke="black" stroke-width="4"/>
+    <circle cx="126" cy="161" r="6" fill="black"/>
+    <circle cx="182" cy="161" r="6" fill="black"/>
+    <path d="M 138 185 Q 150 198 162 185" fill="none" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="150" cy="183" r="6" fill="none" stroke="black" stroke-width="3"/>
+    <line x1="150" y1="183" x2="90" y2="172" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <line x1="150" y1="183" x2="90" y2="183" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <line x1="150" y1="183" x2="90" y2="194" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <line x1="150" y1="183" x2="210" y2="172" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <line x1="150" y1="183" x2="210" y2="183" stroke="black" stroke-width="3" stroke-linecap="round"/>
+    <line x1="150" y1="183" x2="210" y2="194" stroke="black" stroke-width="3" stroke-linecap="round"/>
+  `}
+];
+
+function buildColoringGallery() {
+  const grid = document.getElementById('coloring-gallery-grid');
+  COLORING_PAGES.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'gallery-card';
+    card.innerHTML = `<div class="card-emoji">${p.emoji}</div><div class="card-name">${p.name}</div>`;
+    card.onclick = () => showDraw(p);
+    grid.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+//  COLOR BY NUMBER DATA
+// ═══════════════════════════════════════════════════════
+const CBN_PAGES = [
+  {
+    id: 'rainbow', name: 'Rainbow Sky', emoji: '🌈',
+    colorMap: { 1:'#87CEEB', 2:'#FF4444', 3:'#FF8800', 4:'#FFD700', 5:'#44CC44', 6:'#4488FF', 7:'#9933CC', 8:'#FFFFFF' },
+    svgContent: `
+      <rect data-region="1" data-num="1" x="0" y="0" width="300" height="300" fill="white" stroke="#ccc" stroke-width="1"/>
+      <path data-region="2" data-num="2" d="M -60,300 A 210,210 0 0,1 360,300 L 325,300 A 175,175 0 0,0 -25,300 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="3" data-num="3" d="M -25,300 A 175,175 0 0,1 325,300 L 290,300 A 140,140 0 0,0 10,300 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="4" data-num="4" d="M 10,300 A 140,140 0 0,1 290,300 L 255,300 A 105,105 0 0,0 45,300 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="5" data-num="5" d="M 45,300 A 105,105 0 0,1 255,300 L 220,300 A 70,70 0 0,0 80,300 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="6" data-num="6" d="M 80,300 A 70,70 0 0,1 220,300 L 185,300 A 35,35 0 0,0 115,300 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="7" data-num="7" d="M 115,300 A 35,35 0 0,1 185,300 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <circle data-region="8" data-num="8" cx="45" cy="60" r="38" fill="white" stroke="#333" stroke-width="1.5"/>
+      <circle data-region="9" data-num="8" cx="255" cy="60" r="38" fill="white" stroke="#333" stroke-width="1.5"/>
+      <text x="18" y="22" font-size="11" font-weight="bold" fill="#444" pointer-events="none">1</text>
+      <text x="150" y="100" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">2</text>
+      <text x="150" y="136" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">3</text>
+      <text x="150" y="170" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">4</text>
+      <text x="150" y="205" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">5</text>
+      <text x="150" y="240" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">6</text>
+      <text x="150" y="278" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">7</text>
+      <text x="45" y="64" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">8</text>
+      <text x="255" y="64" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">8</text>
+    `
+  },
+  {
+    id: 'cupcake', name: 'Yummy Cupcake', emoji: '🧁',
+    colorMap: { 1:'#C8860A', 2:'#F5DEB3', 3:'#FF69B4', 4:'#9B59B6', 5:'#FFD700', 6:'#FF4444', 7:'#5CB85C', 8:'#FFA07A' },
+    svgContent: `
+      <rect x="0" y="0" width="300" height="300" fill="#f9f9f9" stroke="none"/>
+      <polygon data-region="1" data-num="2" points="88,220 62,285 238,285 212,220" fill="white" stroke="#333" stroke-width="2"/>
+      <rect data-region="2" data-num="8" x="88" y="158" width="124" height="62" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="3" data-num="3" cx="150" cy="143" rx="72" ry="50" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="4" data-num="4" cx="150" cy="106" rx="38" ry="28" fill="white" stroke="#333" stroke-width="2"/>
+      <circle data-region="5" data-num="3" cx="150" cy="82" r="16" fill="white" stroke="#333" stroke-width="2"/>
+      <rect data-region="6" data-num="7" x="146" y="57" width="8" height="22" fill="white" stroke="#333" stroke-width="2"/>
+      <circle data-region="7" data-num="6" cx="150" cy="49" r="16" fill="white" stroke="#333" stroke-width="2"/>
+      <rect data-region="8" data-num="5" x="102" y="138" width="20" height="8" rx="4" fill="white" stroke="#333" stroke-width="1.5" transform="rotate(-30,112,142)"/>
+      <rect data-region="9" data-num="5" x="178" y="138" width="20" height="8" rx="4" fill="white" stroke="#333" stroke-width="1.5" transform="rotate(30,188,142)"/>
+      <path data-region="10" data-num="1" d="M 112,220 L 108,285 L 118,285 L 122,220 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="11" data-num="1" d="M 148,220 L 147,285 L 153,285 L 152,220 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <path data-region="12" data-num="1" d="M 178,220 L 182,285 L 192,285 L 188,220 Z" fill="white" stroke="#333" stroke-width="1.5"/>
+      <text x="150" y="260" font-size="12" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">2</text>
+      <text x="150" y="194" font-size="12" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">8</text>
+      <text x="150" y="130" font-size="12" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">3</text>
+      <text x="150" y="110" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">4</text>
+      <text x="150" y="86" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">3</text>
+      <text x="150" y="54" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">6</text>
+    `
+  },
+  {
+    id: 'underwater', name: 'Under the Sea', emoji: '🐠',
+    colorMap: { 1:'#006994', 2:'#40C4FF', 3:'#FF8F00', 4:'#FFFFFF', 5:'#FFD600', 6:'#2E7D32', 7:'#81C784', 8:'#F06292' },
+    svgContent: `
+      <rect data-region="1" data-num="2" x="0" y="0" width="300" height="300" fill="white" stroke="#ccc" stroke-width="1"/>
+      <rect data-region="2" data-num="1" x="0" y="250" width="300" height="50" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="3" data-num="3" cx="148" cy="130" rx="65" ry="42" fill="white" stroke="#333" stroke-width="2"/>
+      <polygon data-region="4" data-num="5" points="83,130 55,100 55,160" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="5" data-num="4" cx="148" cy="130" rx="20" ry="38" fill="white" stroke="#333" stroke-width="2"/>
+      <circle data-region="6" data-num="1" cx="192" cy="120" r="10" fill="white" stroke="#333" stroke-width="2"/>
+      <polygon data-region="7" data-num="5" points="140,90 165,90 155,62" fill="white" stroke="#333" stroke-width="2"/>
+      <rect data-region="8" data-num="6" x="36" y="180" width="14" height="70" rx="7" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="9" data-num="7" cx="25" cy="205" rx="22" ry="12" fill="white" stroke="#333" stroke-width="1.5" transform="rotate(-30,25,205)"/>
+      <rect data-region="10" data-num="6" x="248" y="170" width="14" height="80" rx="7" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="11" data-num="7" cx="270" cy="198" rx="22" ry="12" fill="white" stroke="#333" stroke-width="1.5" transform="rotate(30,270,198)"/>
+      <ellipse data-region="12" data-num="8" cx="100" cy="255" rx="22" ry="30" fill="white" stroke="#333" stroke-width="2"/>
+      <ellipse data-region="13" data-num="8" cx="200" cy="258" rx="18" ry="24" fill="white" stroke="#333" stroke-width="2"/>
+      <circle data-region="14" data-num="4" cx="220" cy="70" r="15" fill="white" stroke="#333" stroke-width="2"/>
+      <circle data-region="15" data-num="4" cx="248" cy="45" r="10" fill="white" stroke="#333" stroke-width="2"/>
+      <text x="15" y="20" font-size="11" font-weight="bold" fill="#444" pointer-events="none">2</text>
+      <text x="15" y="268" font-size="11" font-weight="bold" fill="#444" pointer-events="none">1</text>
+      <text x="148" y="122" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">3</text>
+      <text x="63" y="134" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">5</text>
+      <text x="148" y="155" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">4</text>
+      <text x="153" y="78" font-size="11" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">5</text>
+      <text x="43" y="222" font-size="10" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">6</text>
+      <text x="255" y="215" font-size="10" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">6</text>
+      <text x="100" y="258" font-size="10" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">8</text>
+      <text x="200" y="261" font-size="10" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">8</text>
+      <text x="220" y="74" font-size="10" font-weight="bold" fill="#444" text-anchor="middle" pointer-events="none">4</text>
+    `
+  }
+];
+
+// ═══════════════════════════════════════════════════════
+//  COLOR BY NUMBER LOGIC
+// ═══════════════════════════════════════════════════════
+let cbnPage = null, cbnSelected = null, cbnFilled = {};
+
+function buildCBNGallery() {
+  const grid = document.getElementById('cbn-gallery-grid');
+  CBN_PAGES.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'gallery-card';
+    const dots = Object.values(p.colorMap).map(c =>
+      `<div class="cbn-dot" style="background:${c};border-color:${c==='#FFFFFF'?'#aaa':c}"></div>`
+    ).join('');
+    card.innerHTML = `<div class="card-emoji">${p.emoji}</div><div class="card-name">${p.name}</div><div class="cbn-dots">${dots}</div>`;
+    card.onclick = () => openCBN(p);
+    grid.appendChild(card);
+  });
+}
+
+function openCBN(page) {
+  cbnPage = page;
+  cbnSelected = null;
+  cbnFilled = {};
+  document.getElementById('cbn-title').textContent = page.name;
+  document.getElementById('cbn-celebrate').classList.remove('show');
+
+  // Build SVG
+  const container = document.getElementById('cbn-svg-container');
+  container.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" style="display:block;width:100%;height:auto;">${page.svgContent}</svg>`;
+  const svg = container.querySelector('svg');
+  svg.querySelectorAll('[data-region]').forEach(el => {
+    el.style.cursor = 'pointer';
+    const fillRegion = () => {
+      const rid = el.getAttribute('data-region');
+      if (!cbnSelected) { showCBNHint(); return; }
+      const color = page.colorMap[cbnSelected];
+      el.setAttribute('fill', color);
+      cbnFilled[rid] = color;
+      checkCBNComplete(svg);
+    };
+    el.addEventListener('click', fillRegion);
+    el.addEventListener('touchend', e => { e.preventDefault(); fillRegion(); });
+  });
+
+  // Build key
+  const keyGrid = document.getElementById('cbn-key-grid');
+  keyGrid.innerHTML = '';
+  Object.entries(page.colorMap).forEach(([num, color]) => {
+    const item = document.createElement('div');
+    item.className = 'cbn-key-item';
+    item.id = 'cbn-key-' + num;
+    item.innerHTML = `<div class="cbn-key-swatch" style="background:${color};border-color:${color==='#FFFFFF'?'#999':color}"></div><div class="cbn-key-num">${num}</div>`;
+    item.onclick = () => selectCBNColor(Number(num));
+    item.addEventListener('touchend', e => { e.preventDefault(); selectCBNColor(Number(num)); });
+    keyGrid.appendChild(item);
+  });
+
+  updateCBNSelected();
+  showScreen('screen-cbn');
+}
+
+function selectCBNColor(num) {
+  cbnSelected = num;
+  updateCBNSelected();
+}
+
+function updateCBNSelected() {
+  document.querySelectorAll('.cbn-key-item').forEach(el => el.classList.remove('active'));
+  const row = document.getElementById('cbn-selected-row');
+  if (cbnSelected && cbnPage) {
+    const color = cbnPage.colorMap[cbnSelected];
+    document.getElementById('cbn-key-' + cbnSelected)?.classList.add('active');
+    row.innerHTML = `<div class="cbn-selected-swatch" style="background:${color}"></div><span>Color ${cbnSelected} selected — tap a region!</span>`;
+  } else {
+    row.innerHTML = '<span>👇 Tap a number below to pick a color</span>';
+  }
+}
+
+function showCBNHint() {
+  const row = document.getElementById('cbn-selected-row');
+  row.innerHTML = '<span style="color:#e74c3c">👇 Pick a color number first!</span>';
+  setTimeout(updateCBNSelected, 1500);
+}
+
+function checkCBNComplete(svg) {
+  const regions = svg.querySelectorAll('[data-region]');
+  const total = new Set([...regions].map(r => r.getAttribute('data-region'))).size;
+  const done = Object.keys(cbnFilled).length;
+  if (done >= total) document.getElementById('cbn-celebrate').classList.add('show');
+}
+
+function resetCBN() {
+  if (!confirm('Start over?')) return;
+  openCBN(cbnPage);
+}
+
+function saveCBN() {
+  const svg = document.querySelector('#cbn-svg-container svg');
+  if (!svg) return;
+  const data = new XMLSerializer().serializeToString(svg);
+  const blob = new Blob([data], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'anges-world-coloring.svg';
+  a.href = url;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+buildColoringGallery();
+buildCBNGallery();
+</script>
+</body>
+</html>
