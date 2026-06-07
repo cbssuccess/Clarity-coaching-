@@ -650,6 +650,16 @@ window.toggleMenu = function() {
   menu.classList.toggle('open');
   document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
 };
+function applyNavOffset() {
+  var nav = document.querySelector('nav');
+  if (!nav) return;
+  var h = nav.offsetHeight;
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) pages[i].style.paddingTop = h + 'px';
+}
+applyNavOffset();
+window.addEventListener('resize', applyNavOffset);
+
 window.showPage = function(id) {
   var pages = document.querySelectorAll('.page');
   for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
