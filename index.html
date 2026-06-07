@@ -48,7 +48,7 @@
   nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.5rem 3rem; display:flex; align-items:center; justify-content:space-between; background:#080416; backdrop-filter:blur(12px); box-shadow:0 2px 24px rgba(0,0,0,0.25); }
   .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; letter-spacing:0.12em; color:#E8DFC8; text-decoration:none; cursor:pointer; }
   .nav-logo span { color:var(--gold); }
-  .nav-links { display:flex; gap:4rem; list-style:none; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
   .nav-links a { color:#E8DFC8; text-decoration:none; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; transition:color 0.3s; cursor:pointer; opacity:0.85; }
   .nav-links a:hover { color:var(--gold); }
   .nav-cta { background:linear-gradient(105deg,#7a5200 0%,#c9860a 18%,#f5d060 35%,#e8a800 50%,#f5d060 65%,#c9860a 82%,#7a5200 100%); background-size:200% auto; color:#1a0a00; padding:0.5rem 1.4rem; font-family:'Lora',serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; border:none; font-weight:700; animation:shimmer 5s linear infinite; box-shadow:0 0 12px rgba(229,180,30,0.45); }
@@ -174,6 +174,7 @@
   .mobile-menu a { color:var(--star); text-decoration:none; font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; letter-spacing:0.15em; transition:color 0.3s; }
   .mobile-menu a:hover { color:var(--gold); }
   .mobile-menu .mobile-cta { margin-top:1rem; background:var(--violet); color:var(--star); padding:0.9rem 2.5rem; font-family:'Lora',serif; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; border:none; cursor:pointer; }
+  @media(max-width:1024px) { nav { padding:1rem 2rem; } .nav-links { gap:1.5rem; } }
   @media(max-width:768px) { nav { padding:1rem 1.5rem; } .nav-links { display:none; } .hamburger { display:flex; } }
   @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
   .fade-up { animation:fadeUp 0.8s ease forwards; }
