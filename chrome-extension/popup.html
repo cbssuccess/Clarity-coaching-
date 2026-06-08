@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clarity Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stars"></div>
+
+  <header>
+    <div class="planet-icon">
+      <svg viewBox="0 0 60 60" width="48" height="48">
+        <defs>
+          <radialGradient id="pg" cx="42%" cy="38%" r="55%">
+            <stop offset="0%" stop-color="#c4b5fd"/>
+            <stop offset="45%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#2e1065"/>
+          </radialGradient>
+          <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f43f5e"/>
+            <stop offset="33%" stop-color="#facc15"/>
+            <stop offset="66%" stop-color="#4ade80"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+          </linearGradient>
+        </defs>
+        <circle cx="30" cy="30" r="19" fill="url(#pg)"/>
+        <ellipse cx="30" cy="33" rx="32" ry="8" fill="none" stroke="url(#rg)" stroke-width="2.5" opacity="0.9"/>
+        <polygon points="45,12 46,16 50,16 47,18 48,22 45,19.5 42,22 43,18 40,16 44,16" fill="#fde68a" style="transform:scale(0.6) translate(25px,2px)"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Cait &amp; Scott</h1>
+      <p class="sub">Clarity Coaching</p>
+    </div>
+  </header>
+
+  <div class="rainbow-bar"></div>
+
+  <section class="affirmation-section">
+    <p class="section-label">Today's Clarity Prompt</p>
+    <blockquote id="affirmation-text" class="affirmation"></blockquote>
+    <button id="next-prompt" class="btn-ghost" title="New prompt">&#x21bb; New prompt</button>
+  </section>
+
+  <div class="divider">
+    <span style="background:#f43f5e"></span>
+    <span style="background:#facc15"></span>
+    <span style="background:#4ade80"></span>
+    <span style="background:#38bdf8"></span>
+    <span style="background:#a78bfa"></span>
+  </div>
+
+  <section class="journal-section">
+    <p class="section-label">Quick Reflection</p>
+    <textarea id="journal" placeholder="What's on your mind today?"></textarea>
+    <div class="journal-actions">
+      <button id="save-note" class="btn-save">Save</button>
+      <span id="save-status" class="save-status"></span>
+    </div>
+  </section>
+
+  <footer>
+    <a id="book-call" href="https://claritywithcaitandscott.com" target="_blank" class="btn-primary">
+      Book Your Free Clarity Call
+    </a>
+    <p class="footer-note">You are not lost. You are becoming. ✦</p>
+  </footer>
+</body>
+<script src="popup.js"></script>
+</html>

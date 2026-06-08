@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head><title>Icon Generator</title></head>
+<body>
+<p>Open browser console and run the script to generate PNG icons, or use the SVG below as a source.</p>
+
+<svg id="icon" viewBox="0 0 128 128" width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#150836"/>
+      <stop offset="100%" stop-color="#080416"/>
+    </radialGradient>
+    <radialGradient id="pg" cx="42%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="45%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#2e1065"/>
+    </radialGradient>
+    <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="33%" stop-color="#facc15"/>
+      <stop offset="66%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#bg)"/>
+  <circle cx="64" cy="64" r="36" fill="url(#pg)"/>
+  <ellipse cx="64" cy="72" rx="68" ry="14" fill="none" stroke="url(#rg)" stroke-width="5" opacity="0.9"/>
+  <polygon points="98,22 100,29 107,29 101,33 103,40 98,36 93,40 95,33 89,29 96,29" fill="#fde68a"/>
+</svg>
+
+<script>
+const sizes = [16, 48, 128];
+sizes.forEach(size => {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  const svgData = new XMLSerializer().serializeToString(document.getElementById('icon'));
+  const blob = new Blob([svgData], {type: 'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, size, size);
+    const link = document.createElement('a');
+    link.download = `icon${size}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+  img.src = url;
+});
+</script>
+</body>
+</html>
