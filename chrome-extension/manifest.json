@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Cait & Scott Clarity Coaching",
+  "name": "Clarity Coaching",
   "short_name": "Clarity Coaching",
   "version": "1.0.0",
-  "description": "Daily clarity prompts & quick access to your coaching journey — for the 'what now?' moment.",
+  "description": "Daily clarity prompts and quick access to your coaching journey - for the what now moment.",
   "action": {
     "default_popup": "popup.html",
     "default_title": "Clarity Coaching"

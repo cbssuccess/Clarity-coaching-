@@ -6,6 +6,8 @@
   --soft: #c4b5fd;
   --star: #e9d5ff;
   --gold: #fde68a;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +16,7 @@ body {
   width: 320px;
   background: var(--cosmos);
   color: var(--star);
-  font-family: 'Jost', sans-serif;
+  font-family: var(--sans);
   font-weight: 300;
   position: relative;
   overflow-x: hidden;
@@ -46,7 +48,7 @@ header {
 .planet-icon { flex-shrink: 0; }
 
 .header-text h1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--serif);
   font-size: 1.1rem;
   font-weight: 300;
   color: var(--star);
@@ -83,7 +85,7 @@ header {
 }
 
 .affirmation {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--serif);
   font-style: italic;
   font-size: 1rem;
   color: var(--gold);
@@ -98,7 +100,7 @@ header {
   background: transparent;
   border: none;
   color: var(--lilac);
-  font-family: 'Jost', sans-serif;
+  font-family: var(--sans);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -139,7 +141,7 @@ textarea {
   border: 1px solid rgba(124,58,237,0.3);
   color: var(--star);
   padding: 0.6rem;
-  font-family: 'Jost', sans-serif;
+  font-family: var(--sans);
   font-size: 0.8rem;
   font-weight: 300;
   resize: none;
@@ -162,7 +164,7 @@ textarea::placeholder { color: rgba(196,181,253,0.4); }
   border: 1px solid var(--violet);
   color: var(--lilac);
   padding: 0.3rem 0.9rem;
-  font-family: 'Jost', sans-serif;
+  font-family: var(--sans);
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -193,7 +195,7 @@ footer {
   background: var(--violet);
   color: var(--star);
   padding: 0.6rem 1rem;
-  font-family: 'Jost', sans-serif;
+  font-family: var(--sans);
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -207,6 +209,6 @@ footer {
 .footer-note {
   font-size: 0.65rem;
   color: rgba(196,181,253,0.5);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--serif);
   font-style: italic;
 }
