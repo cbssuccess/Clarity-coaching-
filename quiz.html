@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Discover which loop is keeping you stuck. A 3-minute assessment from Shining Clarity Coaching."/>
+<title>Find Your Loop — Shining Clarity Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cosmos: #f7efe3;
+    --deep: #F2EBD9;
+    --violet: #3D1A6E;
+    --soft: #2C2C2C;
+    --star: #E8DFC8;
+    --gold: #c9a96e;
+    --navy: #0f0520;
+    --rainbow: linear-gradient(90deg,#c0306a 0%,#d4603a 14%,#c9a040 28%,#3a9a50 42%,#2a70c0 56%,#3a30b0 72%,#6a20a0 86%,#9a20c0 100%);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--deep);
+    color: var(--soft);
+    font-family: 'Lora', serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ---- Layout ---- */
+  .rainbow-bar { height:3px; background:var(--rainbow); width:100%; margin-bottom:2.5rem; }
+  .quiz-container { width:100%; max-width:660px; }
+
+  /* ---- Screens ---- */
+  .screen { display:none; }
+  .screen.active { display:block; }
+
+  /* ---- Progress ---- */
+  .progress-wrap { margin-bottom:2rem; }
+  .progress-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; }
+  .progress-label { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--violet); opacity:0.7; }
+  .progress-track { width:100%; height:3px; background:rgba(61,26,110,0.1); border-radius:2px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--rainbow); transition:width 0.5s ease; border-radius:2px; }
+
+  /* ---- Welcome ---- */
+  .welcome-label { font-size:0.62rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:1rem; text-align:center; }
+  .welcome-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,6vw,3.4rem); font-weight:300; color:var(--soft); text-align:center; letter-spacing:0.06em; margin-bottom:0.8rem; }
+  .welcome-italic { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:var(--gold); text-align:center; margin-bottom:2rem; line-height:1.5; }
+  .welcome-body { color:#555; font-size:0.95rem; line-height:1.95; text-align:center; max-width:520px; margin:0 auto 1.8rem; }
+  .welcome-meta { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet); text-align:center; margin-bottom:2.2rem; opacity:0.65; }
+
+  /* ---- Buttons ---- */
+  .btn-gold {
+    display:inline-block;
+    background:linear-gradient(105deg,#7a5200 0%,#c9860a 18%,#f5d060 35%,#e8a800 50%,#f5d060 65%,#c9860a 82%,#7a5200 100%);
+    background-size:200% auto;
+    color:#1a0a00;
+    padding:0.9rem 2.5rem;
+    font-family:'Lora',serif;
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:opacity 0.3s;
+    animation:shimmer 3s infinite;
+  }
+  .btn-gold:hover { opacity:0.88; }
+  .btn-outline {
+    display:inline-block;
+    background:transparent;
+    color:var(--soft);
+    padding:0.9rem 2.5rem;
+    font-family:'Lora',serif;
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    border:2px solid var(--violet);
+    border-radius:20px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:all 0.3s;
+  }
+  .btn-outline:hover { background:var(--violet); color:var(--star); }
+  .btn-next {
+    display:none;
+    background:var(--violet);
+    color:var(--star);
+    padding:0.75rem 2.2rem;
+    font-family:'Lora',serif;
+    font-size:0.75rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin-top:1.5rem;
+    transition:opacity 0.25s, transform 0.2s;
+  }
+  .btn-next:hover { opacity:0.88; transform:translateY(-1px); }
+  .btn-next.visible { display:inline-block; }
+  @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+
+  /* ---- Question ---- */
+  .q-number { font-size:0.62rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:1.2rem; opacity:0.7; }
+  .q-text { font-family:'Cormorant Garamond',serif; font-size:clamp(1.35rem,3.2vw,1.85rem); font-weight:300; color:var(--soft); line-height:1.45; margin-bottom:1.8rem; }
+  .options-grid { display:flex; flex-direction:column; gap:0.8rem; }
+  .option-card {
+    background:#fff;
+    border:1.5px solid rgba(61,26,110,0.16);
+    border-radius:6px;
+    padding:1rem 1.3rem;
+    cursor:pointer;
+    transition:all 0.22s;
+    font-family:'Lora',serif;
+    font-size:0.9rem;
+    color:#555;
+    line-height:1.65;
+    text-align:left;
+    width:100%;
+  }
+  .option-card:hover { border-color:var(--violet); color:var(--soft); transform:translateY(-1px); box-shadow:0 4px 14px rgba(61,26,110,0.1); }
+  .option-card.selected { background:var(--violet); border-color:var(--violet); color:var(--star); transform:translateY(-1px); box-shadow:0 6px 20px rgba(61,26,110,0.22); }
+  .opt-letter { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; margin-right:0.75rem; opacity:0.55; }
+  .option-card.selected .opt-letter { opacity:0.7; }
+  .q-footer { text-align:center; }
+
+  /* ---- Fade transition ---- */
+  .fade-out { opacity:0; transform:translateY(-6px); transition:opacity 0.18s ease, transform 0.18s ease; }
+  .fade-in { animation:fadein 0.3s ease forwards; }
+  @keyframes fadein { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ---- Loading ---- */
+  .loading-wrap { text-align:center; padding:5rem 2rem; }
+  .loading-label { font-size:0.62rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:1.5rem; }
+  .loading-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--soft); margin-bottom:2rem; }
+  .dots { display:flex; justify-content:center; gap:0.6rem; }
+  .dot { width:9px; height:9px; border-radius:50%; background:var(--violet); opacity:0.25; animation:blink 1.4s ease-in-out infinite; }
+  .dot:nth-child(2) { animation-delay:0.22s; }
+  .dot:nth-child(3) { animation-delay:0.44s; }
+  @keyframes blink { 0%,80%,100%{opacity:0.25;transform:scale(0.85)} 40%{opacity:1;transform:scale(1.15)} }
+
+  /* ---- Results ---- */
+  .result-label { font-size:0.62rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:0.9rem; text-align:center; }
+  .result-name { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3rem); font-weight:300; color:var(--soft); text-align:center; letter-spacing:0.04em; margin-bottom:0.8rem; }
+  .result-tagline { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; color:var(--gold); text-align:center; margin-bottom:1.8rem; line-height:1.55; }
+  .result-divider { width:56px; height:3px; background:var(--rainbow); margin:0 auto 1.8rem; border-radius:2px; }
+  .result-body { color:#555; font-size:0.94rem; line-height:1.95; margin-bottom:1.4rem; }
+  .belief-block {
+    background:#fff;
+    border:1px solid rgba(61,26,110,0.13);
+    border-left:4px solid var(--violet);
+    padding:1.2rem 1.5rem;
+    margin:1.5rem 0;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.08rem;
+    font-style:italic;
+    color:var(--soft);
+    line-height:1.75;
+  }
+  .result-section-label { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--violet); margin-bottom:0.7rem; margin-top:1.8rem; opacity:0.8; }
+  .result-coaching { color:#555; font-size:0.94rem; line-height:1.95; margin-bottom:0.5rem; }
+  .cta-card {
+    background:rgba(61,26,110,0.03);
+    border:1px solid rgba(61,26,110,0.12);
+    border-top:3px solid var(--gold);
+    padding:2rem 1.8rem;
+    text-align:center;
+    margin-top:2.2rem;
+    border-radius:4px;
+  }
+  .cta-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:300; color:var(--soft); margin-bottom:0.5rem; }
+  .cta-card p { font-size:0.85rem; color:#777; margin-bottom:1.6rem; line-height:1.75; max-width:440px; margin-left:auto; margin-right:auto; }
+  .cta-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .retake-wrap { text-align:center; margin-top:1.6rem; }
+  .retake-btn { background:none; border:none; font-family:'Lora',serif; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--violet); cursor:pointer; text-decoration:underline; opacity:0.6; transition:opacity 0.2s; }
+  .retake-btn:hover { opacity:1; }
+  .text-center { text-align:center; }
+
+  @media (max-width:480px) {
+    body { padding:0 1rem 3rem; }
+    .option-card { padding:0.85rem 1rem; font-size:0.87rem; }
+    .cta-card { padding:1.5rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rainbow-bar"></div>
+
+<div class="quiz-container">
+
+  <!-- WELCOME -->
+  <div id="screen-welcome" class="screen active">
+    <p class="welcome-label">Free Assessment</p>
+    <h1 class="welcome-title">Find Your Loop</h1>
+    <p class="welcome-italic">The pattern underneath your pattern</p>
+    <p class="welcome-body">
+      Most people spend years trying to fix behaviors without ever finding the belief underneath them.
+      This quiz takes 3 minutes and shows you which loop you're actually in — not the symptom, the source.
+    </p>
+    <p class="welcome-meta">8 questions &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; No email required</p>
+    <div class="text-center">
+      <button class="btn-gold" onclick="startQuiz()">Begin the Quiz →</button>
+    </div>
+  </div>
+
+  <!-- QUESTION -->
+  <div id="screen-question" class="screen">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label" id="progress-label">Question 1 of 8</span>
+        <span class="progress-label" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div id="q-content">
+      <p class="q-number" id="q-num">01 / 08</p>
+      <h2 class="q-text" id="q-text"></h2>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="q-footer">
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div id="screen-loading" class="screen">
+    <div class="loading-wrap">
+      <p class="loading-label">Reading Your Responses</p>
+      <h2 class="loading-title">Identifying your loop...</h2>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="screen-results" class="screen">
+    <div id="results-content"></div>
+    <div class="retake-wrap">
+      <button class="retake-btn" onclick="resetQuiz()">Retake the quiz</button>
+    </div>
+  </div>
+
+</div><!-- /quiz-container -->
+
+<script>
+const QUESTIONS = [
+  {
+    q: "When you sit down to work on something that matters to you, what happens first?",
+    opts: [
+      { t: "I start planning and refining — getting it right before I can actually begin", l: "P" },
+      { t: "I think about what others will think when they see the finished result", l: "A" },
+      { t: "I open what I need, then find myself doing something else entirely", l: "V" },
+      { t: "I start strong, then something shifts and I lose momentum or create a problem", l: "S" }
+    ]
+  },
+  {
+    q: "The voice in your head when something goes wrong says:",
+    opts: [
+      { t: "\"You knew it wasn't ready. You should have done more.\"", l: "P" },
+      { t: "\"They'll think you're incompetent. You've let them down.\"", l: "A" },
+      { t: "\"You always do this. You just can't follow through.\"", l: "V" },
+      { t: "\"Of course. Every time things start going well, you blow it.\"", l: "S" }
+    ]
+  },
+  {
+    q: "When someone asks what you want — in life, a relationship, or just in the moment — you:",
+    opts: [
+      { t: "Know what you want but hesitate until you're certain it's the \"right\" answer", l: "P" },
+      { t: "Often defer to what others want or what seems most acceptable", l: "A" },
+      { t: "Know exactly what you want but somehow talk yourself out of asking for it", l: "V" },
+      { t: "Say what you want, then start second-guessing it halfway through", l: "S" }
+    ]
+  },
+  {
+    q: "\"Ready\" is a word that, for you, means:",
+    opts: [
+      { t: "One more revision, one more check — then I'll finally be ready", l: "P" },
+      { t: "When I feel confident enough that others will approve", l: "A" },
+      { t: "Something I've been \"almost\" for a very long time now", l: "V" },
+      { t: "I feel ready, start — and then suddenly I'm not sure anymore", l: "S" }
+    ]
+  },
+  {
+    q: "When you picture the life you actually want, your first internal response is:",
+    opts: [
+      { t: "That's possible — but I'd need to do it the right way, in the right order", l: "P" },
+      { t: "I wonder what people would think of me if I actually had that", l: "A" },
+      { t: "That's exactly what I want — I just can't explain why I haven't made it happen", l: "V" },
+      { t: "I get excited, then immediately think of everything that could go wrong", l: "S" }
+    ]
+  },
+  {
+    q: "Which sentence have you said to yourself most often?",
+    opts: [
+      { t: "\"It's not ready yet.\"", l: "P" },
+      { t: "\"I don't want to disappoint them.\"", l: "A" },
+      { t: "\"I'll do it tomorrow.\"", l: "V" },
+      { t: "\"Why do I always do this?\"", l: "S" }
+    ]
+  },
+  {
+    q: "Beneath all of it, which belief do you suspect is running things?",
+    opts: [
+      { t: "\"If it's not excellent, I'm not excellent — and that's not acceptable.\"", l: "P" },
+      { t: "\"If people knew the real me, they'd leave.\"", l: "A" },
+      { t: "\"If I try and it doesn't work, that proves something I'm afraid is true.\"", l: "V" },
+      { t: "\"Good things in my life don't last.\"", l: "S" }
+    ]
+  },
+  {
+    q: "What would it mean for your life if this loop were finally gone?",
+    opts: [
+      { t: "I'd finish things. Share them. Stop hiding in endless preparation.", l: "P" },
+      { t: "I'd stop performing and start actually connecting with people.", l: "A" },
+      { t: "I'd finally move — not just know what to do, but actually move.", l: "V" },
+      { t: "I could trust that something good can stay.", l: "S" }
+    ]
+  }
+];
+
+const LOOPS = {
+  P: {
+    name: "The Perfectionist Loop",
+    tagline: "You're not afraid of failing. You're afraid of being seen as imperfect.",
+    body: "You have standards — high ones — and you hold yourself to them without mercy. The problem isn't ambition. It's that perfection has become the condition for your own acceptance of yourself. You finish things inside your head. You start over. You research instead of act. You tell yourself it just needs one more round. The loop isn't protecting quality. It's protecting you from the moment someone sees what you made — and you have to find out whether it's enough.",
+    belief: "\"I am only acceptable if what I produce is flawless.\"",
+    coaching: "In coaching, you stop waiting to be ready and start trusting what you already know. You learn to separate your work from your worth — and discover that the thing you kept refining was already good enough to share. The loop breaks not when you get better at things, but when you stop needing to be flawless in order to feel safe."
+  },
+  A: {
+    name: "The Approval Loop",
+    tagline: "You know what you want. You just can't say it yet.",
+    body: "You've learned to read the room faster than most people read a page. You know what people want to hear, and you often give it to them — even when it costs you. The loop isn't weakness. It's a strategy that made perfect sense at some point in your life. But now it's running your relationships, your decisions, and quietly, your sense of self. The version of you that people love isn't quite you. And some part of you knows it.",
+    belief: "\"If people knew what I really wanted — or who I really am — they wouldn't stay.\"",
+    coaching: "In coaching, you stop performing and start connecting. You find out that honesty doesn't cost you love — and that the relationships you've been protecting weren't built on the real you anyway. The loop breaks when you see that the approval you were chasing was never the thing you actually needed."
+  },
+  V: {
+    name: "The Avoidance Loop",
+    tagline: "You know exactly what to do. That's never been the problem.",
+    body: "You're not confused. You're not unmotivated. You can explain the plan in your sleep — you've explained it to yourself more times than you can count. What you can't explain is why your hands won't do what your brain already decided. The loop isn't laziness. It's protection. Somewhere beneath the delay is a belief that trying and not making it would prove something you're not ready to face. So not trying keeps that verdict safely away.",
+    belief: "\"If I try and it doesn't work, that means something is fundamentally wrong with me.\"",
+    coaching: "In coaching, you stop calling it procrastination and start understanding what it actually is. When you see the belief underneath the avoidance, the freeze begins to thaw — and the action that felt impossible starts to feel like just the next step. The loop breaks not by pushing harder, but by making it safe to try."
+  },
+  S: {
+    name: "The Self-Sabotage Loop",
+    tagline: "You don't blow things up because you're broken. You do it because it's familiar.",
+    body: "You're capable — everyone around you can see it. Things get going, they start to look good, and then something shifts. You pull back, start a conflict, miss the deadline, change direction entirely. The loop isn't self-destruction. It's the deepest kind of self-protection: keeping you from having something good that you'd then have to lose. If you never fully arrive, you never have to watch it fall apart. Staying just short of the finish line feels safer than crossing it.",
+    belief: "\"Good things in my life don't last. It's safer not to arrive than to lose it after I get there.\"",
+    coaching: "In coaching, you stop mistaking the familiar for the inevitable. You start building a relationship with the version of your life where things actually stay — and learning what it feels like to be in it without waiting for it to end. The loop breaks when staying stops feeling more dangerous than leaving."
+  }
+};
+
+let current = 0;
+let answers = [];
+let selected = null;
+
+function startQuiz() {
+  showScreen('question');
+  renderQuestion();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[current];
+  const letters = ['A', 'B', 'C', 'D'];
+  const pct = Math.round((current / QUESTIONS.length) * 100);
+
+  document.getElementById('progress-label').textContent = `Question ${current + 1} of ${QUESTIONS.length}`;
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('q-num').textContent = String(current + 1).padStart(2, '0') + ' / ' + String(QUESTIONS.length).padStart(2, '0');
+  document.getElementById('q-text').textContent = q.q;
+
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-card';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt.t}`;
+    btn.onclick = () => pick(i, btn);
+    grid.appendChild(btn);
+  });
+
+  selected = null;
+  document.getElementById('btn-next').classList.remove('visible');
+}
+
+function pick(idx, el) {
+  document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selected = idx;
+  document.getElementById('btn-next').classList.add('visible');
+}
+
+function nextQuestion() {
+  if (selected === null) return;
+  answers.push(QUESTIONS[current].opts[selected].l);
+  current++;
+
+  if (current >= QUESTIONS.length) {
+    showScreen('loading');
+    setTimeout(showResults, 2200);
+    return;
+  }
+
+  const content = document.getElementById('q-content');
+  content.classList.add('fade-out');
+  setTimeout(() => {
+    renderQuestion();
+    content.classList.remove('fade-out');
+    content.classList.add('fade-in');
+    setTimeout(() => content.classList.remove('fade-in'), 350);
+  }, 180);
+}
+
+function showResults() {
+  const counts = { P: 0, A: 0, V: 0, S: 0 };
+  answers.forEach(a => counts[a]++);
+  const winner = Object.keys(counts).reduce((a, b) => counts[a] >= counts[b] ? a : b);
+
+  const loop = LOOPS[winner];
+  document.getElementById('results-content').innerHTML = `
+    <p class="result-label">Your Loop</p>
+    <h2 class="result-name">${loop.name}</h2>
+    <p class="result-tagline">${loop.tagline}</p>
+    <div class="result-divider"></div>
+    <p class="result-body">${loop.body}</p>
+    <p class="result-section-label">The Belief Underneath</p>
+    <div class="belief-block">${loop.belief}</div>
+    <p class="result-section-label">What Changes in Coaching</p>
+    <p class="result-coaching">${loop.coaching}</p>
+    <div class="cta-card">
+      <h3>Ready to break the loop?</h3>
+      <p>A free 30-minute discovery call with Scott &amp; Cait. No pressure — just clarity on what's underneath and whether coaching is the right next step for you.</p>
+      <div class="cta-buttons">
+        <a href="https://shiningclaritycoaching.com/#apply" target="_top" class="btn-gold">Book a Free Call</a>
+        <a href="https://shiningclaritycoaching.com/#services" target="_top" class="btn-outline">View Programs</a>
+      </div>
+    </div>
+  `;
+  showScreen('results');
+}
+
+function resetQuiz() {
+  current = 0;
+  answers = [];
+  selected = null;
+  document.getElementById('progress-fill').style.width = '0%';
+  showScreen('welcome');
+}
+</script>
+
+</body>
+</html>
