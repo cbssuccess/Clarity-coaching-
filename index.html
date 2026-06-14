@@ -875,12 +875,15 @@ window.addEventListener('hashchange', function() {
     clickStart:gl.getUniformLocation(prog,'u_clickStart')
   };
 
-  let DPR = Math.min(window.devicePixelRatio||1, 1.75);
+  const isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
+  let DPR = Math.min(window.devicePixelRatio||1, isMobile ? 1.0 : 1.75);
   const mouse = {x:0,y:0}, target = {x:0,y:0};
   let clickPos = {x:0,y:0}, clickStart = -100, started = performance.now(), moved = false;
+  let paused = false;
+  document.addEventListener('visibilitychange', () => { paused = document.hidden; });
 
   function resize(){
-    DPR = Math.min(window.devicePixelRatio||1, 1.75);
+    DPR = Math.min(window.devicePixelRatio||1, isMobile ? 1.0 : 1.75);
     canvas.width = Math.floor(innerWidth*DPR);
     canvas.height = Math.floor(innerHeight*DPR);
     gl.viewport(0,0,canvas.width,canvas.height);
@@ -891,6 +894,7 @@ window.addEventListener('hashchange', function() {
   addEventListener('pointerdown', e=>{ clickPos.x=e.clientX*DPR; clickPos.y=(innerHeight-e.clientY)*DPR; clickStart=(performance.now()-started)/1000; }, {passive:true});
 
   function frame(now){
+    if(paused){ requestAnimationFrame(frame); return; }
     mouse.x += (target.x-mouse.x)*0.08;
     mouse.y += (target.y-mouse.y)*0.08;
     gl.uniform2f(U.res, canvas.width, canvas.height);
