@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint *)",
+      "Bash(npm run typecheck *)",
+      "Bash(npm test *)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(curl -s *)"
+    ]
+  }
+}
