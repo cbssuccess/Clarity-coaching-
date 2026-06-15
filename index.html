@@ -778,7 +778,7 @@ window.addEventListener('hashchange', function() {
 (function(){
   const canvas = document.getElementById('aurora-bg');
   const gl = canvas.getContext('webgl2', { antialias:false, powerPreference:'high-performance' });
-  if(!gl){ canvas.style.background = 'radial-gradient(circle at 40% 40%, #08082e, #020310)'; return; }
+  if(!gl){ canvas.style.background = 'radial-gradient(circle at 40% 40%, #160840, #0f0520)'; return; }
 
   const VERT = `#version 300 es
   in vec2 a_pos; void main(){ gl_Position = vec4(a_pos,0.,1.); }`;
@@ -792,14 +792,14 @@ window.addEventListener('hashchange', function() {
   uniform vec2  u_click;
   uniform float u_clickStart;
 
-  const vec3 cCosmos = vec3(0.008,0.010,0.058);
-  const vec3 cDeep   = vec3(0.022,0.030,0.130);
-  const vec3 cViolet = vec3(0.150,0.170,0.540);
-  const vec3 cLilac  = vec3(0.240,0.270,0.650);
+  const vec3 cCosmos = vec3(0.055,0.018,0.122);
+  const vec3 cDeep   = vec3(0.088,0.034,0.200);
+  const vec3 cViolet = vec3(0.180,0.078,0.380);
+  const vec3 cLilac  = vec3(0.260,0.150,0.520);
   const vec3 cStar   = vec3(0.780,0.810,0.970);
   const vec3 cRose   = vec3(0.957,0.247,0.369);
   const vec3 cAmber  = vec3(0.976,0.451,0.086);
-  const vec3 cBlue   = vec3(0.110,0.310,0.790);
+  const vec3 cBlue   = vec3(0.145,0.082,0.430);
 
   mat2 rot(float a){ float c=cos(a),s=sin(a); return mat2(c,-s,s,c); }
   float hash21(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
@@ -842,15 +842,13 @@ window.addEventListener('hashchange', function() {
     vec2 smokeOff = vec2(
       fbm(uv*3.2 + vec2(t*0.9, 0.15)) - 0.5,
       fbm(uv*3.2 + vec2(0.15, t*0.75)) - 0.5
-    ) * 0.10;
+    ) * 0.09;
     float distRaw  = length(uv - m);
     float distWisp = length(uv - m + smokeOff);
-    float haze = exp(-distRaw  * 0.80) * 0.10;
-    float glow = exp(-distWisp * 1.30);
-    float soft = exp(-distRaw  * 2.60) * 0.20;
-    col += cRose * haze;
-    col += cRose * glow * (0.14 + volume*0.44);
-    col += cRose * soft;
+    float glow = exp(-distWisp * 1.90);
+    float core = exp(-distRaw  * 4.20) * 0.28;
+    col += cRose * glow * (0.04 + volume*0.38);
+    col += cRose * core;
 
     float bloom = softBloom(uv, cuv);
     col += cRose*bloom*0.70 + cStar*bloom*0.14;
