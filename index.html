@@ -107,9 +107,11 @@
   .mv-card.vision h3 { color:var(--blue); }
   .mv-card p { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:#2C2C2C; line-height:1.8; }
   /* FAQ */
-  .faq-item { border-bottom:1px solid rgba(124,58,237,0.15); padding:1.5rem 0; }
-  .faq-q { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--soft); margin-bottom:0.8rem; }
-  .faq-a { color:var(--soft); font-size:0.9rem; line-height:1.9; }
+  #page-faq .section { counter-reset: faq-counter; }
+  .faq-item { counter-increment: faq-counter; border-bottom:1px solid rgba(61,26,110,0.15); padding:2rem 0; }
+  .faq-q { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--violet); margin-bottom:0.8rem; }
+  .faq-q::before { content: counter(faq-counter) ".  "; color:var(--gold); }
+  .faq-a { color:#555555; font-size:0.92rem; line-height:1.9; padding-left:1.4rem; border-left:2px solid rgba(201,169,110,0.4); }
   /* FORM */
   .form-group { margin-bottom:1.8rem; }
   .form-group label { display:block; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--violet); margin-bottom:0.6rem; }
