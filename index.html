@@ -501,7 +501,8 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 </div>
 </div>
 <div style="max-width:700px;margin:0 auto;padding:0 2rem 4rem">
-<form method="POST" action="https://formspree.io/f/mwvyazlw" name="discovery-call">
+<div style="background:#EFDFBB;border-radius:12px;padding:2.5rem 2.5rem 2rem;border:1px solid rgba(61,26,110,0.13);margin-bottom:2rem">
+<form method="POST" action="https://formspree.io/f/mwvyazlw" name="discovery-call" onsubmit="handleSubmit(event)">
 <div class="form-group">
 <label>Your name</label>
 <input name="name" placeholder="Your full name" required="" type="text"/>
@@ -573,6 +574,7 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:0.8rem;">You're on your way.</h3>
 <p style="color:var(--soft);margin-bottom:2rem;font-size:0.95rem;">Your application has been received. We'll be in touch within 48 hours to schedule your discovery call.</p>
 </div>
+</div><!-- /form box -->
 </div>
 <footer>
 <div class="rainbow-bar" style="margin-bottom:2rem"></div>
@@ -618,7 +620,7 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 <div class="hours-note">✦ Please note — we respond during dedicated business hours. Every message receives full, personal attention during that time.</div>
 </div>
 <div>
-<form method="POST" action="https://formspree.io/f/mdapbnlo" name="contact">
+<form method="POST" action="https://formspree.io/f/mdapbnlo" name="contact" onsubmit="handleContactSubmit(event)">
 <div class="form-group"><label>Your name</label><input name="name" placeholder="Your name" required="" type="text"/></div>
 <div class="form-group"><label>Email address</label><input name="email" placeholder="your@email.com" required="" type="email"/></div>
 <div class="form-group"><label>Your message</label><textarea name="message" placeholder="What's on your mind?" style="height:150px"></textarea></div>
@@ -705,7 +707,15 @@ window.showPage = function(id) {
   var pages = document.querySelectorAll('.page');
   for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
   var el = document.getElementById('page-' + id);
-  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+  if (el) {
+    el.classList.add('active');
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    requestAnimationFrame(function() {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  }
 };
 
 window.selectScale = function(btn, field) {
@@ -728,7 +738,7 @@ window.handleSubmit = function(e) {
     if (response.ok) {
       form.style.display = 'none';
       var m = document.getElementById('success-msg');
-      if (m) { m.style.display = 'block'; window.scrollTo(0,0); }
+      if (m) { m.style.display = 'block'; document.documentElement.scrollTop = 0; document.body.scrollTop = 0; }
       setTimeout(function() { window.open('https://caitlyn16dl.setmore.com/', '_blank'); }, 1500);
     } else {
       alert('There was a problem submitting your form. Please try again.');
