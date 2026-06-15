@@ -783,7 +783,7 @@ window.addEventListener('hashchange', function() {
 (function(){
   const canvas = document.getElementById('aurora-bg');
   const gl = canvas.getContext('webgl2', { antialias:false, powerPreference:'high-performance' });
-  if(!gl){ canvas.style.background = 'radial-gradient(circle at 40% 40%, #1a1140, #080416)'; return; }
+  if(!gl){ canvas.style.background = 'radial-gradient(circle at 40% 40%, #160840, #0f0520)'; return; }
 
   const VERT = `#version 300 es
   in vec2 a_pos; void main(){ gl_Position = vec4(a_pos,0.,1.); }`;
@@ -797,14 +797,14 @@ window.addEventListener('hashchange', function() {
   uniform vec2  u_click;
   uniform float u_clickStart;
 
-  const vec3 cCosmos = vec3(0.031,0.016,0.086);
-  const vec3 cDeep   = vec3(0.082,0.031,0.212);
-  const vec3 cViolet = vec3(0.486,0.227,0.929);
-  const vec3 cLilac  = vec3(0.655,0.545,0.980);
-  const vec3 cStar   = vec3(0.914,0.835,1.000);
+  const vec3 cCosmos = vec3(0.055,0.018,0.122);
+  const vec3 cDeep   = vec3(0.088,0.034,0.200);
+  const vec3 cViolet = vec3(0.180,0.078,0.380);
+  const vec3 cLilac  = vec3(0.260,0.150,0.520);
+  const vec3 cStar   = vec3(0.780,0.810,0.970);
   const vec3 cRose   = vec3(0.957,0.247,0.369);
   const vec3 cAmber  = vec3(0.976,0.451,0.086);
-  const vec3 cBlue   = vec3(0.220,0.741,0.973);
+  const vec3 cBlue   = vec3(0.145,0.082,0.430);
 
   mat2 rot(float a){ float c=cos(a),s=sin(a); return mat2(c,-s,s,c); }
   float hash21(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
@@ -823,7 +823,7 @@ window.addEventListener('hashchange', function() {
     vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/u_res.y;
     vec2 m  = (u_mouse - 0.5*u_res)/u_res.y;
     vec2 cuv= (u_click - 0.5*u_res)/u_res.y;
-    float t = u_time*0.06;
+    float t = u_time*0.038;
     vec2 p = uv*1.15;
 
     vec2 q = vec2( fbm(p + vec2(0.0, t)),
@@ -833,27 +833,32 @@ window.addEventListener('hashchange', function() {
     float base = fbm(p + 2.6*r);
     float wisp = fbm(uv*2.8 + 1.8*r + vec2(-t*0.8, t*0.4));
     float density = base*0.84 + wisp*0.24;
-    density = smoothstep(0.16, 0.96, density);
-    float volume = pow(density, 1.25);
-    float shade = 0.62 + 0.38*smoothstep(0.25, 0.85, length(r));
+    density = smoothstep(0.04, 0.90, density);
+    float volume = pow(density, 0.80);
+    float shade = 0.50 + 0.50*smoothstep(0.25, 0.85, length(r));
 
-    vec3 navy = mix(cCosmos, mix(cCosmos,cDeep,0.7), volume);
-    vec3 blue = mix(cViolet*0.42, cBlue, 0.7);
+    vec3 navy = mix(cCosmos, mix(cCosmos,cDeep,0.60), volume);
+    vec3 blue = mix(cViolet*0.60, cBlue*0.80, 0.60);
     vec3 col = navy;
-    col = mix(col, blue*shade, volume);
-    col += cBlue  * smoothstep(0.55,1.0,density)*0.34*shade;
-    col += cLilac * smoothstep(0.82,1.0,density)*0.16;
+    col = mix(col, blue*shade, volume*0.68);
+    col += cBlue  * smoothstep(0.65,1.0,density)*0.18*shade;
+    col += cLilac * smoothstep(0.88,1.0,density)*0.08;
 
-    float dist = length(uv-m);
-    float glow = exp(-dist*1.8);
-    vec3 warm = mix(cRose, cAmber, 0.25);
-    col += warm * glow * (0.22 + volume*0.95);
-    col += warm * exp(-dist*4.0) * 0.26;
+    vec2 smokeOff = vec2(
+      fbm(uv*3.2 + vec2(t*0.9, 0.15)) - 0.5,
+      fbm(uv*3.2 + vec2(0.15, t*0.75)) - 0.5
+    ) * 0.09;
+    float distRaw  = length(uv - m);
+    float distWisp = length(uv - m + smokeOff);
+    float glow = exp(-distWisp * 1.90);
+    float core = exp(-distRaw  * 4.20) * 0.28;
+    col += cRose * glow * (0.04 + volume*0.38);
+    col += cRose * core;
 
     float bloom = softBloom(uv, cuv);
-    col += warm*bloom*0.8 + cStar*bloom*0.18;
+    col += cRose*bloom*0.70 + cStar*bloom*0.14;
 
-    col = pow(max(col,0.0), vec3(0.95));
+    col = pow(max(col,0.0), vec3(0.92));
     outColor = vec4(col,1.0);
   }`;
 
