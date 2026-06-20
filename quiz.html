@@ -184,6 +184,16 @@
   .retake-btn:hover { opacity:1; }
   .text-center { text-align:center; }
 
+  /* ---- Email Capture ---- */
+  .email-capture { margin-top:1.8rem; padding:1.5rem 1.8rem; background:rgba(201,169,110,0.08); border:1px solid rgba(201,169,110,0.3); border-radius:4px; text-align:center; }
+  .email-capture-text { font-family:'Lora',serif; font-size:0.85rem; color:#666; margin-bottom:1.1rem; line-height:1.7; }
+  .email-form { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
+  .email-input { font-family:'Lora',serif; font-size:0.82rem; padding:0.7rem 1.1rem; border:1.5px solid rgba(61,26,110,0.2); border-radius:20px; background:#fff; color:var(--soft); outline:none; min-width:210px; }
+  .email-input:focus { border-color:var(--violet); }
+  .btn-notify { background:var(--violet); color:var(--star); padding:0.7rem 1.6rem; font-family:'Lora',serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; border:none; border-radius:20px; cursor:pointer; transition:opacity 0.2s; }
+  .btn-notify:hover { opacity:0.85; }
+  .email-success { font-size:0.82rem; color:var(--violet); margin-top:0.8rem; letter-spacing:0.05em; }
+
   @media (max-width:480px) {
     body { padding:0 1rem 3rem; }
     .option-card { padding:0.85rem 1rem; font-size:0.87rem; }
@@ -337,30 +347,30 @@ const LOOPS = {
   P: {
     name: "The Perfectionist Loop",
     tagline: "You're not afraid of failing. You're afraid of being seen as imperfect.",
-    body: "You have standards — high ones — and you hold yourself to them without mercy. The problem isn't ambition. It's that perfection has become the condition for your own acceptance of yourself. You finish things inside your head. You start over. You research instead of act. You tell yourself it just needs one more round. The loop isn't protecting quality. It's protecting you from the moment someone sees what you made — and you have to find out whether it's enough.",
-    belief: "\"I am only acceptable if what I produce is flawless.\"",
-    coaching: "In coaching, you stop waiting to be ready and start trusting what you already know. You learn to separate your work from your worth — and discover that the thing you kept refining was already good enough to share. The loop breaks not when you get better at things, but when you stop needing to be flawless in order to feel safe."
+    body: "You're stuck in the Perfectionist Loop. Underneath, there's a fear (or belief) that you're not good enough — that if you can't do it perfectly, you shouldn't do it at all.\n\nSo you set impossible standards. You exhaust yourself trying to meet them. And when you inevitably fall short, it confirms what you already suspected: you're not capable. The loop tightens.\n\nThe pattern keeps you stuck because perfection isn't the real goal — proving your worth is. And no amount of perfect will ever feel like enough.\n\nThis is exactly what we work on.",
+    belief: "\"I am only enough if what I produce is flawless.\"",
+    emailCapture: "Want to know when the Perfectionist Loop guide is ready? We’ll let you know."
   },
   A: {
     name: "The Approval Loop",
     tagline: "You know what you want. You just can't say it yet.",
-    body: "You've learned to read the room faster than most people read a page. You know what people want to hear, and you often give it to them — even when it costs you. The loop isn't weakness. It's a strategy that made perfect sense at some point in your life. But now it's running your relationships, your decisions, and quietly, your sense of self. The version of you that people love isn't quite you. And some part of you knows it.",
-    belief: "\"If people knew what I really wanted — or who I really am — they wouldn't stay.\"",
-    coaching: "In coaching, you stop performing and start connecting. You find out that honesty doesn't cost you love — and that the relationships you've been protecting weren't built on the real you anyway. The loop breaks when you see that the approval you were chasing was never the thing you actually needed."
+    body: "You're stuck in the Approval Loop. Underneath, there's a fear (or belief) that you're unloved or unwanted — that if people saw the real you, they wouldn't stay.\n\nSo you read the room. You say the right things. You make yourself easy to be around. And it works — people like you. But the version they like isn't quite you, and some part of you knows it. The loop tightens every time you swallow what you actually want to keep the peace.\n\nThe pattern keeps you stuck because approval isn't the real goal — feeling safe to be yourself is. And no amount of people-pleasing will ever get you there.\n\nThis is exactly what we work on.",
+    belief: "\"If people saw who I really am, they wouldn't stay.\"",
+    emailCapture: "Want to know when the Approval Loop guide is ready? We’ll let you know."
   },
   V: {
     name: "The Avoidance Loop",
     tagline: "You know exactly what to do. That's never been the problem.",
-    body: "You're not confused. You're not unmotivated. You can explain the plan in your sleep — you've explained it to yourself more times than you can count. What you can't explain is why your hands won't do what your brain already decided. The loop isn't laziness. It's protection. Somewhere beneath the delay is a belief that trying and not making it would prove something you're not ready to face. So not trying keeps that verdict safely away.",
-    belief: "\"If I try and it doesn't work, that means something is fundamentally wrong with me.\"",
-    coaching: "In coaching, you stop calling it procrastination and start understanding what it actually is. When you see the belief underneath the avoidance, the freeze begins to thaw — and the action that felt impossible starts to feel like just the next step. The loop breaks not by pushing harder, but by making it safe to try."
+    body: "You're stuck in the Avoidance Loop. Underneath, there's a fear (or belief) that you're a failure — that if you try and it doesn't work, it proves something you're not ready to face.\n\nSo you don't try. Or you almost try. You plan, research, get close — and then stop just short of the moment it becomes real. It looks like procrastination from the outside. It doesn't feel like fear from the inside. It just feels like not being ready yet.\n\nThe pattern keeps you stuck because avoiding the attempt keeps the verdict safely away. If you never fully try, you never fully fail. But you also never move.\n\nThis is exactly what we work on.",
+    belief: "\"If I try and fail, it will prove something I'm not ready to face.\"",
+    emailCapture: "Want to know when the Avoidance Loop guide is ready? We’ll let you know."
   },
   S: {
     name: "The Self-Sabotage Loop",
     tagline: "You don't blow things up because you're broken. You do it because it's familiar.",
-    body: "You're capable — everyone around you can see it. Things get going, they start to look good, and then something shifts. You pull back, start a conflict, miss the deadline, change direction entirely. The loop isn't self-destruction. It's the deepest kind of self-protection: keeping you from having something good that you'd then have to lose. If you never fully arrive, you never have to watch it fall apart. Staying just short of the finish line feels safer than crossing it.",
-    belief: "\"Good things in my life don't last. It's safer not to arrive than to lose it after I get there.\"",
-    coaching: "In coaching, you stop mistaking the familiar for the inevitable. You start building a relationship with the version of your life where things actually stay — and learning what it feels like to be in it without waiting for it to end. The loop breaks when staying stops feeling more dangerous than leaving."
+    body: "You're stuck in the Self-Sabotage Loop. Underneath, there's a fear (or belief) that good things don't last for you — that you're fundamentally unloved or unworthy of keeping something good.\n\nSo right when things start working, something shifts. You pull back, create a problem, change direction. It doesn't feel intentional. It never does. But the result is always the same: you stay just short of the finish line.\n\nThe pattern keeps you stuck because leaving before you arrive feels safer than arriving and losing it anyway. If you blow it yourself, at least you're in control of the ending.\n\nThis is exactly what we work on.",
+    belief: "\"Good things don't last for me. It's safer not to arrive than to lose it after I get there.\"",
+    emailCapture: "Want to know when the Self-Sabotage Loop guide is ready? We’ll let you know."
   }
 };
 
@@ -437,26 +447,47 @@ function showResults() {
   const winner = Object.keys(counts).reduce((a, b) => counts[a] >= counts[b] ? a : b);
 
   const loop = LOOPS[winner];
+  const bodyParas = loop.body.split('\n\n').map(p => `<p class="result-body">${p}</p>`).join('');
   document.getElementById('results-content').innerHTML = `
     <p class="result-label">Your Loop</p>
     <h2 class="result-name">${loop.name}</h2>
     <p class="result-tagline">${loop.tagline}</p>
     <div class="result-divider"></div>
-    <p class="result-body">${loop.body}</p>
+    ${bodyParas}
     <p class="result-section-label">The Belief Underneath</p>
     <div class="belief-block">${loop.belief}</div>
-    <p class="result-section-label">What Changes in Coaching</p>
-    <p class="result-coaching">${loop.coaching}</p>
     <div class="cta-card">
       <h3>Ready to break the loop?</h3>
-      <p>A free 30-minute discovery call with Scott &amp; Cait. No pressure — just clarity on what's underneath and whether coaching is the right next step for you.</p>
+      <p>A free discovery call with Scott &amp; Cait. No pressure — just clarity on what's underneath and whether coaching is the right next step for you.</p>
       <div class="cta-buttons">
-        <a href="https://shiningclaritycoaching.com/#apply" target="_top" class="btn-gold">Book a Free Call</a>
+        <a href="https://caitlyn16dl.setmore.com/" target="_blank" class="btn-gold">Start Here</a>
         <a href="https://shiningclaritycoaching.com/#services" target="_top" class="btn-outline">View Programs</a>
       </div>
     </div>
+    <div class="email-capture">
+      <p class="email-capture-text">${loop.emailCapture}</p>
+      <form class="email-form" onsubmit="submitEmailCapture(event, '${winner}')">
+        <input type="email" class="email-input" placeholder="your@email.com" required>
+        <button type="submit" class="btn-notify">Notify Me</button>
+      </form>
+      <p class="email-success" id="email-note" style="display:none">You're on the list. We'll be in touch when it's ready.</p>
+    </div>
   `;
   showScreen('results');
+}
+
+function submitEmailCapture(e, loopKey) {
+  e.preventDefault();
+  const form = e.target;
+  const email = form.querySelector('.email-input').value;
+  fetch('https://formspree.io/f/mdapbnlo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email: email, loop: loopKey, source: 'quiz-notify-me' })
+  }).finally(() => {
+    form.style.display = 'none';
+    document.getElementById('email-note').style.display = 'block';
+  });
 }
 
 function resetQuiz() {
