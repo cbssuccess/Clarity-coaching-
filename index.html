@@ -215,7 +215,29 @@
   .hero .btn-outline:hover{background:var(--violet);border-color:var(--violet);color:var(--star);}
   /* Content sections — opaque card so aurora shows only in hero gap */
   .section{background:rgba(247,239,227,0.93);}
-</style>
+
+  /* OFFER CARDS */
+  .offer-card{background:#FFFFFF;border:1px solid rgba(61,26,110,0.12);margin-bottom:2.5rem;overflow:hidden;transition:border-color 0.3s}
+  .offer-card:hover{border-color:rgba(61,26,110,0.3)}
+  .offer-card.s1{border-left:4px solid var(--gold)}
+  .offer-card.s2{border-left:4px solid var(--violet)}
+  .offer-card.s3{border-left:4px solid var(--blue)}
+  .offer-header{padding:1.5rem 2rem;border-bottom:1px solid rgba(61,26,110,0.08)}
+  .offer-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:300;color:#2C2C2C;margin-bottom:0.2rem}
+  .offer-meta{font-size:0.88rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic}
+  .offer-body{display:grid;grid-template-columns:1fr 1fr}
+  @media(max-width:680px){.offer-body{grid-template-columns:1fr}}
+  .offer-desc{padding:2rem;border-right:1px solid rgba(61,26,110,0.08)}
+  .offer-desc p{color:#555555;line-height:1.9;font-size:0.95rem;margin:0}
+  .offer-detail{padding:2rem;background:rgba(242,235,217,0.45)}
+  .offer-detail h4{font-size:0.63rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--violet);margin-bottom:0.4rem;margin-top:1.2rem}
+  .offer-detail h4:first-child{margin-top:0}
+  .offer-detail ul{list-style:none;padding:0;margin:0 0 0.5rem}
+  .offer-detail ul li{font-size:0.88rem;color:#555555;line-height:1.7;padding-left:1rem;position:relative;margin-bottom:0.15rem}
+  .offer-detail ul li::before{content:'·';position:absolute;left:0;color:var(--gold);font-size:1.1rem;line-height:1.5}
+  .offer-result{margin-top:1rem;padding-top:0.8rem;border-top:1px solid rgba(61,26,110,0.1);font-size:0.85rem;color:var(--soft);font-style:italic;line-height:1.7}
+  .offer-footer{padding:1.2rem 2rem;border-top:1px solid rgba(61,26,110,0.08)}
+  </style>
 </head>
 <body>
 <canvas id="aurora-bg"></canvas>
@@ -410,40 +432,122 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 </div>
 </div>
 <div class="section" style="padding-top:2.5rem;margin-top:1.5rem">
-<div class="service-card s1">
-<p class="service-label" style="color:var(--gold)">Focused Session</p>
-<h2>Pattern Break Intensive</h2>
-<div class="service-price">$197</div>
-<p>You’ve been circling the same thing long enough. This session cracks it open.
-
-You come in with the specific pattern, decision, or loop that won’t quit. Both of us focus on it at the same time, from different directions. By the end of 90 minutes, you’ll know exactly what belief is driving it, why it keeps winning, and what to do about it — with one clear, specific next step that isn’t ‘try harder.’</p>
-<p style="font-size:0.9rem;color:var(--gold);font-style:italic;">You get two trained perspectives on the same pattern — which means you leave with something most people don't find for years.</p>
-<a class="btn-primary" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem">Start Here</a>
+<div class="offer-card s1">
+<div class="offer-header">
+<div class="offer-name">Focused Session</div>
+<div class="offer-meta">90 minutes &middot; $197</div>
 </div>
-<div class="service-card s2">
-<p class="service-label" style="color:var(--gold)">Coaching Experience</p>
-<h2>Loop Breaker Method</h2>
-<div class="service-price">$1,500</div>
-<p>You know what the pattern is. You can probably name it while it’s happening. But knowing it hasn’t stopped it.
-
-Over 6–8 weeks, we go deep enough to find the belief underneath it — and stay long enough to actually shift it. Not just understand it. Stop it. Between sessions, you get two Voxer exchanges per week — send your question, we respond, you follow up, we close it — within a designated response window.</p>
-<p style="font-size:0.9rem;color:var(--gold);font-style:italic;">Scott is tracking what keeps repeating in your story while Cait is listening for what’s underneath it. Two different angles on the same thing, at the same time — so the things that are easy to miss become a lot harder to miss.</p>
-<a class="btn-outline" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem">Start Here</a>
+<div class="offer-body">
+<div class="offer-desc">
+<p>You bring one specific situation you can't get clarity on — a decision, a reaction you keep having, or a pattern that shows up occasionally. We look at it with you from two angles and show you the belief driving your response. You leave with a clear explanation of what's causing the stuck point and one practical next step that moves the situation forward.</p>
 </div>
-<div class="service-card s3">
-<p class="service-label" style="color:var(--blue)">Deep Coaching Experience</p>
-<h2>Identity Rewire Experience</h2>
-<div class="service-price">$3,500</div>
-<p>Some patterns aren’t one loop. They’re the lens you see yourself through — the quiet belief that shows up underneath everything, no matter what you change on the outside.
-
-Over 10–12 weeks, we work at the level where the belief actually lives — not just identifying it, but actively reshaping how it functions. Between sessions you have daily Voxer access — message us when something comes up, we respond within a designated time block. You’ll also receive workbook support to reinforce the work between sessions.</p>
-<p style="font-size:0.9rem;color:var(--gold);font-style:italic;">This is the deepest level of work we do — and having both of us in it means the belief gets found faster, challenged from two angles, and replaced with something that actually holds.</p>
-<a class="btn-outline" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem;border-color:var(--violet);color:var(--violet)">Start Here</a>
+<div class="offer-detail">
+<h4>This is for you if:</h4>
+<ul>
+<li>You're stuck on one issue</li>
+<li>You want to understand what's behind it</li>
+<li>You want a clear next step, not ongoing support</li>
+</ul>
+<h4>What you can expect:</h4>
+<ul>
+<li>A straightforward explanation of what's driving the problem</li>
+<li>Why you keep reacting the same way</li>
+<li>One action that will actually move things forward</li>
+</ul>
+<h4>What this is NOT:</h4>
+<ul>
+<li>Therapy</li>
+<li>Crisis support</li>
+<li>A long-term container</li>
+</ul>
+<p class="offer-result">Result: You stop looping on the same problem because you finally understand what's behind it and what to do next.</p>
 </div>
+</div>
+<div class="offer-footer">
+<a class="btn-primary" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem">Book a Focused Session</a>
+</div>
+</div>
+
+<div class="offer-card s2">
+<div class="offer-header">
+<div class="offer-name">Loop Breaker Method</div>
+<div class="offer-meta">6–8 weeks &middot; $1,500</div>
+</div>
+<div class="offer-body">
+<div class="offer-desc">
+<p>You already know your pattern — you can see it happening, but you can't stop it. Over several weeks, we track it with you in real time. One of us watches how it shows up in your story; the other listens for the belief underneath it. You get weekly sessions plus structured check-ins so you can interrupt the pattern while it's happening, not after.</p>
+</div>
+<div class="offer-detail">
+<h4>This is for you if:</h4>
+<ul>
+<li>You keep repeating the same behavior even when you know better</li>
+<li>You want help changing your response in real time</li>
+<li>You want support between sessions, not just insight</li>
+</ul>
+<h4>What you can expect:</h4>
+<ul>
+<li>Weekly sessions</li>
+<li>Two Voxer check-ins per week to help you respond differently</li>
+<li>Clear explanations of what's driving the pattern</li>
+<li>Guidance on interrupting it as it shows up</li>
+</ul>
+<h4>What this is NOT:</h4>
+<ul>
+<li>A one-time clarity session</li>
+<li>A place to vent</li>
+<li>Identity-level work</li>
+</ul>
+<p class="offer-result">Result: You stop ending up in the same place because you learn to interrupt the pattern as it's happening.</p>
+</div>
+</div>
+<div class="offer-footer">
+<a class="btn-outline" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem">Apply for Loop Breaker Method</a>
+</div>
+</div>
+
+<div class="offer-card s3">
+<div class="offer-header">
+<div class="offer-name">Identity Rewire Experience</div>
+<div class="offer-meta">10–12 weeks &middot; $3,500</div>
+</div>
+<div class="offer-body">
+<div class="offer-desc">
+<p>This is for situations where the issue isn't a single pattern — it's the way you see yourself. Across 10–12 weeks, we work with you to identify the core belief that sits underneath most of your decisions, reactions, and default responses. You get weekly sessions, daily Voxer access, and workbook support to help you apply the work in real situations. The goal is to change the internal setting that keeps creating the same outcomes, even when you change your behavior.</p>
+</div>
+<div class="offer-detail">
+<h4>This is for you if:</h4>
+<ul>
+<li>You've changed habits, jobs, relationships, or environments but the same internal issue keeps showing up</li>
+<li>You can feel the problem is deeper than a pattern — it's how you think about yourself</li>
+<li>You want daily support as you practice new ways of responding</li>
+</ul>
+<h4>What you can expect:</h4>
+<ul>
+<li>Weekly deep-dive sessions</li>
+<li>Daily Voxer access within a designated response window</li>
+<li>Workbook tools to reinforce the new belief between sessions</li>
+<li>Two people tracking blind spots you can't see on your own</li>
+</ul>
+<h4>What this is NOT:</h4>
+<ul>
+<li>A quick fix</li>
+<li>A place to vent</li>
+<li>Therapy or emotional processing work</li>
+<li>A surface-level mindset program</li>
+</ul>
+<p class="offer-result">Result: Your default self-story changes. The belief that used to limit your decisions stops being the one in charge, and your reactions, confidence, and choices shift because the foundation underneath them has changed.</p>
+</div>
+</div>
+<div class="offer-footer">
+<a class="btn-outline" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem;border-color:var(--violet);color:var(--violet)">Apply for Identity Rewire Experience</a>
+</div>
+</div>
+
 <div style="text-align:center;margin-top:3rem">
 <p style="color:#555555;margin-bottom:1.5rem">Not sure which service is right for you? Book a free discovery call — we'll help you figure it out.</p>
 <a class="btn-primary" onclick="showPage('apply')">Start Here</a>
 </div>
+
 </div>
 <footer>
 <div class="rainbow-bar" style="margin-bottom:2rem"></div>
@@ -556,7 +660,7 @@ Over 10–12 weeks, we work at the level where the belief actually lives — not
 <select name="service">
 <option value="">Select a service...</option>
 <option>Free Discovery Call</option>
-<option>Pattern Break Intensive — $197</option>
+<option>Focused Session — $197</option>
 <option>Loop Breaker Method — $1,500</option>
 <option>Identity Rewire Experience — $3,500</option>
 <option>Not sure yet — help me decide</option>
