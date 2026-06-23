@@ -59,7 +59,7 @@
   .hero-planet { width:200px; height:200px; margin:0 auto 3rem; }
   .hero-planet svg { width:100%; height:100%; }
   .hero-eyebrow { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,7vw,5.5rem); font-weight:300; line-height:1.05; letter-spacing:0.08em; color:#2C2C2C; margin-bottom:0.5rem; text-transform:uppercase; }
-  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,4rem); font-weight:300; line-height:1.05; letter-spacing:0.08em; color:#2C2C2C; margin-bottom:0.5rem; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.65rem,4vw,3.25rem); font-weight:300; line-height:1.05; letter-spacing:0.08em; color:#2C2C2C; margin-bottom:0.5rem; }
   .hero-sub { font-size:0.75rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--violet); margin-bottom:2rem; }
   .hero-tagline { font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,2.5vw,1.5rem); font-style:italic; color:#c9a84c; margin-bottom:1rem; }
   .hero-sub-tagline { font-size:0.85rem; color:#c9a84c; margin-bottom:3rem; letter-spacing:0.05em; opacity:0.85; }
@@ -94,13 +94,16 @@
   .service-price { font-size:1.1rem; color:var(--gold); margin-bottom:1rem; font-family:'Cormorant Garamond',serif; font-style:italic; }
   .service-card p { color:#555555; line-height:1.9; font-size:0.95rem; margin-bottom:1.5rem; }
   /* ABOUT */
-  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0; }
-  @media(max-width:620px) { .about-grid { grid-template-columns:1fr; } }
-  .about-card { background:#FFFFFF; border:1px solid rgba(61,26,110,0.12); padding:2rem; }
-  .about-card.scott { border-top:3px solid var(--violet); }
-  .about-card.cait { border-top:3px solid var(--gold); }
-  .about-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:#2C2C2C; margin-bottom:1rem; }
-  .about-card p { color:#555555; font-size:0.9rem; line-height:1.9; }
+  .bio-section { margin:3rem 0; }
+  .bio-section + .bio-section { border-top:1px solid rgba(61,26,110,0.1); padding-top:3rem; }
+  .bio-section-label { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:0.6rem; }
+  .cait-layout { display:grid; grid-template-columns:280px 1fr; gap:2.5rem; align-items:start; }
+  .cait-photo { width:100%; border-radius:8px; display:block; }
+  .bio-name { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--soft); margin-bottom:1.2rem; border-bottom:2px solid var(--gold); padding-bottom:0.6rem; display:inline-block; }
+  .bio-text p { color:#555555; font-size:0.9rem; line-height:1.9; margin-bottom:1rem; }
+  .bio-text p:last-child { margin-bottom:0; }
+  .audio-placeholder { background:#F2EBD9; border:1.5px dashed rgba(61,26,110,0.25); border-radius:8px; padding:1.8rem 2rem; text-align:center; margin-bottom:2rem; color:#888; font-size:0.82rem; letter-spacing:0.1em; }
+  @media(max-width:640px) { .cait-layout { grid-template-columns:1fr; } .cait-photo { max-width:240px; margin:0 auto; } }
   .bio-block { background:#FFFFFF; border:1px solid rgba(61,26,110,0.12); border-left:3px solid var(--violet); padding:2.5rem; line-height:1.9; color:#555555; font-size:1rem; margin-bottom:2rem; }
   .bio-block em { color:var(--gold); font-style:normal; font-weight:500; }
   .mv-grid { display:none; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0; }
@@ -242,7 +245,7 @@
 <body>
 <canvas id="aurora-bg"></canvas>
 <nav>
-<a class="nav-logo" onclick="showPage('home')" style="display:flex;align-items:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="data:image/png;base64,/9j/4QBzRXhpZgAATU0AKgAAAAgABQEAAA" style="height:2.5rem;width:auto;"/><span>Shining Clarity</span></a>
+<a class="nav-logo" onclick="showPage('home')" style="display:flex;align-items:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:2.5rem;width:auto;"/><span>Shining Clarity</span></a>
 <ul class="nav-links">
 <li><a onclick="showPage('home')">Home</a></li>
 <li><a onclick="showPage('about')">About</a></li>
@@ -270,9 +273,9 @@
 <div class="hero-planet fade-up" style="width:0px;height:0px;display:none">
 <img alt="Shining Clarity Coaching Logo" src="data:image/png;base64,/9j/4QBzRXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAACTgEBAAQAAAABAAACJgExAAIAAAAHAAAASgEyAAIAAAAUAAAAUYdpAAQAAAABAAAAZQAAAABHb29nbGUAMjA" style="width:100%;height:100%;"/>
 </div>
-<p class="fade-up-2" style="font-size:0.72rem;letter-spacing:0.2em;color:rgba(201,169,110,0.85);margin-bottom:1.2rem;">For the person who keeps ending up in the same place — no matter how hard they try not to.</p>
+<p class="fade-up-2" style="font-size:1.1rem;letter-spacing:0.2em;color:#FDF6EC;margin-bottom:1.2rem;">For the person who keeps ending up in the same place — no matter how hard they try not to.</p>
 <h1 class="hero-title fade-up-2">You're not stuck because you haven't learned enough.</h1>
-<p class="fade-up-2" style="font-size:0.9rem;color:rgba(232,223,200,0.9);margin-top:0.6rem;margin-bottom:0;line-height:1.75;max-width:580px;">You've tried. You've read the books. Done the work. Sometimes you catch yourself in the moment, sometimes only after — or only when the consequences show up. Either way, that's not a knowledge problem. That's a belief problem. And that's exactly what we fix.</p>
+<p class="fade-up-2" style="font-size:0.9rem;color:#C9A227;margin-top:0.6rem;margin-bottom:0;line-height:1.75;max-width:580px;">You've tried. You've read the books. Done the work. Sometimes you catch yourself in the moment, sometimes only after — or only when the consequences show up. Either way, that's not a knowledge problem. That's a belief problem. And that's exactly what we fix.</p>
 
 <div class="dot-divider fade-up-3">
 <span style="background:#f43f5e"></span>
@@ -417,21 +420,37 @@
 </div>
 <div class="section" style="padding-top:2.5rem;margin-top:1.5rem">
 <div class="bio-block" style="border:none;padding:0;margin-bottom:2rem;background:transparent;text-align:center;font-size:1.15rem;font-style:italic;color:var(--gold)">"You don't need more insight. You need the thing underneath the insight to actually change."</div>
-<div class="about-grid">
-<div class="about-card scott">
-<h3>Scott</h3>
-<p>Scott has spent 18 years watching the same loop show up in different people's lives — and learning exactly how to find it.</p>
-<p>He works at the level most people skip: not the behavior on the surface, but the thought that triggers the feeling that hardens into the belief that drives the action. That's the loop. And once you can see it, you can change it.</p>
-<p>Scott's gift is finding it fast — often before the client can — and knowing how to hold it up without making someone feel broken for having it.</p>
+
+<!-- CAIT -->
+<div class="bio-section">
+<p class="bio-section-label">Meet Cait</p>
+<div class="cait-layout">
+<div class="cait-photo-wrap">
+<img src="images/cait.png" alt="Cait" class="cait-photo"/>
 </div>
-<div class="about-card cait">
-<h3>Cait</h3>
+<div class="bio-text">
+<span class="bio-name">Cait</span>
 <p>Cait hears what people mean underneath what they say.</p>
 <p>In almost every stuck person's story, there's a core belief quietly running the show — I'm not good enough, I'll never get this right, I don't deserve it — and it shows up in the language before the person even knows it's there. She works at that level.</p>
 <p>Using cognitive science and neuroplasticity, she helps people not just identify the belief but actively interrupt it and replace it — because understanding why you're stuck and actually rewiring it are two completely different things. She knows that firsthand.</p>
 <p>Cait didn't build this from a textbook or a training program. She built it from the inside — learning how to rewire her own worth and beliefs while she was still living inside the thing that was testing them. That's where her tools come from. And it's why they actually work.</p>
 </div>
 </div>
+</div>
+
+<!-- SCOTT -->
+<div class="bio-section">
+<p class="bio-section-label">Meet Scott</p>
+<div class="audio-placeholder">🎙 Audio introduction coming soon</div>
+<span class="bio-name">Scott</span>
+<div class="bio-text">
+<p>Scott has spent 18 years watching the same loop show up in different people's lives — and learning exactly how to find it.</p>
+<p>He works at the level most people skip: not the behavior on the surface, but the thought that triggers the feeling that hardens into the belief that drives the action. That's the loop. And once you can see it, you can change it.</p>
+<p>Scott's gift is finding it fast — often before the client can — and knowing how to hold it up without making someone feel broken for having it.</p>
+</div>
+</div>
+
+<!-- TOGETHER -->
 <div class="bio-block" style="margin-top:3rem;border-left-color:var(--gold);text-align:center"><strong style="color:var(--gold);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase">Together</strong><br><br>
 Two coaches. One client. No blind spots.<br><br>
 Scott tracks what keeps repeating in your story. Cait listens for what's underneath it. When we work together, nothing gets missed — because what looks like a behavior pattern to one of us looks like a language pattern to the other. You get both views at the same time.</div>
@@ -604,10 +623,11 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 <span style="background:#f43f5e"></span><span style="background:#facc15"></span><span style="background:#4ade80"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span>
 </div>
 <div class="faq-item"><div class="faq-q">What is coaching and how is it different from therapy?</div><div class="faq-a">Coaching is forward focused. We don't dig into your past — we work with where you are now and where you want to go. We're not treating a condition or processing trauma; we're identifying patterns and creating shifts.</div></div>
+<div class="faq-item"><div class="faq-q">I've tried coaching before and it didn't work. Why would this be different?</div><div class="faq-a">Because we don't start with generic advice. You get both of us from day one — two trained perspectives on your specific pattern, not one-size-fits-all coaching.</div></div>
+<div class="faq-item"><div class="faq-q">Do I need to have a specific problem or goal to start?</div><div class="faq-a">No. Most people come in knowing something is off but not being able to name exactly what. That's fine — figuring out what the loop actually is, is part of the work.</div></div>
 <div class="faq-item"><div class="faq-q">How do I know which service is right for me?</div><div class="faq-a">Start with a free discovery call — that's exactly what it's for. We'll talk through what's going on and recommend the right fit based on what you need.</div></div>
 <div class="faq-item"><div class="faq-q">How do I get started?</div><div class="faq-a">Fill out the form on our Apply page. We'll be in touch within 48 hours to schedule your free discovery call.</div></div>
 <div class="faq-item"><div class="faq-q">Why are spots limited?</div><div class="faq-a">Because this work only works when there's enough space to do it well. We keep client spots limited so every person gets the full attention they deserve.</div></div>
-<div class="faq-item"><div class="faq-q">I've tried coaching before and it didn't work. Why would this be different?</div><div class="faq-a">Because we don't start with generic advice. You get both of us from day one — two trained perspectives on your specific pattern, not one-size-fits-all coaching.</div></div>
 <div class="faq-item"><div class="faq-q">Do you offer packages?</div><div class="faq-a">Yes — our Loop Breaker Method and Identity Rewire Experience are our core packages. Both include both coaches.</div></div>
 <div class="faq-item"><div class="faq-q">What is your refund policy?</div><div class="faq-a">We offer a full refund if you cancel before your first session. If you need to cancel within 48 hours of a session, we'll reschedule instead of charging.</div></div>
 <div class="faq-item"><div class="faq-q">What are your business hours?</div><div class="faq-a">We work with clients across time zones. Availability varies — we'll share current open times when you apply.</div></div>
