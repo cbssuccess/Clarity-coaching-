@@ -237,6 +237,7 @@
   /* OFFER CARDS */
   .offer-card{background:#FFFFFF;border:1px solid rgba(61,26,110,0.12);margin-bottom:2.5rem;overflow:hidden;transition:border-color 0.3s}
   .offer-card:hover{border-color:rgba(61,26,110,0.3)}
+  .offer-card.s0{border-left:4px solid var(--green)}
   .offer-card.s1{border-left:4px solid var(--gold)}
   .offer-card.s2{border-left:4px solid var(--violet)}
   .offer-card.s3{border-left:4px solid var(--blue)}
@@ -512,6 +513,21 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 </div>
 </div>
 <div class="section" style="padding-top:2.5rem;margin-top:1.5rem">
+<div class="offer-card s0">
+<div class="offer-header">
+<div class="offer-name">Discovery Call</div>
+<div class="offer-meta" style="color:var(--green)">30 minutes &middot; Free</div>
+</div>
+<div class="offer-body" style="grid-template-columns:1fr">
+<div class="offer-desc" style="border-right:none">
+<p>Before you commit to anything, we want to make sure coaching is the right fit — and that we're the right people to help. In 30 minutes, we'll hear what's going on, answer your questions, and tell you honestly what we think would serve you. No pitch. No pressure. Just a real conversation so you can make an informed decision.</p>
+</div>
+</div>
+<div class="offer-footer">
+<a class="btn-primary" onclick="showPage('apply')" style="font-size:0.72rem;padding:0.7rem 1.8rem">Book a Free Discovery Call</a>
+</div>
+</div>
+
 <div class="offer-card s1">
 <div class="offer-header">
 <div class="offer-name">Focused Session</div>
@@ -624,8 +640,7 @@ Scott tracks what keeps repeating in your story. Cait listens for what's underne
 </div>
 
 <div style="text-align:center;margin-top:3rem">
-<p style="color:#555555;margin-bottom:1.5rem">Not sure which service is right for you? Book a free discovery call — we'll help you figure it out.</p>
-<a class="btn-primary" onclick="showPage('apply')">Start Here</a>
+<a class="btn-primary" onclick="showPage('apply')">Start Here — Book a Free Discovery Call</a>
 </div>
 
 </div>
