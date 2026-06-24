@@ -65,8 +65,11 @@
   .hero-sub-tagline { font-size:0.85rem; color:#c9a84c; margin-bottom:3rem; letter-spacing:0.05em; opacity:0.85; }
   .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
   .section { padding:5rem 2rem; max-width:900px; margin:0 auto; }
-  .section-dark { background:#F2EBD9; padding:5rem 2rem; }
-  .section-dark .inner { max-width:900px; margin:0 auto; }
+  .section-dark { background:#2D1655; padding:5rem 2rem; }
+  .section-dark .inner { max-width:900px; margin:0 auto; text-align:center; }
+  .section-dark h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:#FDF6EC; margin-bottom:1.5rem; }
+  .section-dark p { color:#FDF6EC; line-height:1.9; font-size:1rem; margin-bottom:1.2rem; }
+  .section-dark .section-label { color:var(--gold); }
   .section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:var(--soft); margin-bottom:1.5rem; }
   .section p { color:var(--soft); line-height:1.9; font-size:1rem; margin-bottom:1.2rem; }
   /* PILLARS - inverted pyramid */
@@ -79,10 +82,10 @@
   .pillar-card p { font-size:0.82rem; color:#555555; line-height:1.6; }
   .pillar-accent { font-size:0.65rem; letter-spacing:0.2em; margin-top:0.8rem; display:block; }
   /* DUAL COACH SECTION */
-  .dual-coach-section { background:#F2EBD9; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
+  .dual-coach-section { background:#FDF6EC; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
   .dual-coach-section .inner { max-width:700px; margin:0 auto; }
-  .dual-coach-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:var(--soft); margin-bottom:1.5rem; }
-  .dual-coach-section p { color:var(--soft); font-size:0.95rem; line-height:1.9; margin-bottom:1.5rem; }
+  .dual-coach-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#2D1655; margin-bottom:1.5rem; }
+  .dual-coach-section p { color:#333333; font-size:0.95rem; line-height:1.9; margin-bottom:1.5rem; }
   /* SERVICES */
   .service-card { background:#FFFFFF; border:1px solid rgba(61,26,110,0.12); padding:3rem; margin-bottom:2rem; transition:border-color 0.3s; }
   .service-card:hover { border-color:rgba(61,26,110,0.3); }
@@ -183,15 +186,16 @@
   .fade-up-3 { animation:fadeUp 0.8s ease 0.4s forwards; opacity:0; }
   .fade-up-4 { animation:fadeUp 0.8s ease 0.6s forwards; opacity:0; }
   /* QUIZ */
-  .quiz-section { background:#F2EBD9; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
-  .quiz-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#2C2C2C; margin-bottom:0.8rem; }
-  .quiz-section p { color:#555555; font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
+  .quiz-section { background:#FDF6EC; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
+  .quiz-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#2D1655; margin-bottom:0.8rem; }
+  .quiz-section p { color:#333333; font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
   .quiz-wrapper { max-width:860px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
   .quiz-wrapper iframe { display:block; width:100%; height:700px; border:none; }
   /* VIDEO */
-  .video-section { background:#F2EBD9; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
-  .video-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#2C2C2C; margin-bottom:0.8rem; }
-  .video-section p { color:#555555; font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
+  .video-section { background:#2D1655; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
+  .video-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#FDF6EC; margin-bottom:0.8rem; }
+  .video-section p { color:#FDF6EC; font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
+  .video-section .section-label { color:var(--gold); }
   .video-wrapper { max-width:800px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
   .video-wrapper video { display:block; width:100%; height:auto; background:#000; }
 
@@ -217,7 +221,7 @@
   .hero .btn-outline{color:var(--star);border-color:rgba(167,139,250,0.5);}
   .hero .btn-outline:hover{background:var(--violet);border-color:var(--violet);color:var(--star);}
   /* Content sections — opaque card so aurora shows only in hero gap */
-  .section{background:rgba(247,239,227,0.93);}
+  .section{background:#FDF6EC;}
 
   /* OFFER CARDS */
   .offer-card{background:#FFFFFF;border:1px solid rgba(61,26,110,0.12);margin-bottom:2.5rem;overflow:hidden;transition:border-color 0.3s}
@@ -273,7 +277,7 @@
 <div class="hero-planet fade-up" style="width:0px;height:0px;display:none">
 <img alt="Shining Clarity Coaching Logo" src="data:image/png;base64,/9j/4QBzRXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAACTgEBAAQAAAABAAACJgExAAIAAAAHAAAASgEyAAIAAAAUAAAAUYdpAAQAAAABAAAAZQAAAABHb29nbGUAMjA" style="width:100%;height:100%;"/>
 </div>
-<p class="fade-up-2" style="font-size:1.1rem;letter-spacing:0.2em;color:#FDF6EC;margin-bottom:1.2rem;">For the person who keeps ending up in the same place — no matter how hard they try not to.</p>
+<p class="fade-up-2" style="font-size:1.3rem;letter-spacing:0.2em;color:#FDF6EC;margin-bottom:1.2rem;">For the person who keeps ending up in the same place — no matter how hard they try not to.</p>
 <h1 class="hero-title fade-up-2">You're not stuck because you haven't learned enough.</h1>
 <p class="fade-up-2" style="font-size:0.9rem;color:#C9A227;margin-top:0.6rem;margin-bottom:0;line-height:1.75;max-width:580px;">You've tried. You've read the books. Done the work. Sometimes you catch yourself in the moment, sometimes only after — or only when the consequences show up. Either way, that's not a knowledge problem. That's a belief problem. And that's exactly what we fix.</p>
 
@@ -295,23 +299,27 @@
 </section>
 
 <!-- WHO THIS IS FOR -->
-<section class="section">
+<section class="section" style="text-align:center">
 <p class="section-label">Is This You?</p>
 <h2>Who This Is For</h2>
 <p><strong>This is for you if:</strong></p>
-<ul style="list-style:none;padding:0;margin:0.5rem 0 2rem;border-left:2px solid rgba(201,169,110,0.4);padding-left:1.4rem">
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You've done therapy, read the books, tried the methods — and you're still circling back to the same place</li>
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You can see yourself doing it. Sometimes mid-loop. And you still can't stop it.</li>
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You're not in crisis. You're functional, self-aware, motivated — and completely exhausted by the fact that none of it is working</li>
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">The pattern shows up in more than one area — same dynamic in relationships, work, money, decisions — like it's following you</li>
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0">Part of you suspects the problem isn't the situation. It's something deeper. You just don't know what.</li>
+<div style="display:inline-block;text-align:left;max-width:580px;width:100%">
+<ul style="list-style:none;padding:0;margin:0.5rem 0 2rem;border-left:2px solid rgba(61,26,110,0.25);padding-left:1.4rem">
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You've done therapy, read the books, tried the methods — and you're still circling back to the same place</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You can see yourself doing it. Sometimes mid-loop. And you still can't stop it.</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You're not in crisis. You're functional, self-aware, motivated — and completely exhausted by the fact that none of it is working</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">The pattern shows up in more than one area — same dynamic in relationships, work, money, decisions — like it's following you</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0">Part of you suspects the problem isn't the situation. It's something deeper. You just don't know what.</li>
 </ul>
+</div>
 <p><strong>This is NOT for you if:</strong></p>
+<div style="display:inline-block;text-align:left;max-width:580px;width:100%">
 <ul style="list-style:none;padding:0;margin:0.5rem 0 0;border-left:2px solid rgba(61,26,110,0.25);padding-left:1.4rem">
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You're looking for someone to tell you what to do</li>
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You want coping tools without understanding why you need them</li>
-<li style="color:#555;font-size:0.94rem;line-height:1.9;margin-bottom:0">You're not willing to look at the belief underneath the behavior</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You're looking for someone to tell you what to do</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0.8rem">You want coping tools without understanding why you need them</li>
+<li style="color:#333333;font-size:0.94rem;line-height:1.9;margin-bottom:0">You're not willing to look at the belief underneath the behavior</li>
 </ul>
+</div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -336,7 +344,7 @@
 <p>Most people who've tried coaching got one perspective on a pattern that took years to build. One person asking good questions. One lens on something that lives in your blind spot.</p>
 <p>We work differently.</p>
 <p style="margin-bottom:2rem;">Scott spots the pattern underneath your story — fast, before you've finished explaining it. Cait hears what your word choices are revealing that you don't even know you're saying. Two different entry points into the same loop, happening at the same time.</p>
-<p style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;margin-bottom:2rem;">What that means for you is simple: the thing that's stayed invisible finally has nowhere to hide.</p>
+<p style="color:#2D1655;font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;margin-bottom:2rem;">What that means for you is simple: the thing that's stayed invisible finally has nowhere to hide.</p>
 <p style="color:var(--soft);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;">You don't get one of us. You get both.</p>
 <div style="margin-top:2rem"><a class="btn-primary" onclick="showPage('apply')">Start Here</a></div>
 </div>
@@ -358,15 +366,6 @@
 </div>
 </section>
 
-<!-- WHO WE HELP -->
-<section class="section" style="text-align:center">
-<p class="section-label">Who We Help</p>
-<h2>For the person who's tried everything and still ends up in the same loop</h2>
-<p>Think about the person who knows exactly why they overspend, overeat, or over-apologize — and does it anyway. They've read the books. They've had the insight. They understand the pattern intellectually. But nothing changes. That gap between knowing and actually changing is exactly where we work.</p>
-<p style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic">If you're done with surface-level fixes and ready to finally understand the loop, you're exactly who we're here for.</p>
-<div style="margin-top:2rem"><a class="btn-outline" onclick="showPage('services')">Explore Our Services</a></div>
-</section>
-
 <!-- QUIZ -->
 <section class="quiz-section">
 <p class="section-label">Free Quiz</p>
@@ -381,7 +380,7 @@
 <section style="background:#3D1A6E;padding:6rem 2rem;text-align:center;border-top:1px solid rgba(61,26,110,0.2);">
 <div style="max-width:700px;margin:0 auto;">
 <p style="font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--violet);margin-bottom:1.5rem;">Your next step</p>
-<h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:300;color:var(--star);margin-bottom:1rem;line-height:1.3;">I'm ready to help you take your next step forward.</h2>
+<h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:300;color:var(--star);margin-bottom:1rem;line-height:1.3;">We're ready to help you take your next step forward.</h2>
 <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;color:var(--gold);margin-bottom:2.5rem;">Are you?</p>
 <a class="btn-primary" onclick="showPage('apply')" style="font-size:0.85rem;letter-spacing:0.2em;padding:1rem 3rem;">Start Here</a>
 <p style="margin-top:1.2rem;font-size:0.72rem;letter-spacing:0.15em;color:rgba(232,223,200,0.55);text-transform:uppercase;">It's free. Always.</p>
