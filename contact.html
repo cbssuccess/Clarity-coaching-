@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact | Shining Clarity Coaching</title>
+<meta name="description" content="Reach out to Shining Clarity Coaching. Have a question? Not sure where to start? We're here — every message receives full, personal attention."/>
+<link rel="canonical" href="https://shiningclaritycoaching.com/contact.html"/>
+<meta property="og:title" content="Contact | Shining Clarity Coaching"/>
+<meta property="og:description" content="Reach out to Shining Clarity Coaching. Have a question? Not sure where to start? We're here."/>
+<meta property="og:url" content="https://shiningclaritycoaching.com/contact.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://shiningclaritycoaching.com/logo.png"/>
+<meta property="og:site_name" content="Shining Clarity Coaching"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Contact | Shining Clarity Coaching"/>
+<meta name="twitter:description" content="Reach out to Shining Clarity Coaching. Every message receives full, personal attention."/>
+<meta name="twitter:image" content="https://shiningclaritycoaching.com/logo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Lora:ital,wght@0,300;0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+<canvas id="aurora-bg"></canvas>
+<nav>
+<a class="nav-logo" href="/" style="display:flex;align-items:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="/logo.png" style="height:2.5rem;width:auto;"/><span>Shining Clarity</span></a>
+<ul class="nav-links">
+<li><a href="/">Home</a></li>
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/faq.html">FAQ</a></li>
+<li><a href="/contact.html">Contact</a></li>
+</ul>
+<a class="nav-cta" href="/apply.html">Start Here</a>
+<button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+  <span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMenu()">Home</a>
+  <a href="/about.html" onclick="toggleMenu()">About</a>
+  <a href="/services.html" onclick="toggleMenu()">Services</a>
+  <a href="/faq.html" onclick="toggleMenu()">FAQ</a>
+  <a href="/contact.html" onclick="toggleMenu()">Contact</a>
+  <a class="mobile-cta" href="/apply.html" onclick="toggleMenu()">Start Here</a>
+</div>
+<main>
+<div class="rainbow-bar"></div>
+<div class="section" style="text-align:center;padding-bottom:2rem">
+<p class="section-label">Reach Out</p>
+<h2>Let's Connect</h2>
+<p style="color:#555555;max-width:500px;margin:0 auto">Have a question? Not sure where to start? We're here. Reach out and we'll get back to you during business hours.</p>
+<div class="dot-divider">
+<span style="background:#f43f5e"></span><span style="background:#facc15"></span><span style="background:#4ade80"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span>
+</div>
+</div>
+<div class="contact-grid" style="background:#EFDFBB;border-radius:12px;padding:2.5rem;border:1px solid rgba(61,26,110,0.13);">
+<div>
+<h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:#2C2C2C;margin-bottom:2rem">Find us here</h3>
+<div class="contact-item">
+<div class="ci-label">Email</div>
+<p style="color:var(--soft);font-size:0.9rem"><a href="mailto:hello@shiningclarity.com">hello@shiningclarity.com</a></p>
+</div>
+<div class="contact-item">
+<div class="ci-label">Social Media</div>
+<div class="social-links">
+<a class="social-link" href="https://www.instagram.com/shining.clarity.coaching?igsh=MTQ4MHdlcnd4eXM5bg==" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a class="social-link" href="https://www.facebook.com/profile.php?id=61570713382176" target="_blank" rel="noopener noreferrer">Facebook</a>
+</div>
+</div>
+<div class="contact-item" style="margin-top:1.5rem">
+<div class="ci-label">Ready to apply?</div>
+<p style="color:var(--soft);font-size:0.9rem;margin-bottom:0.8rem">Head straight to our discovery call.</p>
+<a class="btn-outline" href="/apply.html" style="font-size:0.72rem;padding:0.6rem 1.5rem">Start Here</a>
+</div>
+<div class="hours-note">✦ Please note — we respond during dedicated business hours. Every message receives full, personal attention during that time.</div>
+</div>
+<div>
+<form method="POST" action="https://formspree.io/f/mdapbnlo" name="contact" onsubmit="handleContactSubmit(event)">
+<div class="form-group"><label>Your name</label><input name="name" placeholder="Your name" required="" type="text"/></div>
+<div class="form-group"><label>Email address</label><input name="email" placeholder="your@email.com" required="" type="email"/></div>
+<div class="form-group"><label>Your message</label><textarea name="message" placeholder="What's on your mind?" style="height:150px"></textarea></div>
+<button class="btn-primary" style="width:100%" type="submit">Send Message ✦</button>
+</form>
+<div class="success-msg" id="contact-success-msg" style="margin-top:1rem;display:none;">
+<h3>✦ Message received</h3>
+<p>Thank you for reaching out. We'll be in touch during business hours.</p>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="rainbow-bar" style="margin-bottom:2rem"></div>
+<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="/logo.png" style="height:1.5rem;width:auto;"/><span>Shining Clarity</span></div>
+<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
+<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
+<div class="footer-legal-links">
+<a href="/terms.html">Terms &amp; Conditions</a>
+<a href="/privacy.html">Privacy Policy</a>
+</div>
+<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
+<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
+</footer>
+<script src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apply — Book a Free Discovery Call | Shining Clarity Coaching</title>
+<meta name="description" content="Apply for a free discovery call with Scott and Cait. No pitch, no pressure — just a real conversation about what's keeping you stuck and whether we're the right fit."/>
+<link rel="canonical" href="https://shiningclaritycoaching.com/apply.html"/>
+<meta property="og:title" content="Apply — Book a Free Discovery Call | Shining Clarity Coaching"/>
+<meta property="og:description" content="Apply for a free discovery call with Scott and Cait. No pitch, no pressure — just a real conversation."/>
+<meta property="og:url" content="https://shiningclaritycoaching.com/apply.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://shiningclaritycoaching.com/logo.png"/>
+<meta property="og:site_name" content="Shining Clarity Coaching"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Apply — Book a Free Discovery Call | Shining Clarity Coaching"/>
+<meta name="twitter:description" content="Apply for a free discovery call with Scott and Cait. No pitch, no pressure."/>
+<meta name="twitter:image" content="https://shiningclaritycoaching.com/logo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Lora:ital,wght@0,300;0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+<canvas id="aurora-bg"></canvas>
+<nav>
+<a class="nav-logo" href="/" style="display:flex;align-items:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="/logo.png" style="height:2.5rem;width:auto;"/><span>Shining Clarity</span></a>
+<ul class="nav-links">
+<li><a href="/">Home</a></li>
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/faq.html">FAQ</a></li>
+<li><a href="/contact.html">Contact</a></li>
+</ul>
+<a class="nav-cta" href="/apply.html">Start Here</a>
+<button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+  <span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMenu()">Home</a>
+  <a href="/about.html" onclick="toggleMenu()">About</a>
+  <a href="/services.html" onclick="toggleMenu()">Services</a>
+  <a href="/faq.html" onclick="toggleMenu()">FAQ</a>
+  <a href="/contact.html" onclick="toggleMenu()">Contact</a>
+  <a class="mobile-cta" href="/apply.html" onclick="toggleMenu()">Start Here</a>
+</div>
+<main>
+<div class="rainbow-bar"></div>
+<div class="section" style="text-align:center;padding-bottom:2rem">
+<p class="section-label">Begin Your Journey</p>
+<h2>Start Here</h2>
+<p style="color:#555555;max-width:550px;margin:0 auto">Fill out the form below and we'll be in touch to schedule your free discovery call. No pitch. No pressure. Just a real conversation.</p>
+<div class="dot-divider">
+<span style="background:#f43f5e"></span><span style="background:#facc15"></span><span style="background:#4ade80"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span>
+</div>
+</div>
+<div style="max-width:700px;margin:0 auto;padding:0 2rem 4rem">
+<div style="background:#EFDFBB;border-radius:12px;padding:2.5rem 2.5rem 2rem;border:1px solid rgba(61,26,110,0.13);margin-bottom:2rem">
+<form method="POST" action="https://formspree.io/f/mwvyazlw" name="discovery-call" onsubmit="handleSubmit(event)">
+<div class="form-group">
+<label>Your name</label>
+<input name="name" placeholder="Your full name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label>Preferred pronouns</label>
+<input name="pronouns" placeholder="e.g. she/her, he/his, they/them, or other" type="text"/>
+</div>
+<div class="form-group">
+<label>Email address</label>
+<input name="email" placeholder="your@email.com" required="" type="email"/>
+</div>
+<div class="form-group">
+<label>Phone number</label>
+<input name="phone" placeholder="Your phone number" type="tel"/>
+</div>
+<div class="form-group">
+<label>What brought you to Shining Clarity Coaching today?</label>
+<textarea name="what-brought-you" placeholder="What's going on in your world right now..."></textarea>
+</div>
+<div class="form-group">
+<label>If applicable — what has you feeling most stuck, your biggest obstacle, or most unclear?</label>
+<textarea name="stuck" placeholder="Share as much or as little as you'd like..."></textarea>
+</div>
+<div class="form-group">
+<label>What have you already tried, and what got in the way?</label>
+<textarea name="tried" placeholder="Your honest answer here..."></textarea>
+</div>
+<div class="form-group">
+<label>On a scale of 1–10, how ready are you to do the work and make changes?</label>
+<div class="scale-row">
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">1</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">2</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">3</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">4</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">5</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">6</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">7</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">8</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">9</button>
+<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">10</button>
+</div>
+<input id="readiness-val" name="readiness" type="hidden"/>
+</div>
+<div class="form-group">
+<label>Is there anything you want us to know about you before we begin?</label>
+<textarea name="anything-else-before" placeholder="Anything at all — we're here to listen..."></textarea>
+</div>
+<div class="form-group">
+<label>Which service are you interested in?</label>
+<select name="service">
+<option value="">Select a service...</option>
+<option>Free Discovery Call</option>
+<option>Focused Session — $197</option>
+<option>Loop Breaker Method — $1,500</option>
+<option>Identity Rewire Experience — $3,500</option>
+<option>Not sure yet — help me decide</option>
+</select>
+</div>
+<div class="form-group">
+<label>Anything else you'd like to share?</label>
+<textarea name="anything-else" placeholder="This is your space..."></textarea>
+</div>
+<button class="btn-primary" style="width:100%;font-size:0.85rem;padding:1.1rem" type="submit">Send My Application ✦</button>
+<p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--violet)">After submitting, we'll be in touch within 48 hours.</p>
+</form>
+<div class="success-msg" id="success-msg" style="text-align:center;padding:1rem 0;display:none;">
+<div style="font-size:2rem;color:var(--gold);margin-bottom:1rem;">✦</div>
+<h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:0.8rem;">You're on your way.</h3>
+<p style="color:var(--soft);margin-bottom:2rem;font-size:0.95rem;">Your application has been received. We'll be in touch within 48 hours to schedule your discovery call.</p>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="rainbow-bar" style="margin-bottom:2rem"></div>
+<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="/logo.png" style="height:1.5rem;width:auto;"/><span>Shining Clarity</span></div>
+<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
+<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
+<div class="footer-legal-links">
+<a href="/terms.html">Terms &amp; Conditions</a>
+<a href="/privacy.html">Privacy Policy</a>
+</div>
+<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
+<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
+</footer>
+<script src="/main.js"></script>
+</body>
+</html>
