@@ -1,320 +1,77 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="description" content="Shining Clarity Coaching helps self-aware people break the patterns holding them back and create lasting change at the belief level."/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Shining Clarity Coaching — You can change anything. Start with the pattern holding you back.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shining Clarity Coaching — Break the Pattern Holding You Back</title>
+<meta name="description" content="Shining Clarity Coaching helps self-aware people break the patterns holding them back and create lasting change at the belief level. Two coaches, no blind spots."/>
+<link rel="canonical" href="https://shiningclaritycoaching.com/"/>
+<meta property="og:title" content="Shining Clarity Coaching — Break the Pattern Holding You Back"/>
+<meta property="og:description" content="Shining Clarity Coaching helps self-aware people break the patterns holding them back and create lasting change at the belief level. Two coaches, no blind spots."/>
+<meta property="og:url" content="https://shiningclaritycoaching.com/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://shiningclaritycoaching.com/logo.png"/>
+<meta property="og:site_name" content="Shining Clarity Coaching"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Shining Clarity Coaching — Break the Pattern Holding You Back"/>
+<meta name="twitter:description" content="Shining Clarity Coaching helps self-aware people break the patterns holding them back and create lasting change at the belief level."/>
+<meta name="twitter:image" content="https://shiningclaritycoaching.com/logo.png"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://shiningclaritycoaching.com/",
+  "name": "Shining Clarity Coaching",
+  "url": "https://shiningclaritycoaching.com",
+  "description": "Shining Clarity Coaching helps self-aware people break the patterns holding them back and create lasting change at the belief level.",
+  "email": "scott.cait@shiningclaritycoaching.com",
+  "telephone": "(406) 662-4066",
+  "priceRange": "$197–$3,500",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "MT",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://www.instagram.com/shining.clarity.coaching",
+    "https://www.facebook.com/profile.php?id=61570713382176"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Lora:ital,wght@0,300;0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --cosmos: #f7efe3;
-    --deep: #F2EBD9;
-    --violet: #3D1A6E;
-    --lilac: #5A2D9A;
-    --soft: #2C2C2C;
-    --star: #E8DFC8;
-    --gold: #C9A227;
-    --gold-bright: #D4AF6A;
-    --rose: #c0306a;
-    --amber: #d4603a;
-    --yellow: #c9a040;
-    --green: #3a9a50;
-    --blue: #2a70c0;
-    --navy: #0f0520;
-    --rainbow: linear-gradient(90deg, #c0306a 0%, #d4603a 14%, #c9a040 28%, #3a9a50 42%, #2a70c0 56%, #3a30b0 72%, #6a20a0 86%, #9a20c0 100%);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  @media(min-width:768px) {
-    html { font-size:18px; }
-    .service-card h2 { font-size:2.1rem; }
-    .service-price { font-size:1.25rem; }
-    .service-card p { font-size:1.05rem; }
-    .service-label { font-size:0.72rem; }
-  }
-  body { background:var(--cosmos); color:var(--soft); font-family:'Lora',serif; font-weight:300; overflow-x:hidden; }
-
-  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.5rem 3rem; display:flex; align-items:center; justify-content:space-between; background:#0f0520; backdrop-filter:blur(12px); border-bottom:1px solid rgba(61,26,110,0.1); }
-  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; letter-spacing:0.12em; color:#E8DFC8; text-decoration:none; cursor:pointer; }
-  .nav-logo span { color:var(--gold); }
-  .nav-logo img { height:2.5rem; width:auto; display:block; }
-  .nav-links { display:flex; gap:3rem; list-style:none; }
-  .nav-links a { color:#E8DFC8; text-decoration:none; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; transition:color 0.3s; cursor:pointer; opacity:0.85; }
-  .nav-links a:hover { color:var(--gold); }
-  .nav-cta { background:linear-gradient(105deg,#7a5200 0%,#c9860a 18%,#f5d060 35%,#e8a800 50%,#f5d060 65%,#c9860a 82%,#7a5200 100%); background-size:200% auto; color:#1a0a00; padding:0.5rem 1.4rem; font-family:'Lora',serif; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; border:none; border-radius:20px; cursor:pointer; transition:opacity 0.3s; animation:shimmer 3s infinite; }
-  .nav-cta:hover { opacity:0.9; }
-  @keyframes shimmer { 0% { background-position:200% center; } 100% { background-position:-200% center; } }
-  .page { display:none; min-height:100vh; padding-top:6rem; position:relative; z-index:1; }
-  .page.active { display:block; }
-  .rainbow-bar { height:3px; background:linear-gradient(90deg,#c0306a 0%,#d4603a 14%,#c9a040 28%,#3a9a50 42%,#2a70c0 56%,#3a30b0 72%,#6a20a0 86%,#9a20c0 100%); width:100%; }
-  .section-label { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:1rem; }
-  .btn-primary { display:inline-block; background:linear-gradient(105deg,#7a5200 0%,#c9860a 18%,#f5d060 35%,#e8a800 50%,#f5d060 65%,#c9860a 82%,#7a5200 100%); background-size:200% auto; color:#1a0a00; padding:0.9rem 2.5rem; font-family:'Lora',serif; font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; border:none; border-radius:20px; cursor:pointer; text-decoration:none; transition:opacity 0.3s; animation:shimmer 3s infinite; }
-  .btn-primary:hover { opacity:0.9; }
-  .btn-outline { display:inline-block; background:transparent; color:#2C2C2C; padding:0.9rem 2.5rem; font-family:'Lora',serif; font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; border:2px solid var(--violet); border-radius:20px; cursor:pointer; text-decoration:none; transition:all 0.3s; }
-  .btn-outline:hover { background:var(--violet); color:#E8DFC8; }
-  .dot-divider { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin:1.5rem 0; }
-  .dot-divider span { width:5px; height:5px; border-radius:50%; display:inline-block; }
-  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:4rem 2rem 6rem; }
-  .hero-planet { width:200px; height:200px; margin:0 auto 3rem; }
-  .hero-planet svg { width:100%; height:100%; }
-  .hero-eyebrow { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,7vw,5.5rem); font-weight:300; line-height:1.05; letter-spacing:0.08em; color:#2C2C2C; margin-bottom:0.5rem; text-transform:uppercase; }
-  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.65rem,4vw,3.25rem); font-weight:300; line-height:1.05; letter-spacing:0.08em; color:#2C2C2C; margin-bottom:0.5rem; }
-  .hero-sub { font-size:0.75rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--violet); margin-bottom:2rem; }
-  .hero-tagline { font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,2.5vw,1.5rem); font-style:italic; color:#c9a84c; margin-bottom:1rem; }
-  .hero-sub-tagline { font-size:0.85rem; color:#c9a84c; margin-bottom:3rem; letter-spacing:0.05em; opacity:0.85; }
-  .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-  .section { padding:5rem 2rem; max-width:900px; margin:0 auto; }
-  .section-dark { background:#2D1655; padding:5rem 2rem; }
-  .section-dark .inner { max-width:900px; margin:0 auto; text-align:center; }
-  .section-dark h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:#FDF6EC; margin-bottom:1.5rem; }
-  .section-dark p { color:#FDF6EC; line-height:1.9; font-size:1rem; margin-bottom:1.2rem; }
-  .section-dark .section-label { color:var(--gold); }
-  .section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:var(--soft); margin-bottom:1.5rem; }
-  .section p { color:var(--soft); line-height:1.9; font-size:1rem; margin-bottom:1.2rem; }
-  /* PILLARS - inverted pyramid */
-  .pillars-top { display:none; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:2rem; }
-  .pillars-bottom { display:none; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:1.5rem; max-width:66%; margin-left:auto; margin-right:auto; }
-  @media(max-width:680px) { .pillars-top { grid-template-columns:1fr; } .pillars-bottom { grid-template-columns:1fr; max-width:100%; } }
-  .pillar-card { background:#FFFFFF; border:1px solid rgba(61,26,110,0.12); padding:2rem 1.5rem; text-align:center; transition:border-color 0.3s; }
-  .pillar-card:hover { border-color:rgba(61,26,110,0.3); }
-  .pillar-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; color:#2C2C2C; margin-bottom:0.5rem; margin-top:0.8rem; }
-  .pillar-card p { font-size:0.82rem; color:#555555; line-height:1.6; }
-  .pillar-accent { font-size:0.65rem; letter-spacing:0.2em; margin-top:0.8rem; display:block; }
-  /* DUAL COACH SECTION */
-  .dual-coach-section { background:#FDF6EC; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
-  .dual-coach-section .inner { max-width:700px; margin:0 auto; }
-  .dual-coach-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#2D1655; margin-bottom:1.5rem; }
-  .dual-coach-section p { color:#333333; font-size:0.95rem; line-height:1.9; margin-bottom:1.5rem; }
-  /* SERVICES */
-  .service-card { background:#FFFFFF; border:1px solid rgba(61,26,110,0.12); padding:3rem; margin-bottom:2rem; transition:border-color 0.3s; }
-  .service-card:hover { border-color:rgba(61,26,110,0.3); }
-  .service-card.s1 { border-left:4px solid var(--gold); }
-  .service-card.s2 { border-left:4px solid var(--violet); }
-  .service-card.s3 { border-left:4px solid var(--blue); }
-  .service-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:0.5rem; color:var(--gold); }
-  .service-card h2 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:#2C2C2C; margin-bottom:0.5rem; }
-  .service-price { font-size:1.1rem; color:var(--gold); margin-bottom:1rem; font-family:'Cormorant Garamond',serif; font-style:italic; }
-  .service-card p { color:#555555; line-height:1.9; font-size:0.95rem; margin-bottom:1.5rem; }
-  /* ABOUT */
-  .bio-section { margin:3rem 0; }
-  .bio-section + .bio-section { border-top:1px solid rgba(61,26,110,0.1); padding-top:3rem; }
-  .bio-section-label { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--violet); margin-bottom:0.6rem; }
-  .cait-layout { display:grid; grid-template-columns:280px 1fr; gap:2.5rem; align-items:start; }
-  .cait-photo { width:100%; border-radius:8px; display:block; }
-  .bio-name { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--soft); margin-bottom:1.2rem; border-bottom:2px solid var(--gold); padding-bottom:0.6rem; display:inline-block; }
-  .bio-text p { color:#555555; font-size:0.9rem; line-height:1.9; margin-bottom:1rem; }
-  .bio-text p:last-child { margin-bottom:0; }
-  .audio-placeholder { background:#F2EBD9; border:1.5px dashed rgba(61,26,110,0.25); border-radius:8px; padding:1.8rem 2rem; text-align:center; margin-bottom:2rem; color:#888; font-size:0.82rem; letter-spacing:0.1em; }
-  @media(max-width:640px) { .cait-layout { grid-template-columns:1fr; } .cait-photo { max-width:240px; margin:0 auto; } }
-  .bio-block { background:#FFFFFF; border:1px solid rgba(61,26,110,0.12); border-left:3px solid var(--violet); padding:2.5rem; line-height:1.9; color:#555555; font-size:1rem; margin-bottom:2rem; }
-  .bio-block em { color:var(--gold); font-style:normal; font-weight:500; }
-  .mv-grid { display:none; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0; }
-  @media(max-width:620px) { .mv-grid { grid-template-columns:1fr; } }
-  .mv-card { display:none; background:#FFFFFF; padding:2.5rem; border:1px solid rgba(61,26,110,0.12); }
-  .mv-card.mission { border-top:3px solid var(--violet); }
-  .mv-card.vision { border-top:3px solid var(--violet); }
-  .mv-card h3 { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; margin-bottom:1.2rem; }
-  .mv-card.mission h3 { color:var(--violet); }
-  .mv-card.vision h3 { color:var(--blue); }
-  .mv-card p { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:#2C2C2C; line-height:1.8; }
-  /* FAQ */
-  #page-faq .section { counter-reset: faq-counter; }
-  .faq-item { counter-increment: faq-counter; border-bottom:1px solid rgba(61,26,110,0.15); padding:2rem 0; }
-  .faq-q { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--violet); margin-bottom:0.8rem; }
-  .faq-q::before { content: counter(faq-counter) ".  "; color:var(--gold); }
-  .faq-a { color:#555555; font-size:0.92rem; line-height:1.9; padding-left:1.4rem; border-left:2px solid rgba(201,169,110,0.4); }
-  /* FORM */
-  .form-group { margin-bottom:1.8rem; }
-  .form-group label { display:block; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--violet); margin-bottom:0.6rem; }
-  .form-group input, .form-group textarea, .form-group select { width:100%; background:#FFFFFF; border:1px solid rgba(61,26,110,0.2); color:#2C2C2C; padding:0.9rem 1.2rem; font-family:'Lora',serif; font-size:1rem; border-radius:4px; transition:border-color 0.3s; }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--violet); outline:none; }
-  .form-group textarea { height:120px; resize:vertical; }
-  .form-group select option { background:#FFFFFF; color:#2C2C2C; }
-  .scale-row { display:flex; gap:0.5rem; flex-wrap:wrap; }
-  .scale-btn { width:40px; height:40px; background:#FFFFFF; border:1px solid rgba(61,26,110,0.2); color:#2C2C2C; font-family:'Lora',serif; font-size:0.85rem; cursor:pointer; transition:all 0.3s; border-radius:4px; }
-  .scale-btn:hover, .scale-btn.active { background:var(--violet); color:#E8DFC8; border-color:var(--violet); }
-  /* CONTACT */
-  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; max-width:900px; margin:2rem auto; padding:0 2rem 4rem; }
-  @media(max-width:650px) { .contact-grid { grid-template-columns:1fr; } }
-  .contact-item { margin-bottom:1.5rem; }
-  .ci-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--violet); margin-bottom:0.3rem; }
-  .social-links { display:flex; gap:1rem; margin-top:0.5rem; }
-  .social-link { padding:0.5rem 1.2rem; border:1px solid rgba(61,26,110,0.2); color:#2C2C2C; text-decoration:none; font-size:0.75rem; letter-spacing:0.1em; transition:all 0.3s; border-radius:4px; }
-  .social-link:hover { border-color:var(--violet); color:var(--violet); }
-  .hours-note { background:#F2EBD9; border:1px solid rgba(61,26,110,0.1); border-left:3px solid var(--green); padding:1.2rem 1.5rem; margin-top:1.5rem; font-size:0.82rem; color:#2a5a35; line-height:1.6; border-radius:4px; }
-  /* LEGAL */
-  .legal-page { max-width:800px; margin:2rem auto; padding:3rem 2.5rem 5rem; background:#FDF6EC; border-radius:12px; position:relative; overflow:hidden; }
-  .legal-page::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#c0306a 0%,#d4603a 14%,#c9a040 28%,#3a9a50 42%,#2a70c0 56%,#3a30b0 72%,#6a20a0 86%,#9a20c0 100%); }
-  .legal-page h2 { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; color:var(--soft); margin-bottom:0.5rem; }
-  .legal-page .last-updated { font-size:0.72rem; color:var(--violet); letter-spacing:0.15em; margin-bottom:2.5rem; }
-  .legal-section { margin-bottom:2.5rem; }
-  .legal-section h3 { font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--violet); margin-bottom:0.8rem; }
-  .legal-section p { color:var(--soft); font-size:0.9rem; line-height:1.9; }
-  .legal-section ul { list-style:disc; padding-left:1.5rem; color:var(--soft); font-size:0.9rem; line-height:1.9; margin:0.5rem 0 1rem; }
-  .legal-section ul li { margin-bottom:0.4rem; }
-  /* FOOTER */
-  footer { background:#0f0520; border-top:1px solid rgba(61,26,110,0.2); padding:3rem 2rem; text-align:center; }
-  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; letter-spacing:0.15em; color:var(--star); margin-bottom:0.5rem; }
-  .footer-quote { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--gold); max-width:600px; margin:1rem auto; line-height:1.7; }
-  .footer-cta { margin:1.5rem 0; }
-  .footer-tag { font-size:0.7rem; letter-spacing:0.3em; color:var(--violet); margin-bottom:1rem; }
-  .footer-legal-links { display:flex; justify-content:center; gap:2rem; margin-top:1rem; }
-  .footer-legal-links a { font-size:0.68rem; color:rgba(232,223,200,0.5); text-decoration:none; letter-spacing:0.1em; transition:color 0.3s; cursor:pointer; }
-  .footer-legal-links a:hover { color:var(--lilac); }
-  .footer-copy { font-size:0.72rem; color:rgba(232,223,200,0.5); margin-top:1rem; }
-  .footer-disclaimer { font-size:0.68rem; color:rgba(232,223,200,0.4); max-width:700px; margin:1.2rem auto 0; line-height:1.7; font-style:italic; border-top:1px solid rgba(124,58,237,0.1); padding-top:1.2rem; }
-  .waitlist-banner { background:#f0faf4; border:1px solid rgba(42,90,53,0.2); padding:2rem; text-align:center; margin-top:2rem; border-radius:4px; }
-  .waitlist-banner h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:#2a5a35; margin-bottom:0.5rem; }
-  .waitlist-banner p { color:#2a5a35; font-size:0.9rem; margin-bottom:1.2rem; }
-  /* SUCCESS MESSAGE */
-  .success-msg { display:none; background:#f0faf4; border:1px solid rgba(42,90,53,0.2); border-left:3px solid var(--green); padding:2rem; text-align:center; margin-top:1rem; border-radius:4px; }
-  .success-msg h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:#2a5a35; margin-bottom:0.5rem; }
-  .success-msg p { color:#2a5a35; font-size:0.9rem; }
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:0.4rem; z-index:200; }
-  .hamburger span { display:block; width:24px; height:2px; background:var(--star); border-radius:2px; transition:all 0.3s; }
-  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity:0; }
-  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-  .mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,5,32,0.97); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:2rem; }
-  .mobile-menu.open { display:flex; }
-  .mobile-menu a { color:var(--gold-bright); text-decoration:none; font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; letter-spacing:0.15em; transition:color 0.3s; }
-  .mobile-menu a:hover { color:var(--gold); }
-  .mobile-menu .mobile-cta { margin-top:1rem; background:var(--violet); color:var(--star); padding:0.9rem 2.5rem; font-family:'Lora',serif; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; border:none; border-radius:20px; cursor:pointer; }
-  @media(max-width:1024px) { nav { padding:1rem 2rem; } .nav-links { gap:1.5rem; } }
-  @media(max-width:768px) { nav { padding:1rem 1.5rem; } .nav-links { display:none; } .hamburger { display:flex; } }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-  .fade-up { animation:fadeUp 0.8s ease forwards; }
-  .fade-up-2 { animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
-  .fade-up-3 { animation:fadeUp 0.8s ease 0.4s forwards; opacity:0; }
-  .fade-up-4 { animation:fadeUp 0.8s ease 0.6s forwards; opacity:0; }
-  /* QUIZ */
-  .quiz-section { background:#FDF6EC; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
-  .quiz-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#2D1655; margin-bottom:0.8rem; }
-  .quiz-section p { color:#333333; font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
-  .quiz-wrapper { max-width:860px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
-  .quiz-wrapper iframe { display:block; width:100%; height:700px; border:none; }
-  /* VIDEO */
-  .video-section { background:#2D1655; padding:5rem 2rem; text-align:center; border-top:1px solid rgba(61,26,110,0.1); border-bottom:1px solid rgba(61,26,110,0.1); }
-  .video-section h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; color:#FDF6EC; margin-bottom:0.8rem; }
-  .video-section p { color:#FDF6EC; font-size:0.95rem; line-height:1.8; max-width:600px; margin:0 auto 2rem; }
-  .video-section .section-label { color:var(--gold); }
-  .video-wrapper { max-width:800px; margin:0 auto; border:1px solid rgba(124,58,237,0.3); border-radius:4px; overflow:hidden; box-shadow:0 0 60px rgba(124,58,237,0.15); }
-  .video-wrapper video { display:block; width:100%; height:auto; background:#000; }
-
-  /* ── Aurora: float content as cards so background shows around edges ── */
-  .dual-coach-section,
-  .video-section,
-  .quiz-section,
-  .section-dark {
-    max-width: 960px;
-    margin: 1.5rem auto;
-    border-radius: 12px;
-  }
-  .section { border-radius: 12px; }
-  .section, .section-dark, .dual-coach-section, .video-section, .quiz-section { position: relative; overflow: hidden; }
-  .section::before, .section-dark::before, .dual-coach-section::before, .video-section::before, .quiz-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg,#c0306a 0%,#d4603a 14%,#c9a040 28%,#3a9a50 42%,#2a70c0 56%,#3a30b0 72%,#6a20a0 86%,#9a20c0 100%);
-    z-index: 1;
-  }
-  .section-dark { border-radius: 12px; }
-  /* First content section on each page — less top padding so it starts near the nav */
-  .rainbow-bar + .section { padding-top: 2.5rem; }
-
-  /* ── Aurora background ── */
-  #aurora-bg{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;}
-  body{background:transparent!important;}
-  /* Hero — light text on dark aurora */
-  .hero-eyebrow{color:var(--star)!important;}
-  .hero-title{color:var(--gold)!important;}
-  .hero .btn-outline{color:var(--star);border-color:rgba(167,139,250,0.5);}
-  .hero .btn-outline:hover{background:var(--violet);border-color:var(--violet);color:var(--star);}
-  /* Content sections — opaque card so aurora shows only in hero gap */
-  .section{background:#FDF6EC;}
-
-  /* OFFER CARDS */
-  .offer-card{background:#FFFFFF;border:1px solid rgba(61,26,110,0.12);margin-bottom:2.5rem;overflow:hidden;transition:border-color 0.3s}
-  .offer-card:hover{border-color:rgba(61,26,110,0.3)}
-  .offer-card.s1{border-left:4px solid var(--gold)}
-  .offer-card.s2{border-left:4px solid var(--violet)}
-  .offer-card.s3{border-left:4px solid var(--blue)}
-  .offer-header{padding:1.5rem 2rem;border-bottom:1px solid rgba(61,26,110,0.08)}
-  .offer-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:300;color:#2C2C2C;margin-bottom:0.2rem}
-  .offer-meta{font-size:0.88rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic}
-  .offer-body{display:grid;grid-template-columns:1fr 1fr}
-  @media(max-width:680px){.offer-body{grid-template-columns:1fr}}
-  .offer-desc{padding:2rem;border-right:1px solid rgba(61,26,110,0.08)}
-  .offer-desc p{color:#555555;line-height:1.9;font-size:0.95rem;margin:0}
-  .offer-detail{padding:2rem;background:rgba(242,235,217,0.45)}
-  .offer-detail h4{font-size:0.63rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--violet);margin-bottom:0.4rem;margin-top:1.2rem}
-  .offer-detail h4:first-child{margin-top:0}
-  .offer-detail ul{list-style:none;padding:0;margin:0 0 0.5rem}
-  .offer-detail ul li{font-size:0.88rem;color:#555555;line-height:1.7;padding-left:1rem;position:relative;margin-bottom:0.15rem}
-  .offer-detail ul li::before{content:'·';position:absolute;left:0;color:var(--gold);font-size:1.1rem;line-height:1.5}
-  .offer-result{margin-top:1rem;padding-top:0.8rem;border-top:1px solid rgba(61,26,110,0.1);font-size:0.85rem;color:var(--soft);font-style:italic;line-height:1.7}
-  .offer-footer{padding:1.2rem 2rem;border-top:1px solid rgba(61,26,110,0.08)}
-  /* Rainbow gradient top border on all content cards/sections */
-  .section,
-  .dual-coach-section,
-  .quiz-section {
-    border-top: 3px solid transparent;
-    background: linear-gradient(#FDF6EC,#FDF6EC) padding-box,
-                linear-gradient(90deg,#f43f5e,#f97316,#facc15,#4ade80,#38bdf8,#a78bfa,#f43f5e) border-box;
-  }
-  .section-dark,
-  .video-section {
-    border-top: 3px solid transparent;
-    background: linear-gradient(#2D1655,#2D1655) padding-box,
-                linear-gradient(90deg,#f43f5e,#f97316,#facc15,#4ade80,#38bdf8,#a78bfa,#f43f5e) border-box;
-  }
-  .service-card,
-  .offer-card,
-  .bio-block {
-    border-top: 3px solid transparent;
-    background: linear-gradient(#ffffff,#ffffff) padding-box,
-                linear-gradient(90deg,#f43f5e,#f97316,#facc15,#4ade80,#38bdf8,#a78bfa,#f43f5e) border-box;
-  }
-  </style>
+<link rel="stylesheet" href="/styles.css"/>
 </head>
 <body>
 <canvas id="aurora-bg"></canvas>
 <nav>
-<a class="nav-logo" onclick="showPage('home')" style="display:flex;align-items:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:2.5rem;width:auto;"/><span>Shining Clarity</span></a>
+<a class="nav-logo" href="/" style="display:flex;align-items:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="/logo.png" style="height:2.5rem;width:auto;"/><span>Shining Clarity</span></a>
 <ul class="nav-links">
-<li><a onclick="showPage('home')">Home</a></li>
-<li><a onclick="showPage('about')">About</a></li>
-<li><a onclick="showPage('services')">Services</a></li>
-<li><a onclick="showPage('faq')">FAQ</a></li>
-<li><a onclick="showPage('contact')">Contact</a></li>
+<li><a href="/">Home</a></li>
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/faq.html">FAQ</a></li>
+<li><a href="/contact.html">Contact</a></li>
 </ul>
-<a class="nav-cta" onclick="showPage('apply')">Start Here</a>
+<a class="nav-cta" href="/apply.html">Start Here</a>
 <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
   <span></span><span></span><span></span>
 </button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a onclick="toggleMenu();showPage('home')">Home</a>
-  <a onclick="toggleMenu();showPage('about')">About</a>
-  <a onclick="toggleMenu();showPage('services')">Services</a>
-  <a onclick="toggleMenu();showPage('faq')">FAQ</a>
-  <a onclick="toggleMenu();showPage('contact')">Contact</a>
-  <button class="mobile-cta" onclick="toggleMenu();showPage('apply')">Start Here</button>
+  <a href="/" onclick="toggleMenu()">Home</a>
+  <a href="/about.html" onclick="toggleMenu()">About</a>
+  <a href="/services.html" onclick="toggleMenu()">Services</a>
+  <a href="/faq.html" onclick="toggleMenu()">FAQ</a>
+  <a href="/contact.html" onclick="toggleMenu()">Contact</a>
+  <a class="mobile-cta" href="/apply.html" onclick="toggleMenu()">Start Here</a>
 </div>
-<!-- ===== HOME ===== -->
-<div class="page active" id="page-home">
+<main>
 <div class="rainbow-bar"></div>
 <section class="hero">
-<div class="hero-planet fade-up" style="width:0px;height:0px;display:none">
-<img alt="Shining Clarity Coaching Logo" src="data:image/png;base64,/9j/4QBzRXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAACTgEBAAQAAAABAAACJgExAAIAAAAHAAAASgEyAAIAAAAUAAAAUYdpAAQAAAABAAAAZQAAAABHb29nbGUAMjA" style="width:100%;height:100%;"/>
-</div>
 <p class="fade-up-2" style="font-size:1.3rem;letter-spacing:0.2em;color:#FDF6EC;margin-bottom:1.2rem;font-weight:300;font-family:'Cormorant Garamond',serif;">For the person who keeps ending up in the same place — no matter how hard they try not to.</p>
 <h1 class="hero-title fade-up-2">You're not stuck because you haven't learned enough.</h1>
 <p class="fade-up-2" style="font-size:0.9rem;color:#FDF6EC;margin-top:0.6rem;margin-bottom:0;line-height:1.75;max-width:580px;">You've tried. You've read the books. Done the work. Sometimes you catch yourself in the moment, sometimes only after — or only when the consequences show up. Either way, that's not a knowledge problem. That's a belief problem. And that's exactly what we fix.</p>
-
 <div class="dot-divider fade-up-3">
 <span style="background:#f43f5e"></span>
 <span style="background:#f97316"></span>
@@ -325,14 +82,12 @@
 <span style="background:#f43f5e"></span>
 </div>
 <p class="fade-up-3" style="font-size:0.88rem;color:rgba(232,223,200,0.78);margin-top:0.5rem;margin-bottom:0;line-height:1.8;max-width:560px;">At Shining Clarity Coaching, we help you understand the assumption or fear your brain is using — so you're no longer stuck reacting from it.</p>
-
 <div class="hero-buttons fade-up-4">
-<a class="btn-primary" onclick="showPage('apply')">Start Here</a>
-<a class="btn-outline" onclick="showPage('about')">Meet Scott &amp; Cait</a>
+<a class="btn-primary" href="/apply.html">Start Here</a>
+<a class="btn-outline" href="/about.html">Meet Scott &amp; Cait</a>
 </div>
 </section>
 
-<!-- WHO THIS IS FOR -->
 <section class="section" style="text-align:center">
 <p class="section-label">Is This You?</p>
 <h2>Who This Is For</h2>
@@ -352,7 +107,6 @@
 </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="section-dark">
 <div class="inner">
 <p class="section-label">The Process</p>
@@ -366,7 +120,6 @@
 </div>
 </section>
 
-<!-- DUAL COACH SECTION (NEW) -->
 <section class="dual-coach-section">
 <div class="inner">
 <p class="section-label">Two perspectives. One transformation.</p>
@@ -376,11 +129,10 @@
 <p style="margin-bottom:2rem;">Scott spots the pattern underneath your story — fast, before you've finished explaining it. Cait hears what your word choices are revealing that you don't even know you're saying. Two different entry points into the same loop, happening at the same time.</p>
 <p style="color:#2D1655;font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;margin-bottom:2rem;">What that means for you is simple: the thing that's stayed invisible finally has nowhere to hide.</p>
 <p style="color:var(--soft);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;">You don't get one of us. You get both.</p>
-<div style="margin-top:2rem"><a class="btn-primary" onclick="showPage('apply')">Start Here</a></div>
+<div style="margin-top:2rem"><a class="btn-primary" href="/apply.html">Start Here</a></div>
 </div>
 </section>
 
-<!-- VIDEO -->
 <section class="video-section">
 <p class="section-label">The Science Behind It</p>
 <h2>YOUR BRAIN CAN CHANGE. HERE'S HOW.</h2>
@@ -390,20 +142,19 @@
 <p style="margin-bottom:2rem;">But the brain physically rewires itself in response to new experiences. That's not a metaphor or a motivational poster. That's how it works. And it's exactly why what we do is different from just talking about it — because understanding the loop and actually changing it are two completely different things.</p>
 <div class="video-wrapper">
   <video controls preload="metadata">
-    <source src="video.mp4" type="video/mp4">
+    <source src="/video.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
 </section>
 
-<!-- QUIZ -->
 <section class="quiz-section">
 <p class="section-label">Free Quiz</p>
 <h2>FIND YOUR LOOP</h2>
 <p>Most people spend years trying to fix behaviors without ever finding the belief underneath them. This quiz takes 3 minutes and shows you which loop you're actually in — not the symptom, the source.</p>
 <p style="margin-bottom:2rem;">It's free. It's specific. And it might be the most useful thing you do today.</p>
 <div class="quiz-wrapper">
-  <iframe src="./quiz.html" title="Find Your Loop — Clarity Coaching Quiz" loading="lazy"></iframe>
+  <iframe src="/quiz.html" title="Find Your Loop — Clarity Coaching Quiz" loading="lazy"></iframe>
 </div>
 </section>
 
@@ -412,852 +163,23 @@
 <p class="section-label" style="color:var(--gold);">Your next step</p>
 <h2>We're ready to help you take your next step forward.</h2>
 <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;color:var(--gold);margin-bottom:2.5rem;">Are you?</p>
-<a class="btn-primary" onclick="showPage('apply')" style="font-size:0.85rem;letter-spacing:0.2em;padding:1rem 3rem;">Start Here</a>
+<a class="btn-primary" href="/apply.html" style="font-size:0.85rem;letter-spacing:0.2em;padding:1rem 3rem;">Start Here</a>
 <p style="margin-top:1.2rem;font-size:0.72rem;letter-spacing:0.15em;color:rgba(232,223,200,0.55);text-transform:uppercase;">It's free. Always.</p>
 </div>
 </section>
-
+</main>
 <footer>
 <div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
+<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="/logo.png" style="height:1.5rem;width:auto;"/><span>Shining Clarity</span></div>
 <div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
 <div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
 <div class="footer-legal-links">
-<a onclick="showPage('terms')">Terms &amp; Conditions</a>
-<a onclick="showPage('privacy')">Privacy Policy</a>
+<a href="/terms.html">Terms &amp; Conditions</a>
+<a href="/privacy.html">Privacy Policy</a>
 </div>
 <div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
 <div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
 </footer>
-
-</div>
-
-<!-- ===== ABOUT ===== -->
-<div class="page" id="page-about">
-<div class="rainbow-bar"></div>
-<div class="section" style="text-align:center;padding-bottom:2rem">
-<p class="section-label">Our Story</p>
-<h2>See it. Shift it.</h2>
-<p style="color:#555555;max-width:600px;margin:0 auto">Most people who come to us have already done the work — the books, the journaling, the self-awareness. They know what the pattern is. They just can't make it stop. That's not a willpower problem. That's a belief problem. And that's exactly what we're here for.</p>
-<div class="dot-divider">
-<span style="background:#f43f5e"></span>
-<span style="background:#facc15"></span>
-<span style="background:#4ade80"></span>
-<span style="background:#38bdf8"></span>
-<span style="background:#a78bfa"></span>
-</div>
-</div>
-<div class="section" style="padding-top:2.5rem;margin-top:1.5rem">
-<div class="bio-block" style="border:none;padding:0;margin-bottom:2rem;background:transparent;text-align:center;font-size:1.15rem;font-style:italic;color:var(--gold)">"You don't need more insight. You need the thing underneath the insight to actually change."</div>
-
-<!-- CAIT -->
-<div class="bio-section">
-<p class="bio-section-label">Meet Cait</p>
-<div class="cait-layout">
-<div class="cait-photo-wrap">
-<img src="images/cait.png" alt="Cait" class="cait-photo"/>
-</div>
-<div class="bio-text">
-<span class="bio-name">Cait</span>
-<p>Cait hears what people mean underneath what they say.</p>
-<p>In almost every stuck person's story, there's a core belief quietly running the show — I'm not good enough, I'll never get this right, I don't deserve it — and it shows up in the language before the person even knows it's there. She works at that level.</p>
-<p>Using cognitive science and neuroplasticity, she helps people not just identify the belief but actively interrupt it and replace it — because understanding why you're stuck and actually rewiring it are two completely different things. She knows that firsthand.</p>
-<p>Cait didn't build this from a textbook or a training program. She built it from the inside — learning how to rewire her own worth and beliefs while she was still living inside the thing that was testing them. That's where her tools come from. And it's why they actually work.</p>
-</div>
-</div>
-</div>
-
-<!-- SCOTT -->
-<div class="bio-section">
-<p class="bio-section-label">Meet Scott</p>
-<div class="audio-placeholder">🎙 Audio introduction coming soon</div>
-<span class="bio-name">Scott</span>
-<div class="bio-text">
-<p>Scott has spent 18 years watching the same loop show up in different people's lives — and learning exactly how to find it.</p>
-<p>He works at the level most people skip: not the behavior on the surface, but the thought that triggers the feeling that hardens into the belief that drives the action. That's the loop. And once you can see it, you can change it.</p>
-<p>Scott's gift is finding it fast — often before the client can — and knowing how to hold it up without making someone feel broken for having it.</p>
-</div>
-</div>
-
-<!-- TOGETHER -->
-<div class="bio-block" style="margin-top:3rem;border-left-color:var(--gold);text-align:center"><strong style="color:var(--gold);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase">Together</strong><br><br>
-Two coaches. One client. No blind spots.<br><br>
-Scott tracks what keeps repeating in your story. Cait listens for what's underneath it. When we work together, nothing gets missed — because what looks like a behavior pattern to one of us looks like a language pattern to the other. You get both views at the same time.</div>
-<div style="text-align:center;margin-top:3rem">
-<a class="btn-primary" onclick="showPage('apply')">Start Here</a>
-</div>
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<!-- ===== SERVICES ===== -->
-<div class="page" id="page-services">
-<div class="rainbow-bar"></div>
-<div class="section" style="text-align:center;padding-bottom:2rem">
-<p class="section-label">What We Offer</p>
-<h2>Our Services</h2>
-<p style="color:#555555;max-width:550px;margin:0 auto">Every offering is designed to help you get out of the loop, find the belief underneath the stuckness, and move with clarity.</p>
-<div class="dot-divider">
-<span style="background:#f43f5e"></span>
-<span style="background:#facc15"></span>
-<span style="background:#4ade80"></span>
-<span style="background:#38bdf8"></span>
-<span style="background:#a78bfa"></span>
-</div>
-</div>
-<div class="section" style="padding-top:2.5rem;margin-top:1.5rem">
-<div class="offer-card s1">
-<div class="offer-header">
-<div class="offer-name">Focused Session</div>
-<div class="offer-meta">90 minutes &middot; $197</div>
-</div>
-<div class="offer-body">
-<div class="offer-desc">
-<p>You bring one specific situation you can't get clarity on — a decision, a reaction you keep having, or a pattern that shows up occasionally. We look at it with you from two angles and show you the belief driving your response. You leave with a clear explanation of what's causing the stuck point and one practical next step that moves the situation forward.</p>
-</div>
-<div class="offer-detail">
-<h4>This is for you if:</h4>
-<ul>
-<li>You're stuck on one issue</li>
-<li>You want to understand what's behind it</li>
-<li>You want a clear next step, not ongoing support</li>
-</ul>
-<h4>What you can expect:</h4>
-<ul>
-<li>A straightforward explanation of what's driving the problem</li>
-<li>Why you keep reacting the same way</li>
-<li>One action that will actually move things forward</li>
-</ul>
-<h4>What this is NOT:</h4>
-<ul>
-<li>Therapy</li>
-<li>Crisis support</li>
-<li>A long-term container</li>
-</ul>
-<p class="offer-result">Result: You stop looping on the same problem because you finally understand what's behind it and what to do next.</p>
-</div>
-</div>
-<div class="offer-footer">
-<a class="btn-primary" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem">Book a Focused Session</a>
-</div>
-</div>
-
-<div class="offer-card s2">
-<div class="offer-header">
-<div class="offer-name">Loop Breaker Method</div>
-<div class="offer-meta">6–8 weeks &middot; $1,500</div>
-</div>
-<div class="offer-body">
-<div class="offer-desc">
-<p>You already know your pattern — you can see it happening, but you can't stop it. Over several weeks, we track it with you in real time. One of us watches how it shows up in your story; the other listens for the belief underneath it. You get weekly sessions plus structured check-ins so you can interrupt the pattern while it's happening, not after.</p>
-</div>
-<div class="offer-detail">
-<h4>This is for you if:</h4>
-<ul>
-<li>You keep repeating the same behavior even when you know better</li>
-<li>You want help changing your response in real time</li>
-<li>You want support between sessions, not just insight</li>
-</ul>
-<h4>What you can expect:</h4>
-<ul>
-<li>Weekly sessions</li>
-<li>Two Voxer check-ins per week to help you respond differently</li>
-<li>Clear explanations of what's driving the pattern</li>
-<li>Guidance on interrupting it as it shows up</li>
-</ul>
-<h4>What this is NOT:</h4>
-<ul>
-<li>A one-time clarity session</li>
-<li>A place to vent</li>
-<li>Identity-level work</li>
-</ul>
-<p class="offer-result">Result: You stop ending up in the same place because you learn to interrupt the pattern as it's happening.</p>
-</div>
-</div>
-<div class="offer-footer">
-<a class="btn-outline" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem">Apply for Loop Breaker Method</a>
-</div>
-</div>
-
-<div class="offer-card s3">
-<div class="offer-header">
-<div class="offer-name">Identity Rewire Experience</div>
-<div class="offer-meta">10–12 weeks &middot; $3,500</div>
-</div>
-<div class="offer-body">
-<div class="offer-desc">
-<p>This is for situations where the issue isn't a single pattern — it's the way you see yourself. Across 10–12 weeks, we work with you to identify the core belief that sits underneath most of your decisions, reactions, and default responses. You get weekly sessions, daily Voxer access, and workbook support to help you apply the work in real situations. The goal is to change the internal setting that keeps creating the same outcomes, even when you change your behavior.</p>
-</div>
-<div class="offer-detail">
-<h4>This is for you if:</h4>
-<ul>
-<li>You've changed habits, jobs, relationships, or environments but the same internal issue keeps showing up</li>
-<li>You can feel the problem is deeper than a pattern — it's how you think about yourself</li>
-<li>You want daily support as you practice new ways of responding</li>
-</ul>
-<h4>What you can expect:</h4>
-<ul>
-<li>Weekly deep-dive sessions</li>
-<li>Daily Voxer access within a designated response window</li>
-<li>Workbook tools to reinforce the new belief between sessions</li>
-<li>Two people tracking blind spots you can't see on your own</li>
-</ul>
-<h4>What this is NOT:</h4>
-<ul>
-<li>A quick fix</li>
-<li>A place to vent</li>
-<li>Therapy or emotional processing work</li>
-<li>A surface-level mindset program</li>
-</ul>
-<p class="offer-result">Result: Your default self-story changes. The belief that used to limit your decisions stops being the one in charge, and your reactions, confidence, and choices shift because the foundation underneath them has changed.</p>
-</div>
-</div>
-<div class="offer-footer">
-<a class="btn-outline" href="https://caitlyn16dl.setmore.com/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;padding:0.7rem 1.8rem;border-color:var(--violet);color:var(--violet)">Apply for Identity Rewire Experience</a>
-</div>
-</div>
-
-<div style="text-align:center;margin-top:3rem">
-<p style="color:#555555;margin-bottom:1.5rem">Not sure which service is right for you? Book a free discovery call — we'll help you figure it out.</p>
-<a class="btn-primary" onclick="showPage('apply')">Start Here</a>
-</div>
-
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<!-- ===== FAQ ===== -->
-<div class="page" id="page-faq">
-<div class="rainbow-bar"></div>
-<div class="section">
-<p class="section-label">Questions</p>
-<h2>Frequently Asked Questions</h2>
-<div class="dot-divider" style="justify-content:flex-start">
-<span style="background:#f43f5e"></span><span style="background:#facc15"></span><span style="background:#4ade80"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span>
-</div>
-<div class="faq-item"><div class="faq-q">What is coaching and how is it different from therapy?</div><div class="faq-a">Coaching is forward focused. We don't dig into your past — we work with where you are now and where you want to go. We're not treating a condition or processing trauma; we're identifying patterns and creating shifts.</div></div>
-<div class="faq-item"><div class="faq-q">I've tried coaching before and it didn't work. Why would this be different?</div><div class="faq-a">Because we don't start with generic advice. You get both of us from day one — two trained perspectives on your specific pattern, not one-size-fits-all coaching.</div></div>
-<div class="faq-item"><div class="faq-q">Do I need to have a specific problem or goal to start?</div><div class="faq-a">No. Most people come in knowing something is off but not being able to name exactly what. That's fine — figuring out what the loop actually is, is part of the work.</div></div>
-<div class="faq-item"><div class="faq-q">How do I know which service is right for me?</div><div class="faq-a">Start with a free discovery call — that's exactly what it's for. We'll talk through what's going on and recommend the right fit based on what you need.</div></div>
-<div class="faq-item"><div class="faq-q">How do I get started?</div><div class="faq-a">Fill out the form on our Apply page. We'll be in touch within 48 hours to schedule your free discovery call.</div></div>
-<div class="faq-item"><div class="faq-q">Why are spots limited?</div><div class="faq-a">Because this work only works when there's enough space to do it well. We keep client spots limited so every person gets the full attention they deserve.</div></div>
-<div class="faq-item"><div class="faq-q">Do you offer packages?</div><div class="faq-a">Yes — our Loop Breaker Method and Identity Rewire Experience are our core packages. Both include both coaches.</div></div>
-<div class="faq-item"><div class="faq-q">What is your refund policy?</div><div class="faq-a">We offer a full refund if you cancel before your first session. If you need to cancel within 48 hours of a session, we'll reschedule instead of charging.</div></div>
-<div class="faq-item"><div class="faq-q">What are your business hours?</div><div class="faq-a">We work with clients across time zones. Availability varies — we'll share current open times when you apply.</div></div>
-<div style="text-align:center;margin-top:3rem">
-<p style="color:#555555;margin-bottom:1.5rem">Still have questions? Reach out — we're happy to help.</p>
-<a class="btn-primary" onclick="showPage('contact')">Get in Touch</a>
-</div>
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<!-- ===== APPLY ===== -->
-<div class="page" id="page-apply">
-<div class="rainbow-bar"></div>
-<div class="section" style="text-align:center;padding-bottom:2rem">
-<p class="section-label">Begin Your Journey</p>
-<h2>Start Here</h2>
-<p style="color:#555555;max-width:550px;margin:0 auto">Fill out the form below and we'll be in touch to schedule your free discovery call. No pitch. No pressure. Just a real conversation.</p>
-<div class="dot-divider">
-<span style="background:#f43f5e"></span><span style="background:#facc15"></span><span style="background:#4ade80"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span>
-</div>
-</div>
-<div style="max-width:700px;margin:0 auto;padding:0 2rem 4rem">
-<div style="background:#EFDFBB;border-radius:12px;padding:2.5rem 2.5rem 2rem;border:1px solid rgba(61,26,110,0.13);margin-bottom:2rem">
-<form method="POST" action="https://formspree.io/f/mwvyazlw" name="discovery-call" onsubmit="handleSubmit(event)">
-<div class="form-group">
-<label>Your name</label>
-<input name="name" placeholder="Your full name" required="" type="text"/>
-</div>
-<div class="form-group">
-<label>Preferred pronouns</label>
-<input name="pronouns" placeholder="e.g. she/her, he/his, they/them, or other" type="text"/>
-</div>
-<div class="form-group">
-<label>Email address</label>
-<input name="email" placeholder="your@email.com" required="" type="email"/>
-</div>
-<div class="form-group">
-<label>Phone number</label>
-<input name="phone" placeholder="Your phone number" type="tel"/>
-</div>
-<div class="form-group">
-<label>What brought you to Shining Clarity Coaching today?</label>
-<textarea name="what-brought-you" placeholder="What's going on in your world right now..."></textarea>
-</div>
-<div class="form-group">
-<label>If applicable — what has you feeling most stuck, your biggest obstacle, or most unclear?</label>
-<textarea name="stuck" placeholder="Share as much or as little as you'd like..."></textarea>
-</div>
-<div class="form-group">
-<label>What have you already tried, and what got in the way?</label>
-<textarea name="tried" placeholder="Your honest answer here..."></textarea>
-</div>
-<div class="form-group">
-<label>On a scale of 1–10, how ready are you to do the work and make changes?</label>
-<div class="scale-row">
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">1</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">2</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">3</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">4</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">5</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">6</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">7</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">8</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">9</button>
-<button class="scale-btn" onclick="selectScale(this,'readiness')" type="button">10</button>
-</div>
-<input id="readiness-val" name="readiness" type="hidden"/>
-</div>
-<div class="form-group">
-<label>Is there anything you want us to know about you before we begin?</label>
-<textarea name="anything-else-before" placeholder="Anything at all — we're here to listen..."></textarea>
-</div>
-<div class="form-group">
-<label>Which service are you interested in?</label>
-<select name="service">
-<option value="">Select a service...</option>
-<option>Free Discovery Call</option>
-<option>Focused Session — $197</option>
-<option>Loop Breaker Method — $1,500</option>
-<option>Identity Rewire Experience — $3,500</option>
-<option>Not sure yet — help me decide</option>
-</select>
-</div>
-<div class="form-group">
-<label>Anything else you'd like to share?</label>
-<textarea name="anything-else" placeholder="This is your space..."></textarea>
-</div>
-<button class="btn-primary" style="width:100%;font-size:0.85rem;padding:1.1rem" type="submit">Send My Application ✦</button>
-<p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--violet)">After submitting, we'll be in touch within 48 hours.</p>
-</form>
-<div class="success-msg" id="success-msg" style="text-align:center;padding:1rem 0;display:none;">
-<div style="font-size:2rem;color:var(--gold);margin-bottom:1rem;">✦</div>
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:0.8rem;">You're on your way.</h3>
-<p style="color:var(--soft);margin-bottom:2rem;font-size:0.95rem;">Your application has been received. We'll be in touch within 48 hours to schedule your discovery call.</p>
-</div>
-</div><!-- /form box -->
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<!-- ===== CONTACT ===== -->
-<div class="page" id="page-contact">
-<div class="rainbow-bar"></div>
-<div class="section" style="text-align:center;padding-bottom:2rem">
-<p class="section-label">Reach Out</p>
-<h2>Let's Connect</h2>
-<p style="color:#555555;max-width:500px;margin:0 auto">Have a question? Not sure where to start? We're here. Reach out and we'll get back to you during business hours.</p>
-<div class="dot-divider">
-<span style="background:#f43f5e"></span><span style="background:#facc15"></span><span style="background:#4ade80"></span><span style="background:#38bdf8"></span><span style="background:#a78bfa"></span>
-</div>
-</div>
-<div class="contact-grid" style="background:#EFDFBB;border-radius:12px;padding:2.5rem;border:1px solid rgba(61,26,110,0.13);">
-<div>
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:#2C2C2C;margin-bottom:2rem">Find us here</h3>
-<div class="contact-item">
-<div class="ci-label">Email</div>
-<p style="color:var(--soft);font-size:0.9rem"><a href="mailto:hello@shiningclarity.com">hello@shiningclarity.com</a></p>
-</div>
-<div class="contact-item">
-<div class="ci-label">Social Media</div>
-<div class="social-links">
-<a class="social-link" href="https://www.instagram.com/shining.clarity.coaching?igsh=MTQ4MHdlcnd4eXM5bg==" target="_blank" rel="noopener noreferrer">Instagram</a>
-<a class="social-link" href="https://www.facebook.com/profile.php?id=61570713382176" target="_blank" rel="noopener noreferrer">Facebook</a>
-</div>
-</div>
-<div class="contact-item" style="margin-top:1.5rem">
-<div class="ci-label">Ready to apply?</div>
-<p style="color:var(--soft);font-size:0.9rem;margin-bottom:0.8rem">Head straight to our discovery call.</p>
-<a class="btn-outline" onclick="showPage('apply')" style="font-size:0.72rem;padding:0.6rem 1.5rem">Start Here</a>
-</div>
-<div class="hours-note">✦ Please note — we respond during dedicated business hours. Every message receives full, personal attention during that time.</div>
-</div>
-<div>
-<form method="POST" action="https://formspree.io/f/mdapbnlo" name="contact" onsubmit="handleContactSubmit(event)">
-<div class="form-group"><label>Your name</label><input name="name" placeholder="Your name" required="" type="text"/></div>
-<div class="form-group"><label>Email address</label><input name="email" placeholder="your@email.com" required="" type="email"/></div>
-<div class="form-group"><label>Your message</label><textarea name="message" placeholder="What's on your mind?" style="height:150px"></textarea></div>
-<button class="btn-primary" style="width:100%" type="submit">Send Message ✦</button>
-</form>
-<div class="success-msg" id="contact-success-msg" style="margin-top:1rem;display:none;">
-<h3>✦ Message received</h3>
-<p>Thank you for reaching out. We'll be in touch during business hours.</p>
-</div>
-</div>
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-quote">"You don't have to have it figured out to get started. You just have to be ready to look." — Scott &amp; Cait</div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<!-- ===== TERMS ===== -->
-<div class="page" id="page-terms">
-<div class="rainbow-bar"></div>
-<div class="legal-page">
-<p class="section-label">Legal</p>
-<h2>Terms &amp; Conditions</h2>
-<p class="last-updated">Last Updated: June 24, 2026</p>
-<p>These Terms and Conditions ("Terms") govern your access to and use of the services provided by Shining Clarity Coaching ("SCC," "we," "us," or "our"), a life coaching practice registered in Montana, United States, operating at shiningclaritycoaching.com. By engaging with our services in any form — including but not limited to visiting our website, booking a session, or participating in coaching — you agree to be bound by these Terms in full.</p>
-<p>If you do not agree with any part of these Terms, you must not access or use our services.</p>
-<p>Questions? Contact us at: <a href="mailto:scott.cait@shiningclaritycoaching.com" style="color:var(--violet)">scott.cait@shiningclaritycoaching.com</a> | (406) 662-4066</p>
-
-<div class="legal-section">
-<h3>1. Nature of Services — What We Are and Are Not</h3>
-<p>Shining Clarity Coaching (SCC) is a life coaching practice. We are not licensed therapists, psychologists, psychiatrists, social workers, or medical professionals, and we do not act in any such capacity. Life coaching is a distinct profession that focuses on identifying patterns, shifting thinking, and supporting clients in creating intentional change in their lives.</p>
-<p>The dual-coach model at SCC pairs two coaches — one focused on behavioral patterns and one focused on cognitive patterns, neuroplasticity, and belief work — to work with clients simultaneously. This is still coaching, not therapy.</p>
-<p>Nothing communicated through our website, sessions, materials, or any other form of contact constitutes medical advice, mental health treatment, psychological counseling, legal advice, or financial advice.</p>
-</div>
-
-<div class="legal-section">
-<h3>2. Not a Substitute for Professional Care</h3>
-<p>Our services are not a replacement for professional mental health treatment, medical care, legal counsel, or any other licensed professional service. If you are experiencing a mental health crisis, suicidal ideation, active trauma symptoms, severe depression, anxiety disorders, or any condition requiring clinical intervention, please seek qualified professional help immediately.</p>
-<p>Crisis and mental health resources:</p>
-<ul><li>National Crisis Line: Call or text <strong>988</strong></li><li>Emergency services: <strong>911</strong></li><li>SAMHSA National Helpline: <strong>1-800-662-4357</strong></li><li>Psychology Today therapist finder: psychologytoday.com</li></ul>
-<p>SCC reserves the right to decline or discontinue services with any client whose needs exceed the scope of life coaching. In such cases, we will communicate this directly and, where appropriate, offer referrals.</p>
-</div>
-
-<div class="legal-section">
-<h3>3. Scope of Coaching Services</h3>
-<p>SCC's services are designed for growth-oriented adults who are past acute crisis and are seeking to identify and shift the root belief patterns that are preventing meaningful change. Our work includes:</p>
-<ul><li>Identifying cognitive distortions and thinking patterns</li><li>Neuroplasticity-based belief rewiring</li><li>Behavioral pattern recognition and analysis</li><li>Worthiness and self-concept work</li><li>Goal clarification and forward-focused strategy</li></ul>
-<p>Our services do not include diagnosis of any mental health condition, treatment of trauma, clinical intervention, or any service requiring a professional license. The scope of our work is explicitly forward-focused and non-clinical.</p>
-</div>
-
-<div class="legal-section">
-<h3>4. Client Responsibility and Independent Decision-Making</h3>
-<p>Coaching is a collaborative process — not a directive one. SCC provides frameworks, insight, reflection, and support. You retain full and sole responsibility for every decision you make and every action you take, during and after your engagement with us.</p>
-<p>By engaging with SCC's services, you expressly acknowledge and agree that:</p>
-<ul><li>You are an autonomous adult capable of exercising your own judgment. No insight, framework, or guidance offered during coaching removes your personal responsibility to evaluate information critically and make decisions appropriate for your own life.</li><li>SCC is not responsible for the outcome of any decision you make or action you take — whether or not that decision was influenced by your coaching experience.</li><li>Coaching does not tell you what to do. If you choose to act on something discussed in a session, that choice is yours. SCC assumes no liability for consequences that result from your choices.</li><li>You will provide accurate and honest information about yourself to the extent it is relevant to the coaching relationship.</li><li>You will communicate openly if the coaching relationship is not serving you, or if circumstances change in ways that affect your ability to participate.</li><li>You will seek licensed professional support if your needs exceed the scope of coaching.</li></ul>
-</div>
-
-<div class="legal-section">
-<h3>5. No Guaranteed Results</h3>
-<p>Life coaching is an individualized, collaborative process. Results vary significantly from person to person and are directly tied to the effort, consistency, honesty, and willingness to do the work that each client brings to the process.</p>
-<p>SCC makes no guarantees, representations, or warranties — express or implied — regarding specific outcomes, timelines, or transformations. Any testimonials or case examples shared in our marketing materials reflect individual results and are not promises of what you will achieve.</p>
-<p>Coaching is not a passive experience. Progress requires that you:</p>
-<ul><li>Show up consistently and engage honestly with the process</li><li>Complete any exercises, reflections, or practices discussed in sessions</li><li>Be open to examining patterns, beliefs, and behaviors that may be uncomfortable</li><li>Take responsibility for implementing changes in your own life</li></ul>
-</div>
-
-<div class="legal-section">
-<h3>6. Eligibility</h3>
-<p>Our services and digital products are available only to individuals who are 18 years of age or older. By engaging with SCC or purchasing our materials, you represent that you meet this age requirement.</p>
-<p>Our services are intended for individuals who are not in active psychiatric crisis. If you are currently under the care of a mental health professional for a serious condition, we recommend disclosing this at intake and obtaining clearance from your provider before beginning coaching. SCC reserves the right to decline services or sales to any individual at our sole discretion.</p>
-</div>
-
-<div class="legal-section">
-<h3>7. Confidentiality and Its Limits</h3>
-<p>We treat the information you share in one-on-one coaching sessions with care and discretion. We do not share client information with third parties except in the following circumstances:</p>
-<ul><li>You provide explicit written consent for us to share specific information.</li><li>We are required by law to disclose information (for example, if we receive a valid legal subpoena or court order).</li><li>We have a reasonable belief that you or another person is in imminent danger of harm. In such cases, we may contact appropriate emergency services or authorities.</li></ul>
-<p><strong>Group Coaching Exceptions:</strong> If you participate in an SCC group coaching program, community forum, or group call, you acknowledge that privacy cannot be guaranteed by SCC. You agree to maintain strict confidentiality regarding the personal information, identities, and stories shared by other group participants.</p>
-<p><strong>Legal Status:</strong> Life coaches are not bound by the same confidentiality laws as licensed therapists (such as HIPAA). While we are committed to discretion and professionalism, we are not legally protected providers for the purposes of privileged communication.</p>
-</div>
-
-<div class="legal-section">
-<h3>8. Booking, Payment, and Refund Policy</h3>
-<p><strong>Booking:</strong> Sessions are booked through our designated scheduling system. Booking a session constitutes your acceptance of these Terms.</p>
-<p><strong>Payment:</strong> Payment is due at the time of booking unless otherwise agreed in writing. We accept Visa, Mastercard, Google Pay, and Apple Pay. All prices are in US dollars. Sales tax will be applied where required by law.</p>
-<p><strong>Installment Rules:</strong> For clients utilizing an approved installment plan, all scheduled payments must be fully processed and cleared at least twenty-four (24) hours prior to the scheduled session time. If an installment payment fails or is late, SCC reserves the right to automatically pause services and cancel the upcoming session.</p>
-<p><strong>Financial Commitment:</strong> Choosing an installment plan represents a legally binding commitment to pay the full purchase price of the selected coaching package. You are not permitted to cancel future installments or walk away from the financial obligation early, regardless of whether you choose to use all the sessions in your package.</p>
-<p><strong>Early Termination &amp; Balance Acceleration:</strong> Your installment plan is a financing agreement for the total cost of your coaching package, not a flexible pay-as-you-go subscription. If you choose to cancel early, or if your account is terminated due to a breach of these Terms, the entire remaining balance will become immediately due and payable in full.</p>
-<p><strong>Refund Policy:</strong></p>
-<ul><li><em>Completed Services:</em> Sessions that have already been completed are strictly non-refundable.</li><li><em>Digital &amp; Physical Products:</em> All sales of workbooks, digital products, and downloadable materials are 100% final. No refunds, returns, or exchanges will be issued once purchase or download access is completed.</li><li><em>Unused 1:1 Sessions:</em> If you have paid upfront for a package and have remaining sessions that have not yet occurred, you may request a refund for those unused sessions. Refunds for unused sessions are processed at the standard single-session rate, removing any package discounts if the remaining sessions fall below the package minimum. Requests must be submitted in writing to scott.cait@shiningclaritycoaching.com.</li></ul>
-<p><strong>Cancellation &amp; No-Show Policy:</strong> Cancellations made at least 24 hours before a scheduled session may be rescheduled at our discretion. Cancellations made less than 24 hours before a session may be forfeited without credit. If a client fails to show up within fifteen (15) minutes of the scheduled start time, the session is marked as a No-Show and is forfeited without credit. After 3 consecutive rescheduled appointments, the 4th is a forfeited appointment without credit.</p>
-</div>
-
-<div class="legal-section">
-<h3>9. Intellectual Property and Digital Licensing</h3>
-<p>All content created or provided by Shining Clarity Coaching — including session frameworks, methodologies, workbooks, digital products, downloadable PDFs, written materials, website content, tools, assessments, and coaching approaches — is the exclusive intellectual property of SCC and is protected under applicable copyright and trademark law.</p>
-<p><strong>Limited Single-User License:</strong> You are granted a limited, personal, non-exclusive, non-transferable license to use SCC materials for your own private, individual growth and reference only.</p>
-<p><strong>Prohibited Uses:</strong></p>
-<ul><li>Reproduce, copy, or distribute SCC content or workbook files to third parties</li><li>Rebrand, relabel, or present SCC frameworks or methodologies as your own work</li><li>Use SCC content for commercial purposes, including coaching, teaching, selling, or packaging into your own products or services</li><li>Share SCC materials publicly, including on social media, shared cloud drives, websites, or in group settings, without explicit written consent</li></ul>
-<p>What you personally discover, create, or develop about yourself during the coaching process belongs to you. SCC claims ownership only over the frameworks, tools, and methodologies we bring to the process.</p>
-</div>
-
-<div class="legal-section">
-<h3>10. Testimonials and Marketing</h3>
-<p>If you choose to provide a testimonial or participate in a case study, you grant SCC a non-exclusive, royalty-free license to use your words (and, if you consent separately, your name or likeness) in our marketing materials. We will never share your full name, identifying details, or session content in any public-facing material without your explicit written consent. Testimonials may be shared in anonymized or first-name-only form with your prior agreement. You may withdraw consent for future use of your testimonial at any time by contacting us in writing.</p>
-</div>
-
-<div class="legal-section">
-<h3>11. Website Use and Acceptable Conduct</h3>
-<p>By accessing shiningclaritycoaching.com or entering our digital coaching environments, you agree not to:</p>
-<ul><li>Use the site, products, or materials for any unlawful purpose or in violation of these Terms</li><li>Attempt to gain unauthorized access to any part of the website, user accounts, digital workbooks, or community platforms</li><li>Share, forward, or publicly post direct digital download links, access codes, or login credentials provided by SCC</li><li>Transmit harmful, malicious, or disruptive code, content, or conduct</li><li>Impersonate SCC, its coaches, or any other user</li><li>Scrape, harvest, or collect data from our website or community platforms without written permission</li><li>Use our website, brand, content, or workbooks to compete with us or for unauthorized commercial purposes</li></ul>
-</div>
-
-<div class="legal-section">
-<h3>12. Third-Party Links and Tools</h3>
-<p>Our website or services may reference or link to third-party platforms, tools, or resources such as scheduling software, payment processors, or external reading. These links are provided for convenience only. SCC does not endorse, control, or assume responsibility for the content, privacy practices, or reliability of any third-party platform. Your use of third-party tools or services is governed by their own terms and policies.</p>
-</div>
-
-<div class="legal-section">
-<h3>13. Privacy</h3>
-<p>We collect and use personal information in accordance with our Privacy Policy, which is incorporated into these Terms by reference. By using our services, you consent to the collection and use of your information as described in our Privacy Policy. We do not sell your personal information to third parties.</p>
-</div>
-
-<div class="legal-section">
-<h3>14. Disclaimer of Warranties</h3>
-<p style="text-transform:uppercase;font-size:0.85rem;">Our services and products are provided "as is" and "as available" without warranties of any kind, either express or implied. To the fullest extent permitted by law, SCC disclaims all warranties, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that our services or digital products will meet your specific needs, that any particular result will be achieved, or that our website will be uninterrupted or error-free.</p>
-</div>
-
-<div class="legal-section">
-<h3>15. Limitation of Liability</h3>
-<p style="text-transform:uppercase;font-size:0.85rem;">To the maximum extent permitted by applicable law, SCC and its coaches, employees, contractors, and affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of income, emotional distress, loss of data, or any other intangible losses — arising out of or in connection with your use of our services or any decisions or actions you take as a result of coaching. In no event shall SCC's total liability to you exceed the total amount paid by you to SCC in the three (3) months preceding the event giving rise to the claim.</p>
-</div>
-
-<div class="legal-section">
-<h3>16. Indemnification</h3>
-<p>You agree to indemnify, defend, and hold harmless Shining Clarity Coaching and its coaches, contractors, agents, and representatives from and against any and all claims, damages, losses, costs, or expenses (including reasonable legal fees) arising out of or related to:</p>
-<ul><li>Your use of or inability to use our services or products</li><li>Your violation of these Terms</li><li>Your violation of any third-party rights</li><li>Any decisions or actions you take — or fail to take — as a result of coaching or using our materials</li><li>Any false or misleading information you provide to SCC</li></ul>
-</div>
-
-<div class="legal-section">
-<h3>17. Termination</h3>
-<p>Either party may end the coaching relationship at any time. You may discontinue services by providing written notice to SCC.</p>
-<p>SCC reserves the right to terminate the coaching relationship without prior notice if you violate any provision of these Terms, fail to clear scheduled installment payments within 24 hours of a session, engage in abusive or harassing conduct, violate confidentiality of group participants, share or redistribute our proprietary materials, are consistently unwilling to engage with the coaching process in good faith, or if your needs exceed the appropriate scope of life coaching.</p>
-<p><strong>Financial Obligations Upon Termination:</strong></p>
-<ul><li><em>If You Terminate:</em> You may request a refund for unused upfront prepaid sessions per the Refund Policy. However, if you are on an active installment plan, termination does not relieve you of your financial obligation. The remaining balance accelerates and becomes immediately due in full.</li><li><em>If SCC Terminates for Cause:</em> You forfeit all fees paid. Any remaining unpaid installments accelerate and become immediately due. SCC retains sole discretion over whether any partial refund will be offered.</li><li><em>If SCC Terminates for Scope of Care:</em> You will be refunded for any unused, upfront prepaid sessions on a pro-rata basis, and future automated installment payments for unrendered services will be canceled.</li></ul>
-</div>
-
-<div class="legal-section">
-<h3>18. Governing Law and Dispute Resolution</h3>
-<p>These Terms shall be governed by and construed in accordance with the laws of the State of Montana, without regard to its conflict of law provisions. In the event of a dispute, the parties agree to first attempt resolution informally by contacting SCC directly. If informal resolution is not reached within 30 days, the parties agree to submit to binding arbitration in accordance with the rules of the American Arbitration Association, to be conducted in Montana. You agree that any claims must be brought individually and not as part of a class action or class arbitration.</p>
-</div>
-
-<div class="legal-section">
-<h3>19. Modifications to These Terms</h3>
-<p>We reserve the right to update or modify these Terms at any time. Changes will be reflected by updating the "Last Updated" date at the top of this document. It is your responsibility to review these Terms periodically. Your continued use of our services after any modifications constitutes your acceptance of the revised Terms.</p>
-</div>
-
-<div class="legal-section">
-<h3>20. Entire Agreement</h3>
-<p>These Terms, together with our Privacy Policy and any written service agreement signed between you and SCC, constitute the entire agreement between you and Shining Clarity Coaching and supersede all prior communications, understandings, or agreements related to the subject matter herein. If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.</p>
-</div>
-
-<div class="legal-section">
-<h3>21. Contact Information</h3>
-<p>If you have questions about these Terms or our services, please reach out:</p>
-<p><strong>Shining Clarity Coaching</strong><br>
-Email: <a href="mailto:scott.cait@shiningclaritycoaching.com" style="color:var(--violet)">scott.cait@shiningclaritycoaching.com</a><br>
-Phone: (406) 662-4066<br>
-Website: shiningclaritycoaching.com<br>
-Location: Montana, United States (mailing address available upon request)</p>
-</div>
-
-<div class="legal-section">
-<h3>22. Definitions</h3>
-<ul><li><strong>Coaching</strong> — A non-clinical, forward-focused process that supports clients in identifying patterns, shifting beliefs, and creating intentional change. Coaching is not therapy, counseling, medical treatment, or any licensed professional service.</li><li><strong>Client</strong> — Any individual who engages with SCC services, books sessions, purchases digital products, or participates in coaching programs.</li><li><strong>Coach</strong> — Any individual employed or contracted by SCC to provide coaching services.</li><li><strong>Services</strong> — All offerings provided by SCC, including one-on-one coaching, group coaching, digital products, workbooks, exercises, and website content.</li><li><strong>Scope of Care</strong> — The boundaries of what SCC can ethically and legally provide, excluding therapy, diagnosis, crisis intervention, or any service requiring a professional license.</li><li><strong>Installment Plan</strong> — A financing arrangement allowing clients to pay for a coaching package over time. All installment plans represent a binding commitment to pay the full package price.</li><li><strong>Termination for Cause</strong> — Termination initiated by SCC due to violation of these Terms, non-payment, abusive conduct, digital piracy, confidentiality breaches, or other behaviors outlined in Section 17.</li><li><strong>Unused Sessions</strong> — Prepaid sessions that have not yet occurred at the time of termination or refund request.</li><li><strong>Digital Products</strong> — Any downloadable or online materials including workbooks, PDFs, exercises, and self-study tools.</li></ul>
-</div>
-
-<div class="legal-section">
-<h3>23. Client Code of Conduct</h3>
-<p>To maintain a productive, respectful, and safe coaching environment, all clients agree to:</p>
-<ul><li><strong>Respectful Communication</strong> — Communicate with SCC coaches, staff, and group participants in a respectful, non-abusive manner.</li><li><strong>Honest Participation</strong> — Provide truthful, accurate information relevant to the coaching process and communicate openly about challenges or changes in circumstances.</li><li><strong>Engagement in the Process</strong> — Attend sessions on time, complete agreed-upon work, and engage in good faith.</li><li><strong>Confidentiality in Group Settings</strong> — Maintain strict confidentiality regarding other participants' identities, stories, and personal information.</li><li><strong>Responsible Use of SCC Materials</strong> — Not copy, share, distribute, or repurpose SCC's proprietary content, workbooks, or frameworks.</li><li><strong>Technology Requirements</strong> — Maintain a stable internet connection, functioning audio/video equipment, and a private environment suitable for coaching sessions.</li><li><strong>Financial Integrity</strong> — Honor all payment commitments, including installment plans.</li><li><strong>Appropriate Scope of Care</strong> — Seek licensed professional support when needs exceed the scope of coaching.</li><li><strong>No Disruption of Group Programs</strong> — Not engage in behavior that disrupts group coaching environments.</li></ul>
-<p>By engaging with Shining Clarity Coaching's services or purchasing our products, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
-</div>
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<!-- ===== PRIVACY ===== -->
-<div class="page" id="page-privacy">
-<div class="rainbow-bar"></div>
-<div class="legal-page">
-<p class="section-label">Legal</p>
-<h2>Privacy Policy</h2>
-<p class="last-updated">Last updated: 2026</p>
-<div class="legal-section"><h3>1. Who We Are</h3><p>Shining Clarity Coaching is operated by Scott &amp; Cait. We are committed to protecting your privacy.</p></div>
-<div class="legal-section"><h3>2. What Information We Collect</h3><p>We collect your name, email, phone number, pronouns, and any information you voluntarily share through our forms and sessions.</p></div>
-<div class="legal-section"><h3>3. How We Use Your Information</h3><p>We use your information to respond to your inquiries, set up coaching services, and communicate with you about your engagement with us.</p></div>
-<div class="legal-section"><h3>4. We Do Not Sell Your Data</h3><p>We will never sell, rent, or share your personal information with third parties except where required by law.</p></div>
-<div class="legal-section"><h3>5. Data Storage &amp; Security</h3><p>Your information is stored securely and accessed only by Scott &amp; Cait. We take reasonable precautions to protect your data.</p></div>
-<div class="legal-section"><h3>6. Cookies</h3><p>Our website may use basic cookies to improve your browsing experience. We do not use cookies for advertising purposes.</p></div>
-<div class="legal-section"><h3>7. Contact</h3><p>Questions about this policy? Reach out at hello@shiningclarity.com</p></div>
-</div>
-<footer>
-<div class="rainbow-bar" style="margin-bottom:2rem"></div>
-<div class="footer-logo" style="display:flex;align-items:center;justify-content:center;gap:0.8rem"><img alt="Shining Clarity Coaching" src="logo.png" style="height:1.5rem;width:auto;filter:brightness(0) invert(1);"/><span>Shining Clarity</span></div>
-<div class="footer-tag">You can change anything. Start with the pattern holding you back.</div>
-<div class="footer-legal-links"><a onclick="showPage('terms')">Terms &amp; Conditions</a><a onclick="showPage('privacy')">Privacy Policy</a></div>
-<div class="footer-copy">© 2026 Shining Clarity Coaching — Scott &amp; Cait</div>
-<div class="footer-disclaimer">Shining Clarity Coaching is a coaching practice, not a therapy or mental health service. Scott &amp; Cait are not licensed therapists, psychologists, or medical professionals.</div>
-</footer>
-</div>
-
-<script type="text/javascript">
-window.toggleMenu = function() {
-  var btn = document.getElementById('hamburger');
-  var menu = document.getElementById('mobileMenu');
-  btn.classList.toggle('open');
-  menu.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-};
-window.showPage = function(id) {
-  var pages = document.querySelectorAll('.page');
-  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
-  var el = document.getElementById('page-' + id);
-  if (el) {
-    el.classList.add('active');
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    requestAnimationFrame(function() {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    });
-  }
-};
-
-window.selectScale = function(btn, field) {
-  var btns = btn.closest('.scale-row').querySelectorAll('.scale-btn');
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-  btn.classList.add('active');
-  var inp = document.getElementById(field + '-val');
-  if (inp) inp.value = btn.textContent || btn.innerText;
-};
-
-window.handleSubmit = function(e) {
-  e.preventDefault();
-  var form = e.target;
-  var data = new FormData(form);
-  fetch('https://formspree.io/f/mwvyazlw', {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(function(response) {
-    if (response.ok) {
-      form.style.display = 'none';
-      var m = document.getElementById('success-msg');
-      if (m) { m.style.display = 'block'; document.documentElement.scrollTop = 0; document.body.scrollTop = 0; }
-      setTimeout(function() { window.open('https://caitlyn16dl.setmore.com/', '_blank'); }, 1500);
-    } else {
-      alert('There was a problem submitting your form. Please try again.');
-    }
-  }).catch(function() {
-    alert('There was a problem submitting your form. Please try again.');
-  });
-};
-
-window.handleContactSubmit = function(e) {
-  e.preventDefault();
-  var form = e.target;
-  var data = new FormData(form);
-  fetch('https://formspree.io/f/mdapbnlo', {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(function(response) {
-    if (response.ok) {
-      form.style.display = 'none';
-      var m = document.getElementById('contact-success-msg');
-      if (m) m.style.display = 'block';
-    } else {
-      alert('There was a problem submitting your message. Please try again.');
-    }
-  }).catch(function() {
-    alert('There was a problem submitting your message. Please try again.');
-  });
-};
-
-window.addEventListener('DOMContentLoaded', function() {
-  var valid = ['home','about','services','faq','apply','contact','terms','privacy'];
-  var hash = window.location.hash.replace('#','');
-  var page = (valid.indexOf(hash) > -1) ? hash : 'home';
-  window.showPage(page);
-});
-
-window.addEventListener('hashchange', function() {
-  var valid = ['home','about','services','faq','apply','contact','terms','privacy'];
-  var hash = window.location.hash.replace('#','');
-  var page = (valid.indexOf(hash) > -1) ? hash : 'home';
-  window.showPage(page);
-});
-</script>
-
-<script>
-(function(){
-  const canvas = document.getElementById('aurora-bg');
-  const gl = canvas.getContext('webgl2', { antialias:false, powerPreference:'high-performance' });
-  if(!gl){ canvas.style.background = 'radial-gradient(circle at 40% 40%, #160840, #0f0520)'; return; }
-
-  const VERT = `#version 300 es
-  in vec2 a_pos; void main(){ gl_Position = vec4(a_pos,0.,1.); }`;
-
-  const FRAG = `#version 300 es
-  precision highp float;
-  out vec4 outColor;
-  uniform vec2  u_res;
-  uniform float u_time;
-  uniform vec2  u_mouse;
-  uniform vec2  u_click;
-  uniform float u_clickStart;
-
-  const vec3 cCosmos = vec3(0.055,0.018,0.122);
-  const vec3 cDeep   = vec3(0.088,0.034,0.200);
-  const vec3 cViolet = vec3(0.180,0.078,0.380);
-  const vec3 cLilac  = vec3(0.260,0.150,0.520);
-  const vec3 cStar   = vec3(0.780,0.810,0.970);
-  const vec3 cRose   = vec3(0.957,0.247,0.369);
-  const vec3 cAmber  = vec3(0.976,0.451,0.086);
-  const vec3 cBlue   = vec3(0.145,0.082,0.430);
-
-  mat2 rot(float a){ float c=cos(a),s=sin(a); return mat2(c,-s,s,c); }
-  float hash21(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
-  float vnoise(vec2 p){
-    vec2 i=floor(p), f=fract(p); vec2 u=f*f*f*(f*(f*6.0-15.0)+10.0);
-    float a=hash21(i), b=hash21(i+vec2(1,0)), c=hash21(i+vec2(0,1)), d=hash21(i+vec2(1,1));
-    return mix(mix(a,b,u.x), mix(c,d,u.x), u.y);
-  }
-  float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<5;i++){ v+=a*vnoise(p); p=rot(0.5)*p*2.0; a*=0.5;} return v; }
-  float softBloom(vec2 p, vec2 cuv){
-    float age=u_time-u_clickStart; if(age>3.0||age<0.0) return 0.0;
-    float r=age*0.55+0.06; return exp(-pow(length(p-cuv)/r,2.0))*exp(-age*1.1);
-  }
-
-  void main(){
-    vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/u_res.y;
-    vec2 m  = (u_mouse - 0.5*u_res)/u_res.y;
-    vec2 cuv= (u_click - 0.5*u_res)/u_res.y;
-    float t = u_time*0.038;
-    vec2 p = uv*1.15;
-
-    vec2 q = vec2( fbm(p + vec2(0.0, t)),
-                   fbm(p + vec2(5.2,1.3) - vec2(t*0.6,0.0)) );
-    vec2 r = vec2( fbm(p + 2.6*q + vec2(1.7,9.2) + t*0.7),
-                   fbm(p + 2.6*q + vec2(8.3,2.8) - t*0.5) );
-    float base = fbm(p + 2.6*r);
-    float wisp = fbm(uv*2.8 + 1.8*r + vec2(-t*0.8, t*0.4));
-    float density = base*0.84 + wisp*0.24;
-    density = smoothstep(0.04, 0.90, density);
-    float volume = pow(density, 0.80);
-    float shade = 0.50 + 0.50*smoothstep(0.25, 0.85, length(r));
-
-    vec3 navy = mix(cCosmos, mix(cCosmos,cDeep,0.60), volume);
-    vec3 blue = mix(cViolet*0.60, cBlue*0.80, 0.60);
-    vec3 col = navy;
-    col = mix(col, blue*shade, volume*0.68);
-    col += cBlue  * smoothstep(0.65,1.0,density)*0.18*shade;
-    col += cLilac * smoothstep(0.88,1.0,density)*0.08;
-
-    vec2 smokeOff = vec2(
-      fbm(uv*3.2 + vec2(t*0.9, 0.15)) - 0.5,
-      fbm(uv*3.2 + vec2(0.15, t*0.75)) - 0.5
-    ) * 0.09;
-    float distRaw  = length(uv - m);
-    float distWisp = length(uv - m + smokeOff);
-    float glow = exp(-distWisp * 1.90);
-    float core = exp(-distRaw  * 4.20) * 0.28;
-    col += cRose * glow * (0.04 + volume*0.38);
-    col += cRose * core;
-
-    float bloom = softBloom(uv, cuv);
-    col += cRose*bloom*0.70 + cStar*bloom*0.14;
-
-    col = pow(max(col,0.0), vec3(0.92));
-    outColor = vec4(col,1.0);
-  }`;
-
-  function sh(type, src){
-    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ console.error(gl.getShaderInfoLog(s)); }
-    return s;
-  }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
-  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
-  gl.linkProgram(prog); gl.useProgram(prog);
-
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-  const loc = gl.getAttribLocation(prog, 'a_pos');
-  gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-  const U = {
-    res:gl.getUniformLocation(prog,'u_res'), time:gl.getUniformLocation(prog,'u_time'),
-    mouse:gl.getUniformLocation(prog,'u_mouse'), click:gl.getUniformLocation(prog,'u_click'),
-    clickStart:gl.getUniformLocation(prog,'u_clickStart')
-  };
-
-  const isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
-  let DPR = Math.min(window.devicePixelRatio||1, isMobile ? 1.0 : 1.75);
-  const mouse = {x:0,y:0}, target = {x:0,y:0};
-  let clickPos = {x:0,y:0}, clickStart = -100, started = performance.now(), moved = false;
-  let paused = false;
-  document.addEventListener('visibilitychange', () => { paused = document.hidden; });
-
-  function resize(){
-    DPR = Math.min(window.devicePixelRatio||1, isMobile ? 1.0 : 1.75);
-    canvas.width = Math.floor(innerWidth*DPR);
-    canvas.height = Math.floor(innerHeight*DPR);
-    gl.viewport(0,0,canvas.width,canvas.height);
-    if(!moved){ target.x=mouse.x=clickPos.x=canvas.width/2; target.y=mouse.y=clickPos.y=canvas.height/2; }
-  }
-  addEventListener('resize', resize);
-  addEventListener('pointermove', e=>{ target.x=e.clientX*DPR; target.y=(innerHeight-e.clientY)*DPR; moved=true; }, {passive:true});
-  addEventListener('pointerdown', e=>{ clickPos.x=e.clientX*DPR; clickPos.y=(innerHeight-e.clientY)*DPR; clickStart=(performance.now()-started)/1000; }, {passive:true});
-
-  function frame(now){
-    if(paused){ requestAnimationFrame(frame); return; }
-    mouse.x += (target.x-mouse.x)*0.08;
-    mouse.y += (target.y-mouse.y)*0.08;
-    gl.uniform2f(U.res, canvas.width, canvas.height);
-    gl.uniform1f(U.time, (now-started)/1000);
-    gl.uniform2f(U.mouse, mouse.x, mouse.y);
-    gl.uniform2f(U.click, clickPos.x, clickPos.y);
-    gl.uniform1f(U.clickStart, clickStart);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
-    requestAnimationFrame(frame);
-  }
-  resize();
-  requestAnimationFrame(frame);
-})();
-</script>
+<script src="/main.js"></script>
 </body>
 </html>
