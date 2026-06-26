@@ -160,10 +160,10 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   var isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
-  var DPR = Math.min(window.devicePixelRatio||1, isMobile ? 1.0 : 1.75);
+  var DPR = Math.min(window.devicePixelRatio||1, isMobile ? 1.0 : 1.25);
   var mouse = {x:0,y:0}, target = {x:0,y:0};
   var clickPos = {x:0,y:0}, clickStart = -100, started = performance.now(), moved = false;
-  var paused = false;
+  var paused = false, lastFrame = 0, FRAME_INTERVAL = 1000/30;
   document.addEventListener('visibilitychange', function(){ paused = document.hidden; });
 
   function resize(){
@@ -179,6 +179,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function frame(now){
     if(paused){ requestAnimationFrame(frame); return; }
+    if(now - lastFrame < FRAME_INTERVAL){ requestAnimationFrame(frame); return; }
+    lastFrame = now;
     mouse.x += (target.x-mouse.x)*0.08;
     mouse.y += (target.y-mouse.y)*0.08;
     gl.uniform2f(U.res, canvas.width, canvas.height);
