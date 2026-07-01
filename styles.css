@@ -142,7 +142,7 @@ main { min-height:100vh; padding-top:6rem; position:relative; z-index:1; }
 .legal-section ul { list-style:disc; padding-left:1.5rem; color:var(--soft); font-size:0.9rem; line-height:1.9; margin:0.5rem 0 1rem; }
 .legal-section ul li { margin-bottom:0.4rem; }
 /* FOOTER */
-footer { background:#0f0520; border-top:1px solid rgba(61,26,110,0.2); padding:3rem 2rem; text-align:center; position:relative; z-index:1; }
+footer { background:#1c0d3a; border-top:1px solid rgba(61,26,110,0.2); padding:3rem 2rem; text-align:center; position:relative; z-index:1; }
 .footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; letter-spacing:0.15em; color:var(--star); margin-bottom:0.5rem; }
 .footer-quote { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--gold); max-width:600px; margin:1rem auto; line-height:1.7; }
 .footer-cta { margin:1.5rem 0; }
