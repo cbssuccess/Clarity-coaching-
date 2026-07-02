@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Myths About Change | Shining Clarity Coaching</title>
+<meta name="description" content="10 things everyone believes about change. How many are actually true? Test yourself in 2 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b0f24;
+    --navy-2: #12173a;
+    --violet: #3a2d6e;
+    --violet-soft: #6a5aa8;
+    --gold: #c9a96e;
+    --gold-bright: #D4AF6A;
+    --ink: #e9e6f2;
+    --ink-dim: #a9a4c4;
+    --true-glow: #7fc9a6;
+    --false-glow: #c97f7f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: radial-gradient(ellipse at 50% -10%, var(--violet) 0%, var(--navy-2) 40%, var(--navy) 80%);
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+  }
+  /* starfield */
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .stars span {
+    position: absolute; border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.35;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100%{opacity:.15} 50%{opacity:.5} }
+  @media (prefers-reduced-motion: reduce) {
+    .stars span { animation: none; }
+    * { transition: none !important; }
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); text-align: center; margin-bottom: 18px; font-weight: 500;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 48px);
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h1 em { font-style: italic; color: var(--gold-bright); }
+  .lede {
+    text-align: center; color: var(--ink-dim); font-size: 17px; line-height: 1.6;
+    max-width: 460px; margin: 0 auto 36px;
+  }
+
+  /* neural progress */
+  .neural {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin: 0 auto 40px; max-width: 420px;
+  }
+  .node {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 1px solid var(--violet-soft);
+    background: transparent;
+    flex-shrink: 0;
+    transition: background .5s, box-shadow .5s, border-color .5s;
+  }
+  .node.lit {
+    background: var(--gold-bright);
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 10px rgba(212,175,106,.7);
+  }
+  .synapse {
+    height: 1px; flex: 1;
+    background: var(--violet-soft);
+    opacity: .4;
+    transition: background .5s, opacity .5s;
+  }
+  .synapse.lit { background: var(--gold); opacity: .9; box-shadow: 0 0 6px rgba(201,169,110,.5); }
+
+  .card {
+    background: rgba(18, 23, 58, 0.72);
+    border: 1px solid rgba(106, 90, 168, 0.35);
+    border-radius: 14px;
+    padding: 36px 32px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  }
+
+  .qcount {
+    font-size: 12px; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--violet-soft); margin-bottom: 16px; font-weight: 500;
+  }
+  .myth {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 4.5vw, 30px);
+    font-weight: 500; line-height: 1.35;
+    margin-bottom: 30px;
+  }
+  .myth::before { content: '\201C'; color: var(--gold); }
+  .myth::after { content: '\201D'; color: var(--gold); }
+
+  .choices { display: flex; gap: 14px; }
+  .choices button {
+    flex: 1;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500;
+    padding: 16px 0;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .1s;
+  }
+  .choices button:hover { background: rgba(201,169,110,.12); }
+  .choices button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+  .choices button:active { transform: scale(.98); }
+
+  .reveal { display: none; }
+  .reveal.show { display: block; animation: fadeUp .4s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: none;} }
+
+  .verdict {
+    font-size: 13px; letter-spacing: .26em; text-transform: uppercase; font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .verdict.correct { color: var(--true-glow); }
+  .verdict.wrong { color: var(--false-glow); }
+  .truth { color: var(--ink-dim); font-size: 16.5px; line-height: 1.7; margin-bottom: 26px; }
+  .truth strong { color: var(--ink); font-weight: 500; }
+
+  .next-btn, .cta-btn, .submit-btn {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    padding: 15px 36px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none; border-radius: 8px;
+    cursor: pointer; text-decoration: none;
+    transition: background .2s, transform .1s;
+  }
+  .next-btn:hover, .cta-btn:hover, .submit-btn:hover { background: var(--gold-bright); }
+  .next-btn:focus-visible, .cta-btn:focus-visible, .submit-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* results */
+  .score-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px; font-weight: 500; text-align: center;
+    color: var(--gold-bright); line-height: 1;
+  }
+  .score-label {
+    text-align: center; font-size: 13px; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--violet-soft); margin: 6px 0 26px; font-weight: 500;
+  }
+  .result-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 5vw, 32px); font-weight: 500; text-align: center;
+    margin-bottom: 16px;
+  }
+  .result-body { color: var(--ink-dim); font-size: 16.5px; line-height: 1.7; text-align: center; margin-bottom: 30px; }
+  .result-body strong { color: var(--ink); font-weight: 500; }
+
+  .divider {
+    height: 1px; background: linear-gradient(90deg, transparent, var(--violet-soft), transparent);
+    margin: 30px 0; opacity: .5;
+  }
+
+  .capture-label { font-size: 15px; color: var(--ink-dim); text-align: center; margin-bottom: 16px; line-height: 1.6; }
+  .capture-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .capture-row input {
+    flex: 1; min-width: 220px;
+    font-family: 'Jost', sans-serif; font-size: 15px;
+    padding: 14px 16px;
+    background: rgba(11,15,36,.6);
+    border: 1px solid var(--violet-soft);
+    border-radius: 8px;
+    color: var(--ink);
+  }
+  .capture-row input::placeholder { color: var(--violet-soft); }
+  .capture-row input:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .sent-msg { display: none; text-align: center; color: var(--true-glow); font-size: 15px; margin-top: 14px; }
+
+  .center { text-align: center; }
+  .share-hint { text-align: center; color: var(--violet-soft); font-size: 13.5px; margin-top: 22px; letter-spacing: .04em; }
+
+  .hidden { display: none !important; }
+
+  footer {
+    text-align: center; margin-top: 48px;
+    font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--violet-soft);
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true" id="stars"></div>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <section id="intro">
+    <p class="eyebrow">Shining Clarity Coaching</p>
+    <h1>The Myths About <em>Change</em></h1>
+    <p class="lede">10 things almost everyone believes about how change works. Most of them are wrong &mdash; and they're the reason you're stuck. How many can you catch?</p>
+    <div class="center">
+      <button class="cta-btn" onclick="startQuiz()">Start the Test</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="neural" id="neural" aria-hidden="true"></div>
+    <div class="card">
+      <p class="qcount" id="qcount">Myth 1 of 10</p>
+      <p class="myth" id="mythText"></p>
+      <div class="choices" id="choices">
+        <button onclick="answer(true)">True</button>
+        <button onclick="answer(false)">Myth</button>
+      </div>
+      <div class="reveal" id="reveal">
+        <p class="verdict" id="verdict"></p>
+        <p class="truth" id="truthText"></p>
+        <button class="next-btn" id="nextBtn" onclick="nextQ()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hidden">
+    <div class="card">
+      <p class="score-num" id="scoreNum">0/10</p>
+      <p class="score-label">Myths Caught</p>
+      <h2 class="result-title" id="resultTitle"></h2>
+      <p class="result-body" id="resultBody"></p>
+      <div class="center">
+        <a class="cta-btn" href="https://caitlyn16dl.setmore.com/" target="_blank">Start Here</a>
+      </div>
+      <div class="divider"></div>
+      <form id="captureForm" action="https://formspree.io/f/mdapbnlo" method="POST">
+        <p class="capture-label">Want the full breakdown of all 10 myths &mdash; and what actually rewires them? We'll send it straight to you.</p>
+        <div class="capture-row">
+          <input type="email" name="email" placeholder="Your email" required aria-label="Email address">
+          <input type="hidden" name="quiz" value="The Myths About Change">
+          <input type="hidden" name="score" id="scoreField" value="">
+          <button class="submit-btn" type="submit">Send It</button>
+        </div>
+        <p class="sent-msg" id="sentMsg">Sent! Check your inbox.</p>
+      </form>
+      <p class="share-hint">Screenshot your score and tag us &mdash; then challenge a friend to beat it.</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="https://shiningclaritycoaching.com">shiningclaritycoaching.com</a>
+  </footer>
+</div>
+
+<script>
+const MYTHS = [
+  {
+    text: "It takes 21 days to build a new habit.",
+    isTrue: false,
+    truth: "The 21-day number came from a 1960s plastic surgeon's observations about patients adjusting to their new appearance — not from habit research. Actual research tracking real habit formation found an average of <strong>66 days</strong>, with a range from 18 all the way to 254. If you 'failed' at day 21, you didn't fail. You quit at the point the myth told you to expect a finish line."
+  },
+  {
+    text: "Your brain is basically fixed by adulthood — real change gets much harder after 25.",
+    isTrue: false,
+    truth: "Neuroplasticity — your brain's ability to form new pathways — continues your <strong>entire life</strong>. Adult brains rewire through repetition and attention, not age. The 'fixed at 25' idea is a pop-science distortion of research on brain development, not a ceiling on your capacity to change."
+  },
+  {
+    text: "Once you understand why you do something, you'll stop doing it.",
+    isTrue: false,
+    truth: "Insight lives in one system; automatic patterns run in another. That's why you can explain your pattern perfectly and still repeat it Tuesday. <strong>Understanding is the map — it isn't the walking.</strong> This gap between knowing and doing is the single most common reason self-aware people stay stuck."
+  },
+  {
+    text: "Self-sabotage is your brain trying to protect you.",
+    isTrue: true,
+    truth: "This one's real. Your brain treats <strong>familiar</strong> as safe — even when familiar is painful. When you bail right before a breakthrough, that's not weakness or secret laziness. It's an old protection system defending an old belief about what's safe for you to have."
+  },
+  {
+    text: "If you keep failing to change, you're not committed enough.",
+    isTrue: false,
+    truth: "Repeated 'failure' usually means you're working at the <strong>behavior level</strong> while the pattern is running at the <strong>belief level</strong>. Committing harder to the wrong level just produces more exhausted versions of the same loop. It was never about effort."
+  },
+  {
+    text: "Repeating positive affirmations rewires your brain.",
+    isTrue: false,
+    truth: "Not on their own — and research found that for people who don't believe the statement, affirmations can actually make them feel <strong>worse</strong>, because the brain flags the gap between the words and the belief. Rewiring requires evidence your brain accepts, not slogans it argues with."
+  },
+  {
+    text: "Big change requires big action.",
+    isTrue: false,
+    truth: "Neural pathways strengthen through <strong>repetition, not intensity</strong>. A small action repeated daily rewires more than a dramatic overhaul that collapses in two weeks — which is exactly why the all-in-then-burn-out cycle keeps you where you started."
+  },
+  {
+    text: "Pathways in your brain that you stop using get weaker over time.",
+    isTrue: true,
+    truth: "True — it's often summed up as 'use it or lose it.' Connections you stop firing gradually weaken. That's the hopeful half of neuroplasticity: the loop feels permanent, but <strong>it only stays strong because it keeps getting used</strong>. Starve it and feed a new pathway, and the wiring follows."
+  },
+  {
+    text: "Your thoughts are accurate reports of what's really happening.",
+    isTrue: false,
+    truth: "Thoughts feel like facts, but the brain runs on shortcuts — filtering, catastrophizing, mind-reading, all-or-nothing framing. These <strong>cognitive distortions</strong> feel exactly as true as accurate thoughts do. That felt-certainty is why untrained minds lose arguments to their own wiring."
+  },
+  {
+    text: "If change were really happening, it would feel different by now.",
+    isTrue: false,
+    truth: "New pathways are built and working <strong>before</strong> the feelings catch up. Early change often feels like nothing — or worse, like fraud — because the old wiring still generates the old feelings while the new wiring is still thin. Quitting because it 'doesn't feel different yet' is quitting mid-construction."
+  }
+];
+
+const RESULTS = [
+  { min: 0, max: 4, title: "The Myths Have Been Running the Show",
+    body: "No shame in this score — these myths are repeated everywhere, and they <strong>sound</strong> like wisdom. But here's what it means: the model of change you've been using was built on bad information. You haven't been failing at change. You've been succeeding at a strategy that was never going to work. That's actually good news, because strategies can be replaced." },
+  { min: 5, max: 7, title: "You Know More Than Most — And You're Probably Still Stuck",
+    body: "You caught over half. You're informed, self-aware, and you've clearly done the reading. Which raises the real question: <strong>if knowing this stuff were enough, why hasn't it worked yet?</strong> That's the knowing-doing gap — and it doesn't close with more information. It closes at the belief level." },
+  { min: 8, max: 10, title: "You Can't Be Fooled — So What's Actually in the Way?",
+    body: "Almost nothing got past you. You understand how change works better than most people ever will. So if the loop is still looping, it isn't a knowledge problem — it's a <strong>root belief</strong> problem, and those don't show up on a true/false test. They show up in patterns. Finding yours is exactly what we do." }
+];
+
+let idx = 0, score = 0;
+
+// starfield
+(function(){
+  const c = document.getElementById('stars');
+  for (let i=0;i<70;i++){
+    const s = document.createElement('span');
+    const size = Math.random()*2+1;
+    s.style.width = s.style.height = size+'px';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    c.appendChild(s);
+  }
+})();
+
+// build neural progress bar
+(function(){
+  const n = document.getElementById('neural');
+  for (let i=0;i<MYTHS.length;i++){
+    const node = document.createElement('div');
+    node.className = 'node'; node.id = 'node'+i;
+    n.appendChild(node);
+    if (i < MYTHS.length-1){
+      const syn = document.createElement('div');
+      syn.className = 'synapse'; syn.id = 'syn'+i;
+      n.appendChild(syn);
+    }
+  }
+})();
+
+function startQuiz(){
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  renderQ();
+}
+
+function renderQ(){
+  document.getElementById('qcount').textContent = 'Myth ' + (idx+1) + ' of ' + MYTHS.length;
+  document.getElementById('mythText').textContent = MYTHS[idx].text;
+  document.getElementById('choices').style.display = 'flex';
+  document.getElementById('reveal').classList.remove('show');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function answer(saidTrue){
+  const m = MYTHS[idx];
+  const correct = (saidTrue === m.isTrue);
+  if (correct) score++;
+  document.getElementById('choices').style.display = 'none';
+  const v = document.getElementById('verdict');
+  v.textContent = correct ? '✓ You caught it' : '✗ This one got you';
+  v.className = 'verdict ' + (correct ? 'correct' : 'wrong');
+  document.getElementById('truthText').innerHTML = m.truth;
+  document.getElementById('nextBtn').textContent = (idx === MYTHS.length-1) ? 'See My Score' : 'Next';
+  document.getElementById('reveal').classList.add('show');
+  document.getElementById('node'+idx).classList.add('lit');
+  if (idx>0) document.getElementById('syn'+(idx-1)).classList.add('lit');
+}
+
+function nextQ(){
+  idx++;
+  if (idx < MYTHS.length){ renderQ(); }
+  else { showResults(); }
+}
+
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('scoreNum').textContent = score + '/' + MYTHS.length;
+  document.getElementById('scoreField').value = score + '/' + MYTHS.length;
+  const r = RESULTS.find(r => score >= r.min && score <= r.max);
+  document.getElementById('resultTitle').textContent = r.title;
+  document.getElementById('resultBody').innerHTML = r.body;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Formspree AJAX so the page doesn't navigate away
+document.getElementById('captureForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const form = e.target;
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok){
+      form.querySelector('.capture-row').style.display = 'none';
+      form.querySelector('.capture-label').style.display = 'none';
+      document.getElementById('sentMsg').style.display = 'block';
+    }
+  } catch(err){ /* leave form visible so they can retry */ }
+});
+</script>
+</body>
+</html>
