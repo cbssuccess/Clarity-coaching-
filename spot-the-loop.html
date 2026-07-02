@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spot the Loop — Shining Clarity Coaching</title>
+<meta name="description" content="10 quick stories. Can you spot the loop running the show? Most people can't. Prove us wrong.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#07081a; --navy2:#0d0e26;
+    --violet:#9158cb; --violet-deep:#231041;
+    --gold:#D4AF6A; --gold-bright:#E8C78A;
+    --ivory:#F0ECE4; --muted:#A8A4B6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Jost',sans-serif;font-weight:300;color:var(--ivory);
+    background:var(--navy);min-height:100vh;line-height:1.6;
+    background-image:
+      radial-gradient(ellipse 80% 55% at 65% 12%, rgba(56,26,100,.55), transparent 65%),
+      radial-gradient(ellipse 60% 45% at 10% 90%, rgba(35,16,65,.6), transparent 70%),
+      linear-gradient(180deg,var(--navy2) 0%,var(--navy) 60%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:28px 22px 60px}
+  .brand{font-size:12px;letter-spacing:.34em;color:var(--gold);text-align:center;font-weight:500;text-transform:uppercase}
+  .eyebrow{font-size:12px;letter-spacing:.28em;color:var(--muted);text-align:center;font-weight:500;text-transform:uppercase;margin-top:26px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(42px,9vw,58px);text-align:center;line-height:1.08;margin-top:10px}
+  h1 em{font-style:italic;color:var(--gold-bright)}
+  .sub{text-align:center;color:var(--muted);max-width:440px;margin:18px auto 0;font-size:17px}
+  .sub strong{color:var(--ivory);font-weight:400}
+  .rule{width:64px;height:1px;background:var(--gold);margin:26px auto}
+  .btn{
+    display:block;width:100%;max-width:340px;margin:0 auto;padding:16px 28px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-bright));color:#171126;
+    border:none;border-radius:100px;font-family:'Jost',sans-serif;font-weight:600;
+    font-size:15px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+    text-align:center;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn.ghost{background:transparent;color:var(--gold-bright);border:1px solid rgba(212,175,106,.45)}
+  .hidden{display:none!important}
+
+  /* quiz */
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .count{font-size:13px;letter-spacing:.2em;color:var(--muted);font-weight:500}
+  .bar{height:2px;background:rgba(240,236,228,.12);border-radius:2px;overflow:hidden;margin-bottom:34px}
+  .bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--violet),var(--gold));transition:width .35s ease}
+  .story{
+    font-family:'Cormorant Garamond',serif;font-size:clamp(23px,5.6vw,28px);font-weight:500;
+    line-height:1.42;margin-bottom:10px;
+  }
+  .prompt{font-size:13px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;font-weight:500;margin:22px 0 16px}
+  .opt{
+    display:block;width:100%;text-align:left;margin-bottom:12px;padding:16px 18px;
+    background:rgba(240,236,228,.045);border:1px solid rgba(240,236,228,.14);
+    border-radius:14px;color:var(--ivory);font-family:'Jost',sans-serif;font-weight:400;
+    font-size:16.5px;cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .opt:not(:disabled):hover{border-color:rgba(212,175,106,.6)}
+  .opt.correct{border-color:var(--gold);background:rgba(212,175,106,.13);color:var(--gold-bright)}
+  .opt.wrong{border-color:rgba(200,90,110,.55);color:var(--muted)}
+  .opt:disabled{cursor:default}
+  .verdict{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;color:var(--gold-bright);margin-top:22px}
+  .explain{color:var(--muted);font-size:16.5px;margin-top:8px}
+  .explain strong{color:var(--ivory);font-weight:400}
+  .next{margin-top:28px}
+
+  /* results */
+  .score{
+    font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(96px,26vw,140px);
+    color:var(--gold-bright);text-align:center;line-height:1;margin-top:8px;
+  }
+  .tier{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(26px,6.4vw,32px);text-align:center;margin-top:6px}
+  .pivot{max-width:460px;margin:26px auto 0;text-align:center;font-size:17px;color:var(--muted)}
+  .pivot strong{color:var(--ivory);font-weight:400}
+  .share{
+    margin:34px auto 0;max-width:460px;padding:22px;border:1px solid rgba(212,175,106,.3);
+    border-radius:18px;text-align:center;background:rgba(35,16,65,.28);
+  }
+  .share h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:var(--gold-bright)}
+  .share p{color:var(--muted);font-size:15.5px;margin-top:8px}
+  .share .btn{margin-top:16px;font-size:13px;padding:13px 24px}
+  .stack{display:flex;flex-direction:column;gap:14px;margin-top:34px}
+  footer{margin-top:54px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Shining Clarity Coaching</div>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="eyebrow">A 3-minute game</div>
+    <h1>Spot the <em>Loop</em></h1>
+    <p class="sub">10 quick stories about people you'll swear you know. In each one, a loop is quietly running the show. <strong>Your job: catch it.</strong></p>
+    <p class="sub">Fair warning — spotting it is harder than it sounds. Most people miss at least three.</p>
+    <div class="rule"></div>
+    <button class="btn" onclick="startQuiz()">Let's Play</button>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="top"><span class="count" id="count">1 / 10</span><span class="count" id="running"></span></div>
+    <div class="bar"><i id="fill"></i></div>
+    <p class="story" id="story"></p>
+    <p class="prompt">Which loop is running the show?</p>
+    <div id="opts"></div>
+    <div id="feedback" class="hidden">
+      <p class="verdict" id="verdict"></p>
+      <p class="explain" id="explain"></p>
+      <button class="btn next" id="nextBtn" onclick="nextQ()">Next</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hidden">
+    <div class="eyebrow">Your score</div>
+    <div class="score" id="finalScore"></div>
+    <p class="tier" id="tierLine"></p>
+    <p class="pivot" id="pivotLine">Here's the catch: <strong>other people's loops are easy.</strong> Yours is invisible from the inside — not because something's wrong with you, but because that's how loops work. It's also exactly what we do: two of us, watching from two different angles, so yours has nowhere to hide.</p>
+
+    <div class="share">
+      <h3>Make it a competition.</h3>
+      <p>Screenshot your score. Tag us. Challenge a friend who <em>definitely</em> has a loop.</p>
+      <button class="btn ghost" onclick="copyScore()" id="copyBtn">Copy my score to share</button>
+    </div>
+
+    <div class="stack">
+      <a class="btn" href="https://caitlyn16dl.setmore.com/" target="_blank">Start Here</a>
+      <a class="btn ghost" href="/quiz.html">Find your own loop →</a>
+    </div>
+  </section>
+
+  <footer><div class="brand">shiningclaritycoaching.com</div></footer>
+</div>
+
+<script>
+const LOOPS = {
+  aon:  "The All-or-Nothing Loop",
+  perf: "The Perfectionism Loop",
+  pp:   "The People-Pleasing Loop",
+  avoid:"The Avoidance Loop",
+  sab:  "The Self-Sabotage Loop",
+  cc:   "The Confidence–Collapse Loop"
+};
+
+const QS = [
+  {
+    story:"Maya starts a new workout plan. Week one, she crushes it — new gear, new playlist, tells everyone. Week three she misses one day, decides she's “already ruined it,” and quits entirely.",
+    opts:["aon","pp","cc"], correct:"aon",
+    explain:"One missed day became “ruined.” <strong>That jump — from imperfect straight to over — is the tell.</strong> There's no middle setting in this loop."
+  },
+  {
+    story:"Devon's presentation was finished three days early. He's still “polishing” it at 1 a.m. the night before, and walks in exhausted for a talk he'd already nailed on Tuesday.",
+    opts:["avoid","perf","aon"], correct:"perf",
+    explain:"The deck was done. The polishing wasn't about the deck — <strong>it was about being beyond criticism.</strong> That finish line moves every time he gets close."
+  },
+  {
+    story:"Casey lands the biggest win of her career. Within a week she's convinced everyone's about to figure out she didn't deserve it, and starts playing small in every meeting.",
+    opts:["cc","sab","perf"], correct:"cc",
+    explain:"The higher the win, the harder something yanks her back down to “small.” <strong>Confidence spikes — then the collapse quietly cashes it in.</strong>"
+  },
+  {
+    story:"Alex met someone great two months ago. It's going really well. So naturally, the week before meeting their friends, Alex picks a fight about absolutely nothing.",
+    opts:["avoid","aon","sab"], correct:"sab",
+    explain:"Ending it on purpose hurts less than losing it by surprise. <strong>That's the loop's math — not Alex's.</strong> It pulls the plug before anything can be taken away."
+  },
+  {
+    story:"Jordan just agreed to host the entire family holiday. Again. While being quietly furious about it. Again. The yes was out of her mouth before the thought even finished.",
+    opts:["pp","perf","sab"], correct:"pp",
+    explain:"The yes is automatic — keeping everyone comfortable is the reflex. <strong>The resentment afterward is the receipt.</strong>"
+  },
+  {
+    story:"Riley has wanted to start a business for three years. Still “researching.” The plan gets a little better every year. The launch never gets any closer.",
+    opts:["avoid","perf","cc"], correct:"avoid",
+    explain:"“Not ready yet” is doing a lot of heavy lifting here. <strong>You can't fail at a business you never launch</strong> — and some part of Riley knows it."
+  },
+  {
+    story:"Morgan rereads a two-line text five times before sending it, softens it twice, adds an emoji so it doesn't sound harsh — then opens with “sorry to bother you.”",
+    opts:["aon","pp","avoid"], correct:"pp",
+    explain:"Five rewrites to manage someone else's two seconds of reading. <strong>The apology for existing is the giveaway.</strong>"
+  },
+  {
+    story:"Taylor is all-in by week two of every relationship — fireworks, future plans, the works. Then the first ordinary Tuesday arrives and it suddenly feels like proof the whole thing is dying.",
+    opts:["sab","aon","pp"], correct:"aon",
+    explain:"If it's not fireworks, it's failing. <strong>Ordinary never stood a chance</strong> — this loop only has two settings, and “real life” isn't one of them."
+  },
+  {
+    story:"Quinn found the perfect job posting a month ago. “They probably want someone with more experience,” Quinn decided — without applying. Quinn still checks the posting every day.",
+    opts:["cc","avoid","pp"], correct:"avoid",
+    explain:"Quinn rejected Quinn so the company never got the chance. <strong>Checking it daily means the wanting never went anywhere</strong> — only the trying did."
+  },
+  {
+    story:"Priya has a big project due. First she cleans the whole apartment. Then reorganizes her desk. Then it's 9 p.m. and, well — “no point starting this late. Tomorrow, fresh.”",
+    opts:["perf","avoid","aon"], correct:"perf", also:"avoid",
+    explain:"Waiting for the perfect runway is still not flying — <strong>the clean apartment was a decoy.</strong> And if you said Avoidance: take the point. Perfectionism is just avoidance in a nicer outfit."
+  }
+];
+
+let i = 0, score = 0;
+
+function startQuiz(){
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+  window.scrollTo({top:0});
+}
+
+function render(){
+  const q = QS[i];
+  document.getElementById('count').textContent = (i+1) + " / " + QS.length;
+  document.getElementById('running').textContent = score + " right";
+  document.getElementById('fill').style.width = ((i)/QS.length*100) + "%";
+  document.getElementById('story').textContent = q.story;
+  const box = document.getElementById('opts');
+  box.innerHTML = "";
+  q.opts.forEach(key=>{
+    const b = document.createElement('button');
+    b.className = "opt"; b.textContent = LOOPS[key];
+    b.onclick = ()=>answer(key, b);
+    box.appendChild(b);
+  });
+  document.getElementById('feedback').classList.add('hidden');
+  document.getElementById('nextBtn').textContent = (i === QS.length-1) ? "See my score" : "Next";
+}
+
+function answer(key, btn){
+  const q = QS[i];
+  const right = (key === q.correct) || (q.also && key === q.also);
+  document.querySelectorAll('.opt').forEach(b=>{
+    b.disabled = true;
+    if(b.textContent === LOOPS[q.correct]) b.classList.add('correct');
+  });
+  if(right){ score++; if(q.also && key===q.also) btn.classList.add('correct'); }
+  else btn.classList.add('wrong');
+  document.getElementById('verdict').textContent = right ? "Caught it." : "It got past you.";
+  document.getElementById('explain').innerHTML = q.explain;
+  document.getElementById('running').textContent = score + " right";
+  document.getElementById('feedback').classList.remove('hidden');
+}
+
+function nextQ(){
+  i++;
+  if(i < QS.length){ render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else showResults();
+}
+
+function tierFor(s){
+  if(s === 10) return "Coach eyes. Seriously — Scott should be nervous.";
+  if(s >= 8)  return "Sharp. You catch what most people walk right past.";
+  if(s >= 5)  return "Solid — right around where most people land.";
+  if(s >= 2)  return "Loops are sneaky. That's kind of their whole thing.";
+  return "A perfect score in the other direction is honestly impressive.";
+}
+
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = score + "/10";
+  document.getElementById('tierLine').textContent = tierFor(score);
+  window.scrollTo({top:0});
+}
+
+function copyScore(){
+  const txt = "I caught " + score + "/10 loops on the Spot the Loop quiz 👀 Think you can beat me? shiningclaritycoaching.com";
+  const done = ()=>{ const b=document.getElementById('copyBtn'); b.textContent="Copied — go post it"; setTimeout(()=>b.textContent="Copy my score to share",2500); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done)); }
+  else fallbackCopy(txt, done);
+}
+function fallbackCopy(txt, done){
+  const t=document.createElement('textarea'); t.value=txt; document.body.appendChild(t);
+  t.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(t); done();
+}
+</script>
+</body>
+</html>
