@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Loop Interrupt Card | Shining Clarity Coaching</title>
+<meta name="description" content="Spiraling right now? This takes 60 seconds. Three steps to interrupt the loop while it's running.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b0f24; --navy-2: #12173a; --violet: #3a2d6e; --violet-soft: #6a5aa8;
+    --gold: #c9a96e; --gold-bright: #D4AF6A; --ink: #e9e6f2; --ink-dim: #a9a4c4; --green: #7fc9a6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(ellipse at 50% -10%, var(--violet) 0%, var(--navy-2) 40%, var(--navy) 80%);
+    min-height: 100vh; min-height: 100dvh;
+    color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300;
+    display: flex; flex-direction: column;
+  }
+  .wrap {
+    flex: 1; max-width: 560px; width: 100%; margin: 0 auto;
+    padding: 40px 24px 60px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold); text-align: center; margin-bottom: 20px; font-weight: 500;
+  }
+  .screen { display: none; animation: fade .45s ease; }
+  .screen.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: none;} }
+  @media (prefers-reduced-motion: reduce){ * { animation: none !important; } }
+
+  h1, h2 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(30px, 7vw, 42px); line-height: 1.18; text-align: center; margin-bottom: 18px;
+  }
+  h1 em, h2 em { font-style: italic; color: var(--gold-bright); }
+  .sub { text-align: center; color: var(--ink-dim); font-size: 17px; line-height: 1.65; margin-bottom: 34px; }
+  .sub strong { color: var(--ink); font-weight: 500; }
+
+  .steplabel {
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold); text-align: center; font-weight: 600; margin-bottom: 14px;
+  }
+
+  /* breathing pulse */
+  .pulse {
+    width: 84px; height: 84px; margin: 0 auto 30px; border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    animation: breathe 7s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(201,169,110,.25);
+  }
+  .pulse::after { content:''; width: 26px; height: 26px; border-radius: 50%; background: var(--gold-bright); opacity: .8; }
+  @keyframes breathe { 0%,100% { transform: scale(1);} 50% { transform: scale(1.35);} }
+
+  textarea {
+    width: 100%; min-height: 96px; resize: vertical;
+    font-family: 'Jost', sans-serif; font-size: 17px; font-weight: 300; line-height: 1.6;
+    background: rgba(11,15,36,.6); color: var(--ink);
+    border: 1px solid var(--violet-soft); border-radius: 12px;
+    padding: 16px; margin-bottom: 12px;
+  }
+  textarea::placeholder { color: var(--violet-soft); }
+  textarea:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .hint { color: var(--violet-soft); font-size: 13.5px; text-align: center; margin-bottom: 24px; line-height: 1.5; }
+
+  .btn {
+    display: block; width: 100%;
+    font-family: 'Jost', sans-serif; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    padding: 17px 0; border-radius: 10px; cursor: pointer; text-align: center; text-decoration: none;
+    background: var(--gold); color: var(--navy); border: none;
+    transition: background .2s;
+  }
+  .btn:hover { background: var(--gold-bright); }
+  .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--gold); margin-top: 12px; }
+  .btn-ghost:hover { background: rgba(201,169,110,.12); }
+
+  .recap {
+    background: rgba(18,23,58,.72); border: 1px solid rgba(201,169,110,.45);
+    border-radius: 14px; padding: 26px 24px; margin-bottom: 26px;
+  }
+  .recap .rlabel { font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--violet-soft); font-weight: 600; margin-bottom: 5px; }
+  .recap .rtext { font-size: 16px; line-height: 1.55; margin-bottom: 16px; }
+  .recap .rtext.gold { font-family: 'Cormorant Garamond', serif; font-size: 21px; color: var(--gold-bright); margin-bottom: 0; }
+
+  .dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 30px; }
+  .dots span { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--violet-soft); }
+  .dots span.done { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+  footer { text-align: center; padding: 18px 0 26px; font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--violet-soft); }
+  footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Shining Clarity Coaching</p>
+
+  <!-- START -->
+  <section class="screen on" id="s0">
+    <div class="pulse" aria-hidden="true"></div>
+    <h1>The Loop <em>Interrupt</em></h1>
+    <p class="sub">Spiraling right now? Good &mdash; you caught it while it's running. That's the hardest part, and you already did it.<br><br><strong>Three steps. About 60 seconds.</strong> Breathe with the circle while you're here.</p>
+    <button class="btn" onclick="go(1)">Interrupt It</button>
+  </section>
+
+  <!-- STEP 1 -->
+  <section class="screen" id="s1">
+    <div class="dots"><span class="done"></span><span></span><span></span></div>
+    <p class="steplabel">Step 1 of 3</p>
+    <h2>Name the thought</h2>
+    <p class="sub">One sentence. The loud version, exactly how it sounds in there. Naming it moves it from the part of your brain that panics to the part that observes.</p>
+    <textarea id="t1" placeholder="e.g. &quot;I'm going to mess this up like I always do.&quot;"></textarea>
+    <p class="hint">Nothing you type leaves this device.</p>
+    <button class="btn" onclick="go(2)">Next</button>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="screen" id="s2">
+    <div class="dots"><span class="done"></span><span class="done"></span><span></span></div>
+    <p class="steplabel">Step 2 of 3</p>
+    <h2>Run the camera test</h2>
+    <p class="sub">If a camera had been recording this situation &mdash; no sound track of your thoughts, just footage &mdash; what would it actually show? <strong>Facts only.</strong> No predictions, no mind reading.</p>
+    <textarea id="t2" placeholder="e.g. &quot;I sent the message ten minutes ago. No reply yet. That's all that's actually happened.&quot;"></textarea>
+    <button class="btn" onclick="go(3)">Next</button>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="screen" id="s3">
+    <div class="dots"><span class="done"></span><span class="done"></span><span class="done"></span></div>
+    <p class="steplabel">Step 3 of 3</p>
+    <h2>One accurate sentence</h2>
+    <p class="sub">Rewrite the thought using only what the camera saw. Not positive &mdash; <strong>accurate</strong>. If it's still uncomfortable, that's allowed. Accurate is enough to break the loop.</p>
+    <textarea id="t3" placeholder="e.g. &quot;I don't have a reply yet, and I don't actually know why. Everything else is a story I'm adding.&quot;"></textarea>
+    <button class="btn" onclick="finish()">Done</button>
+  </section>
+
+  <!-- DONE -->
+  <section class="screen" id="s4">
+    <h2>Loop <em>interrupted.</em></h2>
+    <p class="sub">The spiral runs on autopilot. You just took the wheel back &mdash; and every time you do this, the interrupt gets faster and the loop gets weaker. That's not a metaphor. That's how wiring works.</p>
+    <div class="recap" id="recap"></div>
+    <a class="btn" href="thought-record.html">Log It in Your Thought Record</a>
+    <button class="btn btn-ghost" onclick="reset()">Run It Again</button>
+    <a class="btn btn-ghost" href="https://shiningclaritycoaching.com">Start Here</a>
+  </section>
+</div>
+
+<footer><a href="https://shiningclaritycoaching.com">shiningclaritycoaching.com</a></footer>
+
+<script>
+function go(n){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  document.getElementById('s'+n).classList.add('on');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function esc(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function finish(){
+  const t1 = document.getElementById('t1').value.trim();
+  const t2 = document.getElementById('t2').value.trim();
+  const t3 = document.getElementById('t3').value.trim();
+  let html = '';
+  if (t1) html += '<p class="rlabel">The thought</p><p class="rtext">“' + esc(t1) + '”</p>';
+  if (t2) html += '<p class="rlabel">What the camera saw</p><p class="rtext">' + esc(t2) + '</p>';
+  if (t3) html += '<p class="rlabel">The accurate version</p><p class="rtext gold">“' + esc(t3) + '”</p>';
+  if (!html) html = '<p class="rtext">You moved through it without writing &mdash; that works too. The steps count even when they stay in your head.</p>';
+  document.getElementById('recap').innerHTML = html;
+  go(4);
+}
+function reset(){
+  ['t1','t2','t3'].forEach(id => document.getElementById(id).value = '');
+  go(0);
+}
+</script>
+</body>
+</html>
