@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Thought Record | Shining Clarity Coaching</title>
+<meta name="description" content="Catch the thought. Separate fact from story. Spot the distortion. Rewrite it. Track your patterns between sessions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b0f24;
+    --navy-2: #12173a;
+    --violet: #3a2d6e;
+    --violet-soft: #6a5aa8;
+    --gold: #c9a96e;
+    --gold-bright: #D4AF6A;
+    --ink: #e9e6f2;
+    --ink-dim: #a9a4c4;
+    --green: #7fc9a6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(ellipse at 50% -10%, var(--violet) 0%, var(--navy-2) 40%, var(--navy) 80%);
+    min-height: 100vh; color: var(--ink);
+    font-family: 'Jost', sans-serif; font-weight: 300;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 44px 20px 90px; }
+
+  .eyebrow {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold); text-align: center; margin-bottom: 16px; font-weight: 500;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(32px, 6vw, 46px); line-height: 1.14; text-align: center; margin-bottom: 14px;
+  }
+  h1 em { font-style: italic; color: var(--gold-bright); }
+  .lede { text-align: center; color: var(--ink-dim); font-size: 16.5px; line-height: 1.6; max-width: 480px; margin: 0 auto 14px; }
+  .privacy { text-align: center; color: var(--violet-soft); font-size: 13px; margin-bottom: 34px; }
+
+  /* tabs */
+  .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 34px; flex-wrap: wrap; }
+  .tabs button {
+    font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500;
+    background: transparent; color: var(--ink-dim);
+    border: 1px solid var(--violet-soft); border-radius: 999px;
+    padding: 10px 22px; cursor: pointer; transition: all .2s;
+  }
+  .tabs button.active { color: var(--navy); background: var(--gold); border-color: var(--gold); }
+  .tabs button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+
+  .card {
+    background: rgba(18,23,58,.72);
+    border: 1px solid rgba(106,90,168,.35);
+    border-radius: 14px;
+    padding: 30px 26px;
+    margin-bottom: 22px;
+  }
+  .step-label {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 8px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: 24px; margin-bottom: 8px;
+  }
+  .step-help { color: var(--ink-dim); font-size: 14.5px; line-height: 1.6; margin-bottom: 16px; }
+  .step-help strong { color: var(--ink); font-weight: 500; }
+
+  textarea {
+    width: 100%; min-height: 90px; resize: vertical;
+    font-family: 'Jost', sans-serif; font-size: 16px; font-weight: 300; line-height: 1.6;
+    background: rgba(11,15,36,.6); color: var(--ink);
+    border: 1px solid var(--violet-soft); border-radius: 10px;
+    padding: 14px 16px;
+  }
+  textarea::placeholder { color: var(--violet-soft); }
+  textarea:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  /* distortion checklist */
+  .dlist { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 560px){ .dlist { grid-template-columns: 1fr 1fr; } }
+  .ditem {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: rgba(11,15,36,.5);
+    border: 1px solid rgba(106,90,168,.35);
+    border-radius: 10px; padding: 13px 14px;
+    cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .ditem:hover { border-color: var(--gold); }
+  .ditem.checked { border-color: var(--gold-bright); background: rgba(201,169,110,.1); }
+  .ditem input { margin-top: 4px; accent-color: var(--gold-bright); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+  .ditem .dname { font-weight: 500; font-size: 15px; color: var(--ink); }
+  .ditem .ddef { font-size: 13px; color: var(--ink-dim); line-height: 1.5; margin-top: 2px; }
+
+  .btn-solid, .btn-ghost {
+    font-family: 'Jost', sans-serif; font-size: 13.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500;
+    padding: 15px 32px; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block;
+    transition: background .2s;
+  }
+  .btn-solid { background: var(--gold); color: var(--navy); border: none; }
+  .btn-solid:hover { background: var(--gold-bright); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--gold); }
+  .btn-ghost:hover { background: rgba(201,169,110,.12); }
+  .btn-solid:focus-visible, .btn-ghost:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .btn-danger { background: transparent; border: 1px solid rgba(201,127,127,.6); color: #c97f7f; }
+
+  .center { text-align: center; }
+  .saved-flash {
+    display: none; text-align: center; color: var(--green); font-size: 15px; margin-top: 14px;
+  }
+
+  /* entries list */
+  .entry {
+    background: rgba(18,23,58,.72);
+    border: 1px solid rgba(106,90,168,.35);
+    border-radius: 12px; padding: 22px 24px; margin-bottom: 16px;
+  }
+  .entry .edate { font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--violet-soft); margin-bottom: 10px; font-weight: 500; }
+  .entry .ethought { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; line-height: 1.4; margin-bottom: 12px; }
+  .entry .etags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .entry .etag {
+    font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,169,110,.5); border-radius: 999px; padding: 4px 12px;
+  }
+  .entry .ereframe { font-size: 15px; color: var(--ink-dim); line-height: 1.6; }
+  .entry .ereframe strong { color: var(--green); font-weight: 500; }
+  .entry .erow { display: flex; gap: 10px; margin-top: 14px; }
+  .entry .erow button {
+    font-family: 'Jost', sans-serif; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+    background: transparent; border: none; color: var(--violet-soft); cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  }
+  .entry .erow button:hover { color: var(--gold); }
+  .entry .efull { display: none; margin-top: 14px; border-top: 1px solid rgba(106,90,168,.3); padding-top: 14px; }
+  .entry .efull.open { display: block; }
+  .efull p { font-size: 14.5px; line-height: 1.65; color: var(--ink-dim); margin-bottom: 10px; }
+  .efull .flabel { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 3px; }
+
+  .empty-state { text-align: center; color: var(--ink-dim); padding: 40px 20px; line-height: 1.7; }
+
+  /* patterns */
+  .pbar-row { margin-bottom: 16px; }
+  .pbar-label { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px; }
+  .pbar-label .pcount { color: var(--gold-bright); font-weight: 500; }
+  .pbar-track { height: 8px; border-radius: 999px; background: rgba(11,15,36,.6); overflow: hidden; }
+  .pbar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--violet-soft), var(--gold-bright)); transition: width .6s ease; }
+
+  .hidden { display: none !important; }
+
+  footer { text-align: center; margin-top: 46px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--violet-soft); }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* print / session export */
+  @media print {
+    body { background: #fff; color: #111; }
+    .tabs, .privacy, footer, .no-print, .btn-solid, .btn-ghost, .erow { display: none !important; }
+    .wrap { padding: 0; max-width: 100%; }
+    h1, h1 em { color: #111; }
+    .eyebrow { color: #555; }
+    .entry { border: 1px solid #999; background: #fff; page-break-inside: avoid; }
+    .entry .ethought { color: #111; }
+    .entry .edate, .efull p { color: #333; }
+    .entry .etag { color: #555; border-color: #999; }
+    .efull { display: block !important; border-top: 1px solid #ccc; }
+    .efull .flabel { color: #555; }
+    .entry .ereframe strong { color: #111; }
+    .lede { color: #333; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Shining Clarity Coaching</p>
+  <h1>The Thought <em>Record</em></h1>
+  <p class="lede">Catch the thought. Separate fact from story. Name the distortion. Rewrite it without one. Your patterns become visible &mdash; and that's where they lose their power.</p>
+  <p class="privacy no-print">Everything you write stays on this device only. Nothing is sent anywhere.</p>
+
+  <div class="tabs no-print">
+    <button class="active" id="tabNew" onclick="switchTab('new')">New Entry</button>
+    <button id="tabEntries" onclick="switchTab('entries')">My Entries</button>
+    <button id="tabPatterns" onclick="switchTab('patterns')">My Patterns</button>
+  </div>
+
+  <!-- NEW ENTRY -->
+  <section id="viewNew">
+    <div class="card">
+      <p class="step-label">Step 1</p>
+      <p class="step-title">The Thought</p>
+      <p class="step-help">Write it exactly how it sounded in your head. Don't clean it up &mdash; the raw version is the useful one.</p>
+      <textarea id="fThought" placeholder="e.g. &quot;I completely blew that conversation. She probably thinks I'm an idiot now.&quot;"></textarea>
+    </div>
+
+    <div class="card">
+      <p class="step-label">Step 2</p>
+      <p class="step-title">Just the Facts</p>
+      <p class="step-help">Only what a <strong>camera would have recorded</strong>. No interpretations, no guesses about what anyone thinks, no predictions. If it's not indisputable, it doesn't go here.</p>
+      <textarea id="fFacts" placeholder="e.g. &quot;I paused mid-sentence twice. She checked her phone once. The conversation lasted about ten minutes and ended with her saying 'talk soon.'&quot;"></textarea>
+    </div>
+
+    <div class="card">
+      <p class="step-label">Step 3</p>
+      <p class="step-title">Spot the Distortion</p>
+      <p class="step-help">Compare the thought to the facts. Where's the gap? Check every distortion doing work in that thought &mdash; there's usually more than one.</p>
+      <div class="dlist" id="dlist"></div>
+    </div>
+
+    <div class="card">
+      <p class="step-label">Step 4</p>
+      <p class="step-title">Evidence Against It</p>
+      <p class="step-help">What does the distorted thought conveniently ignore? Past evidence, present facts, anything real that argues the other side.</p>
+      <textarea id="fEvidence" placeholder="e.g. &quot;She's initiated our last three conversations. Last month she asked my opinion on her project. 'Talk soon' is not what people say to idiots.&quot;"></textarea>
+    </div>
+
+    <div class="card">
+      <p class="step-label">Step 5</p>
+      <p class="step-title">The Rewrite</p>
+      <p class="step-help">Same situation, minus the distortion. Not forced positivity &mdash; just <strong>accurate</strong>. If the honest version is still uncomfortable, that's allowed. Accurate beats comfortable.</p>
+      <textarea id="fReframe" placeholder="e.g. &quot;I stumbled a couple times in a ten-minute conversation that ended normally. I have no actual evidence about what she thinks &mdash; and plenty that she values talking to me.&quot;"></textarea>
+    </div>
+
+    <div class="center no-print">
+      <button class="btn-solid" onclick="saveEntry()">Save This Entry</button>
+      <p class="saved-flash" id="savedFlash">Saved. That's one more pattern on the record instead of running in the dark.</p>
+    </div>
+  </section>
+
+  <!-- ENTRIES -->
+  <section id="viewEntries" class="hidden">
+    <div class="center no-print" style="margin-bottom:22px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-ghost" onclick="window.print()">Print / Save PDF for Session</button>
+      <button class="btn-ghost btn-danger" onclick="clearAll()">Delete All Entries</button>
+    </div>
+    <div id="entriesList"></div>
+  </section>
+
+  <!-- PATTERNS -->
+  <section id="viewPatterns" class="hidden">
+    <div class="card">
+      <p class="step-label">Your Most Frequent Distortions</p>
+      <p class="step-help" style="margin-top:8px">This is the map of your loop. The one at the top isn't a flaw &mdash; it's the pathway your brain has practiced most. Which means it's also the one with the most room to rewire.</p>
+      <div id="patternBars" style="margin-top:20px"></div>
+    </div>
+  </section>
+
+  <footer><a href="https://shiningclaritycoaching.com">shiningclaritycoaching.com</a></footer>
+</div>
+
+<script>
+const DISTORTIONS = [
+  { id:'aon',  name:'All-or-Nothing Thinking', def:'It was perfect or it was a failure. No middle exists.' },
+  { id:'cat',  name:'Catastrophizing', def:'Fast-forwarding straight to the worst possible ending.' },
+  { id:'mind', name:'Mind Reading', def:'Deciding what someone thinks of you with zero evidence.' },
+  { id:'fort', name:'Fortune Telling', def:'Predicting failure and treating the prediction as fact.' },
+  { id:'emo',  name:'Emotional Reasoning', def:'"I feel it, so it must be true."' },
+  { id:'over', name:'Overgeneralization', def:'One event becomes "always" or "never."' },
+  { id:'filt', name:'Mental Filter', def:'One negative detail cancels everything else that happened.' },
+  { id:'disc', name:'Discounting the Positive', def:'Good things "don’t count" or "anyone could have done that."' },
+  { id:'shld', name:'Should Statements', def:'Rigid rules about how you (or others) must be, with guilt as the penalty.' },
+  { id:'labl', name:'Labeling', def:'"I’m lazy" instead of "I skipped one day."' },
+  { id:'pers', name:'Personalization', def:'Taking the blame for things that were never in your control.' },
+  { id:'preq', name:'Preemptive Disqualifying', def:'Rejecting yourself first so no one else gets the chance.' },
+  { id:'scor', name:'Silent Scorekeeping', def:'Tracking unspoken debts and grading people on tests they don’t know they’re taking.' }
+];
+
+const KEY = 'scc_thought_records';
+
+// build distortion checklist
+const dlist = document.getElementById('dlist');
+DISTORTIONS.forEach(d => {
+  const label = document.createElement('label');
+  label.className = 'ditem';
+  label.innerHTML = '<input type="checkbox" value="' + d.id + '">' +
+    '<span><span class="dname">' + d.name + '</span><br><span class="ddef">' + d.def + '</span></span>';
+  label.querySelector('input').addEventListener('change', function(){
+    label.classList.toggle('checked', this.checked);
+  });
+  dlist.appendChild(label);
+});
+
+function getEntries(){
+  try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+  catch(e){ return []; }
+}
+function setEntries(arr){ localStorage.setItem(KEY, JSON.stringify(arr)); }
+
+function saveEntry(){
+  const thought = document.getElementById('fThought').value.trim();
+  if (!thought){ document.getElementById('fThought').focus(); return; }
+  const checked = [...document.querySelectorAll('.dlist input:checked')].map(i => i.value);
+  const entry = {
+    date: new Date().toISOString(),
+    thought,
+    facts: document.getElementById('fFacts').value.trim(),
+    distortions: checked,
+    evidence: document.getElementById('fEvidence').value.trim(),
+    reframe: document.getElementById('fReframe').value.trim()
+  };
+  const all = getEntries();
+  all.unshift(entry);
+  setEntries(all);
+  // reset form
+  ['fThought','fFacts','fEvidence','fReframe'].forEach(id => document.getElementById(id).value = '');
+  document.querySelectorAll('.dlist input').forEach(i => { i.checked = false; i.closest('.ditem').classList.remove('checked'); });
+  const flash = document.getElementById('savedFlash');
+  flash.style.display = 'block';
+  setTimeout(() => flash.style.display = 'none', 3500);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function dname(id){ const d = DISTORTIONS.find(x => x.id === id); return d ? d.name : id; }
+
+function fmtDate(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' }) +
+    ' · ' + d.toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
+}
+
+function renderEntries(){
+  const list = document.getElementById('entriesList');
+  const all = getEntries();
+  if (!all.length){
+    list.innerHTML = '<div class="empty-state">No entries yet. The next time a thought hits hard, come catch it here.<br>The pattern can’t hide once it’s on paper.</div>';
+    return;
+  }
+  list.innerHTML = all.map((e, i) => {
+    const tags = e.distortions.map(d => '<span class="etag">' + dname(d) + '</span>').join('');
+    return '<div class="entry">' +
+      '<p class="edate">' + fmtDate(e.date) + '</p>' +
+      '<p class="ethought">“' + esc(e.thought) + '”</p>' +
+      (tags ? '<div class="etags">' + tags + '</div>' : '') +
+      (e.reframe ? '<p class="ereframe"><strong>Rewritten:</strong> ' + esc(e.reframe) + '</p>' : '') +
+      '<div class="erow no-print">' +
+        '<button onclick="toggleFull(' + i + ')">Full entry</button>' +
+        '<button onclick="deleteEntry(' + i + ')">Delete</button>' +
+      '</div>' +
+      '<div class="efull" id="full' + i + '">' +
+        (e.facts ? '<p><span class="flabel">Just the facts</span><br>' + esc(e.facts) + '</p>' : '') +
+        (e.evidence ? '<p><span class="flabel">Evidence against the distortion</span><br>' + esc(e.evidence) + '</p>' : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function esc(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function toggleFull(i){ document.getElementById('full' + i).classList.toggle('open'); }
+
+function deleteEntry(i){
+  if (!confirm('Delete this entry? This can’t be undone.')) return;
+  const all = getEntries(); all.splice(i,1); setEntries(all); renderEntries();
+}
+
+function clearAll(){
+  if (!confirm('Delete ALL entries from this device? This can’t be undone.')) return;
+  localStorage.removeItem(KEY); renderEntries();
+}
+
+function renderPatterns(){
+  const wrap = document.getElementById('patternBars');
+  const all = getEntries();
+  const counts = {};
+  all.forEach(e => e.distortions.forEach(d => counts[d] = (counts[d]||0)+1));
+  const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  if (!sorted.length){
+    wrap.innerHTML = '<div class="empty-state">No patterns yet &mdash; save a few entries and your map will build itself.</div>';
+    return;
+  }
+  const max = sorted[0][1];
+  wrap.innerHTML = sorted.map(([id, n]) =>
+    '<div class="pbar-row">' +
+      '<div class="pbar-label"><span>' + dname(id) + '</span><span class="pcount">' + n + '×</span></div>' +
+      '<div class="pbar-track"><div class="pbar-fill" style="width:' + Math.round(n/max*100) + '%"></div></div>' +
+    '</div>'
+  ).join('');
+}
+
+function switchTab(t){
+  ['New','Entries','Patterns'].forEach(x => {
+    document.getElementById('tab' + x).classList.toggle('active', x.toLowerCase() === t);
+    document.getElementById('view' + x).classList.toggle('hidden', x.toLowerCase() !== t);
+  });
+  if (t === 'entries') renderEntries();
+  if (t === 'patterns') renderPatterns();
+}
+</script>
+</body>
+</html>
