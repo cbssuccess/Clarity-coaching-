@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Excuse Translator | Shining Clarity Coaching</title>
+<meta name="description" content="Pick your favorite excuse. We'll tell you what it's actually saying. You won't like it. Do it anyway.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b0f24;
+    --navy-2: #12173a;
+    --violet: #3a2d6e;
+    --violet-soft: #6a5aa8;
+    --gold: #c9a96e;
+    --gold-bright: #D4AF6A;
+    --ink: #e9e6f2;
+    --ink-dim: #a9a4c4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(ellipse at 50% -10%, var(--violet) 0%, var(--navy-2) 40%, var(--navy) 80%);
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .stars span {
+    position: absolute; border-radius: 50%; background: var(--gold);
+    opacity: .3; animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100%{opacity:.12} 50%{opacity:.45} }
+  @media (prefers-reduced-motion: reduce) {
+    .stars span { animation: none; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 48px 22px 80px; }
+
+  .eyebrow {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold); text-align: center; margin-bottom: 18px; font-weight: 500;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(34px, 6vw, 50px); line-height: 1.12; text-align: center; margin-bottom: 18px;
+  }
+  h1 em { font-style: italic; color: var(--gold-bright); }
+  .lede {
+    text-align: center; color: var(--ink-dim); font-size: 17px; line-height: 1.6;
+    max-width: 440px; margin: 0 auto 40px;
+  }
+
+  .picker-label {
+    font-size: 12px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--violet-soft); text-align: center; margin-bottom: 18px; font-weight: 500;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+  .chips button {
+    font-family: 'Jost', sans-serif; font-size: 14.5px; font-weight: 400;
+    color: var(--ink);
+    background: rgba(18,23,58,.6);
+    border: 1px solid var(--violet-soft);
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .1s;
+  }
+  .chips button:hover { border-color: var(--gold); background: rgba(201,169,110,.1); }
+  .chips button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+  .chips button.active { border-color: var(--gold-bright); background: rgba(201,169,110,.16); color: var(--gold-bright); }
+  .random-btn {
+    display: block; margin: 0 auto 40px;
+    font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    background: transparent; color: var(--gold); border: none; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 4px;
+  }
+
+  /* the translation card — the screenshot */
+  .tcard {
+    display: none;
+    background: linear-gradient(160deg, rgba(26,32,74,.92), rgba(13,17,42,.95));
+    border: 1px solid rgba(201,169,110,.45);
+    border-radius: 16px;
+    padding: 38px 34px 30px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.45);
+    position: relative;
+  }
+  .tcard.show { display: block; animation: cardIn .5s ease; }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(14px) scale(.98);} to { opacity: 1; transform: none;} }
+
+  .tlabel {
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--violet-soft); font-weight: 600; margin-bottom: 10px;
+  }
+  .tlabel.gold { color: var(--gold); }
+  .excuse-line {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(22px, 4.5vw, 28px); line-height: 1.35; margin-bottom: 26px;
+  }
+  .excuse-line::before { content: '\201C'; color: var(--violet-soft); }
+  .excuse-line::after { content: '\201D'; color: var(--violet-soft); }
+
+  .arrow {
+    text-align: center; color: var(--gold); font-size: 20px; margin: 0 0 26px;
+    letter-spacing: .3em;
+  }
+
+  .translation {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(24px, 5vw, 30px); line-height: 1.35;
+    color: var(--gold-bright); margin-bottom: 30px;
+  }
+  .tell {
+    font-size: 15.5px; line-height: 1.65; color: var(--ink-dim);
+    border-left: 2px solid var(--violet-soft);
+    padding-left: 16px; margin-bottom: 26px;
+  }
+  .tell strong { color: var(--ink); font-weight: 500; }
+  .dare {
+    font-size: 16.5px; line-height: 1.6; color: var(--ink); font-weight: 400;
+  }
+  .dare::before {
+    content: 'The dare'; display: block;
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 8px;
+  }
+  .brandline {
+    margin-top: 30px; padding-top: 18px;
+    border-top: 1px solid rgba(106,90,168,.3);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+  .brandline .site {
+    font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--violet-soft);
+  }
+  .brandline .tag {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: var(--gold);
+  }
+
+  .actions { display: flex; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+  .btn-solid, .btn-ghost {
+    font-family: 'Jost', sans-serif; font-size: 13.5px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    padding: 14px 30px; border-radius: 8px; cursor: pointer; text-decoration: none; text-align: center;
+    transition: background .2s;
+  }
+  .btn-solid { background: var(--gold); color: var(--navy); border: none; }
+  .btn-solid:hover { background: var(--gold-bright); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--gold); }
+  .btn-ghost:hover { background: rgba(201,169,110,.12); }
+  .btn-solid:focus-visible, .btn-ghost:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  .share-hint { text-align: center; color: var(--violet-soft); font-size: 13.5px; margin-top: 20px; }
+
+  footer {
+    text-align: center; margin-top: 54px;
+    font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--violet-soft);
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<div class="wrap">
+  <p class="eyebrow">Shining Clarity Coaching</p>
+  <h1>The Excuse <em>Translator</em></h1>
+  <p class="lede">Pick the one you say most. We'll translate what it's actually saying. Fair warning: it knew you'd pick that one.</p>
+
+  <p class="picker-label">Choose your excuse</p>
+  <div class="chips" id="chips" role="group" aria-label="Choose an excuse to translate"></div>
+  <button class="random-btn" onclick="randomPick()">Can't decide? Translate a random one</button>
+
+  <div class="tcard" id="tcard" aria-live="polite">
+    <p class="tlabel">What you said</p>
+    <p class="excuse-line" id="cExcuse"></p>
+    <p class="arrow">&darr;</p>
+    <p class="tlabel gold">What it's actually saying</p>
+    <p class="translation" id="cTranslation"></p>
+    <p class="tell" id="cTell"></p>
+    <p class="dare" id="cDare"></p>
+    <div class="brandline">
+      <span class="tag">Prove us wrong.</span>
+      <span class="site">shiningclaritycoaching.com</span>
+    </div>
+  </div>
+
+  <div class="actions" id="actions" style="display:none">
+    <button class="btn-ghost" onclick="randomPick()">Translate Another</button>
+    <a class="btn-solid" href="https://shiningclaritycoaching.com">Start Here</a>
+  </div>
+  <p class="share-hint" id="shareHint" style="display:none">Screenshot the one that stung. Send it to the friend who says it.</p>
+
+  <footer><a href="https://shiningclaritycoaching.com">shiningclaritycoaching.com</a></footer>
+</div>
+
+<script>
+const EXCUSES = [
+  {
+    chip: "I'll start when things calm down",
+    excuse: "I'll start when things calm down.",
+    translation: "I don't trust myself to follow through unless conditions are perfect.",
+    tell: "<strong>The tell:</strong> sometimes life genuinely is on fire, and waiting is wisdom. But count the times things did calm down &mdash; and you still didn't start. If that number is above zero, it was never about the calm.",
+    dare: "Things calmed down in March. And again in June. Circle the one where you started."
+  },
+  {
+    chip: "I'm still doing research",
+    excuse: "I'm still doing research.",
+    translation: "If I know enough, I can't be blamed for failing.",
+    tell: "<strong>The tell:</strong> real preparation has an end date and a next step. If you've consumed ten times more than you've applied, you're not researching &mdash; you're hiding somewhere that looks productive.",
+    dare: "Name the specific fact you're missing. Can't? The research phase ended a while ago."
+  },
+  {
+    chip: "I work better under pressure",
+    excuse: "I work better under pressure.",
+    translation: "I only feel permission to act when there's an emergency.",
+    tell: "<strong>The tell:</strong> some people genuinely thrive on deadlines. The difference is whether you can also act without one. If panic is the only fuel your engine accepts, that's not a work style &mdash; that's a rule about when you're allowed to matter.",
+    dare: "Do one important thing this week with zero deadline attached. Watch what your brain does."
+  },
+  {
+    chip: "I don't want to half-do it",
+    excuse: "I'm waiting until I can do it right.",
+    translation: "If it's not perfect, it counts as evidence against me.",
+    tell: "<strong>The tell:</strong> high standards finish things at high quality. Perfectionism prevents things from starting. One produces work; the other produces waiting. Check your output, not your intentions.",
+    dare: "Do it at 70% and post it anyway. The discomfort you feel is the belief we'd be working on."
+  },
+  {
+    chip: "It's just not the right time",
+    excuse: "It's just not the right time.",
+    translation: "I'm waiting to become a version of me who feels ready. She's not coming.",
+    tell: "<strong>The tell:</strong> real timing problems have specifics &mdash; a date, a dollar amount, an event. \"Not the right time\" with no specifics attached isn't timing. It's a feeling wearing a calendar as a disguise.",
+    dare: "Define exactly what 'the right time' looks like. If you can't, you just found the loop."
+  },
+  {
+    chip: "I'm too busy right now",
+    excuse: "I'm too busy right now.",
+    translation: "Everyone else's needs are automatic. Mine require a permission slip.",
+    tell: "<strong>The tell:</strong> busy is real &mdash; you have an actual life. But your phone knows exactly how many hours went to things that didn't scare you this week. Busy protects you from the scary thing specifically, not from everything.",
+    dare: "You found four hours this week for things that asked nothing of you. The math isn't the problem."
+  },
+  {
+    chip: "I've tried everything",
+    excuse: "I've tried everything.",
+    translation: "If everything's been tried, I never have to try the thing that actually scares me.",
+    tell: "<strong>The tell:</strong> \"everything\" usually means every surface-level tactic &mdash; apps, planners, routines, podcasts. The belief underneath the pattern? Almost nobody has tried working there. That's not a criticism. It's just not on the list of things you tried.",
+    dare: "List what you've tried. Notice how every item on it was safe."
+  },
+  {
+    chip: "I'm just not motivated",
+    excuse: "I'm just not motivated.",
+    translation: "I'm waiting to feel like it first &mdash; because I treat my feelings as facts.",
+    tell: "<strong>The tell:</strong> motivation is real, and burnout is real &mdash; sometimes the tank is genuinely empty and rest is the answer. But if you're rested and still waiting for the feeling to arrive before you move, you've got the order backwards. Action creates the feeling. Not the other way around.",
+    dare: "Do it unmotivated. Do it badly, even. Motivation shows up around minute eleven."
+  },
+  {
+    chip: "I don't want to be cringe",
+    excuse: "I don't want to be one of those people.",
+    translation: "If nobody sees me try, nobody gets to see me fail.",
+    tell: "<strong>The tell:</strong> taste is fine &mdash; you're allowed to not want to be cheesy. But there's a difference between adjusting your style and deleting your visibility. One edits the work. The other makes sure there's no work to judge.",
+    dare: "Whose opinion, specifically, are you pre-losing to? Name them. Now ask if they're living your life."
+  },
+  {
+    chip: "I need to understand why first",
+    excuse: "I need to figure out why I do this first.",
+    translation: "Understanding feels like progress &mdash; and it's much safer than changing.",
+    tell: "<strong>The tell:</strong> insight matters. It's half the work. But if you've understood the same pattern from six different angles across three years, more understanding isn't the missing piece. At some point the map is done and the walking hasn't started.",
+    dare: "You already know why. Say the sentence out loud. Now do the thing anyway."
+  },
+  {
+    chip: "Other people have it worse",
+    excuse: "Other people have it worse. I shouldn't complain.",
+    translation: "My struggle has to qualify before it deserves attention.",
+    tell: "<strong>The tell:</strong> perspective is healthy. But somebody having a broken leg doesn't make your sprained ankle imaginary &mdash; and refusing to treat it doesn't help them walk. Pain isn't a competition with a podium.",
+    dare: "Notice you'd never apply this rule to someone you love. Just you. Ask why you're the exception."
+  },
+  {
+    chip: "I'll do it tomorrow",
+    excuse: "I'll do it tomorrow.",
+    translation: "Tomorrow-me is a fictional character with better follow-through than I've ever had.",
+    tell: "<strong>The tell:</strong> honest scheduling says \"tomorrow at 9, here's how.\" The loop version has no time, no plan, and a suspicious sense of relief the moment you say it. That relief is the tell &mdash; you didn't schedule the task, you escaped it.",
+    dare: "You've met tomorrow-you hundreds of times. What does she actually do?"
+  }
+];
+
+// starfield
+(function(){
+  const c = document.getElementById('stars');
+  for (let i=0;i<60;i++){
+    const s = document.createElement('span');
+    const size = Math.random()*2+1;
+    s.style.width = s.style.height = size+'px';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    c.appendChild(s);
+  }
+})();
+
+// build chips
+const chipsEl = document.getElementById('chips');
+EXCUSES.forEach((e, i) => {
+  const b = document.createElement('button');
+  b.textContent = '“' + e.chip + '”';
+  b.onclick = () => show(i, b);
+  chipsEl.appendChild(b);
+});
+
+let lastIdx = -1;
+function show(i, btn){
+  lastIdx = i;
+  document.querySelectorAll('.chips button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const e = EXCUSES[i];
+  document.getElementById('cExcuse').textContent = e.excuse;
+  document.getElementById('cTranslation').textContent = e.translation;
+  document.getElementById('cTell').innerHTML = e.tell;
+  document.getElementById('cDare').textContent = e.dare;
+  const card = document.getElementById('tcard');
+  card.classList.remove('show');
+  void card.offsetWidth; // restart animation
+  card.classList.add('show');
+  document.getElementById('actions').style.display = 'flex';
+  document.getElementById('shareHint').style.display = 'block';
+  card.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function randomPick(){
+  let i;
+  do { i = Math.floor(Math.random()*EXCUSES.length); } while (i === lastIdx && EXCUSES.length > 1);
+  const btn = document.querySelectorAll('.chips button')[i];
+  show(i, btn);
+}
+</script>
+</body>
+</html>
