@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Loop Cost Calculator | Shining Clarity Coaching</title>
+<meta name="description" content="Years stuck. Restarts. Courses bought. Hours overthinking. See the real number your loop has been charging you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b0f24; --navy-2: #12173a; --violet: #3a2d6e; --violet-soft: #6a5aa8;
+    --gold: #c9a96e; --gold-bright: #D4AF6A; --ink: #e9e6f2; --ink-dim: #a9a4c4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(ellipse at 50% -10%, var(--violet) 0%, var(--navy-2) 40%, var(--navy) 80%);
+    min-height: 100vh; color: var(--ink);
+    font-family: 'Jost', sans-serif; font-weight: 300;
+  }
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .stars span { position: absolute; border-radius: 50%; background: var(--gold); opacity: .3; animation: twinkle 4s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100%{opacity:.12} 50%{opacity:.45} }
+  @media (prefers-reduced-motion: reduce){ .stars span { animation: none; } * { transition: none !important; } }
+
+  .wrap { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 48px 22px 90px; }
+
+  .eyebrow { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 18px; font-weight: 500; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(34px, 6vw, 48px); line-height: 1.12; text-align: center; margin-bottom: 16px; }
+  h1 em { font-style: italic; color: var(--gold-bright); }
+  .lede { text-align: center; color: var(--ink-dim); font-size: 16.5px; line-height: 1.6; max-width: 460px; margin: 0 auto 42px; }
+
+  .q {
+    background: rgba(18,23,58,.72);
+    border: 1px solid rgba(106,90,168,.35);
+    border-radius: 14px;
+    padding: 26px 26px 30px;
+    margin-bottom: 18px;
+  }
+  .q .qtitle { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 21px; margin-bottom: 4px; }
+  .q .qsub { color: var(--ink-dim); font-size: 13.5px; line-height: 1.5; margin-bottom: 20px; }
+  .q .val { font-size: 30px; font-weight: 400; color: var(--gold-bright); text-align: center; margin-bottom: 14px; font-family: 'Cormorant Garamond', serif; }
+  input[type=range] {
+    width: 100%; accent-color: var(--gold-bright); cursor: pointer; height: 28px;
+  }
+  input[type=range]:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+  .calc-btn {
+    display: block; width: 100%;
+    font-family: 'Jost', sans-serif; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    padding: 17px 0; margin-top: 26px;
+    background: var(--gold); color: var(--navy); border: none; border-radius: 10px; cursor: pointer;
+    transition: background .2s;
+  }
+  .calc-btn:hover { background: var(--gold-bright); }
+  .calc-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* results card */
+  .rcard {
+    display: none;
+    background: linear-gradient(160deg, rgba(26,32,74,.94), rgba(13,17,42,.96));
+    border: 1px solid rgba(201,169,110,.5);
+    border-radius: 16px;
+    padding: 40px 32px 28px;
+    margin-top: 34px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.45);
+  }
+  .rcard.show { display: block; animation: cardIn .5s ease; }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: none;} }
+
+  .rcard .rhead {
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--violet-soft); font-weight: 600; text-align: center; margin-bottom: 26px;
+  }
+  .stat { text-align: center; margin-bottom: 26px; }
+  .stat .num {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: clamp(40px, 9vw, 54px); color: var(--gold-bright); line-height: 1;
+  }
+  .stat .lbl { font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-dim); margin-top: 6px; }
+  .statrow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .statrow .stat .num { font-size: clamp(30px, 6vw, 38px); }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--violet-soft), transparent); margin: 6px 0 24px; opacity: .5; }
+
+  .honest {
+    font-size: 15.5px; line-height: 1.7; color: var(--ink-dim); text-align: center; margin-bottom: 22px;
+  }
+  .honest strong { color: var(--ink); font-weight: 500; }
+  .flip {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(20px, 4.5vw, 24px); line-height: 1.45; color: var(--gold-bright);
+    text-align: center; margin-bottom: 26px;
+  }
+  .brandline {
+    padding-top: 18px; border-top: 1px solid rgba(106,90,168,.3);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+  .brandline .tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: var(--gold); }
+  .brandline .site { font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--violet-soft); }
+
+  .actions { display: none; gap: 12px; justify-content: center; margin-top: 26px; flex-wrap: wrap; }
+  .actions.show { display: flex; }
+  .btn-solid, .btn-ghost {
+    font-family: 'Jost', sans-serif; font-size: 13.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500;
+    padding: 15px 32px; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block; text-align: center;
+    transition: background .2s;
+  }
+  .btn-solid { background: var(--gold); color: var(--navy); border: none; }
+  .btn-solid:hover { background: var(--gold-bright); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--gold); }
+  .btn-ghost:hover { background: rgba(201,169,110,.12); }
+  .share-hint { display: none; text-align: center; color: var(--violet-soft); font-size: 13.5px; margin-top: 18px; }
+  .share-hint.show { display: block; }
+
+  footer { text-align: center; margin-top: 52px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--violet-soft); }
+  footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<div class="wrap">
+  <p class="eyebrow">Shining Clarity Coaching</p>
+  <h1>The Loop <em>Cost</em> Calculator</h1>
+  <p class="lede">The loop doesn't send a bill. It just quietly charges you &mdash; in time, money, and restarts. Four sliders. Let's see the invoice.</p>
+
+  <div class="q">
+    <p class="qtitle">How long have you been in this loop?</p>
+    <p class="qsub">The same pattern &mdash; however many shapes it's worn.</p>
+    <p class="val" id="vYears">3 years</p>
+    <input type="range" id="sYears" min="1" max="40" step="1" value="6" aria-label="Years in the loop (in half-year steps)">
+  </div>
+
+  <div class="q">
+    <p class="qtitle">How many times have you restarted?</p>
+    <p class="qsub">New plans, fresh Mondays, "this time for real" &mdash; count them all.</p>
+    <p class="val" id="vRestarts">10 restarts</p>
+    <input type="range" id="sRestarts" min="0" max="50" step="1" value="10" aria-label="Number of restarts">
+  </div>
+
+  <div class="q">
+    <p class="qtitle">Money spent on fixes that didn't stick?</p>
+    <p class="qsub">Books, courses, apps, planners, programs. Rough guess is fine.</p>
+    <p class="val" id="vMoney">$500</p>
+    <input type="range" id="sMoney" min="0" max="10000" step="50" value="500" aria-label="Money spent in dollars">
+  </div>
+
+  <div class="q">
+    <p class="qtitle">Hours per week spent overthinking it?</p>
+    <p class="qsub">Ruminating, replaying, planning-without-doing, lying awake.</p>
+    <p class="val" id="vHours">5 hours / week</p>
+    <input type="range" id="sHours" min="0" max="40" step="1" value="5" aria-label="Hours per week overthinking">
+  </div>
+
+  <button class="calc-btn" onclick="calculate()">Show Me the Invoice</button>
+
+  <div class="rcard" id="rcard">
+    <p class="rhead">What the loop has charged you</p>
+    <div class="stat">
+      <p class="num" id="rHours">0</p>
+      <p class="lbl">hours of your life spent overthinking</p>
+    </div>
+    <div class="statrow">
+      <div class="stat">
+        <p class="num" id="rWeeks">0</p>
+        <p class="lbl" id="rWeeksLbl">full waking weeks</p>
+      </div>
+      <div class="stat">
+        <p class="num" id="rMoney">$0</p>
+        <p class="lbl">spent on fixes that didn't stick</p>
+      </div>
+    </div>
+    <div class="stat">
+      <p class="num" id="rRestarts">0</p>
+      <p class="lbl">restarts &mdash; and it's still here</p>
+    </div>
+    <div class="divider"></div>
+    <p class="honest" id="honestText"></p>
+    <p class="flip" id="flipText"></p>
+    <div class="brandline">
+      <span class="tag">The loop is expensive. You weren't.</span>
+      <span class="site">shiningclaritycoaching.com</span>
+    </div>
+  </div>
+
+  <div class="actions" id="actions">
+    <a class="btn-solid" href="https://shiningclaritycoaching.com">Start Here</a>
+    <a class="btn-ghost" href="free-tools.html">More Free Tools</a>
+  </div>
+  <p class="share-hint" id="shareHint">Screenshot your invoice. Send it to the friend who's paying the same one.</p>
+
+  <footer><a href="https://shiningclaritycoaching.com">shiningclaritycoaching.com</a></footer>
+</div>
+
+<script>
+(function(){
+  const c = document.getElementById('stars');
+  for (let i=0;i<60;i++){
+    const s = document.createElement('span');
+    const size = Math.random()*2+1;
+    s.style.width = s.style.height = size+'px';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    c.appendChild(s);
+  }
+})();
+
+// slider displays — years slider is in half-year steps (value/2)
+function years(){ return document.getElementById('sYears').value / 2; }
+function yearsLabel(y){ return (y % 1 === 0 ? y : y.toFixed(1)) + (y === 1 ? ' year' : ' years'); }
+
+const S = id => document.getElementById(id);
+S('sYears').addEventListener('input', e => S('vYears').textContent = yearsLabel(e.target.value/2));
+S('sRestarts').addEventListener('input', e => S('vRestarts').textContent = e.target.value + (e.target.value == 1 ? ' restart' : ' restarts') + (e.target.value == 50 ? '+' : ''));
+S('sMoney').addEventListener('input', e => S('vMoney').textContent = '$' + Number(e.target.value).toLocaleString() + (e.target.value == 10000 ? '+' : ''));
+S('sHours').addEventListener('input', e => S('vHours').textContent = e.target.value + (e.target.value == 1 ? ' hour / week' : ' hours / week'));
+// init labels
+S('vYears').textContent = yearsLabel(years());
+
+function countUp(el, target, prefix, suffix, dur){
+  prefix = prefix || ''; suffix = suffix || ''; dur = dur || 1200;
+  const start = performance.now();
+  function tick(now){
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function calculate(){
+  const y = years();
+  const restarts = Number(S('sRestarts').value);
+  const money = Number(S('sMoney').value);
+  const hrsWk = Number(S('sHours').value);
+
+  const totalHours = Math.round(y * 52 * hrsWk);
+  // waking weeks: 16 waking hours/day * 7 = 112 hrs per waking week
+  const wakingWeeks = totalHours / 112;
+  let weeksVal, weeksLbl;
+  if (wakingWeeks >= 1){
+    weeksVal = Math.round(wakingWeeks * 10) / 10;
+    weeksLbl = 'full waking weeks — awake, and gone';
+  } else {
+    weeksVal = Math.round(totalHours / 16 * 10) / 10;
+    weeksLbl = 'full waking days — awake, and gone';
+  }
+
+  const card = S('rcard');
+  card.classList.remove('show'); void card.offsetWidth; card.classList.add('show');
+
+  countUp(S('rHours'), totalHours);
+  // weeks may be decimal — handle separately
+  (function(){
+    const el = S('rWeeks'); const target = weeksVal;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / 1200, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (Math.round(target * eased * 10) / 10).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+  S('rWeeksLbl').textContent = weeksLbl;
+  countUp(S('rMoney'), money, '$');
+  countUp(S('rRestarts'), restarts);
+
+  // honest reframe — accuracy guardrail: effort was never the problem
+  let honest;
+  if (restarts >= 5 || money >= 500){
+    honest = 'Read that number again — because here’s what it actually proves: <strong>you never stopped trying.</strong> Lazy people don’t restart ' + restarts + ' times. Uncommitted people don’t spend that. Effort was never your problem. You’ve been paying full price to work at the behavior level, while the loop runs at the belief level.';
+  } else {
+    honest = 'Whatever this number is, here’s what it isn’t: proof that something’s wrong with you. It’s proof the loop has a cost — and that the usual fixes weren’t aimed at the level where it lives. <strong>Behaviors are the symptom. The belief underneath is the source.</strong>';
+  }
+  S('honestText').innerHTML = honest;
+
+  const nextYearHours = Math.round(52 * hrsWk);
+  S('flipText').textContent = nextYearHours > 0
+    ? 'If nothing changes, the next 12 months cost another ' + nextYearHours.toLocaleString() + ' hours. What would six months of actual change be worth?'
+    : 'The question isn’t what the loop cost. It’s what the next year is worth without it.';
+
+  S('actions').classList.add('show');
+  S('shareHint').classList.add('show');
+  card.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+</body>
+</html>
