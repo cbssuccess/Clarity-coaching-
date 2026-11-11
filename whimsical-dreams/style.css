@@ -2,14 +2,15 @@
    Colors sampled directly from the original Square site. */
 :root {
   --header-pink: #ff819f;
-  --button-pink: #ff5883;
+  --button-pink: #d6245a;   /* was #ff5883 — deepened so white button text is readable */
+  --tagline-pink: #c21f55;  /* was #ff5883 */
   --page-blush: #f5eff1;
   --shop-grey: #f7f7f7;
   --pill-grey: #e9e9e9;
   --maroon: #80011f;
   --ink: #301d21;
-  --lilac: #e08bff;
-  --blue: #4151ff;
+  --lilac: #a845d6;         /* was #e08bff — deepened for readability */
+  --blue: #3342e6;          /* was #4151ff — nudged darker so small menu text clears the standard */
   --low-stock: #d1293d;
   --head: "Fraunces", Georgia, serif;
   --body: "Gelasio", Georgia, serif;
@@ -73,7 +74,7 @@ a { color: inherit; }
 .home-top { padding-top: 110px; }
 .hero-photo { width: 100%; height: 60vh; min-height: 320px; max-height: 620px; object-fit: cover; }
 .hero-text { padding: 56px 0 72px; }
-.tagline { color: var(--button-pink); font-size: clamp(22px, 3vw, 30px); margin: 0 0 24px; }
+.tagline { color: var(--tagline-pink); font-size: clamp(22px, 3vw, 30px); margin: 0 0 24px; }
 .brand-name {
   font-family: var(--head); font-weight: 800; color: var(--lilac);
   font-size: clamp(64px, 11vw, 120px); line-height: .95; margin: 0 0 32px; letter-spacing: -1px;
@@ -114,7 +115,7 @@ a { color: inherit; }
 .card { text-align: center; }
 .card .photo {
   aspect-ratio: 1; border-radius: 28px; overflow: hidden; background: #ececec; margin-bottom: 20px;
-  display: flex; align-items: center; justify-content: center; color: #aaa; font-family: var(--ui); font-size: 15px;
+  display: flex; align-items: center; justify-content: center; color: #666; font-family: var(--ui); font-size: 15px;
 }
 .card .photo img { width: 100%; height: 100%; object-fit: cover; }
 .card h3 { font-family: var(--body); font-weight: 400; font-size: clamp(20px, 2.6vw, 26px); margin: 0 0 6px; line-height: 1.25; }
@@ -137,7 +138,7 @@ a { color: inherit; }
 }
 .socials svg { width: 24px; height: 24px; }
 .site-footer hr { border: 0; border-top: 2px solid #c9c4c6; margin: 0 0 28px; }
-.small { font-family: var(--ui); font-size: 14px; color: #777; }
+.small { font-family: var(--ui); font-size: 14px; color: #5e5e5e; }
 
 /* ---------- Floating "Text us" ---------- */
 .text-us {
@@ -181,3 +182,12 @@ a { color: inherit; }
 }
 .legal-links { margin-bottom: 8px; }
 .legal-links a { color: #555; }
+
+/* ---------- Accessibility helpers ---------- */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 100; background: #fff; color: var(--maroon);
+  font-family: var(--ui); padding: 10px 16px; border-radius: 8px; text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .menu { transition: none; } }

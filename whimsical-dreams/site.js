@@ -39,6 +39,7 @@ function buildChrome() {
     `<a href="${href}"${href === here ? ' aria-current="page"' : ""}>${label === "Home Decor, Crafts, and Treasures" ? "Home Decor &amp; Treasures" : label}</a>`).join("");
 
   document.body.insertAdjacentHTML("afterbegin", `
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap">
         <a class="logo" href="index.html" aria-label="Whimsical Dreams home"><img src="images/logo.png" alt="Whimsical Dreams moon and mushroom logo"></a>
@@ -68,7 +69,7 @@ function buildChrome() {
         <a class="logo" href="index.html" aria-label="Whimsical Dreams home"><img src="images/logo.png" alt=""></a>
         <div class="socials">${socials}</div>
         <hr>
-        <p class="small legal-links"><a href="terms.html">Terms &amp; Conditions</a> &middot; <a href="privacy.html">Privacy Policy</a></p>
+        <p class="small legal-links"><a href="terms.html">Terms &amp; Conditions</a> &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="accessibility.html">Accessibility</a></p>
         <p class="small">&copy; ${new Date().getFullYear()} Whimsical Dreams &middot; Botanics &amp; Treasures &middot; Auburn, Maine</p>
       </div>
     </footer>
