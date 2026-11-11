@@ -9,6 +9,7 @@ const EMAIL = "";
 
 const PAGES = [
   ["index.html", "Home"],
+  ["about.html", "About"],
   ["clothing.html", "Clothing and Wares"],
   ["decor.html", "Home Decor, Crafts, and Treasures"],
   ["plants.html", "Plants"],
@@ -67,6 +68,7 @@ function buildChrome() {
         <a class="logo" href="index.html" aria-label="Whimsical Dreams home"><img src="images/logo.png" alt=""></a>
         <div class="socials">${socials}</div>
         <hr>
+        <p class="small legal-links"><a href="terms.html">Terms &amp; Conditions</a> &middot; <a href="privacy.html">Privacy Policy</a></p>
         <p class="small">&copy; ${new Date().getFullYear()} Whimsical Dreams &middot; Botanics &amp; Treasures &middot; Auburn, Maine</p>
       </div>
     </footer>
