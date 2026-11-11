@@ -1,0 +1,193 @@
+/* Whimsical Dreams — Botanics & Treasures
+   Colors sampled directly from the original Square site. */
+:root {
+  --header-pink: #ff819f;
+  --button-pink: #d6245a;   /* was #ff5883 — deepened so white button text is readable */
+  --tagline-pink: #c21f55;  /* was #ff5883 */
+  --page-blush: #f5eff1;
+  --shop-grey: #f7f7f7;
+  --pill-grey: #e9e9e9;
+  --maroon: #80011f;
+  --ink: #301d21;
+  --lilac: #a845d6;         /* was #e08bff — deepened for readability */
+  --blue: #3342e6;          /* was #4151ff — nudged darker so small menu text clears the standard */
+  --low-stock: #d1293d;
+  --head: "Fraunces", Georgia, serif;
+  --body: "Gelasio", Georgia, serif;
+  --ui: "Comfortaa", "Trebuchet MS", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--page-blush);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.5;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Header ---------- */
+.site-header { background: var(--header-pink); position: sticky; top: 0; z-index: 20; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 110px; }
+.logo { background: #fff; display: block; width: 114px; height: 104px; padding: 4px; }
+.logo img { width: 100%; height: 100%; object-fit: contain; }
+.header-icons { display: flex; gap: 22px; align-items: center; }
+.icon-btn {
+  background: none; border: 0; padding: 6px; cursor: pointer; color: #111;
+  display: inline-flex; text-decoration: none;
+}
+.icon-btn svg { width: 32px; height: 32px; }
+.desktop-nav { display: none; gap: 28px; font-family: var(--ui); }
+.desktop-nav a { text-decoration: none; color: #111; font-size: 16px; }
+.desktop-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+
+/* Home page header is see-through over the swirl pattern, with blue icons */
+.home .site-header { background: transparent; position: absolute; left: 0; right: 0; }
+.home .icon-btn, .home .desktop-nav a { color: var(--blue); }
+
+/* ---------- Slide-out menu ---------- */
+.menu {
+  position: fixed; inset: 0; background: var(--page-blush); z-index: 50;
+  transform: translateX(100%); transition: transform .3s ease, visibility .3s; overflow-y: auto; visibility: hidden;
+}
+.menu.open { transform: none; visibility: visible; }
+.menu-top { height: 110px; display: flex; justify-content: flex-end; align-items: center; padding: 0 40px; border-bottom: 1px solid #ddd; }
+.menu-close { color: var(--maroon); }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu li a {
+  display: block; text-align: center; padding: 32px 16px; border-bottom: 1px solid #ddd;
+  font-family: var(--ui); font-size: 24px; color: var(--maroon); text-decoration: none;
+}
+.menu li a:hover { background: #efe5e8; }
+
+/* ---------- Home hero ---------- */
+.swirl {
+  background-color: var(--pill-grey);
+  background-image: url("images/swirl.svg");
+  background-size: cover; background-repeat: no-repeat; background-position: center;
+}
+.home-top { padding-top: 110px; }
+.hero-photo { width: 100%; height: 60vh; min-height: 320px; max-height: 620px; object-fit: cover; }
+.hero-text { padding: 56px 0 72px; }
+.tagline { color: var(--tagline-pink); font-size: clamp(22px, 3vw, 30px); margin: 0 0 24px; }
+.brand-name {
+  font-family: var(--head); font-weight: 800; color: var(--lilac);
+  font-size: clamp(64px, 11vw, 120px); line-height: .95; margin: 0 0 32px; letter-spacing: -1px;
+}
+.brand-sub { font-family: var(--head); font-weight: 700; color: var(--blue); font-size: clamp(30px, 5vw, 48px); margin: 0 0 40px; }
+.pill-btn {
+  display: block; width: 100%; max-width: 900px; text-align: center; background: var(--button-pink);
+  color: #fff; font-family: var(--ui); font-size: 24px; padding: 22px; border-radius: 999px;
+  text-decoration: none; border: 0; cursor: pointer;
+}
+.pill-btn:hover { filter: brightness(1.05); }
+
+/* ---------- Notice / intro blocks (maroon on blush) ---------- */
+.notice { background: var(--page-blush); padding: 64px 0; color: var(--maroon); }
+.notice h1, .notice h2 {
+  font-family: var(--head); font-weight: 800; font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.1; margin: 0 0 8px; letter-spacing: -.5px;
+}
+.notice p { font-size: clamp(20px, 2.6vw, 26px); margin: 0; }
+.notice p + p { margin-top: 28px; }
+.notice a { color: var(--maroon); text-decoration: none; }
+.notice a:hover { text-decoration: underline; }
+
+/* ---------- Shop grid ---------- */
+.shop { background: var(--shop-grey); padding: 64px 0 96px; }
+.shop h1, .shop h2 {
+  font-family: var(--head); font-weight: 800; font-size: clamp(36px, 5vw, 52px);
+  margin: 0 0 32px; letter-spacing: -.5px; line-height: 1.1;
+}
+.filter-row { display: flex; gap: 20px; margin-bottom: 40px; }
+.categories {
+  flex: 1; min-width: 0; width: 100%; background: var(--pill-grey); border: 0; border-radius: 999px; padding: 22px;
+  font-family: var(--ui); font-size: 20px; color: #222; appearance: none; text-align: center; text-align-last: center;
+}
+.count { color: #555; font-size: 22px; margin: 0 0 40px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px 40px; }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+.card { text-align: center; }
+.card .photo {
+  aspect-ratio: 1; border-radius: 28px; overflow: hidden; background: #ececec; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; color: #666; font-family: var(--ui); font-size: 15px;
+}
+.card .photo img { width: 100%; height: 100%; object-fit: cover; }
+.card h3 { font-family: var(--body); font-weight: 400; font-size: clamp(20px, 2.6vw, 26px); margin: 0 0 6px; line-height: 1.25; }
+.card .price { font-size: clamp(20px, 2.4vw, 24px); margin: 0 0 4px; }
+.card .stock { color: var(--low-stock); font-family: var(--ui); font-size: 18px; margin: 0 0 14px; }
+.card .order {
+  display: inline-block; font-family: var(--ui); font-size: 15px; color: var(--maroon);
+  border: 1.5px solid var(--maroon); border-radius: 999px; padding: 8px 18px; text-decoration: none;
+}
+.card .order:hover { background: var(--maroon); color: #fff; }
+.empty { font-size: 20px; color: #666; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--page-blush); padding: 96px 0 140px; text-align: center; }
+.site-footer .logo { margin: 0 auto 64px; width: 94px; height: 86px; }
+.socials { display: flex; justify-content: center; gap: 22px; margin-bottom: 48px; }
+.socials a {
+  width: 46px; height: 46px; border-radius: 50%; background: #111; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.socials svg { width: 24px; height: 24px; }
+.site-footer hr { border: 0; border-top: 2px solid #c9c4c6; margin: 0 0 28px; }
+.small { font-family: var(--ui); font-size: 14px; color: #5e5e5e; }
+
+/* ---------- Floating "Text us" ---------- */
+.text-us {
+  position: fixed; right: 24px; bottom: 24px; z-index: 30; background: #fff; color: #111;
+  border-radius: 999px; padding: 18px 34px; display: flex; gap: 14px; align-items: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,.18); text-decoration: none;
+  font-family: system-ui, sans-serif; font-size: 22px; font-weight: 500;
+}
+.text-us svg { width: 30px; height: 30px; }
+
+@media (min-width: 900px) {
+  .desktop-nav { display: flex; }
+  .menu-toggle { display: none; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 18px; }
+  .site-header .wrap, .menu-top { height: 90px; }
+  .home-top { padding-top: 90px; }
+  .logo { width: 88px; height: 80px; }
+  .header-icons { gap: 10px; }
+  .icon-btn svg { width: 28px; height: 28px; }
+  .grid { gap: 40px 18px; }
+  .card .photo { border-radius: 20px; }
+  .text-us { padding: 14px 24px; font-size: 18px; right: 16px; bottom: 16px; }
+  .pill-btn { font-size: 20px; padding: 18px; }
+  .hero-photo { height: auto; min-height: 0; aspect-ratio: 1024 / 600; }
+}
+
+/* ---------- About / Terms / Privacy ---------- */
+.doc .wrap { max-width: 780px; }
+.notice.doc h2 { font-size: clamp(24px, 3.4vw, 32px); margin: 40px 0 8px; }
+.notice.doc p { font-size: clamp(17px, 2vw, 20px); }
+.notice.doc p + p { margin-top: 16px; }
+.doc a { text-decoration: underline; }
+.updated { color: #6b3a46; }
+.todo { background: #fff3a8; color: #5a4200; padding: 0 4px; border-radius: 4px; }
+.draft-note {
+  display: inline-block; background: #fff3a8; color: #5a4200; font-family: var(--ui);
+  font-size: 14px !important; padding: 6px 12px; border-radius: 999px; margin: 0 0 24px !important;
+}
+.legal-links { margin-bottom: 8px; }
+.legal-links a { color: #555; }
+
+/* ---------- Accessibility helpers ---------- */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 100; background: #fff; color: var(--maroon);
+  font-family: var(--ui); padding: 10px 16px; border-radius: 8px; text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .menu { transition: none; } }
