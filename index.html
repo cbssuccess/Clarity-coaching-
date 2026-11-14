@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Caitra&#39;s Creations — Site Draft</title>
-<meta name="description" content="Caitra's Creations: clean websites for small businesses, practical digital planners and workbooks, and art. Made in Twin Bridges, Montana.">
+<title>Caitra's Creations</title>
+<meta name="description" content="Caitra's Creations: clean websites for small businesses, practical digital planners and workbooks. Made in Twin Bridges, Montana.">
 <meta property="og:title" content="Caitra's Creations">
-<meta property="og:description" content="Websites, digital planners and workbooks, and art. Made in Twin Bridges, Montana.">
+<meta property="og:description" content="Websites, digital planners and workbooks. Made in Twin Bridges, Montana.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23f3b6cf'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#faf6ee;
@@ -139,6 +139,24 @@ section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--line)}
 .about-why p{color:var(--muted);margin:0}
 @media(max-width:760px){.about-top{grid-template-columns:1fr;gap:1.6rem}.about-top .about-photo{margin:0 auto}}
 
+/* art gallery */
+.gallery{columns:3 260px;column-gap:1rem}
+.gallery figure{margin:0 0 1rem;break-inside:avoid}
+.gallery a{display:block;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;transition:transform .15s}
+.gallery a:hover{transform:translateY(-2px)}
+.gallery img{width:100%;height:auto}
+
+/* about lead + learn more */
+.about-why .about-lead{font-size:1.15rem;color:var(--ink);margin:0 0 1.4rem;max-width:34em}
+details.more summary{list-style:none;cursor:pointer}
+details.more summary::-webkit-details-marker{display:none}
+details.more .s-close{display:none}
+details.more[open] .s-open{display:none}
+details.more[open] .s-close{display:inline}
+.more-body{margin-top:1.4rem;max-width:34em}
+.about-why .more-body p{color:var(--muted);margin:0 0 1rem}
+.more-body a{text-decoration:underline}
+
 /* contact */
 .contact{background:var(--pink)}
 .contact .box{text-align:center;max-width:640px;margin:0 auto}
@@ -164,6 +182,66 @@ h3{font-size:1.9rem}
 .brand{font-style:italic;font-weight:600;font-size:1.8rem}
 h1 em,h2 em{font-weight:600}
 @media(max-width:700px){.brand{font-size:1.25rem}}
+/* professional type: upright serif headings, Inter for everything else */
+h1,h2,h3,.brand,.note-card .big,.panel.soon .t{font-family:'Source Serif 4',Georgia,serif;font-style:normal;font-weight:600;letter-spacing:-.02em}
+em,h1 em,h2 em{font-family:inherit;font-style:normal;font-weight:600;color:var(--pink-deep)}
+nav a,.btn,.filters button,.chip,.item .link{font-family:'Inter',system-ui,sans-serif;letter-spacing:0}
+nav a{font-size:.95rem;font-weight:500}
+nav a.pill{font-weight:600;padding:.45rem .95rem}
+.btn{font-size:.98rem;font-weight:600;padding:.8rem 1.4rem}
+.filters button{font-size:.92rem;font-weight:500;padding:.55rem 1.1rem}
+.chip{font-size:.88rem;font-weight:500}
+.item .link{font-size:.92rem;font-weight:600}
+h1{font-size:clamp(2.6rem,6.5vw,4.4rem);line-height:1.05}
+h2{font-size:clamp(2rem,4.5vw,3rem);line-height:1.1}
+h3{font-size:1.4rem;line-height:1.2}
+.brand{font-size:1.4rem;font-weight:700}
+.note-card .big{font-size:1.8rem;line-height:1.2;margin:1.2rem 0}
+.panel.soon .t{font-size:1.5rem}
+.hero h1{margin-bottom:1.6rem}
+@media(max-width:700px){.brand{font-size:1.1rem}nav a{font-size:.85rem}nav ul{gap:.65rem}}
+/* elaborate script for the brand name and hero headline only */
+.brand,h1{font-family:'Great Vibes','Brush Script MT',cursive;font-weight:400;letter-spacing:0}
+.brand{font-size:2.1rem;line-height:1}
+h1{font-size:clamp(3.2rem,8.5vw,5.6rem);line-height:1.1}
+h1 em{font-weight:400}
+@media(max-width:700px){.brand{font-size:1.6rem}}
+/* desktop headline: two centered lines */
+.br-d{display:none}
+@media(min-width:861px){
+.br-d{display:inline}
+.nb{white-space:nowrap}
+.hero .grid>div:first-child{text-align:center}
+.hero .btns{justify-content:center}
+.hero h1{font-size:clamp(3rem,5.6vw,4.4rem)}
+}
+/* Cormorant Garamond for all text except the script brand name + headline */
+body,nav a,.btn,.filters button,.chip,.item .link{font-family:'Cormorant Garamond',Georgia,serif}
+h2,h3,.note-card .big,.panel.soon .t{font-family:'Cormorant Garamond',Georgia,serif;font-style:normal;font-weight:600;letter-spacing:-.01em}
+body{font-size:19px;font-weight:500}
+nav a{font-size:1.1rem;font-weight:600}
+.btn{font-size:1.1rem;font-weight:700}
+.filters button{font-size:1.05rem;font-weight:600}
+.chip{font-size:1rem;font-weight:600}
+.item .link{font-size:1.05rem;font-weight:700}
+.eyebrow{font-weight:700}
+h2{font-size:clamp(2.3rem,5vw,3.4rem)}
+h3{font-size:1.7rem}
+.note-card .big{font-size:2rem}
+@media(max-width:700px){nav a{font-size:.95rem}}
+/* Work dropdown */
+.dd{position:relative}
+.dd-btn{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:600;color:var(--muted);background:none;border:0;padding:0;cursor:pointer;line-height:inherit}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--ink)}
+nav ul.dd-menu{display:none;position:absolute;top:calc(100% + .7rem);right:0;min-width:215px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 30px rgba(42,34,48,.12);padding:.5rem;flex-direction:column;align-items:stretch;gap:0;z-index:30}
+.dd.open ul.dd-menu{display:flex}
+nav ul.dd-menu li a{display:block;padding:.55rem .8rem;border-radius:8px;white-space:nowrap}
+nav ul.dd-menu li a:hover{background:var(--pink-2)}
+@media(max-width:700px){.dd-btn{font-size:.95rem}}
+/* Work dropdown button: keep label and arrow on one line */
+.dd-btn{display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap}
+.dd-btn .chev{display:inline-block;width:.42em;height:.42em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-.1em,-.1em);transition:transform .15s}
+.dd.open .dd-btn .chev{transform:rotate(-135deg) translate(-.1em,-.1em)}
 </style>
 </head>
 <body>
@@ -174,9 +252,16 @@ h1 em,h2 em{font-weight:600}
     <a class="brand" href="#top" aria-label="Caitra's Creations home">Caitra's Creations</a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#art">Art</a></li>
         <li><a href="#about">About</a></li>
+        <li class="dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Work <span class="chev" aria-hidden="true"></span></button>
+          <ul class="dd-menu">
+            <li><a href="#work" data-f="all">All work</a></li>
+            <li><a href="#work" data-f="websites">Websites</a></li>
+            <li><a href="#work" data-f="planners">Planners &amp; workbooks</a></li>
+            <li><a href="#work" data-f="tools">Tools</a></li>
+          </ul>
+        </li>
+
         <li class="hide-m"><a class="pill" href="#contact">Say hello</a></li>
         <li class="show-m-only"><a href="#contact">Contact</a></li>
       </ul>
@@ -191,8 +276,8 @@ h1 em,h2 em{font-weight:600}
     <div class="wrap grid">
       <div>
         <p class="status"><i aria-hidden="true"></i>Open to new website projects</p>
-        <h1>Things made with <em>care,</em> built to be used.</h1>
-        <p class="lead">I'm Cait. I design clean websites for small businesses, create planners and workbooks that make hard things feel doable, and make art. Everything is made in Twin Bridges, Montana.</p>
+        <h1>Things made with <em>care,</em><br class="br-d"> <span class="nb">built for a purpose.</span></h1>
+
         <div class="btns">
           <a class="btn solid" href="#work">See my work <span aria-hidden="true">↓</span></a>
           <a class="btn ghost" href="#contact">Say hello <span aria-hidden="true">↗</span></a>
@@ -205,9 +290,31 @@ h1 em,h2 em{font-weight:600}
         <ul>
           <li><b>Building:</b> websites for local businesses</li>
           <li><b>Making:</b> planners &amp; workbooks</li>
-          <li><b>Next:</b> art</li>
+
         </ul>
-        <div class="stamp" aria-hidden="true">Made in<br>Twin Bridges<br>Montana</div>
+        <div class="stamp" aria-hidden="true">Made in<br>Montana</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about-top">
+        <div class="about-photo"><img src="img/cait.png" alt="Cait, smiling, with pink-blonde hair and glasses" width="621" height="1024"></div>
+        <div class="about-why">
+          <p class="eyebrow">01 / About</p>
+          <h2>Hi, I'm <em>Cait.</em></h2>
+          <p class="about-lead">I design, build and maintain websites for small businesses, and I'm also a life coach helping people reach their personal goals and build confidence. I create workbooks, planners, frameworks and other tools to make life a little lighter and brighter for others. I'm picky about the details, I love working with AI tools, and I'm always learning.</p>
+          <details class="more">
+            <summary class="btn ghost"><span class="s-open">Learn more <span aria-hidden="true">↓</span></span><span class="s-close">Show less <span aria-hidden="true">↑</span></span></summary>
+            <div class="more-body">
+              <p>I co-founded <a href="https://shiningclaritycoaching.com" target="_blank" rel="noopener">Shining Clarity Coaching</a>, where I help people untangle stuck thinking patterns and change beliefs that hold them back. Along the way I've written coaching frameworks, workbooks and planners, and I've built the websites and interactive tools that go with them. I also build websites for small businesses that don't have one yet.</p>
+              <p>I work with AI daily, and I don't take its word for things. I check its answers, question what sounds too confident and push for honest feedback over easy agreement. I'm also taking a course in vibe coding, because I want to understand how these tools actually work.</p>
+              <p>Underneath it all, I care about creating things that actually work. I'm not interested in making filler. Whether it's a website, a workbook or a planner, it has to be useful to the person on the other end. That's why I care so much about clear writing, good judgment and tone. I can usually tell when something is correct but unhelpful, or polished but wrong.</p>
+              <p>I can't solve a problem for someone, but I can hand them tools that make their life a little easier, brighter or lighter. The rest is up to them.</p>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
   </section>
@@ -215,7 +322,7 @@ h1 em,h2 em{font-weight:600}
   <section id="work">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">01 / Selected work</p>
+        <p class="eyebrow">02 / Selected work</p>
         <h2>A few things I've <em>made.</em></h2>
         <p class="sub">Free tools, websites for local businesses, and planners and workbooks. Tap a card to open it.</p>
       </div>
@@ -223,20 +330,21 @@ h1 em,h2 em{font-weight:600}
       <div class="filters" role="group" aria-label="Filter work">
         <button type="button" data-f="all" aria-pressed="true">All work</button>
         <button type="button" data-f="websites" aria-pressed="false">Websites</button>
-        <button type="button" data-f="products" aria-pressed="false">Planners, workbooks &amp; tools</button>
+        <button type="button" data-f="planners" aria-pressed="false">Planners &amp; workbooks</button>
+        <button type="button" data-f="tools" aria-pressed="false">Tools</button>
       </div>
 
       <div class="work">
-        <article class="item" data-cat="products">
+        <article class="item" data-cat="websites">
           <a class="cover" href="https://shiningclaritycoaching.com" target="_blank" rel="noopener" aria-label="Visit Shining Clarity Coaching">
-            <div class="panel alt soon"><span class="ph">Free tools</span><span class="t">Shining Clarity</span></div>
+            <div class="panel alt soon"><span class="ph">Coaching website</span><span class="t">Shining Clarity</span></div>
           </a>
-          <p class="meta-line">Free quizzes &amp; tools</p>
+          <p class="meta-line">Website · Coaching practice</p>
           <h3>Shining Clarity Coaching <span class="arrow" aria-hidden="true">↗</span></h3>
           <p>I co-founded a coaching practice and built its free quizzes and tools, with no signup required.</p>
         </article>
 
-        <article class="item" data-cat="products">
+        <article class="item" data-cat="tools">
           <a class="cover" href="https://shiningclaritycoaching.com/thought-record.html" target="_blank" rel="noopener" aria-label="Open the Thought Record tool">
             <div class="panel soon"><span class="ph">Free tool</span><span class="t">Thought Record</span></div>
           </a>
@@ -245,7 +353,43 @@ h1 em,h2 em{font-weight:600}
           <p>A guided exercise to catch a thought, separate fact from story, spot the distortion, and rewrite it. It saves privately on your device.</p>
         </article>
 
-        <article class="item" data-cat="products">
+        <article class="item" data-cat="tools">
+          <a class="cover" href="https://shiningclaritycoaching.com/quiz.html" target="_blank" rel="noopener" aria-label="Take the Find Your Loop quiz">
+            <div class="panel alt soon"><span class="ph">Free quiz</span><span class="t">Find Your Loop</span></div>
+          </a>
+          <p class="meta-line">Free quiz · Self-discovery</p>
+          <h3>Find Your Loop <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A short quiz that identifies which recurring pattern is keeping you stuck, so you can work on the source instead of the symptom.</p>
+        </article>
+
+        <article class="item" data-cat="tools">
+          <a class="cover" href="https://shiningclaritycoaching.com/myths-quiz.html" target="_blank" rel="noopener" aria-label="Take The Myths About Change quiz">
+            <div class="panel soon"><span class="ph">Free quiz</span><span class="t">The Myths About Change</span></div>
+          </a>
+          <p class="meta-line">Free quiz · Myth-busting</p>
+          <h3>The Myths About Change <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A two-minute quiz that tests common beliefs about change, so you can see which ones are actually true.</p>
+        </article>
+
+        <article class="item" data-cat="tools">
+          <a class="cover" href="https://shiningclaritycoaching.com/loop-cost-calculator.html" target="_blank" rel="noopener" aria-label="Open the Loop Cost Calculator">
+            <div class="panel alt soon"><span class="ph">Free calculator</span><span class="t">Loop Cost Calculator</span></div>
+          </a>
+          <p class="meta-line">Free calculator · Self-awareness</p>
+          <h3>The Loop Cost Calculator <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>Estimates what a stuck pattern has cost you in time, money and repeated attempts.</p>
+        </article>
+
+        <article class="item" data-cat="tools">
+          <a class="cover" href="https://shiningclaritycoaching.com/excuse-translator.html" target="_blank" rel="noopener" aria-label="Open the Excuse Translator">
+            <div class="panel soon"><span class="ph">Free tool</span><span class="t">Excuse Translator</span></div>
+          </a>
+          <p class="meta-line">Free tool · Challenger voice</p>
+          <h3>The Excuse Translator <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>Pick your most common excuse and find out what it might really mean. It's a little cheeky and a little too accurate.</p>
+        </article>
+
+        <article class="item" data-cat="tools">
           <a class="cover" href="https://child-profile-builder.pages.dev/" target="_blank" rel="noopener" aria-label="Open the All About My Child profile builder">
             <div class="panel alt soon"><span class="ph">Free tool</span><span class="t">All About My Child</span></div>
           </a>
@@ -289,7 +433,7 @@ h1 em,h2 em{font-weight:600}
           <p>A classic, trustworthy layout for an established local shop.</p>
         </article>
 
-        <article class="item" data-cat="products">
+        <article class="item" data-cat="planners">
           <div class="panel planner">
             <img src="img/planner-004.jpg" alt="Winging It planner mind map page" width="595" height="770">
             <img src="img/planner-005.jpg" alt="Winging It planner project planner page" width="595" height="770">
@@ -300,7 +444,7 @@ h1 em,h2 em{font-weight:600}
           <ul><li>15 sections with tap-to-jump tabs</li><li>Pages to dump, sort, and break big projects into steps</li><li>Monthly pages from November 2026 through December 2027</li></ul>
         </article>
 
-        <article class="item" data-cat="products">
+        <article class="item" data-cat="planners">
           <div class="panel planner">
             <img src="img/iae-evidence.jpg" alt="I Am Enough workbook, Evidence Cards page" width="765" height="990" loading="lazy">
             <img src="img/iae-thought-record.jpg" alt="I Am Enough workbook, Thought Record page" width="765" height="990" loading="lazy">
@@ -312,7 +456,7 @@ h1 em,h2 em{font-weight:600}
           <p class="buy"><span class="btn solid buy-soon" aria-disabled="true">Checkout opening soon</span></p>
         </article>
 
-        <article class="item" data-cat="products">
+        <article class="item" data-cat="planners">
           <div class="panel soon"><span class="ph">Workbook series</span><span class="t">In progress</span></div>
           <p class="meta-line">Series · In progress</p>
           <h3>Grow Together</h3>
@@ -325,33 +469,11 @@ h1 em,h2 em{font-weight:600}
     </div>
   </section>
 
-  <section id="art">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">02 / Art</p>
-        <h2>Art, coming <em>soon.</em></h2>
-      </div>
-      <div class="art-panel">
-        <p class="big">Pieces will live here when they're ready.</p>
-        <p>I make art too, and this corner is for the work I'm ready to share.</p>
-      </div>
-    </div>
-  </section>
 
-  <section id="about">
+
+  <section id="how">
     <div class="wrap">
-      <div class="about-top">
-        <div class="about-photo"><img src="img/cait.png" alt="Cait, smiling, with pink-blonde hair and glasses" width="621" height="1024" loading="lazy"></div>
-        <div class="about-why">
-          <p class="eyebrow">03 / About</p>
-          <h2>Hi, I'm <em>Cait.</em></h2>
-          <h3>What I do</h3>
-          <p>I build clean, simple websites for small businesses, make planners and workbooks for people whose lives are full, and make art.</p>
-          <h3>Why I do it</h3>
-          <p>A good website shouldn't be complicated or out of reach for a small local business, and hard things feel more doable with the right tool. I like taking something complicated and turning it into something clear and usable, like a planner that fits how a busy brain really works, or a workbook built on one idea: your worth is given, not earned.</p>
-        </div>
-      </div>
-      <div class="about" style="margin-top:3rem">
+      <div class="about">
         <div>
           <p>I'm a writer, web designer, and maker in Twin Bridges, Montana.</p>
           <p>"Caitra" is a nickname my mom made by blending my name with my sister's. It's stuck with me, and it's why this is Caitra's Creations.</p>
@@ -375,7 +497,7 @@ h1 em,h2 em{font-weight:600}
   <section id="contact" class="contact">
     <div class="wrap">
       <div class="box">
-        <p class="eyebrow">04 / Contact</p>
+        <p class="eyebrow">03 / Contact</p>
         <h2>Let's make <em>something.</em></h2>
         <p class="sub">Have a business that needs a website, or a question about a planner or workbook? I'd love to hear from you.</p>
         <p><a class="btn solid" href="mailto:caitrascreations@gmail.com">caitrascreations@gmail.com</a></p>
@@ -430,6 +552,28 @@ h1 em,h2 em{font-weight:600}
     frames.forEach(load); scale();
   }
   window.addEventListener('resize', scale);
+})();
+</script>
+<script>
+(function(){
+  var dd = document.querySelector('.dd'); if(!dd) return;
+  var btn = dd.querySelector('.dd-btn');
+  function close(){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var o = dd.classList.toggle('open');
+    btn.setAttribute('aria-expanded', o ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){ if(!dd.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  dd.querySelectorAll('.dd-menu a').forEach(function(a){
+    a.addEventListener('click', function(){
+      var f = a.getAttribute('data-f');
+      var b = document.querySelector('.filters button[data-f="' + f + '"]');
+      if(b) b.click();
+      close();
+    });
+  });
 })();
 </script>
 </body>
