@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caitra&#39;s Creations — Site Draft</title>
+<meta name="description" content="Caitra's Creations: clean websites for small businesses, practical digital planners and workbooks, and art. Made in Twin Bridges, Montana.">
+<meta property="og:title" content="Caitra's Creations">
+<meta property="og:description" content="Websites, digital planners and workbooks, and art. Made in Twin Bridges, Montana.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23f3b6cf'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ee;
+  --cream-2:#f3ecdf;
+  --ink:#2a2230;
+  --muted:#6a6173;
+  --pink:#f6dde6;
+  --pink-2:#fbeaf0;
+  --pink-deep:#8a3d62;
+  --line:#e6dccd;
+  --rainbow:linear-gradient(90deg,#f3a6dc,#f9cfb3,#f7eaa6,#a8ecd9,#a6e1ee,#b9a2ee);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(1120px,calc(100% - 3rem));margin:0 auto}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:-.015em;line-height:1;margin:0 0 .45em}
+h1{font-size:clamp(3.2rem,8.4vw,5.8rem);font-weight:600}
+h2{font-size:clamp(2.5rem,5.8vw,3.8rem)}
+h3{font-size:1.7rem;letter-spacing:-.005em;line-height:1.1}
+em{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.01em}
+h1 em,h2 em{font-weight:500}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:.6rem 1rem;z-index:99}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid #b9a2ee;outline-offset:3px}
+
+/* header */
+header.site{position:sticky;top:0;z-index:20;background:rgba(250,246,238,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
+.brand{text-decoration:none;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;letter-spacing:0;font-size:1.65rem;line-height:1;white-space:nowrap}
+nav ul{list-style:none;display:flex;align-items:center;gap:1.5rem;margin:0;padding:0}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+nav a.pill{color:var(--ink);border:1px solid var(--ink);border-radius:8px;padding:.45rem .9rem;font-weight:600}
+@media(max-width:700px){nav ul{gap:.85rem}nav a{font-size:.8rem}nav li.hide-m{display:none}nav li.show-m-only{display:list-item}.brand{font-size:1.3rem}}
+
+li.show-m-only{display:none}
+/* buttons + chips */
+.btns{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;font-weight:600;font-size:.98rem;padding:.9rem 1.4rem;border-radius:8px;border:1px solid var(--ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--ink);color:#fff}
+.btn.ghost{background:transparent}
+.chip{display:inline-block;font-size:.88rem;font-weight:500;padding:.45rem .95rem;border:1px solid var(--line);border-radius:999px;background:#fff}
+
+/* hero */
+.hero{padding:clamp(3rem,8vw,6rem) 0 clamp(3rem,7vw,5rem)}
+.hero .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center}
+@media(max-width:860px){.hero .grid{grid-template-columns:1fr}}
+.status{display:inline-flex;align-items:center;gap:.6rem;font-size:.9rem;color:var(--muted);margin-bottom:1.4rem}
+.status i{width:9px;height:9px;border-radius:50%;background:#7fd8b6;box-shadow:0 0 0 4px rgba(127,216,182,.25)}
+.lead{font-size:1.2rem;color:var(--muted);max-width:32em;margin:1.2rem 0 1.8rem}
+.note-card{position:relative;background:var(--pink);border-radius:6px;padding:2.2rem 1.8rem 1.6rem;transform:rotate(1.4deg);box-shadow:0 18px 40px rgba(110,60,80,.12);max-width:420px;margin-inline:auto}
+.note-card .tape{position:absolute;top:-14px;left:50%;width:130px;height:30px;transform:translateX(-50%) rotate(-3deg);background:var(--rainbow);opacity:.75;border-radius:2px}
+.note-card .top{display:flex;justify-content:space-between;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pink-deep);font-weight:600;padding-bottom:.8rem;border-bottom:1px solid rgba(138,61,98,.25)}
+.note-card .big{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:2.4rem;line-height:1.1;margin:1.3rem 0 1.2rem;letter-spacing:-.01em}
+.note-card ul{list-style:none;margin:0;padding:0;font-size:.95rem}
+.note-card li{padding:.65rem 0;border-top:1px solid rgba(138,61,98,.2)}
+.note-card li b{font-weight:600}
+.stamp{position:absolute;right:1.2rem;bottom:-1.6rem;width:92px;height:92px;border-radius:50%;border:1.5px solid var(--pink-deep);background:var(--cream);display:grid;place-items:center;text-align:center;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pink-deep);font-weight:700;transform:rotate(-12deg);line-height:1.4;padding:.5rem}
+
+section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--line)}
+.sec-head{max-width:40em;margin-bottom:2.2rem}
+.sec-head p.sub{color:var(--muted);margin:0;font-size:1.05rem}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 2rem}
+.filters button{font:inherit;font-size:.92rem;font-weight:500;padding:.55rem 1.1rem;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* work grid */
+.work{display:grid;grid-template-columns:repeat(2,1fr);gap:2.6rem 2rem}
+@media(max-width:760px){.work{grid-template-columns:1fr}}
+.item[hidden]{display:none}
+.item a.cover{display:block;text-decoration:none}
+.panel{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--pink);aspect-ratio:16/10;display:grid;place-items:center;border:1px solid rgba(138,61,98,.08)}
+.panel::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--rainbow);z-index:2}
+.panel.alt{background:var(--cream-2)}
+.panel .ph{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--pink-deep);opacity:.8}
+.panel iframe{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform-origin:0 0;pointer-events:none;background:#fff}
+.panel.planner{aspect-ratio:auto;padding:1.6rem;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
+.panel.planner img{width:100%;height:auto;border-radius:8px;border:1px solid rgba(138,61,98,.12);box-shadow:0 8px 20px rgba(110,60,80,.12);background:#fff}
+.panel.soon{text-align:center;padding:1.5rem}
+.panel.soon .ph{display:block}
+.panel.soon .t{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:2rem;color:var(--ink);display:block;margin-top:.3rem;opacity:1;letter-spacing:0;text-transform:none;font-weight:400}
+.meta-line{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:1rem 0 .5rem;font-weight:500}
+.item h3{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:.4rem}
+.item h3 span.arrow{font-weight:400;font-size:1.2rem}
+.item p{color:var(--muted);margin:0 0 .6rem;font-size:.98rem}
+.item ul{margin:.2rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.93rem}
+.item .link{font-weight:600;font-size:.92rem}
+.buy{margin:1rem 0 0}.buy-soon{opacity:.6;cursor:default;pointer-events:none}
+.fine{margin-top:2.4rem;font-size:.9rem;color:var(--muted)}
+
+/* art */
+.art-panel{border:1.5px dashed rgba(138,61,98,.35);border-radius:var(--radius);background:var(--pink-2);padding:clamp(2rem,6vw,3.5rem);text-align:center;position:relative;overflow:hidden}
+.art-panel::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--rainbow)}
+.art-panel p{margin:0;color:var(--muted)}
+.art-panel .big{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--ink);margin-bottom:.4rem;letter-spacing:-.01em}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+.about p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
+.process{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.8rem;position:relative;overflow:hidden}
+.process::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--rainbow)}
+.steps{list-style:none;counter-reset:s;padding:0;margin:.4rem 0 0}
+.steps li{counter-increment:s;position:relative;padding:.1rem 0 1.1rem 2.9rem;color:var(--muted);font-size:.98rem}
+.steps li:last-child{padding-bottom:0}
+.steps li strong{color:var(--ink)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:2rem;height:2rem;border-radius:50%;background:var(--pink);color:var(--pink-deep);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+
+.about-photo{position:relative;background:var(--pink);border-radius:var(--radius);overflow:hidden;max-width:300px;margin:0 0 1.8rem;padding:1.6rem 1.2rem 0;border:1px solid rgba(138,61,98,.08)}
+.about-photo::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--rainbow)}
+.about-photo img{width:100%;height:auto;max-height:380px;object-fit:contain;object-position:bottom center;margin:0 auto}
+@media(max-width:760px){.about-photo{max-width:260px}}
+
+/* contact */
+.contact{background:var(--pink)}
+.contact .box{text-align:center;max-width:640px;margin:0 auto}
+.contact .box p.sub{color:var(--muted);margin:0 0 1.6rem}
+footer{padding:1.8rem 0;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Cormorant for nav, buttons, filters, chips */
+nav a,.btn,.filters button,.chip,.item .link{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.01em}
+nav a{font-size:1.2rem;font-weight:600}
+nav a.pill{font-weight:700;padding:.4rem 1rem}
+.btn{font-size:1.2rem;font-weight:700;padding:.75rem 1.5rem}
+.filters button{font-size:1.1rem;font-weight:600;padding:.5rem 1.2rem}
+.chip{font-size:1.05rem;font-weight:600}
+.item .link{font-size:1.1rem;font-weight:700}
+@media(max-width:700px){.brand{font-size:1.1rem}nav ul{gap:.65rem}nav a{font-size:.92rem}.nav{gap:.6rem}}
+
+/* headings in Cormorant Garamond italic */
+h1,h2,h3{font-style:italic;font-weight:500;letter-spacing:-.01em}
+h1{font-size:clamp(3.4rem,9vw,6.2rem);line-height:.98}
+h2{font-size:clamp(2.7rem,6.2vw,4.2rem)}
+h3{font-size:1.9rem}
+.brand{font-style:italic;font-weight:600;font-size:1.8rem}
+h1 em,h2 em{font-weight:600}
+@media(max-width:700px){.brand{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Caitra's Creations home">Caitra's Creations</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#art">Art</a></li>
+        <li><a href="#about">About</a></li>
+        <li class="hide-m"><a class="pill" href="#contact">Say hello</a></li>
+        <li class="show-m-only"><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div id="top"></div>
+
+  <section class="hero" style="border-top:0">
+    <div class="wrap grid">
+      <div>
+        <p class="status"><i aria-hidden="true"></i>Open to new website projects</p>
+        <h1>Things made with <em>care,</em> built to be used.</h1>
+        <p class="lead">I'm Cait. I design clean websites for small businesses, create planners and workbooks that make hard things feel doable, and make art. Everything is made in Twin Bridges, Montana.</p>
+        <div class="btns">
+          <a class="btn solid" href="#work">See my work <span aria-hidden="true">↓</span></a>
+          <a class="btn ghost" href="#contact">Say hello <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="note-card" aria-label="A note from the studio">
+        <span class="tape" aria-hidden="true"></span>
+        <div class="top"><span>From the studio</span><span>Vol. 01 / 2026</span></div>
+        <p class="big">Simple, clear, and made to last.</p>
+        <ul>
+          <li><b>Building:</b> websites for local businesses</li>
+          <li><b>Making:</b> planners &amp; workbooks</li>
+          <li><b>Next:</b> art</li>
+        </ul>
+        <div class="stamp" aria-hidden="true">Made in<br>Twin Bridges<br>Montana</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">01 / Selected work</p>
+        <h2>A few things I've <em>made.</em></h2>
+        <p class="sub">Free tools, websites for local businesses, and planners and workbooks. Tap a card to open it.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter work">
+        <button type="button" data-f="all" aria-pressed="true">All work</button>
+        <button type="button" data-f="websites" aria-pressed="false">Websites</button>
+        <button type="button" data-f="products" aria-pressed="false">Planners, workbooks &amp; tools</button>
+      </div>
+
+      <div class="work">
+        <article class="item" data-cat="products">
+          <a class="cover" href="https://shiningclaritycoaching.com" target="_blank" rel="noopener" aria-label="Visit Shining Clarity Coaching">
+            <div class="panel alt soon"><span class="ph">Free tools</span><span class="t">Shining Clarity</span></div>
+          </a>
+          <p class="meta-line">Free quizzes &amp; tools</p>
+          <h3>Shining Clarity Coaching <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>I co-founded a coaching practice and built its free quizzes and tools, with no signup required.</p>
+        </article>
+
+        <article class="item" data-cat="products">
+          <a class="cover" href="https://shiningclaritycoaching.com/thought-record.html" target="_blank" rel="noopener" aria-label="Open the Thought Record tool">
+            <div class="panel soon"><span class="ph">Free tool</span><span class="t">Thought Record</span></div>
+          </a>
+          <p class="meta-line">Free tool · Self-coaching</p>
+          <h3>The Thought Record <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A guided exercise to catch a thought, separate fact from story, spot the distortion, and rewrite it. It saves privately on your device.</p>
+        </article>
+
+        <article class="item" data-cat="products">
+          <a class="cover" href="https://child-profile-builder.pages.dev/" target="_blank" rel="noopener" aria-label="Open the All About My Child profile builder">
+            <div class="panel alt soon"><span class="ph">Free tool</span><span class="t">All About My Child</span></div>
+          </a>
+          <p class="meta-line">Free tool · For parents &amp; caregivers</p>
+          <h3>All About My Child <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A private, in-browser conversation that turns what you know about your child into a one-page sheet for teachers, aides, babysitters, and doctors.</p>
+        </article>
+        <article class="item" data-cat="websites">
+          <a class="cover" href="https://turneytowing.pages.dev" target="_blank" rel="noopener" aria-label="Open the towing and roadside concept site">
+            <div class="panel frame" data-src="https://turneytowing.pages.dev"><span class="ph">Towing &amp; roadside</span></div>
+          </a>
+          <p class="meta-line">Concept site · Towing · 2026</p>
+          <h3>Towing &amp; roadside <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>Bold, easy to call from a phone, built around real photos.</p>
+        </article>
+
+        <article class="item" data-cat="websites">
+          <a class="cover" href="https://kuusisto-and-sons-plumbing.pages.dev" target="_blank" rel="noopener" aria-label="Open the plumbing concept site with personality">
+            <div class="panel alt frame" data-src="https://kuusisto-and-sons-plumbing.pages.dev"><span class="ph">Plumbing</span></div>
+          </a>
+          <p class="meta-line">Concept site · Plumbing · 2026</p>
+          <h3>Plumbing, with personality <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A humor-forward voice that matches how the owners really talk.</p>
+        </article>
+
+        <article class="item" data-cat="websites">
+          <a class="cover" href="https://lickadeelube.pages.dev" target="_blank" rel="noopener" aria-label="Open the car wash and lube concept site">
+            <div class="panel alt frame" data-src="https://lickadeelube.pages.dev"><span class="ph">Car wash &amp; lube</span></div>
+          </a>
+          <p class="meta-line">Concept site · Car care · 2026</p>
+          <h3>Car wash &amp; lube <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A single-page site with services, hours, and directions up front.</p>
+        </article>
+
+        <article class="item" data-cat="websites">
+          <a class="cover" href="https://puccinelli-plumbing.pages.dev" target="_blank" rel="noopener" aria-label="Open the plumbing and heating concept site">
+            <div class="panel frame" data-src="https://puccinelli-plumbing.pages.dev"><span class="ph">Plumbing &amp; heating</span></div>
+          </a>
+          <p class="meta-line">Concept site · Plumbing &amp; heating · 2026</p>
+          <h3>Plumbing &amp; heating <span class="arrow" aria-hidden="true">↗</span></h3>
+          <p>A classic, trustworthy layout for an established local shop.</p>
+        </article>
+
+        <article class="item" data-cat="products">
+          <div class="panel planner">
+            <img src="img/planner-004.jpg" alt="Winging It planner mind map page" width="595" height="770">
+            <img src="img/planner-005.jpg" alt="Winging It planner project planner page" width="595" height="770">
+          </div>
+          <p class="meta-line">Digital planner · 2026–2027</p>
+          <h3>Winging It</h3>
+          <p>A tabbed digital planner for moms with ADHD, made in Canva. It includes brain dumps, mind maps, project planning, habit tracking, meals, mood, and a "Start here" page that tells you to skip the days you miss.</p>
+          <ul><li>15 sections with tap-to-jump tabs</li><li>Pages to dump, sort, and break big projects into steps</li><li>Monthly pages from November 2026 through December 2027</li></ul>
+        </article>
+
+        <article class="item" data-cat="products">
+          <div class="panel planner">
+            <img src="img/iae-evidence.jpg" alt="I Am Enough workbook, Evidence Cards page" width="765" height="990" loading="lazy">
+            <img src="img/iae-thought-record.jpg" alt="I Am Enough workbook, Thought Record page" width="765" height="990" loading="lazy">
+          </div>
+          <p class="meta-line">Printable workbook · 34 pages · $17</p>
+          <h3>I Am Enough</h3>
+          <p>A workbook of proof, practice, and a plan for the life you want. It's built on one idea: your worth is given, not earned.</p>
+          <ul><li>8 parts, from the Enough List and Evidence Cards to the Thought Record</li><li>Partner standards, words for hard conversations, and practice rounds</li><li>Print it and write in it by hand</li></ul>
+          <p class="buy"><span class="btn solid buy-soon" aria-disabled="true">Checkout opening soon</span></p>
+        </article>
+
+        <article class="item" data-cat="products">
+          <div class="panel soon"><span class="ph">Workbook series</span><span class="t">In progress</span></div>
+          <p class="meta-line">Series · In progress</p>
+          <h3>Grow Together</h3>
+          <p>A relationship workbook series for couples: a book for each partner, then one to do together.</p>
+        </article>
+
+      </div>
+
+      <p class="fine">Concept sites are built from public information to show what's possible. They aren't live client sites.</p>
+    </div>
+  </section>
+
+  <section id="art">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">02 / Art</p>
+        <h2>Art, coming <em>soon.</em></h2>
+      </div>
+      <div class="art-panel">
+        <p class="big">Pieces will live here when they're ready.</p>
+        <p>I make art too, and this corner is for the work I'm ready to share.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">03 / About</p>
+        <div class="about-photo"><img src="img/cait.png" alt="Cait, smiling, with pink-blonde hair and glasses" width="621" height="1024" loading="lazy"></div>
+        <h2>Hi, I'm <em>Cait.</em></h2>
+        <p>I'm a writer, web designer, and maker in Twin Bridges, Montana. I like taking something complicated and turning it into something clear and usable, whether that's a business's first website or a planner that fits how a busy brain really works.</p>
+        <p>"Caitra" is a nickname my mom made by blending my name with my sister's. It's stuck with me, and it's why this is Caitra's Creations.</p>
+        <div class="chips">
+          <span class="chip">Web design</span><span class="chip">Writing</span><span class="chip">Planners &amp; workbooks</span><span class="chip">Canva</span><span class="chip">HTML &amp; CSS</span>
+        </div>
+      </div>
+      <div class="process">
+        <p class="eyebrow">How a website project works</p>
+        <ol class="steps">
+          <li><strong>We talk.</strong> I learn about your business and what customers ask.</li>
+          <li><strong>I build a sample.</strong> You see a real, working draft before you decide anything.</li>
+          <li><strong>We polish it.</strong> You tell me what to change until it feels right.</li>
+          <li><strong>You own your domain.</strong> It's registered in your name from day one, and I can host the site for you if you'd like.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="box">
+        <p class="eyebrow">04 / Contact</p>
+        <h2>Let's make <em>something.</em></h2>
+        <p class="sub">Have a business that needs a website, or a question about a planner or workbook? I'd love to hear from you.</p>
+        <p><a class="btn solid" href="mailto:caitrascreations@gmail.com">caitrascreations@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="yr">2026</span> Caitra's Creations · Twin Bridges, Montana</div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // filters
+  var btns = document.querySelectorAll('.filters button');
+  var items = document.querySelectorAll('.item');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.getAttribute('data-f');
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true' : 'false'); });
+      items.forEach(function(it){ it.hidden = !(f==='all' || it.getAttribute('data-cat')===f); });
+      scale();
+    });
+  });
+
+  // lazy, scaled site previews
+  var frames = document.querySelectorAll('.frame[data-src]');
+  function scale(){
+    frames.forEach(function(f){
+      var i = f.querySelector('iframe');
+      if(i && f.clientWidth){ i.style.transform = 'scale(' + (f.clientWidth/1280) + ')'; }
+    });
+  }
+  function load(f){
+    var i = document.createElement('iframe');
+    i.src = f.getAttribute('data-src'); i.setAttribute('tabindex','-1');
+    i.setAttribute('aria-hidden','true'); i.setAttribute('loading','lazy');
+    i.setAttribute('title','Preview of sample website');
+    f.appendChild(i);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ load(e.target); scale(); io.unobserve(e.target); }
+      });
+    },{rootMargin:'200px'});
+    frames.forEach(function(f){ io.observe(f); });
+  } else {
+    frames.forEach(load); scale();
+  }
+  window.addEventListener('resize', scale);
+})();
+</script>
+</body>
+</html>
