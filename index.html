@@ -133,6 +133,12 @@ section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--line)}
 .about-photo img{width:100%;height:auto;max-height:380px;object-fit:contain;object-position:bottom center;margin:0 auto}
 @media(max-width:760px){.about-photo{max-width:260px}}
 
+.about-top{display:grid;grid-template-columns:300px 1fr;gap:3rem;align-items:center}
+.about-top .about-photo{margin:0}
+.about-why h3{font-size:1.6rem;margin:1.3rem 0 .25rem}
+.about-why p{color:var(--muted);margin:0}
+@media(max-width:760px){.about-top{grid-template-columns:1fr;gap:1.6rem}.about-top .about-photo{margin:0 auto}}
+
 /* contact */
 .contact{background:var(--pink)}
 .contact .box{text-align:center;max-width:640px;margin:0 auto}
@@ -333,25 +339,35 @@ h1 em,h2 em{font-weight:600}
   </section>
 
   <section id="about">
-    <div class="wrap about">
-      <div>
+    <div class="wrap">
+      <div class="about-top">
         <div class="about-photo"><img src="img/cait.png" alt="Cait, smiling, with pink-blonde hair and glasses" width="621" height="1024" loading="lazy"></div>
-        <p class="eyebrow">03 / About</p>
-        <h2>Hi, I'm <em>Cait.</em></h2>
-        <p>I'm a writer, web designer, and maker in Twin Bridges, Montana. I like taking something complicated and turning it into something clear and usable, whether that's a business's first website or a planner that fits how a busy brain really works.</p>
-        <p>"Caitra" is a nickname my mom made by blending my name with my sister's. It's stuck with me, and it's why this is Caitra's Creations.</p>
-        <div class="chips">
-          <span class="chip">Web design</span><span class="chip">Writing</span><span class="chip">Planners &amp; workbooks</span><span class="chip">Canva</span><span class="chip">HTML &amp; CSS</span>
+        <div class="about-why">
+          <p class="eyebrow">03 / About</p>
+          <h2>Hi, I'm <em>Cait.</em></h2>
+          <h3>What I do</h3>
+          <p>I build clean, simple websites for small businesses, make planners and workbooks for people whose lives are full, and make art.</p>
+          <h3>Why I do it</h3>
+          <p>A good website shouldn't be complicated or out of reach for a small local business, and hard things feel more doable with the right tool. I like taking something complicated and turning it into something clear and usable, like a planner that fits how a busy brain really works, or a workbook built on one idea: your worth is given, not earned.</p>
         </div>
       </div>
-      <div class="process">
-        <p class="eyebrow">How a website project works</p>
-        <ol class="steps">
-          <li><strong>We talk.</strong> I learn about your business and what customers ask.</li>
-          <li><strong>I build a sample.</strong> You see a real, working draft before you decide anything.</li>
-          <li><strong>We polish it.</strong> You tell me what to change until it feels right.</li>
-          <li><strong>You own your domain.</strong> It's registered in your name from day one, and I can host the site for you if you'd like.</li>
-        </ol>
+      <div class="about" style="margin-top:3rem">
+        <div>
+          <p>I'm a writer, web designer, and maker in Twin Bridges, Montana.</p>
+          <p>"Caitra" is a nickname my mom made by blending my name with my sister's. It's stuck with me, and it's why this is Caitra's Creations.</p>
+          <div class="chips">
+            <span class="chip">Web design</span><span class="chip">Writing</span><span class="chip">Planners &amp; workbooks</span><span class="chip">Canva</span><span class="chip">HTML &amp; CSS</span>
+          </div>
+        </div>
+        <div class="process">
+          <p class="eyebrow">How a website project works</p>
+          <ol class="steps">
+            <li><strong>We talk.</strong> I learn about your business and what customers ask.</li>
+            <li><strong>I build a sample.</strong> You see a real, working draft before you decide anything.</li>
+            <li><strong>We polish it.</strong> You tell me what to change until it feels right.</li>
+            <li><strong>You own your domain.</strong> It's registered in your name from day one, and I can host the site for you if you'd like.</li>
+          </ol>
+        </div>
       </div>
     </div>
   </section>
